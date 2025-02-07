@@ -1,0 +1,29 @@
+//
+//  colors.stencil
+//  Mega-Mall
+//
+//  Created by Mahmoud Alaa on 28/01/2025.
+//
+
+import UIKit
+
+// MARK: - Colors
+
+enum Colors {
+
+      public static var heavyGray: UIColor {
+        UIColor(named: "heavy Gray")!
+      }
+
+      public static var primaryBlue: UIColor {
+        UIColor(named: "primary Blue")!
+      }
+
+      public static var secondaryBLue: UIColor {
+        UIColor(named: "secondary BLue")!
+      }
+
+      public static var secondaryGray: UIColor {
+        UIColor(named: "secondary Gray")!
+      }
+}

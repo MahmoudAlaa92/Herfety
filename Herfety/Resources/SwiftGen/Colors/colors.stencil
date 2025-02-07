@@ -1,0 +1,19 @@
+//
+//  colors.stencil
+//  Mega-Mall
+//
+//  Created by Mahmoud Alaa on 28/01/2025.
+//
+
+import UIKit
+
+// MARK: - Colors
+
+enum Colors {
+    {% for color in catalogs.first.assets %}
+
+      public static var {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: UIColor {
+        UIColor(named: "{{ color.name }}")!
+      }
+    {% endfor %}
+}

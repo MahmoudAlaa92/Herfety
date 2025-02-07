@@ -1,0 +1,19 @@
+//
+//  images.stencil
+//  Mega-Mall
+//
+//  Created by Mahmoud Alaa on 28/01/2025.
+//
+
+import UIKit
+
+// MARK: - Images
+
+enum Images {
+    {% for image in catalogs.first.assets %}
+    
+    public static var {{image.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: UIImage {
+        UIImage(named: "{{ image.name }}")!
+    }
+    {% endfor %}
+}
