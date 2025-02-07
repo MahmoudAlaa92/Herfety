@@ -32,7 +32,7 @@ class HeaderView: UICollectionReusableView {
     }
     
     @IBAction func seeAllPressed(_ sender: UIButton) {
-        
+        print("Hello world")
     }
     
 }
