@@ -1,0 +1,94 @@
+//
+//  CardItemProvider.swift
+//  Herfety/Users/work in/Herfety/Herfety/Herfety/Scene/Home/HomeViewController.swift
+//
+//  Created by Mahmoud Alaa on 08/02/2025.
+//
+
+import UIKit
+
+class CardItemProvider: CollectionViewProvider {
+    // MARK: - Properties
+    let productItems: [ProductItem]
+    
+    // MARK: - Init
+    init(productItems: [ProductItem]) {
+        self.productItems = productItems
+    }
+    /// RegisterCell
+    func registerCells(in collectionView: UICollectionView) {
+        collectionView.register(UINib(nibName: CardOfProductCollectionViewCell.cellIdentifier, bundle: nil), forCellWithReuseIdentifier: CardOfProductCollectionViewCell.cellIdentifier)
+        
+        /// Register for HeaderView
+        collectionView.register(UINib(nibName: HeaderView.headerIdentifier, bundle: nil), forSupplementaryViewOfKind: "Header", withReuseIdentifier: HeaderView.headerIdentifier)
+    }
+    
+    var numberOfItems: Int {
+        return productItems.count
+    }
+    
+    func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardOfProductCollectionViewCell.cellIdentifier, for: indexPath) as? CardOfProductCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let item = productItems[indexPath.item]
+        cell.imageProduct.image = item.image
+        cell.nameProduct.text = item.name
+        cell.offerPrice.text = item.discountPrice
+        cell.priceProduct.text = item.price
+        cell.offerProduct.text = " \(item.offerPrice)\nOFF"
+        cell.savePrice.text = item.savePrice
+        return cell
+    }
+}
+
+// MARK: - Header And Foter for category
+//
+extension CardItemProvider: HeaderAndFooterProvider {
+    
+    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == "Header" {
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HeaderView.headerIdentifier,
+                for: indexPath) as! HeaderView
+            
+            header.titleLabel.text = "the best deal on"
+            header.descriptionLabel.text = " Jewelry & Accessories"
+            return header
+        }
+        
+        return UICollectionReusableView()
+    }
+}
+
+
+// MARK: - Layout
+//
+struct CardProductSectionLayoutProvider: SectionLayoutProvider {
+    
+    func layoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(250),
+            heightDimension: .absolute(200))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+        section.boundarySupplementaryItems = [
+            .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                    heightDimension: .absolute(30)),
+                                    elementKind: "Header",
+                                    alignment: .top)]
+        
+        return section
+    }
+}

@@ -28,15 +28,18 @@ class HomeViewModel {
     ]
     
     var productItems: [ProductItem] = [
-        ProductItem(name: "Jewelry", price: "$10499", offer: "$14999", save: "Save - $4500"),
-        ProductItem(name: "Jewelry", price: "$10499", offer: "$14999", save: "Save - $4500"),
-        ProductItem(name: "Jewelry", price: "$10499", offer: "$14999", save: "Save - $4500"),
+        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+
     ]
     
-    var dailyEssentailItems: [DailyEssentailItem] = [
-        DailyEssentailItem(name: "Jewelry ", offer: "UP to 50% OFF"),
-        DailyEssentailItem(name: "Jewelry ", offer: "UP to 50% OFF"),
-        DailyEssentailItem(name: "Jewelry ", offer: "UP to 50% OFF"),
+    var dailyEssentailItems: [DailyEssentialyItem] = [
+        DailyEssentialyItem(name: "Jewelry ", offer: "UP to 50% OFF"),
+        DailyEssentialyItem(name: "Jewelry ", offer: "UP to 50% OFF"),
+        DailyEssentialyItem(name: "Jewelry ", offer: "UP to 50% OFF"),
     ]
     
     func numberOfSections() -> Int {

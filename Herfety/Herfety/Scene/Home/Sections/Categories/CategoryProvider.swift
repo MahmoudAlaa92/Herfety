@@ -18,7 +18,7 @@ class CategoryProvider: CollectionViewProvider {
     func registerCells(in collectionView: UICollectionView) {
         collectionView.register(UINib(nibName: "CategoriesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: CategoriesCollectionViewCell.cellIdentifier)
         
-        /// Register HeaderView
+        /// Register for HeaderView
         collectionView.register(
               UINib(nibName: "HeaderView", bundle: nil),
               forSupplementaryViewOfKind: "Header",
@@ -52,8 +52,8 @@ extension CategoryProvider: HeaderAndFooterProvider {
                 withReuseIdentifier: HeaderView.headerIdentifier,
                 for: indexPath) as! HeaderView
             
-            header.titleLabel.text = "the best deal on "
-            header.descriptionLabel.text = "Jewelry & Accessories "
+            header.titleLabel.text = "Categories "
+            header.descriptionLabel.text = ""
             return header
         }
         
@@ -80,7 +80,11 @@ struct CategoriesSectionLayoutProvider: SectionLayoutProvider {
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
         
         section.boundarySupplementaryItems = [
-        .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30)), elementKind: "Header", alignment: .top)]
+        .init(layoutSize: .init(widthDimension: .
+                                fractionalWidth(1),
+                                heightDimension: .absolute(30)),
+                                elementKind: "Header",
+                                alignment: .top)]
         
         return section
     }

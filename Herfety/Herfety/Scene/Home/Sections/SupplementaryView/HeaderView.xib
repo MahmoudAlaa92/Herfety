@@ -14,27 +14,10 @@
             <rect key="frame" x="0.0" y="0.0" width="392" height="102"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="eZ1-zd-a1c">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="102"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMh-ba-xlb">
-                            <rect key="frame" x="0.0" y="0.0" width="144.66666666666666" height="102"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vac-Sd-L3J">
-                            <rect key="frame" x="147.66666666666663" y="0.0" width="152.33333333333337" height="102"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVP-WX-F3X">
                     <rect key="frame" x="302" y="0.0" width="90" height="102"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="90" id="CFl-LT-0yx"/>
+                        <constraint firstAttribute="width" constant="90" id="CFl-LT-0yx" userLabel="width = 50"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
@@ -42,19 +25,34 @@
                         <action selector="seeAllPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="rM2-C0-sSF"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBe-S9-26j">
+                    <rect key="frame" x="44.333333333333343" y="0.0" width="256.66666666666663" height="102"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMh-ba-xlb">
+                    <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="102"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="eZ1-zd-a1c" secondAttribute="bottom" id="TOJ-sF-hXe"/>
-                <constraint firstItem="eZ1-zd-a1c" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="Txv-W2-77F"/>
-                <constraint firstItem="MVP-WX-F3X" firstAttribute="bottom" secondItem="U6b-Vx-4bR" secondAttribute="bottom" id="U7s-a1-KHB"/>
-                <constraint firstItem="MVP-WX-F3X" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="W21-o7-Kj9"/>
-                <constraint firstItem="MVP-WX-F3X" firstAttribute="leading" secondItem="eZ1-zd-a1c" secondAttribute="trailing" constant="2" id="j0L-xc-E89"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="MVP-WX-F3X" secondAttribute="trailing" id="l2D-NG-0k0"/>
-                <constraint firstItem="eZ1-zd-a1c" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="sKz-Qc-6ik"/>
+                <constraint firstAttribute="bottom" secondItem="PMh-ba-xlb" secondAttribute="bottom" id="4TW-Yg-7zd"/>
+                <constraint firstItem="MVP-WX-F3X" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="5fp-Ob-njY"/>
+                <constraint firstItem="IBe-S9-26j" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="9Cs-BC-whm"/>
+                <constraint firstItem="PMh-ba-xlb" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="KyH-T8-TvI"/>
+                <constraint firstItem="IBe-S9-26j" firstAttribute="leading" secondItem="PMh-ba-xlb" secondAttribute="trailing" constant="3" id="PGd-f2-hnq"/>
+                <constraint firstAttribute="bottom" secondItem="MVP-WX-F3X" secondAttribute="bottom" id="oVm-FT-pOY"/>
+                <constraint firstAttribute="bottom" secondItem="IBe-S9-26j" secondAttribute="bottom" id="roY-de-MlS"/>
+                <constraint firstAttribute="trailing" secondItem="MVP-WX-F3X" secondAttribute="trailing" id="wKt-pT-tBw"/>
+                <constraint firstItem="MVP-WX-F3X" firstAttribute="leading" secondItem="IBe-S9-26j" secondAttribute="trailing" constant="1" id="yE1-kz-czH"/>
+                <constraint firstItem="PMh-ba-xlb" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="zaM-oX-s03"/>
             </constraints>
             <connections>
-                <outlet property="descriptionLabel" destination="Vac-Sd-L3J" id="1Uy-et-SBx"/>
+                <outlet property="descriptionLabel" destination="IBe-S9-26j" id="Z5g-bM-y4J"/>
                 <outlet property="seeAll" destination="MVP-WX-F3X" id="0Jp-Gh-ef9"/>
                 <outlet property="titleLabel" destination="PMh-ba-xlb" id="MLU-8E-yHj"/>
             </connections>

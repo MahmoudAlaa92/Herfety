@@ -43,10 +43,12 @@ class HomeViewController: UIViewController {
     private func configureProvider() {
         let sliderProvider = SliderProvider(sliderItems: viewModel.sliderItems)
         let categorProvider = CategoryProvider(categoryItems: viewModel.categoryItems)
-        providers = [sliderProvider, categorProvider]
+        let cardProvider = CardItemProvider(productItems: viewModel.productItems)
+        providers = [sliderProvider, categorProvider, cardProvider]
         
         layoutProviders.append(SliderSectionLayoutProvider())
         layoutProviders.append(CategoriesSectionLayoutProvider())
+        layoutProviders.append(CardProductSectionLayoutProvider())
     }
     
     private func setUpCollectionView() {

@@ -11,6 +11,10 @@ import UIKit
 
 public enum Colors {
 
+      public static var primaryGreen: UIColor {
+        UIColor(named: "Primary Green")!
+      }
+
       public static var heavyGray: UIColor {
         UIColor(named: "heavy Gray")!
       }
