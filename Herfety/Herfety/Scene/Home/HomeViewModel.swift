@@ -18,9 +18,9 @@ class HomeViewModel {
     
     var categoryItems: [CategryItem] = [
         CategryItem(name: "Jewelry", image: Images.jewelry),
-        CategryItem(name: "Jewelry", image: Images.jewelry),
-        CategryItem(name: "Jewelry", image: Images.jewelry),
-        CategryItem(name: "Jewelry", image: Images.jewelry),
+        CategryItem(name: "Offers", image: Images.offers),
+        CategryItem(name: "Home Décor", image: Images.homeDecore),
+        CategryItem(name: "Fashion & Textiles", image: Images.fashion),
         CategryItem(name: "Jewelry", image: Images.jewelry),
         CategryItem(name: "Jewelry", image: Images.jewelry),
         CategryItem(name: "Jewelry", image: Images.jewelry),
@@ -36,10 +36,17 @@ class HomeViewModel {
 
     ]
     
+    var topBrandsItems: [TopBrandsItems] = [
+        TopBrandsItems(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+        TopBrandsItems(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+        TopBrandsItems(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+        TopBrandsItems(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+    ]
+    
     var dailyEssentailItems: [DailyEssentialyItem] = [
-        DailyEssentialyItem(name: "Jewelry ", offer: "UP to 50% OFF"),
-        DailyEssentialyItem(name: "Jewelry ", offer: "UP to 50% OFF"),
-        DailyEssentialyItem(name: "Jewelry ", offer: "UP to 50% OFF"),
+        DailyEssentialyItem(image: Images.homeDecore, name: "Home Décor ", offer: "UP to 50% OFF"),
+        DailyEssentialyItem(image: Images.art, name: "Art & Collectibles ", offer: "UP to 30% OFF"),
+        DailyEssentialyItem(image: Images.craft, name: "Kids’ Crafts & Toys ", offer: "UP to 10% OFF"),
     ]
     
     func numberOfSections() -> Int {

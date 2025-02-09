@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UIHerfety
 
 protocol CollectionViewProvider {
     func registerCells(in collectionView: UICollectionView)
@@ -20,6 +21,8 @@ protocol SectionLayoutProvider {
 }
 
 class HomeViewController: UIViewController {
+    
+    private var navigationBarBehavior: HomeNavBar?
     
     // MARK: - Outlets
     //
@@ -36,6 +39,8 @@ class HomeViewController: UIViewController {
         configureProvider()
         setUpCollectionView()
         cofigureCompositianalLayout()
+        configureNavBar()
+        
     }
     
     // Configure Provider
@@ -44,11 +49,24 @@ class HomeViewController: UIViewController {
         let sliderProvider = SliderProvider(sliderItems: viewModel.sliderItems)
         let categorProvider = CategoryProvider(categoryItems: viewModel.categoryItems)
         let cardProvider = CardItemProvider(productItems: viewModel.productItems)
-        providers = [sliderProvider, categorProvider, cardProvider]
+        let topBrands = TopBrandsProvider(topBrandsItems: viewModel.topBrandsItems)
+        let dailyEssentailItems = DailyEssentailProvider(dailyEssentail: viewModel.dailyEssentailItems)
+        providers = [sliderProvider, categorProvider, cardProvider, topBrands, dailyEssentailItems]
         
         layoutProviders.append(SliderSectionLayoutProvider())
         layoutProviders.append(CategoriesSectionLayoutProvider())
         layoutProviders.append(CardProductSectionLayoutProvider())
+        layoutProviders.append(TopBrandsSectionLayoutProvider())
+        layoutProviders.append(DailyEssentailSectionLayoutProvider())
+    }
+    
+    func configureNavBar() {
+        navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
+        navigationBarBehavior?.configure(onNotification: {
+            print("searchBtn is tapped")
+        }, onSearch: {
+            print("NotificationBtn is tapped")
+        },userName: "Mahmoud Alaa", userImage: Images.profilePhoto)
     }
     
     private func setUpCollectionView() {

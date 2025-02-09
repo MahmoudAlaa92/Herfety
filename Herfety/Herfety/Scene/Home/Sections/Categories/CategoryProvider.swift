@@ -52,8 +52,7 @@ extension CategoryProvider: HeaderAndFooterProvider {
                 withReuseIdentifier: HeaderView.headerIdentifier,
                 for: indexPath) as! HeaderView
             
-            header.titleLabel.text = "Categories "
-            header.descriptionLabel.text = ""
+            header.configure(title:  "Categories", description: "", shouldShowButton: true)
             return header
         }
         

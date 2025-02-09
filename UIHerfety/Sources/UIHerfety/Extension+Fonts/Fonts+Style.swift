@@ -50,6 +50,10 @@ public extension UIFont {
     static var caption1: UIFont {
         return UIFont(name: "DMSans-Regular", size: 10) ?? .systemFont(ofSize: 10)
     }
+    
+    static var caption2: UIFont {
+        return UIFont(name: "DMSans-Regular", size: 8) ?? .systemFont(ofSize: 8)
+    }
 }
 
 // MARK: - TextField

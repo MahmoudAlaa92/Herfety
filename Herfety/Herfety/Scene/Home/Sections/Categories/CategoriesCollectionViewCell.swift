@@ -31,6 +31,8 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
         backGround.backgroundColor = Colors.heavyGray
         imageOfCategory.contentMode = .scaleAspectFill
         
-        nameOfCategory.font = .callout
+        nameOfCategory.font = .caption2
+        nameOfCategory.textColor = Colors.labelGray
+        nameOfCategory.numberOfLines = 1
     }
 }

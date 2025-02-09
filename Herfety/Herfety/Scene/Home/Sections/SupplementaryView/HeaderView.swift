@@ -9,7 +9,7 @@ import UIKit
 import UIHerfety
 
 class HeaderView: UICollectionReusableView {
-
+    
     // MARK: - Properties
     //
     static let headerIdentifier = "HeaderView"
@@ -25,18 +25,35 @@ class HeaderView: UICollectionReusableView {
         setUp()
     }
     
+}
+
+// MARK: - Configure
+//
+extension HeaderView {
+    
+    func configure(title: String, description: String, shouldShowButton: Bool) {
+        titleLabel.text = title
+        descriptionLabel.text = description
+        seeAll.isHidden = !shouldShowButton
+        seeAll.applyStyle(.labelButton, title: "seeAll")
+        
+    }
+    
     private func setUp() {
         
         titleLabel.font = .callout
         
         descriptionLabel.font = .callout
         descriptionLabel.textColor = Colors.primaryBlue
-       
-        seeAll.applyStyle(.labelButton, title: "seeAll")
     }
+    
+}
+
+// MARK: - Actions
+//
+extension HeaderView {
     
     @IBAction func seeAllPressed(_ sender: UIButton) {
         // seeAllButton
     }
-    
 }

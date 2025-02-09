@@ -46,7 +46,7 @@ struct SliderSectionLayoutProvider: SectionLayoutProvider {
            
            let groupSize = NSCollectionLayoutSize(
                widthDimension: .fractionalWidth(1),
-               heightDimension: .absolute(180))
+               heightDimension: .absolute(150))
            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
            group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0
                 , bottom: 0, trailing: 0)

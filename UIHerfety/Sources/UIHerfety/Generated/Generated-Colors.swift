@@ -11,12 +11,20 @@ import UIKit
 
 public enum Colors {
 
+      public static var primaryBeige: UIColor {
+        UIColor(named: "Primary Beige")!
+      }
+
       public static var primaryGreen: UIColor {
         UIColor(named: "Primary Green")!
       }
 
       public static var heavyGray: UIColor {
         UIColor(named: "heavy Gray")!
+      }
+
+      public static var labelGray: UIColor {
+        UIColor(named: "label Gray")!
       }
 
       public static var primaryBlue: UIColor {

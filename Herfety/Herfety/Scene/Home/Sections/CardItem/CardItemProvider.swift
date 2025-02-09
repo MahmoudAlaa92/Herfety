@@ -42,28 +42,6 @@ class CardItemProvider: CollectionViewProvider {
     }
 }
 
-// MARK: - Header And Foter for category
-//
-extension CardItemProvider: HeaderAndFooterProvider {
-    
-    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if kind == "Header" {
-            let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: HeaderView.headerIdentifier,
-                for: indexPath) as! HeaderView
-            
-            header.titleLabel.text = "the best deal on"
-            header.descriptionLabel.text = " Jewelry & Accessories"
-            return header
-        }
-        
-        return UICollectionReusableView()
-    }
-}
-
-
 // MARK: - Layout
 //
 struct CardProductSectionLayoutProvider: SectionLayoutProvider {
@@ -83,6 +61,7 @@ struct CardProductSectionLayoutProvider: SectionLayoutProvider {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+        section.interGroupSpacing = 10
         section.boundarySupplementaryItems = [
             .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                     heightDimension: .absolute(30)),
@@ -90,5 +69,25 @@ struct CardProductSectionLayoutProvider: SectionLayoutProvider {
                                     alignment: .top)]
         
         return section
+    }
+}
+
+// MARK: - Header And Foter for category
+//
+extension CardItemProvider: HeaderAndFooterProvider {
+    
+    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == "Header" {
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HeaderView.headerIdentifier,
+                for: indexPath) as! HeaderView
+            
+            header.configure(title: "The best deal on", description: " Jewelry & Accessories", shouldShowButton: true)
+            return header
+        }
+        
+        return UICollectionReusableView()
     }
 }
