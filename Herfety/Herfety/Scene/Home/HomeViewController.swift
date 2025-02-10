@@ -22,15 +22,16 @@ protocol SectionLayoutProvider {
 
 class HomeViewController: UIViewController {
     
-    private var navigationBarBehavior: HomeNavBar?
-    
-    // MARK: - Outlets
+    // MARK: - Properties
     //
-    @IBOutlet weak var collectionView: UICollectionView!
+    private var navigationBarBehavior: HomeNavBar?
     private let viewModel = HomeViewModel()
     private var providers: [CollectionViewProvider] = []
     private var layoutProviders:[SectionLayoutProvider] = []
     
+    // MARK: - Outlets
+    //
+    @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Lifecycle
     //
@@ -46,11 +47,11 @@ class HomeViewController: UIViewController {
     // Configure Provider
     //
     private func configureProvider() {
-        let sliderProvider = SliderProvider(sliderItems: viewModel.sliderItems)
-        let categorProvider = CategoryProvider(categoryItems: viewModel.categoryItems)
-        let cardProvider = CardItemProvider(productItems: viewModel.productItems)
-        let topBrands = TopBrandsProvider(topBrandsItems: viewModel.topBrandsItems)
-        let dailyEssentailItems = DailyEssentailProvider(dailyEssentail: viewModel.dailyEssentailItems)
+        let sliderProvider = SliderCollectionViewSection(sliderItems: viewModel.sliderItems)
+        let categorProvider = CategoryCollectionViewSection(categoryItems: viewModel.categoryItems)
+        let cardProvider = CardItemCollectionViewSection(productItems: viewModel.productItems)
+        let topBrands = TopBrandsCollectionViewSection(topBrandsItems: viewModel.topBrandsItems)
+        let dailyEssentailItems = DailyEssentailCollectionViewSection(dailyEssentail: viewModel.dailyEssentailItems)
         providers = [sliderProvider, categorProvider, cardProvider, topBrands, dailyEssentailItems]
         
         layoutProviders.append(SliderSectionLayoutProvider())

@@ -22,6 +22,12 @@ public enum Images {
     public static var artLogo: UIImage {
         UIImage(named: "ArtLogo")!
     }
+    public static var cartIcon: UIImage {
+        UIImage(named: "Cart Icon")!
+    }
+    public static var cartSelected: UIImage {
+        UIImage(named: "Cart Selected")!
+    }
     public static var chain: UIImage {
         UIImage(named: "Chain")!
     }
@@ -31,11 +37,17 @@ public enum Images {
     public static var fashion: UIImage {
         UIImage(named: "Fashion")!
     }
+    public static var heartIcon: UIImage {
+        UIImage(named: "Heart Icon")!
+    }
+    public static var homeIcon: UIImage {
+        UIImage(named: "Home Icon")!
+    }
+    public static var homeSelected: UIImage {
+        UIImage(named: "Home Selected")!
+    }
     public static var homeDecore: UIImage {
         UIImage(named: "HomeDecore")!
-    }
-    public static var icons: UIImage {
-        UIImage(named: "Icons")!
     }
     public static var imageOfArt: UIImage {
         UIImage(named: "ImageOfArt")!
@@ -52,14 +64,26 @@ public enum Images {
     public static var jewelry2: UIImage {
         UIImage(named: "Jewelry2")!
     }
+    public static var listIcon: UIImage {
+        UIImage(named: "List Icon")!
+    }
     public static var logo: UIImage {
         UIImage(named: "Logo")!
     }
     public static var offers: UIImage {
         UIImage(named: "Offers")!
     }
+    public static var profileIcon: UIImage {
+        UIImage(named: "Profile Icon")!
+    }
+    public static var profileSelected: UIImage {
+        UIImage(named: "Profile Selected")!
+    }
     public static var profilePhoto: UIImage {
         UIImage(named: "ProfilePhoto")!
+    }
+    public static var rectangleBeige: UIImage {
+        UIImage(named: "Rectangle Beige")!
     }
     public static var search: UIImage {
         UIImage(named: "Search")!
@@ -69,6 +93,9 @@ public enum Images {
     }
     public static var tradeLogo: UIImage {
         UIImage(named: "TradeLogo")!
+    }
+    public static var wishlistSelected: UIImage {
+        UIImage(named: "Wishlist Selected")!
     }
     public static var chevronForward: UIImage {
         UIImage(named: "chevron.forward")!

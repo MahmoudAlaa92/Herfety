@@ -1,23 +1,23 @@
 
 ## Generate Colors
 xcassets:
-   inputs:
-       - Herfety/Resources/SwiftGen/Colors/Colors.xcassets
-   outputs:
-       templatePath: Herfety/Resources/SwiftGen/Colors/colors.stencil
-       params:
-         forceProvidesNamespaces: true
-         forceFileNameEnum: true
-       output: Herfety/Resources/SwiftGen/Colors/Generated-Colors.swift
-# Generate Images
 #   inputs:
-#       - Herfety/Resources/SwiftGen/Images/Images.xcassets
+#       - Herfety/Resources/SwiftGen/Colors/Colors.xcassets
 #   outputs:
-#       templatePath: Herfety/Resources/SwiftGen/Images/images.stencil
+#       templatePath: Herfety/Resources/SwiftGen/Colors/colors.stencil
 #       params:
 #         forceProvidesNamespaces: true
 #         forceFileNameEnum: true
-#       output: Herfety/Resources/SwiftGen/Images/Generated-Images.swift
+#       output: Herfety/Resources/SwiftGen/Colors/Generated-Colors.swift
+# Generate Images
+   inputs:
+       - Herfety/Resources/SwiftGen/Images/Images.xcassets
+   outputs:
+       templatePath: Herfety/Resources/SwiftGen/Images/images.stencil
+       params:
+         forceProvidesNamespaces: true
+         forceFileNameEnum: true
+       output: Herfety/Resources/SwiftGen/Images/Generated-Images.swift
 
 ## Generate Strings
 #strings:

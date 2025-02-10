@@ -20,7 +20,11 @@ public extension UIButton {
         
         switch style {
         case .primaryButton:
-            break
+            configureButton(buttonColor: Colors.primaryBlue,
+                            title: title,
+                            titleColor: .white,
+                            font: .caption1,
+                            cornerRaduis: 15)
         case .secondaryButton:
             break
         case .labelButton:
@@ -59,13 +63,14 @@ extension UIButton {
             config.title = title
             let attributes: [NSAttributedString.Key: Any] = [.font: font]
             config.attributedTitle = AttributedString(title, attributes: AttributeContainer(attributes))
-            config.image = Images.chevronForward
             config.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                           leading: 20,
+                                                           leading: 10,
                                                            bottom: 0,
-                                                           trailing: 20)
-            config.imagePadding = 5
-            config.imagePlacement = .trailing
+                                                           trailing: 10)
+            if image != nil {
+                config.image = Images.chevronForward
+                config.imagePadding = 5
+                config.imagePlacement = .trailing }
             
             self.configuration = config
             

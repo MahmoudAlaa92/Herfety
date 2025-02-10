@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Images
 
-enum Images {
+public enum Images {
     {% for image in catalogs.first.assets %}
     
     public static var {{image.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: UIImage {

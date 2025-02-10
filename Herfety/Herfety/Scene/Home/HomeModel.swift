@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 enum HomeSection: Int, CaseIterable {
     case slider
     case categories

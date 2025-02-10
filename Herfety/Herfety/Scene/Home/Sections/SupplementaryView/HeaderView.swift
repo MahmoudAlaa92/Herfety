@@ -31,16 +31,16 @@ class HeaderView: UICollectionReusableView {
 //
 extension HeaderView {
     
-    func configure(title: String, description: String, shouldShowButton: Bool) {
+    func configure(title: String, description: String,titleFont: UIFont? = nil,titleColor: UIColor? = nil, shouldShowButton: Bool) {
         titleLabel.text = title
+        titleLabel.font = titleFont
+        titleLabel.textColor = titleColor
         descriptionLabel.text = description
         seeAll.isHidden = !shouldShowButton
         seeAll.applyStyle(.labelButton, title: "seeAll")
-        
     }
     
     private func setUp() {
-        
         titleLabel.font = .callout
         
         descriptionLabel.font = .callout
@@ -48,7 +48,6 @@ extension HeaderView {
     }
     
 }
-
 // MARK: - Actions
 //
 extension HeaderView {
