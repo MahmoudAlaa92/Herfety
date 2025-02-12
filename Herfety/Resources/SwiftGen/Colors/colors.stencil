@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Colors
 
-enum Colors {
+public enum Colors {
     {% for color in catalogs.first.assets %}
 
       public static var {{color.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: UIColor {

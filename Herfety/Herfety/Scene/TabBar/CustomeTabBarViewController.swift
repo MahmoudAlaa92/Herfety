@@ -26,7 +26,7 @@ class CustomeTabBarViewController: UITabBarController {
         let vc2 = UINavigationController(rootViewController: WishListViewController())
         wishListViewController = vc2
         
-        let vc3 = UINavigationController(rootViewController: CartViewController())
+        let vc3 = UINavigationController(rootViewController: OrderViewController())
         cartViewController = vc3
         
         let vc4 = UINavigationController(rootViewController: ProfileViewController())

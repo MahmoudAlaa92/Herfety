@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct HomeLayout {
+struct SectionsLayout {
     
     //MARK: - Properties
     //

@@ -84,7 +84,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     private func cofigureCompositianalLayout() {
 
-        let layoutFactory = HomeLayout(providers: layoutProviders)
+        let layoutFactory = SectionsLayout(providers: layoutProviders)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
 }
@@ -116,5 +116,4 @@ extension HomeViewController: UICollectionViewDataSource {
         /// provider does not support headers/footers.
         return UICollectionReusableView()
     }
-    
 }

@@ -46,7 +46,7 @@ extension WishListViewController {
     
     /// Configure Layout
     private func cofigureCompositianalLayout() {
-        let layoutFactory = HomeLayout(providers: layoutProviders)
+        let layoutFactory = SectionsLayout(providers: layoutProviders)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
 }

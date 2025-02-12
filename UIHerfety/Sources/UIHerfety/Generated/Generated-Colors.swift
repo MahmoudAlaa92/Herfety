@@ -19,6 +19,10 @@ public enum Colors {
         UIColor(named: "Primary Green")!
       }
 
+      public static var buttonGray: UIColor {
+        UIColor(named: "button Gray")!
+      }
+
       public static var heavyGray: UIColor {
         UIColor(named: "heavy Gray")!
       }
