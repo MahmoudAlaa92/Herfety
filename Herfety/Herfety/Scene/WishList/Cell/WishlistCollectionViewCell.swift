@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import UIHerfety
 
 class WishlistCollectionViewCell: UICollectionViewCell {
     
@@ -14,6 +13,7 @@ class WishlistCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Outelets
     //
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imageCell: UIImageView!
     
     @IBOutlet weak var nameCell: UILabel!
@@ -27,6 +27,7 @@ class WishlistCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         configure()
+        configureContainerView()
     }
     
 }
@@ -34,7 +35,7 @@ class WishlistCollectionViewCell: UICollectionViewCell {
 //
 extension WishlistCollectionViewCell {
     private func configure() {
-        imageCell.contentMode = .scaleAspectFill
+        imageCell.contentMode = .scaleAspectFit
         
         nameCell.font = .callout
         descriptionCell.font = .caption1
@@ -43,6 +44,17 @@ extension WishlistCollectionViewCell {
         priceCell.font = .callout
         
         addCartBtn.applyStyle(.primaryButton, title: "Add to Cart")
+    }
+    
+    /// Configures the appearance of the container view, including shadows and corner radius.
+    private func configureContainerView() {
+        
+        containerView.backgroundColor = Colors.hMainTheme
+        containerView.layer.shadowColor = Colors.hPrimaryButton.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
     }
 }
 

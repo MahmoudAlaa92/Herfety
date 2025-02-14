@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import UIHerfety
 
 protocol CollectionViewProvider {
     func registerCells(in collectionView: UICollectionView)
@@ -41,7 +40,6 @@ class HomeViewController: UIViewController {
         setUpCollectionView()
         cofigureCompositianalLayout()
         configureNavBar()
-        
     }
     
     // Configure Provider

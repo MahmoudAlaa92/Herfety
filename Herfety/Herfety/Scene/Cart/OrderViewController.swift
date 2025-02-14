@@ -13,6 +13,7 @@ class OrderViewController: UIViewController {
     @IBOutlet weak private(set) var paymentView: PaymentView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var proccedToPayment: PrimaryButton!
     // MARK: - Properties
     private let orderViewModel = OrderViewModel()
     private lazy var paymentViewModel: PaymentView.Model = {
@@ -29,6 +30,9 @@ class OrderViewController: UIViewController {
         setUpCollectionView()
         cofigureCompositianalLayout()
         configureViews()
+        configureUI()
+        setUpNavigationBar()
+        bindViewModel()
     }
 }
 
@@ -85,7 +89,41 @@ private extension OrderViewController {
         let layoutFactory = SectionsLayout(providers: layoutProviders)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
+    
+    // Configure UI
+    private func configureUI() {
+        proccedToPayment.title = "Procced to Payment"
+    }
+    
+    // Navigation Bar
+    private func setUpNavigationBar() {
+        navigationItem.backButtonTitle = ""
+    }
 }
-// MARK: - Private Handlers
+
+// MARK: - Binding
 //
-private extension OrderViewController {}
+extension OrderViewController {
+    
+    private func bindViewModel() {
+        // Navigate to Shipping VC
+        viewModel.navigationToShipping = { [weak self] in
+            let shippingVC = ShippingViewController()
+            self?.navigationController?.pushViewController(shippingVC, animated: true)
+        }
+    }
+}
+
+// MARK: - Actions
+//
+extension OrderViewController {
+ 
+    @IBAction func paymentPressed(_ sender: Any) {
+        print("payment Pressed in order")
+        viewModel.didTapPayment()
+    }
+}
+
+// MARK: - Private Handlers ???
+//
+extension OrderViewController {}

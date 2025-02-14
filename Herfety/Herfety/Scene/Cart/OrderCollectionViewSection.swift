@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import UIHerfety
+
 
 class OrderCollectionViewSection: CollectionViewProvider {
     
@@ -69,12 +69,11 @@ struct OrderSectionLayoutProvider: SectionLayoutProvider {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(150))
+                                               heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
     
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
+        section.interGroupSpacing = 0
         section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                       heightDimension: .absolute(50)),
                                                     elementKind: "Header",

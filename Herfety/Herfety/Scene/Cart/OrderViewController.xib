@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="collectionView" destination="VDv-6L-Pcv" id="UyT-yO-hgn"/>
                 <outlet property="paymentView" destination="hPo-1e-ILy" id="Nbo-kZ-j82"/>
+                <outlet property="proccedToPayment" destination="0l4-jX-1IH" id="opG-FD-hLO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VDv-6L-Pcv">
-                    <rect key="frame" x="10" y="69" width="373" height="517"/>
+                    <rect key="frame" x="10" y="20" width="373" height="575"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nYw-13-ggZ">
                         <size key="itemSize" width="128" height="128"/>
@@ -31,37 +32,35 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4i-pG-2zY">
-                    <rect key="frame" x="10" y="756" width="373" height="48"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="QhR-S9-RuU"/>
-                    </constraints>
-                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Procced to Checkout"/>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPo-1e-ILy" customClass="PaymentView" customModule="Herfety" customModuleProvider="target">
-                    <rect key="frame" x="10" y="596" width="373" height="150"/>
+                    <rect key="frame" x="10" y="605" width="373" height="150"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="150" id="esk-1a-J0m"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0l4-jX-1IH" customClass="PrimaryButton" customModule="Herfety" customModuleProvider="target">
+                    <rect key="frame" x="10" y="765" width="373" height="39"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="paymentPressed:" destination="-1" eventType="touchUpInside" id="nSU-gw-Irg"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0l4-jX-1IH" secondAttribute="trailing" constant="10" id="Bow-RU-RKx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0l4-jX-1IH" secondAttribute="bottom" constant="14" id="Hds-jj-hca"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hPo-1e-ILy" secondAttribute="trailing" constant="10" id="Jnw-Ki-w5A"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VDv-6L-Pcv" secondAttribute="trailing" constant="10" id="Jzl-VU-rJi"/>
                 <constraint firstItem="hPo-1e-ILy" firstAttribute="top" secondItem="VDv-6L-Pcv" secondAttribute="bottom" constant="10" id="O6a-Rn-Nth"/>
-                <constraint firstItem="m4i-pG-2zY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="YIn-IX-JPB"/>
+                <constraint firstItem="0l4-jX-1IH" firstAttribute="top" secondItem="hPo-1e-ILy" secondAttribute="bottom" constant="10" id="VEv-CZ-pl3"/>
+                <constraint firstItem="0l4-jX-1IH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="eB0-lQ-5De"/>
                 <constraint firstItem="hPo-1e-ILy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="erc-nX-TT3"/>
-                <constraint firstItem="m4i-pG-2zY" firstAttribute="top" secondItem="hPo-1e-ILy" secondAttribute="bottom" constant="10" id="euV-UF-0pn"/>
                 <constraint firstItem="VDv-6L-Pcv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="jl2-VI-oRl"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="m4i-pG-2zY" secondAttribute="bottom" constant="14" id="omO-Xh-iS6"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="m4i-pG-2zY" secondAttribute="trailing" constant="10" id="qXS-el-2v5"/>
-                <constraint firstItem="VDv-6L-Pcv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="xk5-CL-S6s"/>
+                <constraint firstItem="VDv-6L-Pcv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="xk5-CL-S6s"/>
             </constraints>
             <point key="canvasLocation" x="6.8702290076335872" y="19.718309859154932"/>
         </view>

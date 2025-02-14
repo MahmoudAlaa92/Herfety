@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import UIHerfety
+
 
 class CustomeTabBarViewController: UITabBarController {
 
@@ -23,7 +23,7 @@ class CustomeTabBarViewController: UITabBarController {
         let vc1 = UINavigationController(rootViewController: HomeViewController())
         homeViewController = vc1
         
-        let vc2 = UINavigationController(rootViewController: WishListViewController())
+        let vc2 =  WishListViewController()
         wishListViewController = vc2
         
         let vc3 = UINavigationController(rootViewController: OrderViewController())

@@ -24,6 +24,8 @@ class WishListViewController: UIViewController {
         configureProvider()
         cofigureCompositianalLayout()
         setUpCollectionView()
+        view.backgroundColor = Colors.hBackgroundColor
+
     }
 }
 // MARK: - Configure

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import UIHerfety
+
 
 class CategoriesCollectionViewCell: UICollectionViewCell {
 

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import UIHerfety
 
 class HeaderView: UICollectionReusableView {
     

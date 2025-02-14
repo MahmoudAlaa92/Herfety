@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import UIHerfety
+
 
 class OrderViewModel {
     
@@ -32,5 +32,15 @@ class OrderViewModel {
        
     func numberOfItems(in section: Int) -> Int {
         return orderItems.count
+    }
+    
+    var navigationToShipping: (()-> Void)?
+    
+    func didTapPayment() {
+        if orderItems.isEmpty {
+            print("Order is empty show Alert here")
+        }else {
+            navigationToShipping?()
+        }
     }
 }

@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:UIHerfety">
-   </FileRef>
-   <FileRef
-      location = "group:Logger">
-   </FileRef>
-   <FileRef
       location = "group:Herfety/Herfety.xcodeproj">
    </FileRef>
 </Workspace>
