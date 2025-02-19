@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ShippingViewModel {
+class InfoViewModel {
     
-    var shippingItems: [ShippingModel] = [
-        ShippingModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
-        ShippingModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
-        ShippingModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
-        ShippingModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
+    var shippingItems: [InfoModel] = [
+        InfoModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
+        InfoModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
+        InfoModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
+        InfoModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
     ]
     
     func numberOfItems() -> Int {
@@ -21,6 +21,10 @@ class ShippingViewModel {
     }
     
     var navigationToPayment: (()-> Void)?
+    
+    func didTapPlusButton() {
+        // navigate to address screen here
+    }
     
     func didTapPaymentButton() {
         if shippingItems.isEmpty {

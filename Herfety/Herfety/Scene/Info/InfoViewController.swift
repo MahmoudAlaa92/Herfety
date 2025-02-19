@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ShippingViewController: UIViewController {
+class InfoViewController: UIViewController {
 
     // MARK: - Properties
-    private var viewModel = ShippingViewModel()
+    private var viewModel = InfoViewModel()
     private var sections: [CollectionViewProvider] = []
     private var layoutProviders: [SectionLayoutProvider] = []
     private var navigationBarBehavior: ShippingNavBar?
@@ -35,7 +35,7 @@ class ShippingViewController: UIViewController {
 
 // MARK: - Configuration
 //
-extension ShippingViewController {
+extension InfoViewController {
     
     private func setUpCollectionView() {
         collectionView.dataSource = self
@@ -43,7 +43,7 @@ extension ShippingViewController {
         sections.forEach { $0.registerCells(in: collectionView) }
     }
     private func configureProvider() {
-        let infoSection = ShippingCollectionViewSection(shippingItems: viewModel.shippingItems)
+        let infoSection = InfoCollectionViewSection(shippingItems: viewModel.shippingItems)
         sections = [infoSection]
         
         layoutProviders.append(ShippingInfoSectionLayoutProvider())
@@ -61,23 +61,21 @@ extension ShippingViewController {
     
     // Set up Navigation Bar
     private func setUpNavigationBar() {
-        navigationBarBehavior = ShippingNavBar(navigationItem: navigationItem, navigationController: navigationController)
-        navigationBarBehavior?.configure(title: "Info", titleColor: .primaryBlue,onPlus: {
-            print("plus button is tapped")
-        })
-//        navigationItem.backButtonTitle = ""
-//        let plusBtton
-//        navigationController?.navigationBar.backIndicatorImage = Images.iconBack.withRenderingMode(.alwaysOriginal)
-//        navigationController?
-//            .navigationBar
-//            .backIndicatorTransitionMaskImage = Images.iconBack.withRenderingMode(.alwaysOriginal)
         
+        navigationItem.backButtonTitle = ""
+        
+        navigationBarBehavior = ShippingNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navigationBarBehavior?.configure(title: "Info", titleColor: .primaryBlue,onPlus: { [weak self] in
+             // plus button is tapped
+            let addressVC = AddAddressViewController(viewModel: AddAddressViewModel())
+            self?.navigationController?.pushViewController(addressVC, animated: true)
+        })
     }
 }
 
 // MARK: - UICollectionViewDataSource
 //
-extension ShippingViewController: UICollectionViewDataSource {
+extension InfoViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         sections.count
     }
@@ -92,7 +90,7 @@ extension ShippingViewController: UICollectionViewDataSource {
 
 // MARK: - Binding
 //
-extension ShippingViewController {
+extension InfoViewController {
     private func bindViewModel() {
 //        viewModel.navigationToPayment = { [weak self] in
 //            let paymentVc = PaymentViewController()
@@ -103,7 +101,7 @@ extension ShippingViewController {
 }
 // MARK: - Actions
 //
-extension ShippingViewController {
+extension InfoViewController {
     
     @IBAction func paymentPressed(_ sender: Any) {
 //        print("Payment Pressed")

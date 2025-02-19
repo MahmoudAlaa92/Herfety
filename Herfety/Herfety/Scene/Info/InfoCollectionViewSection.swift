@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ShippingCollectionViewSection: CollectionViewProvider {
+class InfoCollectionViewSection: CollectionViewProvider {
     
-    let shippingItems: [ShippingModel]
+    let shippingItems: [InfoModel]
     
-    init(shippingItems: [ShippingModel]) {
+    init(shippingItems: [InfoModel]) {
         self.shippingItems = shippingItems
     }
     

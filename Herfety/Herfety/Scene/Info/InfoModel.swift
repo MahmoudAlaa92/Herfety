@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ShippingModel: Codable {
+struct InfoModel: Codable {
     var name: String?
     var address: String?
     var phone: String?

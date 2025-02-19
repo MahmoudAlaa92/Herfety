@@ -108,7 +108,7 @@ extension OrderViewController {
     private func bindViewModel() {
         // Navigate to Shipping VC
         viewModel.navigationToShipping = { [weak self] in
-            let shippingVC = ShippingViewController()
+            let shippingVC = InfoViewController()
             self?.navigationController?.pushViewController(shippingVC, animated: true)
         }
     }
@@ -119,7 +119,7 @@ extension OrderViewController {
 extension OrderViewController {
  
     @IBAction func paymentPressed(_ sender: Any) {
-        print("payment Pressed in order")
+       // payment Pressed in order
         viewModel.didTapPayment()
     }
 }
