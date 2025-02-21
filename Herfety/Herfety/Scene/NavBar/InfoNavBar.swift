@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShippingNavBar {
+class InfoNavBar {
     
     // MARK: - Properties
     private unowned var navigationItem: UINavigationItem
@@ -24,7 +24,7 @@ class ShippingNavBar {
 
 // MARK: - Configure
 //
-extension ShippingNavBar {
+extension InfoNavBar {
     
     func configure(title: String = "", titleColor: UIColor = .black, onPlus: @escaping () -> Void) {
         self.plusBtn = onPlus
@@ -40,6 +40,7 @@ extension ShippingNavBar {
         
         /// Customize navigation bar appearance
         let appearance = UINavigationBarAppearance()
+        appearance.shadowColor = .clear
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemBackground
         appearance.titleTextAttributes = [.foregroundColor: titleColor, .font: UIFont.title2]
@@ -48,7 +49,6 @@ extension ShippingNavBar {
         appearance.setBackIndicatorImage(Images.iconBack.withRenderingMode(.alwaysOriginal),
                                          transitionMaskImage: Images.iconBack.withRenderingMode(.alwaysOriginal))
         /// Ensure navigationController is not nil
-
         if let navigationController = navigationController {
             navigationController.navigationBar.standardAppearance = appearance
             navigationController.navigationBar.scrollEdgeAppearance = appearance
@@ -59,7 +59,7 @@ extension ShippingNavBar {
 
 // MARK: - Actions
 //
-extension ShippingNavBar {
+extension InfoNavBar {
     @objc private func onPlusBtnTapped() {
         plusBtn()
     }

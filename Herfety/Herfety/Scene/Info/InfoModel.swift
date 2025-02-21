@@ -1,5 +1,5 @@
 //
-//  ShippingModel.swift
+//  InfoModel.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 13/02/2025.

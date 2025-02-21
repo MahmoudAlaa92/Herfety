@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreditCardViewController" customModule="Herfety" customModuleProvider="target">
+            <connections>
+                <outlet property="addNewCardLabel" destination="dg7-EL-Inz" id="NuU-u4-W1C"/>
+                <outlet property="cardCvvTextField" destination="eXI-8t-gNI" id="Rns-4t-aJU"/>
+                <outlet property="cardDetailsLabel" destination="MUR-KZ-Ddg" id="vDl-Ag-tcc"/>
+                <outlet property="cardExpDateTextField" destination="Ji3-wP-LKI" id="dYD-qO-Lhx"/>
+                <outlet property="cardHolderNameTextField" destination="2zL-29-tTh" id="YKc-0n-KbD"/>
+                <outlet property="cardNumberTextField" destination="H20-ps-Y0f" id="Quu-sn-PZZ"/>
+                <outlet property="cardView" destination="chm-oZ-CCZ" id="7EG-Ff-h3v"/>
+                <outlet property="headerCard" destination="dg7-EL-Inz" id="jcM-VF-3It"/>
+                <outlet property="headerTextField" destination="MUR-KZ-Ddg" id="1Wi-hn-FhL"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSb-g1-qMh">
+                    <rect key="frame" x="0.0" y="69" width="393" height="749"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xzf-iO-kgs" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="560.66666666666663"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KA0-YN-jEG" userLabel="Stack Content View">
+                                    <rect key="frame" x="20" y="0.0" width="353" height="560.66666666666663"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="AdM-gj-8KV">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="20.333333333333332"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dg7-EL-Inz">
+                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="20.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="yvy-GS-zJP">
+                                            <rect key="frame" x="0.0" y="40.333333333333314" width="353" height="200"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chm-oZ-CCZ" customClass="CardView" customModule="Herfety" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="200"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="200" id="wQT-eQ-5BM"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Dld-8o-Ev7">
+                                            <rect key="frame" x="0.0" y="260.33333333333331" width="353" height="20.333333333333314"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUR-KZ-Ddg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="20.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="S8a-Hj-PHo">
+                                            <rect key="frame" x="0.0" y="300.66666666666669" width="353" height="260.00000000000006"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H20-ps-Y0f" customClass="AddressTextField" customModule="Herfety" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="353" height="50"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zL-29-tTh" customClass="AddressTextField" customModule="Herfety" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="70" width="353" height="50"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ji3-wP-LKI" customClass="AddressTextField" customModule="Herfety" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="140" width="353" height="50"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXI-8t-gNI" customClass="AddressTextField" customModule="Herfety" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="209.99999999999994" width="353" height="50"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="KA0-YN-jEG" firstAttribute="top" secondItem="xzf-iO-kgs" secondAttribute="top" id="3nx-Jx-KEd"/>
+                                <constraint firstAttribute="bottom" secondItem="KA0-YN-jEG" secondAttribute="bottom" id="9PC-ki-frC"/>
+                                <constraint firstAttribute="trailing" secondItem="KA0-YN-jEG" secondAttribute="trailing" constant="20" id="Rzh-KE-Mys"/>
+                                <constraint firstItem="KA0-YN-jEG" firstAttribute="leading" secondItem="xzf-iO-kgs" secondAttribute="leading" constant="20" id="ga8-iB-vXT"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="xzf-iO-kgs" firstAttribute="bottom" secondItem="VD9-ri-TPi" secondAttribute="bottom" id="1NZ-Vu-4GB"/>
+                        <constraint firstItem="xzf-iO-kgs" firstAttribute="top" secondItem="VD9-ri-TPi" secondAttribute="top" id="7S6-vX-fu4"/>
+                        <constraint firstItem="xzf-iO-kgs" firstAttribute="trailing" secondItem="VD9-ri-TPi" secondAttribute="trailing" id="QJn-EA-3IC"/>
+                        <constraint firstItem="xzf-iO-kgs" firstAttribute="width" secondItem="6LX-ZV-GgL" secondAttribute="width" id="gSc-HT-Sdc"/>
+                        <constraint firstItem="xzf-iO-kgs" firstAttribute="leading" secondItem="VD9-ri-TPi" secondAttribute="leading" id="mBT-Mn-CP2"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="VD9-ri-TPi"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="6LX-ZV-GgL"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="qSb-g1-qMh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5sD-lS-xYt"/>
+                <constraint firstItem="qSb-g1-qMh" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="BD5-9z-QiC"/>
+                <constraint firstItem="qSb-g1-qMh" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="BGL-uG-Wpf"/>
+                <constraint firstItem="qSb-g1-qMh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="dd2-em-T0Z"/>
+            </constraints>
+            <point key="canvasLocation" x="5.343511450381679" y="20.422535211267608"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

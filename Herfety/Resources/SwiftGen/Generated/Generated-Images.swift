@@ -88,6 +88,15 @@ public enum Images {
     public static var wishlistSelected: UIImage {
         UIImage(named: "Wishlist Selected")!
     }
+    public static var alertAddToCart: UIImage {
+        UIImage(named: "alert-addToCart")!
+    }
+    public static var alertError: UIImage {
+        UIImage(named: "alert-error")!
+    }
+    public static var alertWarning: UIImage {
+        UIImage(named: "alert-warning")!
+    }
     public static var auth: UIImage {
         UIImage(named: "auth")!
     }

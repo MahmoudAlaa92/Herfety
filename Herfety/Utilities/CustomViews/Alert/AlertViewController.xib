@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertViewController" customModule="Herfety" customModuleProvider="target">
             <connections>
+                <outlet property="alertView" destination="aMo-h8-4NQ" id="fMZ-Ag-zQi"/>
                 <outlet property="confirmBtn" destination="Kg1-Pb-Aia" id="AJo-YT-VhG"/>
                 <outlet property="descriptionLabel" destination="akN-YU-EQT" id="eRX-VS-a9v"/>
                 <outlet property="imageView" destination="Gu2-SU-lyl" id="th2-4z-DwL"/>
@@ -23,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="462" height="548"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMo-h8-4NQ">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMo-h8-4NQ" userLabel="Alert View">
                     <rect key="frame" x="81" y="111.66666666666669" width="300" height="350"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SY4-85-QQs">
@@ -70,6 +71,9 @@
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    <connections>
+                                        <action selector="pressedConfirmBtn:" destination="-1" eventType="touchUpInside" id="Qak-1y-Acb"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AddAddressViewControllerDelegate: AnyObject {
+    func didAddAddress(_ address: InfoModel)
+}
+
 class AddAddressViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var nameTextField: AddressTextField!
@@ -16,6 +20,7 @@ class AddAddressViewController: UIViewController {
     
     // MARK: - Properties
     var viewModel:AddAddressViewModel
+    weak var delegate: AddAddressViewControllerDelegate?
     
     // MARK: - Init
     init(viewModel:AddAddressViewModel) {
@@ -60,6 +65,13 @@ extension AddAddressViewController {
 //
 extension AddAddressViewController {
     @IBAction func addPressed(_ sender: Any) {
-        print("add button is tapped")
+        guard let name = nameTextField.textField.text, !name.isEmpty,
+              let phone = phoneTextField.textField.text, !phone.isEmpty,
+              let address = addressTextField.textField.text, !address.isEmpty
+        else{
+            return
+        }
+        delegate?.didAddAddress(InfoModel(name: name, address: address, phone: phone))
+        self.navigationController?.popViewController(animated: true)
     }
 }

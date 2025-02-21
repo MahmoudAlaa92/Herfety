@@ -39,6 +39,11 @@ public extension UIFont {
         return UIFont(name: "DMSans-Medium", size: 14) ?? .systemFont(ofSize: 14)
     }
 
+    
+    static var calloutBold: UIFont {
+        return UIFont(name: "DMSans-Bold", size: 14) ?? .systemFont(ofSize: 14)
+    }
+    
     static var footnote: UIFont {
         return UIFont(name: "DMSans-Bold", size: 12) ?? .systemFont(ofSize: 12)
     }

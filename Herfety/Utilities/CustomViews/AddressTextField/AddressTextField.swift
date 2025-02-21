@@ -7,9 +7,14 @@
 
 import UIKit
 
-class AddressTextField: UIView {
+protocol AddressTextFieldDelegate: AnyObject {
+    func addressTextFieldDidChange(_ textField: AddressTextField, textDidChange: String?)
+}
+
+class AddressTextField: UIView, UITextFieldDelegate {
     // MARK: - Outlets
     @IBOutlet weak var textField: UITextField!
+    weak var delegate: AddressTextFieldDelegate?
     
     // MARK: - Propereties
     var placeholder: String? {
@@ -19,7 +24,7 @@ class AddressTextField: UIView {
             // add font and color from extension
         }
     }
-    
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadNib()
@@ -46,6 +51,8 @@ class AddressTextField: UIView {
 extension AddressTextField {
   
     private func configureUI() {
+        setUpTextField()
+        textField.delegate = self
         textField.heightAnchor.constraint(equalToConstant: 56).isActive = true
         layer.cornerRadius = 15
         layer.borderWidth = 0.5
@@ -53,3 +60,21 @@ extension AddressTextField {
     }
 }
 
+// MARK: - Actions
+//
+extension AddressTextField {
+    
+    func setUpTextField() {
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        delegate?.addressTextFieldDidChange(self, textDidChange: textField.text)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}

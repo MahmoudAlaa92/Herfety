@@ -1,5 +1,5 @@
 //
-//  ShippingViewController.swift
+//  InfoViewController.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 13/02/2025.
@@ -13,7 +13,7 @@ class InfoViewController: UIViewController {
     private var viewModel = InfoViewModel()
     private var sections: [CollectionViewProvider] = []
     private var layoutProviders: [SectionLayoutProvider] = []
-    private var navigationBarBehavior: ShippingNavBar?
+    private var navigationBarBehavior: InfoNavBar?
     
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -24,12 +24,13 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureProvider()
+        configureSections()
         configureCompositianalLayout()
         setUpCollectionView()
         configureUI()
         setUpNavigationBar()
         bindViewModel()
+        configureNotificationCenter()
     }
 }
 
@@ -39,14 +40,14 @@ extension InfoViewController {
     
     private func setUpCollectionView() {
         collectionView.dataSource = self
-        
+
         sections.forEach { $0.registerCells(in: collectionView) }
     }
-    private func configureProvider() {
-        let infoSection = InfoCollectionViewSection(shippingItems: viewModel.shippingItems)
+    private func configureSections() {
+        let infoSection = InfoCollectionViewSection(infoItems: viewModel.infoItems)
         sections = [infoSection]
         
-        layoutProviders.append(ShippingInfoSectionLayoutProvider())
+        layoutProviders = [InfoSectionLayoutProvider()]
     }
     // Configure Layout
     private func configureCompositianalLayout() {
@@ -64,12 +65,26 @@ extension InfoViewController {
         
         navigationItem.backButtonTitle = ""
         
-        navigationBarBehavior = ShippingNavBar(navigationItem: navigationItem, navigationController: navigationController)
-        navigationBarBehavior?.configure(title: "Info", titleColor: .primaryBlue,onPlus: { [weak self] in
-             // plus button is tapped
-            let addressVC = AddAddressViewController(viewModel: AddAddressViewModel())
-            self?.navigationController?.pushViewController(addressVC, animated: true)
+        navigationBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        
+        navigationBarBehavior?.configure(title: "Info", titleColor: .primaryBlue, onPlus: { [weak self] in
+            guard let self = self else { return }
+            /// plus button is tapped
+            self.viewModel.didTapPlusButton(navigationController: navigationController)
         })
+    }
+    
+    // Notification Center
+    private func configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: Notification.Name("infoItemsUpdated"), object: nil)
+    }
+    
+    // Reloud collectionView
+   @objc private func reloadCollectionView() {
+       configureSections()
+       DispatchQueue.main.async { [weak self] in
+           self?.collectionView.reloadData()
+       }
     }
 }
 
@@ -91,12 +106,12 @@ extension InfoViewController: UICollectionViewDataSource {
 // MARK: - Binding
 //
 extension InfoViewController {
+    // Navigate to Credit Card
     private func bindViewModel() {
-//        viewModel.navigationToPayment = { [weak self] in
-//            let paymentVc = PaymentViewController()
-//            navigationController?.pushViewController(paymentVc, animated: true)
-//        }
-        print("Binding to navigate payment VC")
+        viewModel.navigationToPayment = { [weak self] in
+            let creditCardVC = CreditCardViewController(viewModel: CreditCardViewModel())
+            self?.navigationController?.pushViewController(creditCardVC, animated: true)
+        }
     }
 }
 // MARK: - Actions
@@ -104,7 +119,6 @@ extension InfoViewController {
 extension InfoViewController {
     
     @IBAction func paymentPressed(_ sender: Any) {
-//        print("Payment Pressed")
         viewModel.didTapPaymentButton()
     }
 }
