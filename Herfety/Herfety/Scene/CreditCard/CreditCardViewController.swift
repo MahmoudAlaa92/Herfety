@@ -8,7 +8,6 @@
 import UIKit
 
 class CreditCardViewController: UIViewController {
-    
     // MARK: - Outlets
     @IBOutlet weak var headerCard: UILabel!
     @IBOutlet weak var addNewCardLabel: UILabel!
@@ -20,6 +19,9 @@ class CreditCardViewController: UIViewController {
     @IBOutlet weak var cardHolderNameTextField: AddressTextField!
     @IBOutlet weak var cardExpDateTextField: AddressTextField!
     @IBOutlet weak var cardCvvTextField: AddressTextField!
+    
+    @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var confirmBtn: PrimaryButton!
     
     // MARK: - Properties
     var viewModel: CreditCardViewModel
@@ -38,16 +40,16 @@ class CreditCardViewController: UIViewController {
         super.viewDidLoad()
         cofigureTextFieldsPlaceHolder()
         configureHeaderLabel()
+        configureButtonUI()
         setUpDelegates()
         bindViewModel()
     }
-    
     // Bind
     private func bindViewModel() {
+        
         viewModel.onCardNumberChange = { [weak self] value in
-            let validValue = self?.viewModel.isValidTextField(value: value, 16)
-            self?.cardNumberTextField.textField.text = validValue
-            self?.cardView.setCardNumber(number: validValue ?? "")
+            self?.cardNumberTextField.textField.text = value
+            self?.cardView.setCardNumber(number: value)
         }
         
         viewModel.onCardHolderChange = { [weak self] value in
@@ -64,17 +66,12 @@ class CreditCardViewController: UIViewController {
             self?.cardView.setValueDate(date: validValue ?? "")
         }
         
-        viewModel.onShowAlert = { [weak self] message in
-            let alert = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self?.present(alert, animated: true)
+        viewModel.onDismiss = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
         }
         
-        viewModel.onDismiss = { [weak self] in
-            self?.dismiss(animated: true)
-        }
     }
-    
+
 }
 
 // MARK: - Configuration
@@ -97,7 +94,16 @@ extension CreditCardViewController {
         cardHolderNameTextField.placeholder = "Card holder Name"
         cardExpDateTextField.placeholder = "Exp Date"
         cardCvvTextField.placeholder = "CVV"
-        
+    }
+    
+    private func configureButtonUI() {
+        confirmBtn.title = "Confirm"
+        if #available(iOS 15.0, *) {
+            cancelBtn.configuration = nil
+            cancelBtn.setTitle("Cancel", for: .normal)
+            cancelBtn.setTitleColor(Colors.hCardTextFieldPlaceholder, for: .normal)
+            cancelBtn.titleLabel?.font = .callout
+        }
     }
     
     private func setUpDelegates() {
@@ -108,7 +114,7 @@ extension CreditCardViewController {
     }
 }
 
-// MARK: - Delegate
+// MARK: - TextFieldDelegates
 //
 extension CreditCardViewController: AddressTextFieldDelegate {
     func addressTextFieldDidChange(_ textField: AddressTextField, textDidChange: String?) {
@@ -126,5 +132,18 @@ extension CreditCardViewController: AddressTextFieldDelegate {
         default:
             break
         }
+    }
+}
+// MARK: - Actions
+//
+extension CreditCardViewController {
+  
+    
+    @IBAction func cancelPressed(_ sender: Any) {
+        viewModel.didTapCancel()
+    }
+    
+    @IBAction func confirmPressed(_ sender: Any) {
+     
     }
 }

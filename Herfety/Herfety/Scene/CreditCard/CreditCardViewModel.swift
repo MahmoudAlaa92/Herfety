@@ -13,7 +13,7 @@ class CreditCardViewModel {
     var onCardHolderChange: ((String) -> Void)?
     var onCVVChange: ((String) -> Void)?
     var onExpDateChange: ((String) -> Void)?
-    var onShowAlert: ((String) -> Void)?
+    var onShowAlert: ((AlertModel) -> Void)?
     var onDismiss: (() -> Void)?
     
     func formatExpirationDate(_ input: String) -> String {
@@ -23,17 +23,16 @@ class CreditCardViewModel {
             let index = input.index(input.startIndex, offsetBy: 2)
             input.insert("/", at: index)
         }
-        
         return input
     }
     
     func isValidTextField(value: String, _ byPrefix: Int) -> String {
-        let cleanedValue = value.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-        return String(cleanedValue.prefix(byPrefix))
+        let numericalValue = value.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        return String(numericalValue.prefix(byPrefix))
     }
     
     func didTapAddCard() {
-        onShowAlert?("Card added successfully!")
+       
     }
     
     func didTapCancel() {

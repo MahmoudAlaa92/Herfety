@@ -13,6 +13,7 @@ protocol AddressTextFieldDelegate: AnyObject {
 
 class AddressTextField: UIView, UITextFieldDelegate {
     // MARK: - Outlets
+    @IBOutlet var contentView: UIView!
     @IBOutlet weak var textField: UITextField!
     weak var delegate: AddressTextFieldDelegate?
     
@@ -52,6 +53,8 @@ extension AddressTextField {
   
     private func configureUI() {
         setUpTextField()
+        contentView.layer.cornerRadius = 15
+        contentView.layer.masksToBounds = true
         textField.delegate = self
         textField.heightAnchor.constraint(equalToConstant: 56).isActive = true
         layer.cornerRadius = 15
@@ -59,7 +62,6 @@ extension AddressTextField {
         layer.borderColor = Colors.hCardTextFieldPlaceholder.cgColor
     }
 }
-
 // MARK: - Actions
 //
 extension AddressTextField {

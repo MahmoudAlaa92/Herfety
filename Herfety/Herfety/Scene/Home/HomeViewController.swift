@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
     //
     private var navigationBarBehavior: HomeNavBar?
     private let viewModel = HomeViewModel()
-    private var providers: [CollectionViewProvider] = []
+    private var sections: [CollectionViewProvider] = []
     private var layoutProviders:[SectionLayoutProvider] = []
     
     // MARK: - Outlets
@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureProvider()
+        configureSections()
         setUpCollectionView()
         cofigureCompositianalLayout()
         configureNavBar()
@@ -44,13 +44,13 @@ class HomeViewController: UIViewController {
     
     // Configure Provider
     //
-    private func configureProvider() {
+    private func configureSections() {
         let sliderProvider = SliderCollectionViewSection(sliderItems: viewModel.sliderItems)
         let categorProvider = CategoryCollectionViewSection(categoryItems: viewModel.categoryItems)
         let cardProvider = CardItemCollectionViewSection(productItems: viewModel.productItems)
         let topBrands = TopBrandsCollectionViewSection(topBrandsItems: viewModel.topBrandsItems)
         let dailyEssentailItems = DailyEssentailCollectionViewSection(dailyEssentail: viewModel.dailyEssentailItems)
-        providers = [sliderProvider, categorProvider, cardProvider, topBrands, dailyEssentailItems]
+        sections = [sliderProvider, categorProvider, cardProvider, topBrands, dailyEssentailItems]
         
         layoutProviders.append(SliderSectionLayoutProvider())
         layoutProviders.append(CategoriesSectionLayoutProvider())
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
         collectionView.dataSource = self
         
         /// Registere cells
-        providers.forEach { $0.registerCells(in: collectionView) }
+        sections.forEach { $0.registerCells(in: collectionView) }
     }
 }
 
@@ -95,20 +95,20 @@ extension HomeViewController: UICollectionViewDelegate {}
 extension HomeViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return providers.count
+        return sections.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return providers[section].numberOfItems
+        return sections[section].numberOfItems
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return providers[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
+        return sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
     
 // MARK: - Header And Footer
 //
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if let provider = providers[indexPath.section] as? HeaderAndFooterProvider {
+        if let provider = sections[indexPath.section] as? HeaderAndFooterProvider {
             return provider.cellForItems(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         }
         /// provider does not support headers/footers.

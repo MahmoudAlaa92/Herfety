@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddressTextField" customModule="Herfety" customModuleProvider="target">
             <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="uMW-hi-sCi"/>
                 <outlet property="textField" destination="3Ua-Bu-Lfl" id="Ef2-8Z-JMk"/>
             </connections>
         </placeholder>
