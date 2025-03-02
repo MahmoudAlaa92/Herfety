@@ -10,6 +10,7 @@ import UIKit
 class CardItemCollectionViewSection: CollectionViewProvider {
     // MARK: - Properties
     let productItems: [ProductItem]
+    var headerConfigurator: ((HeaderView) -> Void)?
     
     // MARK: - Init
     init(productItems: [ProductItem]) {
@@ -62,12 +63,12 @@ struct CardProductSectionLayoutProvider: SectionLayoutProvider {
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
         section.interGroupSpacing = 10
-        section.boundarySupplementaryItems = [
-            .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                    heightDimension: .absolute(30)),
-                                    elementKind: "Header",
-                                    alignment: .top)]
         
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                                                          heightDimension: .absolute(56)), elementKind: "Header", alignment: .top)
+        sectionHeader.contentInsets = NSDirectionalEdgeInsets(top: 14, leading: 0, bottom: 0, trailing: 0)
+        
+        section.boundarySupplementaryItems = [sectionHeader]
         return section
     }
 }
@@ -84,7 +85,7 @@ extension CardItemCollectionViewSection: HeaderAndFooterProvider {
                 withReuseIdentifier: HeaderView.headerIdentifier,
                 for: indexPath) as! HeaderView
             
-            header.configure(title: "The best deal on", description: " Jewelry & Accessories", shouldShowButton: true)
+            headerConfigurator?(header)
             return header
         }
         

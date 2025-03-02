@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="ButtonCollectionReusableView" customModule="Herfety" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSx-jk-2j0" customClass="PrimaryButton" customModule="Herfety" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstItem="QSx-jk-2j0" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="2HY-sy-YfZ"/>
+                <constraint firstAttribute="trailing" secondItem="QSx-jk-2j0" secondAttribute="trailing" id="8vc-MY-JJL"/>
+                <constraint firstAttribute="bottom" secondItem="QSx-jk-2j0" secondAttribute="bottom" id="Hqx-hN-p1x"/>
+                <constraint firstItem="QSx-jk-2j0" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="xqw-p8-TDO"/>
+            </constraints>
+            <connections>
+                <outlet property="button" destination="QSx-jk-2j0" id="Tw7-Y8-jRm"/>
+            </connections>
+            <point key="canvasLocation" x="5" y="20"/>
+        </collectionReusableView>
+    </objects>
+</document>

@@ -53,7 +53,7 @@ class HomeViewController: UIViewController {
         sections = [sliderProvider, categorProvider, cardProvider, topBrands, dailyEssentailItems]
         
         layoutProviders.append(SliderSectionLayoutProvider())
-        layoutProviders.append(CategoriesSectionLayoutProvider())
+        layoutProviders.append(CategoriesSectionLayoutSection())
         layoutProviders.append(CardProductSectionLayoutProvider())
         layoutProviders.append(TopBrandsSectionLayoutProvider())
         layoutProviders.append(DailyEssentailSectionLayoutProvider())
