@@ -26,7 +26,6 @@
 		151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF42D2D5BD03B00A3AD98 /* OrderViewModel.swift */; };
 		151DF4302D5BD39200A3AD98 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF42F2D5BD39200A3AD98 /* OrderModel.swift */; };
 		151DF4322D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF4312D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift */; };
-		152E8EB42D665D64005766FB /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152E8EB32D665D64005766FB /* Generated-Images.swift */; };
 		152E8EB82D6662AF005766FB /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152E8EB72D6662AF005766FB /* AlertModel.swift */; };
 		1532F3472D5E7DF2003223A1 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1532F3462D5E7DF2003223A1 /* InfoViewController.xib */; };
 		1532F3482D5E7DF2003223A1 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3452D5E7DF2003223A1 /* InfoViewController.swift */; };
@@ -117,6 +116,15 @@
 		15F927CA2D5A86600038CEB8 /* WishListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F927C92D5A86600038CEB8 /* WishListViewModel.swift */; };
 		15F927CE2D5AC5E50038CEB8 /* OrderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F927CD2D5AC5E50038CEB8 /* OrderCollectionViewCell.xib */; };
 		15F927CF2D5AC5E50038CEB8 /* OrderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F927CC2D5AC5E50038CEB8 /* OrderCollectionViewCell.swift */; };
+		15FB21C32D75209C0002B576 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 15FB21C22D75209C0002B576 /* Cosmos */; };
+		15FB21C52D752F810002B576 /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FB21C42D752F810002B576 /* Generated-Images.swift */; };
+		15FB21CA2D7531740002B576 /* ReviewersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FB21C82D7531740002B576 /* ReviewersViewController.swift */; };
+		15FB21CB2D7531740002B576 /* ReviewersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15FB21C92D7531740002B576 /* ReviewersViewController.xib */; };
+		15FB21D12D7535A70002B576 /* ReviewersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FB21CF2D7535A70002B576 /* ReviewersCollectionViewCell.swift */; };
+		15FB21D22D7535A70002B576 /* ReviewersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15FB21D02D7535A70002B576 /* ReviewersCollectionViewCell.xib */; };
+		15FB21D42D7542B40002B576 /* ReviewerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FB21D32D7542B40002B576 /* ReviewerModel.swift */; };
+		15FB21D62D7543080002B576 /* ReviewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FB21D52D7543080002B576 /* ReviewerViewModel.swift */; };
+		15FB21D82D7544580002B576 /* ReviewerCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FB21D72D7544580002B576 /* ReviewerCollectionViewSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,7 +147,6 @@
 		151DF42D2D5BD03B00A3AD98 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		151DF42F2D5BD39200A3AD98 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		151DF4312D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCollectionViewSection.swift; sourceTree = "<group>"; };
-		152E8EB32D665D64005766FB /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		152E8EB72D6662AF005766FB /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		1532F3452D5E7DF2003223A1 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		1532F3462D5E7DF2003223A1 /* InfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
@@ -232,6 +239,14 @@
 		15F927C92D5A86600038CEB8 /* WishListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewModel.swift; sourceTree = "<group>"; };
 		15F927CC2D5AC5E50038CEB8 /* OrderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCollectionViewCell.swift; sourceTree = "<group>"; };
 		15F927CD2D5AC5E50038CEB8 /* OrderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCollectionViewCell.xib; sourceTree = "<group>"; };
+		15FB21C42D752F810002B576 /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
+		15FB21C82D7531740002B576 /* ReviewersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewersViewController.swift; sourceTree = "<group>"; };
+		15FB21C92D7531740002B576 /* ReviewersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewersViewController.xib; sourceTree = "<group>"; };
+		15FB21CF2D7535A70002B576 /* ReviewersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewersCollectionViewCell.swift; sourceTree = "<group>"; };
+		15FB21D02D7535A70002B576 /* ReviewersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewersCollectionViewCell.xib; sourceTree = "<group>"; };
+		15FB21D32D7542B40002B576 /* ReviewerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewerModel.swift; sourceTree = "<group>"; };
+		15FB21D52D7543080002B576 /* ReviewerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewerViewModel.swift; sourceTree = "<group>"; };
+		15FB21D72D7544580002B576 /* ReviewerCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewerCollectionViewSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15FB21C32D75209C0002B576 /* Cosmos in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				151631312D5D56CF00BA088E /* Generated-Colors.swift */,
-				152E8EB32D665D64005766FB /* Generated-Images.swift */,
+				15FB21C42D752F810002B576 /* Generated-Images.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -584,6 +600,7 @@
 			isa = PBXGroup;
 			children = (
 				15E5B66A2D709CCD00C0383D /* ProductDetails */,
+				15FB21C72D7530FD0002B576 /* Reviewer */,
 				153F6AAD2D597C9B00317F49 /* NavBar */,
 				153F6A992D59527200317F49 /* TabBar */,
 				15CD44AA2D5268F800E58C6F /* Home */,
@@ -657,11 +674,6 @@
 			isa = PBXGroup;
 			children = (
 				15CD44BF2D529A4000E58C6F /* Sections */,
-				15CD44C22D52A10200E58C6F /* HomeModel.swift */,
-				15CD44C42D52A3BC00E58C6F /* HomeViewModel.swift */,
-				1589FC1D2D51808600240754 /* HomeViewController.swift */,
-				1589FC1E2D51808600240754 /* HomeViewController.xib */,
-				15CD44C62D52A72F00E58C6F /* SectionsLayout.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -702,6 +714,11 @@
 		15CD44BF2D529A4000E58C6F /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				15CD44C22D52A10200E58C6F /* HomeModel.swift */,
+				15CD44C42D52A3BC00E58C6F /* HomeViewModel.swift */,
+				1589FC1D2D51808600240754 /* HomeViewController.swift */,
+				1589FC1E2D51808600240754 /* HomeViewController.xib */,
+				15CD44C62D52A72F00E58C6F /* SectionsLayout.swift */,
 				15CD44AB2D52691200E58C6F /* SliderImages */,
 				15CD44B02D52714300E58C6F /* Categories */,
 				1589FC2B2D51934800240754 /* CardItem */,
@@ -712,7 +729,7 @@
 			path = Sections;
 			sourceTree = "<group>";
 		};
-		15CE60EE2D73B39B0032617B /* Reviews */ = {
+		15CE60EE2D73B39B0032617B /* ProductDeetailsReviews */ = {
 			isa = PBXGroup;
 			children = (
 				15CE60EF2D73B3CB0032617B /* ReviewCollectionViewCell.swift */,
@@ -720,7 +737,7 @@
 				15CE60F32D73B69D0032617B /* ReviewCollectionViewSection.swift */,
 				15CE60F52D73BA050032617B /* ReviewModel.swift */,
 			);
-			path = Reviews;
+			path = ProductDeetailsReviews;
 			sourceTree = "<group>";
 		};
 		15CE60F72D73C3660032617B /* TitleReviews */ = {
@@ -748,7 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				153B7FCF2D71F8FE00B364F8 /* ImagesProductDetails */,
-				15CE60EE2D73B39B0032617B /* Reviews */,
+				15CE60EE2D73B39B0032617B /* ProductDeetailsReviews */,
 				158F8D532D72635700D8E768 /* SupplementaryView */,
 			);
 			path = Sections;
@@ -761,6 +778,28 @@
 				15F927CD2D5AC5E50038CEB8 /* OrderCollectionViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		15FB21C72D7530FD0002B576 /* Reviewer */ = {
+			isa = PBXGroup;
+			children = (
+				15FB21D32D7542B40002B576 /* ReviewerModel.swift */,
+				15FB21D52D7543080002B576 /* ReviewerViewModel.swift */,
+				15FB21C82D7531740002B576 /* ReviewersViewController.swift */,
+				15FB21C92D7531740002B576 /* ReviewersViewController.xib */,
+				15FB21CC2D75354C0002B576 /* Sections */,
+				15FB21D72D7544580002B576 /* ReviewerCollectionViewSection.swift */,
+			);
+			path = Reviewer;
+			sourceTree = "<group>";
+		};
+		15FB21CC2D75354C0002B576 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				15FB21CF2D7535A70002B576 /* ReviewersCollectionViewCell.swift */,
+				15FB21D02D7535A70002B576 /* ReviewersCollectionViewCell.xib */,
+			);
+			path = Sections;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -780,6 +819,7 @@
 			);
 			name = Herfety;
 			packageProductDependencies = (
+				15FB21C22D75209C0002B576 /* Cosmos */,
 			);
 			productName = Herfety;
 			productReference = 1589FBF22D51781D00240754 /* Herfety.app */;
@@ -809,6 +849,9 @@
 			);
 			mainGroup = 1589FBE92D51781D00240754;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1589FBF32D51781D00240754 /* Products */;
 			projectDirPath = "";
@@ -851,12 +894,14 @@
 				153B7FD92D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib in Resources */,
 				15CE60F12D73B3CB0032617B /* ReviewCollectionViewCell.xib in Resources */,
 				153F6AA12D5955E800317F49 /* WishListViewController.xib in Resources */,
+				15FB21D22D7535A70002B576 /* ReviewersCollectionViewCell.xib in Resources */,
 				157E04762D554252000170FC /* images.stencil in Resources */,
 				153F6AB12D597DF200317F49 /* WishlistCollectionViewCell.xib in Resources */,
 				15955C1C2D67797500673BE7 /* CreditCardViewController.xib in Resources */,
 				157E046F2D553F6E000170FC /* Colors.xcassets in Resources */,
 				157F91032D62B774005381FB /* AddAddressViewController.xib in Resources */,
 				154112132D56983400F248F7 /* HeaderView.xib in Resources */,
+				15FB21CB2D7531740002B576 /* ReviewersViewController.xib in Resources */,
 				15F927CE2D5AC5E50038CEB8 /* OrderCollectionViewCell.xib in Resources */,
 				1517EC952D74ABF7007CCBF7 /* ButtonCollectionReusableView.xib in Resources */,
 				158F8D522D7252DC00D8E768 /* DescriptionProductDetails.xib in Resources */,
@@ -871,9 +916,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15FB21D62D7543080002B576 /* ReviewerViewModel.swift in Sources */,
 				158F8D512D7252DC00D8E768 /* DescriptionProductDetails.swift in Sources */,
+				15FB21C52D752F810002B576 /* Generated-Images.swift in Sources */,
+				15FB21D82D7544580002B576 /* ReviewerCollectionViewSection.swift in Sources */,
+				15FB21D12D7535A70002B576 /* ReviewersCollectionViewCell.swift in Sources */,
 				1589FC182D51785700240754 /* AppDelegate.swift in Sources */,
-				152E8EB42D665D64005766FB /* Generated-Images.swift in Sources */,
 				15CD44C52D52A3BC00E58C6F /* HomeViewModel.swift in Sources */,
 				15CE60F22D73B3CB0032617B /* ReviewCollectionViewCell.swift in Sources */,
 				15CD44B42D52716D00E58C6F /* CategoriesCollectionViewCell.swift in Sources */,
@@ -888,6 +936,7 @@
 				157F91192D62E804005381FB /* AlertViewController.swift in Sources */,
 				1589FC192D51785700240754 /* SceneDelegate.swift in Sources */,
 				15166A712D581B6500F8F35C /* TopBrandsModel.swift in Sources */,
+				15FB21D42D7542B40002B576 /* ReviewerModel.swift in Sources */,
 				15166A772D581C4100F8F35C /* TopBrandsCollectionViewCell.swift in Sources */,
 				15955C112D6759C400673BE7 /* CardView.swift in Sources */,
 				1532F34F2D5E8DF7003223A1 /* InfoCollectionViewSection.swift in Sources */,
@@ -908,6 +957,7 @@
 				153F6AAC2D59563F00317F49 /* ProfileViewController.swift in Sources */,
 				153F6AB22D597DF200317F49 /* WishlistCollectionViewCell.swift in Sources */,
 				15166A7A2D5823CF00F8F35C /* TopBrandsCollectionViewSection.swift in Sources */,
+				15FB21CA2D7531740002B576 /* ReviewersViewController.swift in Sources */,
 				154112122D56983400F248F7 /* HeaderView.swift in Sources */,
 				1532F3592D5EB297003223A1 /* InfoNavBar.swift in Sources */,
 				156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */,
@@ -1156,6 +1206,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/Cosmos?tab=readme-ov-file";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 25.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		15FB21C22D75209C0002B576 /* Cosmos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */;
+			productName = Cosmos;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1589FBEA2D51781D00240754 /* Project object */;
 }

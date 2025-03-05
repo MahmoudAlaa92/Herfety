@@ -14,6 +14,7 @@ class ProductDetailsViewModel {
             price: "$200.00",
             review: 20,
             reviewCount: 108,
+            rating: 4.0,
             availableCount: 100)
     
     var reviewsItems: [Review] = [

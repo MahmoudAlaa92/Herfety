@@ -27,5 +27,4 @@ struct SectionsLayout {
             return layoutProviders[sectionIndex].layoutSection()
         }
     }
-    
 }

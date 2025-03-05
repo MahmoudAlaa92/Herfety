@@ -15,8 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
-        // CustomeTabBarViewController()
+        window.rootViewController =
+//        ReviewersViewController(viewModel: ReviewerViewModel())
+//        ProductDetailsViewController(viewModel: ProductDetailsViewModel())
+         CustomeTabBarViewController()
         // ProductsViewController()
         self.window = window
         

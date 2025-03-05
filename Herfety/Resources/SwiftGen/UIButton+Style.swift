@@ -31,17 +31,14 @@ public extension UIButton {
             configureButton(buttonColor: .clear,
                             title: title,
                             titleColor: .black,
-                            font: .footnote,
+                            font: .caption1,
                             image: Images.chevronForward
             )
         case .wichlistButton:
             break
         }
     }
-    
-  
 }
-
 // MARK: - Configuraiton
 //
 extension UIButton {
@@ -82,5 +79,4 @@ extension UIButton {
             self.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
     }
-    
 }

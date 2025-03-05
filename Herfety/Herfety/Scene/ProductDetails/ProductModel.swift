@@ -14,6 +14,7 @@ struct Product {
     let price: String
     let review: Double
     let reviewCount: Int
+    let rating: Double
     let availableCount: Int
     
     var description: String {

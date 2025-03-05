@@ -26,13 +26,18 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PPz-43-A70">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PPz-43-A70">
                                     <rect key="frame" x="220" y="0.0" width="90" height="35"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08A-R4-4Ra">
-                                            <rect key="frame" x="0.0" y="0.0" width="30" height="35"/>
+                                            <rect key="frame" x="0.0" y="5.6666666666666679" width="24" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="SMc-rA-DTg"/>
+                                                <constraint firstAttribute="height" constant="24" id="ZbZ-NK-XZT"/>
+                                            </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="minus" catalog="system">
+                                                <directionalEdgeInsets key="contentInsets" top="0.0" leading="10" bottom="0.0" trailing="0.0"/>
                                                 <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </buttonConfiguration>
                                             <connections>
@@ -40,15 +45,20 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5S-6I-H5j">
-                                            <rect key="frame" x="30" y="0.0" width="30" height="35"/>
+                                            <rect key="frame" x="41.333333333333314" y="7.3333333333333339" width="7.6666666666666643" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWa-45-PTN">
-                                            <rect key="frame" x="60" y="0.0" width="30" height="35"/>
+                                            <rect key="frame" x="66" y="5.6666666666666679" width="24" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="X7l-iO-e3p"/>
+                                                <constraint firstAttribute="width" constant="24" id="rx7-nq-8cg"/>
+                                            </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system">
+                                                <directionalEdgeInsets key="contentInsets" top="0.0" leading="-10" bottom="0.0" trailing="0.0"/>
                                                 <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </buttonConfiguration>
                                             <connections>
@@ -57,7 +67,7 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="PA0-2k-lHt"/>
+                                        <constraint firstAttribute="height" constant="35" id="Sj4-KJ-dTg"/>
                                         <constraint firstAttribute="width" constant="90" id="vX0-g9-1hB"/>
                                     </constraints>
                                 </stackView>

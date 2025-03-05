@@ -1,0 +1,15 @@
+{
+  "originHash" : "10c590866cd62b509b97beeb5c47e1ab85346f40e66a4338b575c2709e258eab",
+  "pins" : [
+    {
+      "identity" : "cosmos?tab=readme-ov-file",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/evgenyneu/Cosmos?tab=readme-ov-file",
+      "state" : {
+        "revision" : "40ba10aaf175bf50abefd0e518bd3b40862af3b1",
+        "version" : "25.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}

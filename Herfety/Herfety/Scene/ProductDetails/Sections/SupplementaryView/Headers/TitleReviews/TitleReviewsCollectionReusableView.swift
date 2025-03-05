@@ -6,30 +6,32 @@
 //
 
 import UIKit
+import Cosmos
 
 class TitleReviewsCollectionReusableView: UICollectionReusableView {
 
     // MARK: - Properties
     static let identifier = "TitleReviewsCollectionReusableView"
+    lazy var cosmosView = CosmosView()
     
     // MARK: - Outlets
     @IBOutlet weak var titleReview: UILabel!
-    @IBOutlet weak var imageReview: UIImageView!
     @IBOutlet weak var numberReviews: UILabel!
+    @IBOutlet weak var starView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureUI()
     }
-    
 }
-
 // MARK: - Configuration
 //
 extension TitleReviewsCollectionReusableView {
     
-    func configure(numberOfReviews: Int) {
+    func configure(numberOfReviews: Int, rating: Double) {
         self.numberReviews.text = "(\(numberOfReviews) Review)"
+        
+        cosmosView.rating = Double(rating)
     }
     
     private func configureUI() {
@@ -38,6 +40,13 @@ extension TitleReviewsCollectionReusableView {
         
         numberReviews.font = .body
         
-        imageReview.image = Images.iconRating
+        starView.addSubview(cosmosView)
+        
+        cosmosView.translatesAutoresizingMaskIntoConstraints = false
+//        cosmosView.frame = starView.bounds
+        cosmosView.settings.filledImage = Images.iconRating
+        cosmosView.settings.emptyImage = Images.iconRatingEmpty
+        cosmosView.settings.starSize = 17
+        cosmosView.settings.updateOnTouch = false
     }
 }

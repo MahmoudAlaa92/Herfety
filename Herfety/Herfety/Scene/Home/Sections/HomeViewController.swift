@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     private var navigationBarBehavior: HomeNavBar?
     private let viewModel = HomeViewModel()
     private var sections: [CollectionViewProvider] = []
-    private var layoutProviders:[SectionLayoutProvider] = []
+    private var layoutSections:[SectionLayoutProvider] = []
     
     // MARK: - Outlets
     //
@@ -48,15 +48,18 @@ class HomeViewController: UIViewController {
         let sliderProvider = SliderCollectionViewSection(sliderItems: viewModel.sliderItems)
         let categorProvider = CategoryCollectionViewSection(categoryItems: viewModel.categoryItems)
         let cardProvider = CardItemCollectionViewSection(productItems: viewModel.productItems)
+        cardProvider.headerConfigurator = { header in
+            header.configure(title: "the best deal on ", description: "Jewelry & Accessories", shouldShowButton: true)
+        }
         let topBrands = TopBrandsCollectionViewSection(topBrandsItems: viewModel.topBrandsItems)
         let dailyEssentailItems = DailyEssentailCollectionViewSection(dailyEssentail: viewModel.dailyEssentailItems)
         sections = [sliderProvider, categorProvider, cardProvider, topBrands, dailyEssentailItems]
         
-        layoutProviders.append(SliderSectionLayoutProvider())
-        layoutProviders.append(CategoriesSectionLayoutSection())
-        layoutProviders.append(CardProductSectionLayoutProvider())
-        layoutProviders.append(TopBrandsSectionLayoutProvider())
-        layoutProviders.append(DailyEssentailSectionLayoutProvider())
+        layoutSections.append(SliderSectionLayoutProvider())
+        layoutSections.append(CategoriesSectionLayoutSection())
+        layoutSections.append(CardProductSectionLayoutProvider())
+        layoutSections.append(TopBrandsSectionLayoutProvider())
+        layoutSections.append(DailyEssentailSectionLayoutProvider())
     }
     
     func configureNavBar() {
@@ -82,7 +85,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     private func cofigureCompositianalLayout() {
 
-        let layoutFactory = SectionsLayout(providers: layoutProviders)
+        let layoutFactory = SectionsLayout(providers: layoutSections)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
 }

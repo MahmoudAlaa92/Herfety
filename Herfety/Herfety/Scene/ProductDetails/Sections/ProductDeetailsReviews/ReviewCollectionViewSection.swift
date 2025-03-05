@@ -10,8 +10,10 @@ import UIKit
 class ReviewCollectionViewSection: CollectionViewProvider {
     
     let reviewItems: [Review]
-    init(reviewItems: [Review]) {
+    let product: Product
+    init(reviewItems: [Review], rating: Product) {
         self.reviewItems = reviewItems
+        self.product = rating
     }
     
     func registerCells(in collectionView: UICollectionView) {
@@ -82,7 +84,7 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
             ofKind: TitleReviewsCollectionReusableView.identifier,
             withReuseIdentifier: TitleReviewsCollectionReusableView.identifier,
             for: indexPath) as? TitleReviewsCollectionReusableView {
-            header.configure(numberOfReviews: reviewItems.count)
+            header.configure(numberOfReviews: reviewItems.count, rating: product.rating)
             return header
         } else if kind == ButtonCollectionReusableView.identifier,
                   let footer = collectionView.dequeueReusableSupplementaryView(

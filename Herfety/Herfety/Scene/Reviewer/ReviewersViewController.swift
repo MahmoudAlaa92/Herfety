@@ -1,24 +1,23 @@
 //
-//  ProductDetailsViewController.swift
+//  ReviewersViewController.swift
 //  Herfety
 //
-//  Created by Mahmoud Alaa on 27/02/2025.
+//  Created by Mahmoud Alaa on 03/03/2025.
 //
 
 import UIKit
 
-class ProductDetailsViewController: UIViewController {
+class ReviewersViewController: UIViewController {
     
     // MARK: - Properties
-    //
     @IBOutlet weak var collectionView: UICollectionView!
     ///
-    private var viewModel: ProductDetailsViewModel
+    private var viewModel: ReviewerViewModel
     private var sections: [CollectionViewProvider] = []
-    private var layoutSections: [SectionLayoutProvider] = []
+    private var sectionsLayout: [SectionLayoutProvider] = []
     
     // MARK: - Init
-    init(viewModel:  ProductDetailsViewModel) {
+    init(viewModel: ReviewerViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,6 +26,7 @@ class ProductDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
@@ -36,39 +36,27 @@ class ProductDetailsViewController: UIViewController {
 }
 // MARK: - Configuration
 //
-extension ProductDetailsViewController {
-    // CollectoinView
+extension ReviewersViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    // Sections
     private func configureSections() {
-        let imagesProducts = ProductDetailsCollectionViewSection(productItems: viewModel.productItems)
-        let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItems)
-        let recommendItems = CardItemCollectionViewSection(productItems: viewModel.recommendItems)
-        recommendItems.headerConfigurator = { header in
-            header.configure(title: "Recommended for you", description: "", shouldShowButton: false)
-        }
-        sections = [imagesProducts, reviews, recommendItems]
-        
-        sections.forEach( { $0.registerCells(in: collectionView) } )
+        let reviewrs = ReviewerCollectionViewSection(reviewers: viewModel.reviersItems)
+        sections = [reviewrs]
+        sections.forEach({ $0.registerCells(in: collectionView)})
     }
-    // Layout
     private func configureLayoutSections() {
-        let productImages = ProductDetailsCollectionViewProvider()
-        let review = ReviewCollectionViewSectionLayout()
-        let recommendItems = CardProductSectionLayoutProvider()
+        let reviewers = ReviewerCollectionViewLayoutSection()
+        sectionsLayout = [reviewers]
         
-        layoutSections = [productImages, review, recommendItems]
+        let layoutFactory = SectionsLayout(providers: sectionsLayout)
         
-        let layoutFactory = SectionsLayout(providers: layoutSections)
         collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
 }
 // MARK: - UICollectionViewDataSource
-//
-extension ProductDetailsViewController: UICollectionViewDataSource {
+extension ReviewersViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         sections.count
     }
@@ -79,18 +67,24 @@ extension ProductDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
-    
     // Header And Footer
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if let provider = sections[indexPath.section] as? HeaderAndFooterProvider {
-            return provider.cellForItems(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+        if kind == HeaderView.headerIdentifier,
+           let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: HeaderView.headerIdentifier,
+            withReuseIdentifier: HeaderView.headerIdentifier,
+            for: indexPath) as? HeaderView {
+            header.configure(
+                title: "Reviews Client",
+                description: "",
+                titleFont: .title3,
+                shouldShowButton: false)
+            return header
         }
-        
         return UICollectionReusableView()
     }
 }
 // MARK: - UICollectionViewDelegate
 //
-extension ProductDetailsViewController:  UICollectionViewDelegate {}
-
+extension ReviewersViewController: UICollectionViewDelegate {}
+    

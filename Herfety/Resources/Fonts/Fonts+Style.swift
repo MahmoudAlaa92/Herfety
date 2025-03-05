@@ -51,6 +51,10 @@ public extension UIFont {
     static var body: UIFont {
         return UIFont(name: "DMSans-Regular", size: 14) ?? .systemFont(ofSize: 14)
     }
+    
+    static var body2: UIFont {
+        return UIFont(name: "DMSans-Regular", size: 12) ?? .systemFont(ofSize: 12)
+    }
 
     static var caption1: UIFont {
         return UIFont(name: "DMSans-Regular", size: 10) ?? .systemFont(ofSize: 10)
