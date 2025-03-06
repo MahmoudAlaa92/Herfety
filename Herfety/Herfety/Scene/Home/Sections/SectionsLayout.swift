@@ -11,11 +11,11 @@ struct SectionsLayout {
     
     //MARK: - Properties
     //
-    private let layoutProviders: [SectionLayoutProvider]
+    private let layoutProviders: [LayoutSectionProvider]
     
     // MARK: - Init
     //
-    init(providers: [SectionLayoutProvider]) {
+    init(providers: [LayoutSectionProvider]) {
         self.layoutProviders = providers
     }
     // MARK: - Configure

@@ -15,7 +15,7 @@ protocol CollectionViewProvider {
 protocol HeaderAndFooterProvider {
     func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
 }
-protocol SectionLayoutProvider {
+protocol LayoutSectionProvider {
     func layoutSection() -> NSCollectionLayoutSection
 }
 
@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     private var navigationBarBehavior: HomeNavBar?
     private let viewModel = HomeViewModel()
     private var sections: [CollectionViewProvider] = []
-    private var layoutSections:[SectionLayoutProvider] = []
+    private var layoutSections:[LayoutSectionProvider] = []
     
     // MARK: - Outlets
     //

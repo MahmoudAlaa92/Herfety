@@ -45,7 +45,7 @@ class CardItemCollectionViewSection: CollectionViewProvider {
 
 // MARK: - Layout
 //
-struct CardProductSectionLayoutProvider: SectionLayoutProvider {
+struct CardProductSectionLayoutProvider: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(

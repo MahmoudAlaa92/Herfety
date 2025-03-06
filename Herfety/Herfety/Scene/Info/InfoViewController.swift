@@ -12,7 +12,7 @@ class InfoViewController: UIViewController {
     // MARK: - Properties
     private var viewModel = InfoViewModel()
     private var sections: [CollectionViewProvider] = []
-    private var layoutProviders: [SectionLayoutProvider] = []
+    private var layoutProviders: [LayoutSectionProvider] = []
     private var navigationBarBehavior: InfoNavBar?
     
     // MARK: - Outlets

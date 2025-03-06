@@ -35,7 +35,7 @@ class SliderCollectionViewSection: CollectionViewProvider {
 }
 // MARK: - Layout
 //
-struct SliderSectionLayoutProvider: SectionLayoutProvider {
+struct SliderSectionLayoutProvider: LayoutSectionProvider {
     func layoutSection() -> NSCollectionLayoutSection {
            let itemSize = NSCollectionLayoutSize(
                widthDimension: .fractionalWidth(1),

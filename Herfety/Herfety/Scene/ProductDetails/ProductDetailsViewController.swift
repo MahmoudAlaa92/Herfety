@@ -15,7 +15,7 @@ class ProductDetailsViewController: UIViewController {
     ///
     private var viewModel: ProductDetailsViewModel
     private var sections: [CollectionViewProvider] = []
-    private var layoutSections: [SectionLayoutProvider] = []
+    private var layoutSections: [LayoutSectionProvider] = []
     
     // MARK: - Init
     init(viewModel:  ProductDetailsViewModel) {

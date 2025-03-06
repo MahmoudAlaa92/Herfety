@@ -40,7 +40,7 @@ class InfoCollectionViewSection: CollectionViewProvider {
 
 // MARK: - Layout
 //
-struct InfoSectionLayoutProvider: SectionLayoutProvider {
+struct InfoSectionLayoutProvider: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),

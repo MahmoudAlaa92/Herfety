@@ -44,7 +44,7 @@ class DailyEssentailCollectionViewSection: CollectionViewProvider {
 
 // MARK: - Layout
 //
-struct DailyEssentailSectionLayoutProvider: SectionLayoutProvider {
+struct DailyEssentailSectionLayoutProvider: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),

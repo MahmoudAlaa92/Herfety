@@ -40,7 +40,7 @@ class ProductsCollectionViewSection: CollectionViewProvider {
 }
 // MARK: - Layout
 //
-struct ProductsCollectionViewSectionLayout: SectionLayoutProvider {
+struct ProductsCollectionViewSectionLayout: LayoutSectionProvider {
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                           heightDimension: .fractionalHeight(1))

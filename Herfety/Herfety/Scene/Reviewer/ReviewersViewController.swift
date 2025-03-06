@@ -14,7 +14,7 @@ class ReviewersViewController: UIViewController {
     ///
     private var viewModel: ReviewerViewModel
     private var sections: [CollectionViewProvider] = []
-    private var sectionsLayout: [SectionLayoutProvider] = []
+    private var sectionsLayout: [LayoutSectionProvider] = []
     
     // MARK: - Init
     init(viewModel: ReviewerViewModel) {

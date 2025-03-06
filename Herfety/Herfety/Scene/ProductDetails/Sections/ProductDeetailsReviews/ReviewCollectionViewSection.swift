@@ -42,7 +42,7 @@ class ReviewCollectionViewSection: CollectionViewProvider {
 
 // MARK: - Layout
 //
-struct ReviewCollectionViewSectionLayout: SectionLayoutProvider {
+struct ReviewCollectionViewSectionLayout: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         

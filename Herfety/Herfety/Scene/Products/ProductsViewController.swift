@@ -15,7 +15,7 @@ class ProductsViewController: UIViewController {
     // MARK: - Properties
     private let viewModel =  ProductsViewModel()
     private var sections = [CollectionViewProvider]()
-    private var layoutSections = [SectionLayoutProvider]()
+    private var layoutSections = [LayoutSectionProvider]()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

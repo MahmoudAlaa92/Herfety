@@ -29,7 +29,7 @@ class CustomeTabBarViewController: UITabBarController {
         let vc3 = UINavigationController(rootViewController: OrderViewController())
         cartViewController = vc3
         
-        let vc4 = UINavigationController(rootViewController: ProfileViewController())
+        let vc4 = UINavigationController(rootViewController: ProfileViewController(nameViewModel: NameViewModel(), profileListViewModel: ProfileListViewModel()))
         profileViewController = vc4
         
         viewControllers = [homeViewController, wishListViewController, cartViewController, profileViewController]

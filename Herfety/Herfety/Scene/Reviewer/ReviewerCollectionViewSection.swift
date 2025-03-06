@@ -41,7 +41,7 @@ class ReviewerCollectionViewSection: CollectionViewProvider {
 }
 // MARK: - Layout
 //
-struct ReviewerCollectionViewLayoutSection: SectionLayoutProvider {
+struct ReviewerCollectionViewLayoutSection: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),

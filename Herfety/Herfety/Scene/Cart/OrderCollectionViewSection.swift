@@ -61,7 +61,7 @@ extension OrderCollectionViewSection: HeaderAndFooterProvider {
 
 // MARK: - Layout
 //
-struct OrderSectionLayoutProvider: SectionLayoutProvider {
+struct OrderSectionLayoutProvider: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),

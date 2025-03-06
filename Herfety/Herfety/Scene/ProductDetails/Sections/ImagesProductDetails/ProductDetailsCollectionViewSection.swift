@@ -40,7 +40,7 @@ class ProductDetailsCollectionViewSection: CollectionViewProvider {
 }
 // MARK: - Layout
 //
-struct ProductDetailsCollectionViewProvider: SectionLayoutProvider {
+struct ProductDetailsCollectionViewProvider: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         // Item

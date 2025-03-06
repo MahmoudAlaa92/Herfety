@@ -13,7 +13,7 @@ class WishListViewController: UIViewController {
     //
     private let viewModel = WishListViewModel()
     private var providers = [CollectionViewProvider]()
-    private var layoutProviders = [SectionLayoutProvider]()
+    private var layoutProviders = [LayoutSectionProvider]()
     
     // MARK: - Outlets
     //

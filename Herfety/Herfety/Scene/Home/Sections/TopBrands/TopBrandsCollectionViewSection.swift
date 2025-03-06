@@ -47,7 +47,7 @@ class TopBrandsCollectionViewSection: CollectionViewProvider {
 
 // MARK: - Layout
 //
-struct TopBrandsSectionLayoutProvider: SectionLayoutProvider {
+struct TopBrandsSectionLayoutProvider: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(

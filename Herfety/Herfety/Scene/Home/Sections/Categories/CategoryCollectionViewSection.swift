@@ -62,7 +62,7 @@ extension CategoryCollectionViewSection: HeaderAndFooterProvider {
 
 // MARK: - Layout
 //
-struct CategoriesSectionLayoutSection: SectionLayoutProvider {
+struct CategoriesSectionLayoutSection: LayoutSectionProvider {
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),

@@ -62,7 +62,7 @@ extension WishlistCollectionViewSection: HeaderAndFooterProvider {
 }
 // MARK: - Layout
 //
-struct WishlistSectionLayoutProvider: SectionLayoutProvider {
+struct WishlistSectionLayoutProvider: LayoutSectionProvider {
     
     func layoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),

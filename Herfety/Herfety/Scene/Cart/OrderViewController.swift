@@ -21,7 +21,7 @@ class OrderViewController: UIViewController {
     }()
     private var viewModel = OrderViewModel()
     private var sections: [CollectionViewProvider] = []
-    private var layoutProviders: [SectionLayoutProvider] = []
+    private var layoutProviders: [LayoutSectionProvider] = []
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
