@@ -28,6 +28,7 @@ class NameCollectionViewCell: UICollectionViewCell {
 extension NameCollectionViewCell {
     private func configureIU() {
         nameProfile.font = .title3
+        nameProfile.textColor = Colors.primaryBlue
         
         emailProfile.font = .caption1
         emailProfile.textColor = Colors.hCardTextFieldPlaceholder

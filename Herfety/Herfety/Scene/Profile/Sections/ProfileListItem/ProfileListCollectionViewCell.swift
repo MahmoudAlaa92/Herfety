@@ -25,7 +25,11 @@ class ProfileListCollectionViewCell: UICollectionViewCell {
 //
 extension ProfileListCollectionViewCell {
     private func configurUI() {
-        nameLabel.font = .body
+        nameLabel.textColor = Colors.primaryBlue
+        nameLabel.font = .calloutBold
+        
+        languageLabel.font = .caption1
+        languageLabel.textColor = Colors.labelGray
     }
 }
 // MARK: - Actions

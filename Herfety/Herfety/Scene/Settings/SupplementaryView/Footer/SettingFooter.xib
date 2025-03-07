@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="SettingFooter" customModule="Herfety" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="247" height="35"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fz7-yW-OLh">
+                    <rect key="frame" x="0.0" y="0.0" width="247" height="35"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmt-jE-K3c">
+                            <rect key="frame" x="0.0" y="0.0" width="75.666666666666671" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLx-cp-guc">
+                            <rect key="frame" x="85.666666666666657" y="0.0" width="75.666666666666657" height="35"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            <connections>
+                                <action selector="malePressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="KxC-a5-OnE"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTw-vv-0nZ">
+                            <rect key="frame" x="171.33333333333334" y="0.0" width="75.666666666666657" height="35"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            <connections>
+                                <action selector="femalePressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="GKI-gh-d9N"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstItem="fz7-yW-OLh" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="0aD-JJ-2un"/>
+                <constraint firstAttribute="trailing" secondItem="fz7-yW-OLh" secondAttribute="trailing" id="M9I-eL-nzc"/>
+                <constraint firstAttribute="bottom" secondItem="fz7-yW-OLh" secondAttribute="bottom" id="XX6-b2-NXS"/>
+                <constraint firstItem="fz7-yW-OLh" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="ouW-i3-Y8s"/>
+            </constraints>
+            <connections>
+                <outlet property="femaleBtn" destination="LTw-vv-0nZ" id="kk7-Sp-MPa"/>
+                <outlet property="maleBtn" destination="mLx-cp-guc" id="axH-nk-GdX"/>
+                <outlet property="titleLabel" destination="vmt-jE-K3c" id="2XZ-4v-hAO"/>
+            </connections>
+            <point key="canvasLocation" x="-70.992366412213741" y="14.43661971830986"/>
+        </collectionReusableView>
+    </objects>
+</document>

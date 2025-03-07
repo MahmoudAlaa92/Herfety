@@ -4,9 +4,7 @@
 //
 //  Created by Mahmoud Alaa on 11/02/2025.
 //
-
 import UIKit
-
 
 class PaymentView: UIView {
     
@@ -39,7 +37,6 @@ class PaymentView: UIView {
         view.frame = bounds
     }
 }
-
 // MARK: - ViewModel
 //
 extension PaymentView {
@@ -51,7 +48,6 @@ extension PaymentView {
         let numberOfItems: Int
     }
 }
-
 // MARK: - Configuration
 //
 extension PaymentView {
@@ -78,9 +74,9 @@ extension PaymentView {
         
         /// Style View
         numberOfItems.textColor = Colors.labelGray
-        contentView.layer.borderWidth = 0.5
+        contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
-        contentView.layer.borderColor = Colors.labelGray.cgColor
+        contentView.layer.borderColor = Colors.buttonGray.cgColor
     }
 }

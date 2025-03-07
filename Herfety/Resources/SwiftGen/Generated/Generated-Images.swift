@@ -127,6 +127,30 @@ public enum Images {
     public static var creditVisa: UIImage {
         UIImage(named: "credit-visa")!
     }
+    public static var iconCommunity: UIImage {
+        UIImage(named: "icon-Community")!
+    }
+    public static var iconFAQs: UIImage {
+        UIImage(named: "icon-FAQs")!
+    }
+    public static var iconMyCard: UIImage {
+        UIImage(named: "icon-My Card")!
+    }
+    public static var iconMyFavourites: UIImage {
+        UIImage(named: "icon-My Favourites")!
+    }
+    public static var iconPersonalDetails: UIImage {
+        UIImage(named: "icon-Personal Details")!
+    }
+    public static var iconPrivacyPolicy: UIImage {
+        UIImage(named: "icon-Privacy Policy")!
+    }
+    public static var iconSettings: UIImage {
+        UIImage(named: "icon-Settings")!
+    }
+    public static var iconShippingAddress: UIImage {
+        UIImage(named: "icon-Shipping Address")!
+    }
     public static var iconArrow: UIImage {
         UIImage(named: "icon-arrow")!
     }
@@ -138,6 +162,9 @@ public enum Images {
     }
     public static var iconDelete: UIImage {
         UIImage(named: "icon-delete")!
+    }
+    public static var iconEdit: UIImage {
+        UIImage(named: "icon-edit")!
     }
     public static var iconLocation: UIImage {
         UIImage(named: "icon-location")!

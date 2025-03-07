@@ -50,11 +50,13 @@ extension WishlistCollectionViewCell {
     private func configureContainerView() {
         
         containerView.backgroundColor = Colors.hMainTheme
-        containerView.layer.shadowColor = Colors.hPrimaryButton.cgColor
+        containerView.layer.shadowColor = Colors.primaryBlue.cgColor
         containerView.layer.shadowOffset = .zero
-        containerView.layer.shadowOpacity = 0.2
-        containerView.layer.shadowRadius = 5
+        containerView.layer.shadowOpacity = 0.15
+        containerView.layer.shadowRadius = 2
         containerView.layer.cornerRadius = 20
+        
+        
     }
 }
 

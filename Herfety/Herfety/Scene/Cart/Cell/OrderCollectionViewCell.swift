@@ -49,10 +49,10 @@ extension OrderCollectionViewCell {
     
     private func configureUi() {
         containerView.backgroundColor = Colors.hMainTheme
-        containerView.layer.shadowColor = Colors.hPrimaryButton.cgColor
+        containerView.layer.shadowColor = Colors.primaryBlue.cgColor
         containerView.layer.cornerRadius = 20
-        containerView.layer.shadowOpacity = 0.2
-        containerView.layer.shadowRadius = 5
+        containerView.layer.shadowOpacity = 0.15
+        containerView.layer.shadowRadius = 2
         containerView.layer.shadowOffset = .zero
     }
 }

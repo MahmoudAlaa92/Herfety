@@ -47,7 +47,7 @@
                                     <constraint firstAttribute="width" constant="25" id="Jk4-fF-Gre"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="chevron.forward"/>
+                                <buttonConfiguration key="configuration" style="plain" image="icon-profile-arrow"/>
                                 <connections>
                                     <action selector="pressedButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="XcV-7m-qHU"/>
                                 </connections>
@@ -76,6 +76,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="chevron.forward" width="8" height="8"/>
+        <image name="icon-profile-arrow" width="7" height="10"/>
     </resources>
 </document>

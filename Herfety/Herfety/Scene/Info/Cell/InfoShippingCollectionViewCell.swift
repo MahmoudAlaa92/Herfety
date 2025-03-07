@@ -34,11 +34,12 @@ extension InfoShippingCollectionViewCell {
     
     /// Configures the appearance of the container view, including shadows and corner radius.
     private func configureContainerView() {
+        /// Shadow
         containerView.backgroundColor = Colors.hMainTheme
-        containerView.layer.shadowColor = Colors.hPrimaryButton.cgColor
+        containerView.layer.shadowColor = Colors.primaryBlue.cgColor
         containerView.layer.cornerRadius = 15
-        containerView.layer.shadowOpacity = 0.2
-        containerView.layer.shadowRadius = 5
+        containerView.layer.shadowOpacity = 0.15
+        containerView.layer.shadowRadius = 2
         containerView.layer.shadowOffset = .zero
     }
     /// Configure UI

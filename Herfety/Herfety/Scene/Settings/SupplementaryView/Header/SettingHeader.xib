@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="SettingHeader" customModule="Herfety" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="154" height="129"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0P-7l-POe" userLabel="Content View">
+                    <rect key="frame" x="32" y="0.0" width="90" height="90"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FH7-8H-qYg">
+                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rv8-La-TP2">
+                            <rect key="frame" x="-5" y="100" width="100" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="nyU-oj-ssY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyp-wz-kNO">
+                            <rect key="frame" x="65" y="65" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="eSF-Sh-xth"/>
+                                <constraint firstAttribute="width" constant="25" id="gR5-xW-Q9F"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="icon-edit"/>
+                            <connections>
+                                <action selector="editImagePressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="gIC-gg-7cI"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="7G3-Z5-IIO"/>
+                        <constraint firstItem="rv8-La-TP2" firstAttribute="centerX" secondItem="O0P-7l-POe" secondAttribute="centerX" id="K0K-Nk-d3Q"/>
+                        <constraint firstAttribute="bottom" secondItem="FH7-8H-qYg" secondAttribute="bottom" id="WAE-ze-MEo"/>
+                        <constraint firstAttribute="trailing" secondItem="FH7-8H-qYg" secondAttribute="trailing" id="Yg7-u0-oGL"/>
+                        <constraint firstAttribute="height" constant="90" id="a0z-eJ-zZx"/>
+                        <constraint firstItem="FH7-8H-qYg" firstAttribute="top" secondItem="O0P-7l-POe" secondAttribute="top" id="gF4-Td-ANP"/>
+                        <constraint firstAttribute="trailing" secondItem="Lyp-wz-kNO" secondAttribute="trailing" id="hAP-Kw-fyY"/>
+                        <constraint firstAttribute="bottom" secondItem="Lyp-wz-kNO" secondAttribute="bottom" id="m1J-Fl-xj5"/>
+                        <constraint firstItem="FH7-8H-qYg" firstAttribute="leading" secondItem="O0P-7l-POe" secondAttribute="leading" id="sW7-eb-jPl"/>
+                        <constraint firstItem="rv8-La-TP2" firstAttribute="top" secondItem="FH7-8H-qYg" secondAttribute="bottom" constant="10" id="vmw-Lu-GEM"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstItem="O0P-7l-POe" firstAttribute="centerX" secondItem="VXr-Tz-HHm" secondAttribute="centerX" id="d7R-yy-Vfd"/>
+                <constraint firstItem="O0P-7l-POe" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="deB-mC-h9A"/>
+            </constraints>
+            <connections>
+                <outlet property="editImage" destination="Lyp-wz-kNO" id="fe8-qe-tRd"/>
+                <outlet property="imageSetting" destination="FH7-8H-qYg" id="27b-wj-3Q2"/>
+                <outlet property="titleLabel" destination="rv8-La-TP2" id="vbD-uD-QU1"/>
+            </connections>
+            <point key="canvasLocation" x="-59.541984732824424" y="46.83098591549296"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="icon-edit" width="45.333332061767578" height="45"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -31,6 +31,7 @@ class ProfileListCollectionViewSection: CollectionViewProvider {
         
         cell.imageOfView.image = item.icon
         cell.nameLabel.text = item.title
+        cell.languageLabel.text = ""
         return cell
     }
 }
