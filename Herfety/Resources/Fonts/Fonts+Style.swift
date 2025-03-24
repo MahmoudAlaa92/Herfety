@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  Herfety
-//
-//  Created by Mahmoud Alaa on 28/01/2025.
-//
-
 import UIKit
 
 // MARK: - Buttons
