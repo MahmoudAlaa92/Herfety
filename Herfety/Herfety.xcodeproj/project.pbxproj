@@ -26,6 +26,10 @@
 		151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF42D2D5BD03B00A3AD98 /* OrderViewModel.swift */; };
 		151DF4302D5BD39200A3AD98 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF42F2D5BD39200A3AD98 /* OrderModel.swift */; };
 		151DF4322D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF4312D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift */; };
+		152494EE2D943B84007A97CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 152494ED2D943B83007A97CD /* GoogleService-Info.plist */; };
+		152494F12D9446E9007A97CD /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 152494F02D9446E9007A97CD /* FirebaseCore */; };
+		152494F32D9446EE007A97CD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 152494F22D9446EE007A97CD /* FirebaseAnalytics */; };
+		152494F52D944710007A97CD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 152494F42D944710007A97CD /* FirebaseFirestore */; };
 		152E8EB82D6662AF005766FB /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152E8EB72D6662AF005766FB /* AlertModel.swift */; };
 		1532F3472D5E7DF2003223A1 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1532F3462D5E7DF2003223A1 /* InfoViewController.xib */; };
 		1532F3482D5E7DF2003223A1 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3452D5E7DF2003223A1 /* InfoViewController.swift */; };
@@ -164,6 +168,7 @@
 		151DF42D2D5BD03B00A3AD98 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		151DF42F2D5BD39200A3AD98 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		151DF4312D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCollectionViewSection.swift; sourceTree = "<group>"; };
+		152494ED2D943B83007A97CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		152E8EB72D6662AF005766FB /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		1532F3452D5E7DF2003223A1 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		1532F3462D5E7DF2003223A1 /* InfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
@@ -288,7 +293,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				152494F12D9446E9007A97CD /* FirebaseCore in Frameworks */,
+				152494F52D944710007A97CD /* FirebaseFirestore in Frameworks */,
 				15FB21C32D75209C0002B576 /* Cosmos in Frameworks */,
+				152494F32D9446EE007A97CD /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +621,7 @@
 		1589FC132D51785700240754 /* Herfety */ = {
 			isa = PBXGroup;
 			children = (
+				152494ED2D943B83007A97CD /* GoogleService-Info.plist */,
 				1589FC1C2D51802300240754 /* Scene */,
 				1589FC0A2D51785700240754 /* AppDelegate.swift */,
 				1589FC112D51785700240754 /* SceneDelegate.swift */,
@@ -935,6 +944,9 @@
 			name = Herfety;
 			packageProductDependencies = (
 				15FB21C22D75209C0002B576 /* Cosmos */,
+				152494F02D9446E9007A97CD /* FirebaseCore */,
+				152494F22D9446EE007A97CD /* FirebaseAnalytics */,
+				152494F42D944710007A97CD /* FirebaseFirestore */,
 			);
 			productName = Herfety;
 			productReference = 1589FBF22D51781D00240754 /* Herfety.app */;
@@ -966,6 +978,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */,
+				152494EF2D943C71007A97CD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1589FBF32D51781D00240754 /* Products */;
@@ -984,6 +997,7 @@
 			files = (
 				153F6AAB2D59563F00317F49 /* ProfileViewController.xib in Resources */,
 				15CD44BD2D5293AE00E58C6F /* DailyEssentailCollectionViewCell.xib in Resources */,
+				152494EE2D943B84007A97CD /* GoogleService-Info.plist in Resources */,
 				157F910C2D62CA13005381FB /* AddressTextField.xib in Resources */,
 				15CD44AE2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib in Resources */,
 				1589FC142D51785700240754 /* Images.xcassets in Resources */,
@@ -1148,8 +1162,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47J63V48RD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Herfety/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1164,6 +1180,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MahmoudAlaa.Herfety;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1175,8 +1192,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47J63V48RD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Herfety/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1191,6 +1210,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MahmoudAlaa.Herfety;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1340,6 +1360,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		152494EF2D943C71007A97CD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.10.0;
+			};
+		};
 		15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/Cosmos?tab=readme-ov-file";
@@ -1351,6 +1379,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		152494F02D9446E9007A97CD /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 152494EF2D943C71007A97CD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		152494F22D9446EE007A97CD /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 152494EF2D943C71007A97CD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		152494F42D944710007A97CD /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 152494EF2D943C71007A97CD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		15FB21C22D75209C0002B576 /* Cosmos */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */;
