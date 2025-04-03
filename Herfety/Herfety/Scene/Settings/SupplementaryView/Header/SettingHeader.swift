@@ -9,10 +9,13 @@ import UIKit
 
 class SettingHeader: UICollectionReusableView {
 
+    // MARK: - Properties
+    static let identifier = "SettingHeader"
+    // MARK: - Outlets
     @IBOutlet weak var imageSetting: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var editImage: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configureUI()

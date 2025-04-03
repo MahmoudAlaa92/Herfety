@@ -9,11 +9,15 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     ///
+    // MARK: - Properties
     private var nameViewModel: NameViewModel
     private var profileListViewModel: ProfileListViewModel
-    
+    private var sections: [CollectionViewProvider] = []
+    private var layoutSections: [LayoutSectionProvider] = []
+    // MARK: - Init
     init(nameViewModel: NameViewModel, profileListViewModel: ProfileListViewModel){
         self.nameViewModel = nameViewModel
         self.profileListViewModel = profileListViewModel
@@ -23,10 +27,7 @@ class ProfileViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private var sections: [CollectionViewProvider] = []
-    private var layoutSections: [LayoutSectionProvider] = []
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSections()
