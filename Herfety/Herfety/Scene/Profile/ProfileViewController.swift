@@ -11,7 +11,6 @@ class ProfileViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
-    ///
     // MARK: - Properties
     private var nameViewModel: NameViewModel
     private var profileListViewModel: ProfileListViewModel

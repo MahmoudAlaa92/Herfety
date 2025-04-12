@@ -65,6 +65,11 @@
 		1548CF432D56DFA900F7CEEA /* CategoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF422D56DFA900F7CEEA /* CategoriesModel.swift */; };
 		1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF442D56DFF300F7CEEA /* CardOfProductModel.swift */; };
 		1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF462D56E07E00F7CEEA /* DailyEssentialyModel.swift */; };
+		1562A4412DAA9B8500459EB5 /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4402DAA9B8500459EB5 /* Logout.swift */; };
+		1562A4442DAAA80200459EB5 /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4432DAAA80200459EB5 /* Generated-Images.swift */; };
+		1562A4482DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1562A4472DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib */; };
+		1562A4492DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4462DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift */; };
+		1562A44B2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A44A2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift */; };
 		156CD83F2D6A463D00D6DA77 /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156CD83E2D6A463D00D6DA77 /* ProductsViewController.xib */; };
 		156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD83D2D6A463D00D6DA77 /* ProductsViewController.swift */; };
 		156CD8422D6A4A6000D6DA77 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD8412D6A4A6000D6DA77 /* ProductsViewModel.swift */; };
@@ -98,7 +103,6 @@
 		158B39DC2D7A85E100D58B07 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39D92D7A85E100D58B07 /* SettingViewController.swift */; };
 		158B39E02D7A869F00D58B07 /* SettingHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158B39DF2D7A869F00D58B07 /* SettingHeader.xib */; };
 		158B39E12D7A869F00D58B07 /* SettingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39DE2D7A869F00D58B07 /* SettingHeader.swift */; };
-		158B39E32D7A889E00D58B07 /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39E22D7A889E00D58B07 /* Generated-Images.swift */; };
 		158B39E82D7A8B7B00D58B07 /* SettingFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158B39E72D7A8B7B00D58B07 /* SettingFooter.xib */; };
 		158B39E92D7A8B7B00D58B07 /* SettingFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39E62D7A8B7B00D58B07 /* SettingFooter.swift */; };
 		158F8D482D72444E00D8E768 /* TitleProductDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F8D462D72444E00D8E768 /* TitleProductDetails.swift */; };
@@ -210,6 +214,11 @@
 		1548CF422D56DFA900F7CEEA /* CategoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesModel.swift; sourceTree = "<group>"; };
 		1548CF442D56DFF300F7CEEA /* CardOfProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOfProductModel.swift; sourceTree = "<group>"; };
 		1548CF462D56E07E00F7CEEA /* DailyEssentialyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEssentialyModel.swift; sourceTree = "<group>"; };
+		1562A4402DAA9B8500459EB5 /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
+		1562A4432DAAA80200459EB5 /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
+		1562A4462DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButttonCollectionViewCell.swift; sourceTree = "<group>"; };
+		1562A4472DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoutButttonCollectionViewCell.xib; sourceTree = "<group>"; };
+		1562A44A2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButtonCollectionViewSection.swift; sourceTree = "<group>"; };
 		156CD83D2D6A463D00D6DA77 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		156CD83E2D6A463D00D6DA77 /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
 		156CD8412D6A4A6000D6DA77 /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
@@ -245,7 +254,6 @@
 		158B39DA2D7A85E100D58B07 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		158B39DE2D7A869F00D58B07 /* SettingHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeader.swift; sourceTree = "<group>"; };
 		158B39DF2D7A869F00D58B07 /* SettingHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingHeader.xib; sourceTree = "<group>"; };
-		158B39E22D7A889E00D58B07 /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		158B39E62D7A8B7B00D58B07 /* SettingFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFooter.swift; sourceTree = "<group>"; };
 		158B39E72D7A8B7B00D58B07 /* SettingFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingFooter.xib; sourceTree = "<group>"; };
 		158F8D462D72444E00D8E768 /* TitleProductDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleProductDetails.swift; sourceTree = "<group>"; };
@@ -341,7 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				151631312D5D56CF00BA088E /* Generated-Colors.swift */,
-				158B39E22D7A889E00D58B07 /* Generated-Images.swift */,
+				1562A4432DAAA80200459EB5 /* Generated-Images.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -535,6 +543,16 @@
 			path = "Extension ";
 			sourceTree = "<group>";
 		};
+		1562A4452DAACA0A00459EB5 /* LogoutButton */ = {
+			isa = PBXGroup;
+			children = (
+				1562A4462DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift */,
+				1562A4472DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib */,
+				1562A44A2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift */,
+			);
+			path = LogoutButton;
+			sourceTree = "<group>";
+		};
 		156CD83C2D6A461E00D6DA77 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +638,7 @@
 				15840BD42D5D7CAA006F8B67 /* HerfetyButton.swift */,
 				15840BD62D5D80F7006F8B67 /* PrimaryButton.swift */,
 				154167A12D9E6467007E4CAA /* GenderButton.swift */,
+				1562A4402DAA9B8500459EB5 /* Logout.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -793,6 +812,7 @@
 			children = (
 				15A5EC8C2D77E05D003E49AB /* ProfileName */,
 				15A5EC8E2D77E0FB003E49AB /* ProfileListItem */,
+				1562A4452DAACA0A00459EB5 /* LogoutButton */,
 				158B39CF2D7A397200D58B07 /* SublementaryView */,
 			);
 			path = Sections;
@@ -1052,6 +1072,7 @@
 				15CE60F12D73B3CB0032617B /* ReviewCollectionViewCell.xib in Resources */,
 				153F6AA12D5955E800317F49 /* WishListViewController.xib in Resources */,
 				15FB21D22D7535A70002B576 /* ReviewersCollectionViewCell.xib in Resources */,
+				1562A4482DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib in Resources */,
 				157E04762D554252000170FC /* images.stencil in Resources */,
 				153F6AB12D597DF200317F49 /* WishlistCollectionViewCell.xib in Resources */,
 				15955C1C2D67797500673BE7 /* CreditCardViewController.xib in Resources */,
@@ -1077,11 +1098,13 @@
 				15FB21D62D7543080002B576 /* ReviewerViewModel.swift in Sources */,
 				158F8D512D7252DC00D8E768 /* DescriptionProductDetails.swift in Sources */,
 				15A3C3CB2D78863B00AE6CFA /* NameOfProfileCollectionViewSection.swift in Sources */,
+				1562A4412DAA9B8500459EB5 /* Logout.swift in Sources */,
 				15FB21D82D7544580002B576 /* ReviewerCollectionViewSection.swift in Sources */,
 				15FB21D12D7535A70002B576 /* ReviewersCollectionViewCell.swift in Sources */,
 				1589FC182D51785700240754 /* AppDelegate.swift in Sources */,
 				15CD44C52D52A3BC00E58C6F /* HomeViewModel.swift in Sources */,
 				15CE60F22D73B3CB0032617B /* ReviewCollectionViewCell.swift in Sources */,
+				1562A4442DAAA80200459EB5 /* Generated-Images.swift in Sources */,
 				15CD44B42D52716D00E58C6F /* CategoriesCollectionViewCell.swift in Sources */,
 				151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */,
 				151631262D5D556D00BA088E /* Fonts+Style.swift in Sources */,
@@ -1103,6 +1126,7 @@
 				156CD8422D6A4A6000D6DA77 /* ProductsViewModel.swift in Sources */,
 				157F911B2D62EFFD005381FB /* AlertStatus.swift in Sources */,
 				156CD8442D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift in Sources */,
+				1562A4492DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift in Sources */,
 				153F6A9D2D59538100317F49 /* CustomeTabBarViewController.swift in Sources */,
 				151DF4322D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift in Sources */,
 				154167A62D9E8212007E4CAA /* Ext+Images.swift in Sources */,
@@ -1128,6 +1152,7 @@
 				154112122D56983400F248F7 /* HeaderView.swift in Sources */,
 				1532F3592D5EB297003223A1 /* InfoNavBar.swift in Sources */,
 				156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */,
+				1562A44B2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift in Sources */,
 				154167A02D9DFA5F007E4CAA /* SettingCollectionViewSection.swift in Sources */,
 				153F6AA82D59562B00317F49 /* OrderViewController.swift in Sources */,
 				15A5EC8B2D77DD10003E49AB /* NameCollectionViewCell.swift in Sources */,
@@ -1160,7 +1185,6 @@
 				154167A22D9E6467007E4CAA /* GenderButton.swift in Sources */,
 				15CE60F62D73BA050032617B /* ReviewModel.swift in Sources */,
 				153B7FD52D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift in Sources */,
-				158B39E32D7A889E00D58B07 /* Generated-Images.swift in Sources */,
 				157F91142D62CF5F005381FB /* AddAddressModel.swift in Sources */,
 				15E5B67E2D70E9D300C0383D /* ProductDetailsViewModel.swift in Sources */,
 				15E5B67F2D70E9D300C0383D /* ProductModel.swift in Sources */,

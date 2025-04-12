@@ -193,6 +193,9 @@ public enum Images {
     public static var iconScaner: UIImage {
         UIImage(named: "icon-scaner")!
     }
+    public static var logout: UIImage {
+        UIImage(named: "logout")!
+    }
     public static var notification: UIImage {
         UIImage(named: "notification")!
     }

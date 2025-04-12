@@ -11,13 +11,10 @@ class SettingViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
-    
     // MARK: - Properties
     private(set) var settingViewModel: SettingViewModel
     private(set) var sections: [CollectionViewProvider] = []
     private(set) var layoutSections: [LayoutSectionProvider] = []
-    ///
-    private var selectedGenderButton: GenderButton?
     // MARK: - Init
     init(settingViewModel: SettingViewModel) {
         self.settingViewModel = settingViewModel
@@ -49,17 +46,20 @@ extension SettingViewController {
         let firstList = SettingCollectionViewSection(items: settingViewModel.firstList)
         /// 2) Second list
         let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList)
+        /// 3) Logout button
+        let logoutButton = LogoutButtonCollectionViewSection()
         
-        sections = [firstList, secondList]
+        sections = [firstList, secondList, logoutButton]
         sections.forEach({ $0.registerCells(in: collectionView) })
     }
     private func configureLayoutSections() {
         /// 1) First list
         let firstList = SettingCollectionLayoutSection()
-        /// 1) Second list
+        /// 2) Second list
         let secondList = ProfileListLayoutSection()
-        
-        layoutSections = [firstList, secondList]
+        /// 3) Lagout button
+        let logoutButton = LogoutButtonCollectionLayoutSection()
+        layoutSections = [firstList, secondList, logoutButton]
         
         /// Set Layout in collectionView
         ///

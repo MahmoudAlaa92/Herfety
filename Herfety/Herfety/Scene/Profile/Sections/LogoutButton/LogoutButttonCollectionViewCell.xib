@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LogoutButttonCollectionViewCell" customModule="Herfety" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="207" height="62"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="207" height="62"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMI-gI-D7g" customClass="HerfetyButton" customModule="Herfety" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="207" height="62"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                        <connections>
+                            <action selector="lougoutBtnPressed:" destination="gTV-IL-0wX" eventType="touchUpInside" id="cks-uk-a3Z"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="XMI-gI-D7g" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="K4O-aG-EeH"/>
+                <constraint firstAttribute="bottom" secondItem="XMI-gI-D7g" secondAttribute="bottom" id="e2A-0t-k8s"/>
+                <constraint firstItem="XMI-gI-D7g" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hbo-U8-6zh"/>
+                <constraint firstAttribute="trailing" secondItem="XMI-gI-D7g" secondAttribute="trailing" id="nfc-W1-bb9"/>
+            </constraints>
+            <size key="customSize" width="207" height="62"/>
+            <connections>
+                <outlet property="logoutButton" destination="XMI-gI-D7g" id="SFd-sf-2g5"/>
+            </connections>
+            <point key="canvasLocation" x="145.80152671755724" y="23.943661971830988"/>
+        </collectionViewCell>
+    </objects>
+</document>
