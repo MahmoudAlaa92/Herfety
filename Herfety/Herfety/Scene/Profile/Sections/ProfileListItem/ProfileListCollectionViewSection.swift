@@ -15,8 +15,11 @@ class ProfileListCollectionViewSection: CollectionViewProvider {
     }
     
     func registerCells(in collectionView: UICollectionView) {
+        /// Header
+        collectionView.register(UINib(nibName: HeaderView.headerIdentifier, bundle: nil), forSupplementaryViewOfKind: "Header", withReuseIdentifier: HeaderView.headerIdentifier)
         /// Cell
         collectionView.register(UINib(nibName: ProfileListCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: ProfileListCollectionViewCell.identifier)
+        
     }
     
     var numberOfItems: Int {
@@ -39,6 +42,7 @@ class ProfileListCollectionViewSection: CollectionViewProvider {
 // MARK: - Layout
 //
 struct ProfileListLayoutSection: LayoutSectionProvider {
+    
     func layoutSection() -> NSCollectionLayoutSection {
         // Each item is full width in a vertical list
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),

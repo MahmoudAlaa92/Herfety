@@ -16,7 +16,8 @@ class SettingViewController: UIViewController {
     private(set) var settingViewModel: SettingViewModel
     private(set) var sections: [CollectionViewProvider] = []
     private(set) var layoutSections: [LayoutSectionProvider] = []
-    
+    ///
+    private var selectedGenderButton: GenderButton?
     // MARK: - Init
     init(settingViewModel: SettingViewModel) {
         self.settingViewModel = settingViewModel
@@ -47,21 +48,24 @@ extension SettingViewController {
         /// 1) First list
         let firstList = SettingCollectionViewSection(items: settingViewModel.firstList)
         /// 2) Second list
-//        let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList)
+        let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList)
         
-        sections = [firstList]
+        sections = [firstList, secondList]
         sections.forEach({ $0.registerCells(in: collectionView) })
     }
     private func configureLayoutSections() {
         /// 1) First list
         let firstList = SettingCollectionLayoutSection()
         /// 1) Second list
-//        let secondList = ProfileListLayoutSection()
+        let secondList = ProfileListLayoutSection()
         
-        layoutSections = [firstList]
+        layoutSections = [firstList, secondList]
         
         /// Set Layout in collectionView
+        ///
         let layoutFactory = SectionsLayout(providers: layoutSections).createLayout()
+        layoutFactory.register(SectionDecorationView.self, forDecorationViewOfKind: SectionDecorationView.identifier)
+        
         collectionView.setCollectionViewLayout(layoutFactory, animated: true)
     }
 }
@@ -75,11 +79,10 @@ extension SettingViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         sections[section].numberOfItems
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
-    // Header
+    /// Header & Footer
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let provider = sections[indexPath.section] as? HeaderAndFooterProvider else {
             /// provider does not support headers/footers.
@@ -87,7 +90,6 @@ extension SettingViewController: UICollectionViewDataSource {
         }
         return provider.cellForItems(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
     }
-    
 }
 // MARK: - Delegate
 //

@@ -25,16 +25,19 @@ class HerfetyButton: UIButton {
     }
     
     func setUp() {
-       let height: CGFloat = 52
-       setTitleColor(.white, for: .normal)
-       layer.cornerRadius = 10
-       heightAnchor.constraint(equalToConstant: height).isActive = true
-       
-       if #available(iOS 15.0, *) {
-           configuration = nil
-           imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 20)
-           titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
-       
-       }
-   }
+        let height: CGFloat = 52
+        setTitleColor(.white, for: .normal)
+        layer.cornerRadius = 10
+        heightAnchor.constraint(equalToConstant: height).isActive = true
+        titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
+        
+        if #available(iOS 15.0, *) {
+            #warning("Edit this button configuration")
+            var config = UIButton.Configuration.filled()
+            config.titlePadding = 8  /// Adjust spacing between text & image
+            config.imagePadding = 10  /// Adjust spacing between button image and text
+            config.cornerStyle = .medium
+            self.configuration = config
+        }
+    }
 }

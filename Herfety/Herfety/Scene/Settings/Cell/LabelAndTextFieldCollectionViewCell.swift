@@ -26,13 +26,12 @@ class LabelAndTextFieldCollectionViewCell: UICollectionViewCell {
 extension LabelAndTextFieldCollectionViewCell {
     private func configureUI() {
         /// nameLabel
-        nameLabel.font = .body2
+        nameLabel.font = .body
         nameLabel.textColor = Colors.hCardTextFieldPlaceholder
         /// textField
         textField.layer.cornerRadius = 12
         textField.layer.masksToBounds = true
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = Colors.labelGray.cgColor
-        
     }
 }
