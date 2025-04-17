@@ -6,46 +6,46 @@
 //
 
 import UIKit
-
+import Combine
 
 class HomeViewModel {
     
-    var sliderItems: [SliderItem] = [
-        SliderItem(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
-        SliderItem(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
-        SliderItem(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
+    @Published var sliderItems: [SliderItem] = [
+        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
+        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
+        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
     ]
     
-    var categoryItems: [CategryItem] = [
-        CategryItem(name: "Jewelry", image: Images.jewelry),
-        CategryItem(name: "Offers", image: Images.offers),
-        CategryItem(name: "Home Décor", image: Images.homeDecore),
-        CategryItem(name: "Fashion & Textiles", image: Images.fashion),
-        CategryItem(name: "Jewelry", image: Images.jewelry),
-        CategryItem(name: "Jewelry", image: Images.jewelry),
-        CategryItem(name: "Jewelry", image: Images.jewelry),
-        CategryItem(name: "Jewelry", image: Images.jewelry),
+    @Published var categoryItems: [CategryItem] = [
+       .init(name: "Jewelry", image: Images.jewelry),
+       .init(name: "Offers", image: Images.offers),
+       .init(name: "Home Décor", image: Images.homeDecore),
+       .init(name: "Fashion & Textiles", image: Images.fashion),
+       .init(name: "Jewelry", image: Images.jewelry),
+       .init(name: "Jewelry", image: Images.jewelry),
+       .init(name: "Jewelry", image: Images.jewelry),
+       .init(name: "Jewelry", image: Images.jewelry),
     ]
     
-    var productItems: [ProductItem] = [
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500")
+    @Published var productItems: [ProductItem] = [
+       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500")
     ]
     
-    var topBrandsItems: [TopBrandsItems] = [
-        TopBrandsItems(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-        TopBrandsItems(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-        TopBrandsItems(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-        TopBrandsItems(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+    @Published var topBrandsItems: [TopBrandsItem] = [
+       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
     ]
     
-    var dailyEssentailItems: [DailyEssentialyItem] = [
-        DailyEssentialyItem(image: Images.homeDecore, name: "Home Décor ", offer: "UP to 50% OFF"),
-        DailyEssentialyItem(image: Images.art, name: "Art & Collectibles ", offer: "UP to 30% OFF"),
-        DailyEssentialyItem(image: Images.craft, name: "Kids’ Crafts & Toys ", offer: "UP to 10% OFF"),
+    @Published var dailyEssentailItems: [DailyEssentialyItem] = [
+       .init(image: Images.homeDecore, name: "Home Décor ", offer: "UP to 50% OFF"),
+       .init(image: Images.art, name: "Art & Collectibles ", offer: "UP to 30% OFF"),
+       .init(image: Images.craft, name: "Kids’ Crafts & Toys ", offer: "UP to 10% OFF"),
     ]
     
     func numberOfSections() -> Int {

@@ -13,9 +13,19 @@ class ProductsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
-    private let viewModel =  ProductsViewModel()
+    private(set) var viewModel: ProductsViewModel
     private var sections = [CollectionViewProvider]()
     private var layoutSections = [LayoutSectionProvider]()
+    
+    // MARK: Init
+    init(viewModel: ProductsViewModel){
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

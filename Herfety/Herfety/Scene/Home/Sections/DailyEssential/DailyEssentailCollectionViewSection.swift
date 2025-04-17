@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class DailyEssentailCollectionViewSection: CollectionViewProvider {
     
     // MARK: - Properties
     let dailyEssentail: [DailyEssentialyItem]
-    
+    let selectedItem: PassthroughSubject<DailyEssentialyItem, Never> = .init()
     // MARK: - Init
     init(dailyEssentail: [DailyEssentialyItem]) {
         self.dailyEssentail = dailyEssentail
@@ -41,7 +42,33 @@ class DailyEssentailCollectionViewSection: CollectionViewProvider {
     }
     
 }
-
+// MARK: - Header And Foter for category
+//
+extension DailyEssentailCollectionViewSection: HeaderAndFooterProvider {
+    
+    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == "Header" {
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HeaderView.headerIdentifier,
+                for: indexPath) as! HeaderView
+            
+            header.configure(title: "Daily ", description: "Essential", shouldShowButton: false)
+            return header
+        }
+        
+        return UICollectionReusableView()
+    }
+}
+// MARK: - Delegate
+//
+extension DailyEssentailCollectionViewSection: CollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = dailyEssentail[indexPath.item]
+        selectedItem.send(item)
+    }
+}
 // MARK: - Layout
 //
 struct DailyEssentailSectionLayoutProvider: LayoutSectionProvider {
@@ -67,24 +94,3 @@ struct DailyEssentailSectionLayoutProvider: LayoutSectionProvider {
     }
     
 }
-
-// MARK: - Header And Foter for category
-//
-extension DailyEssentailCollectionViewSection: HeaderAndFooterProvider {
-    
-    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if kind == "Header" {
-            let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: HeaderView.headerIdentifier,
-                for: indexPath) as! HeaderView
-            
-            header.configure(title: "Daily ", description: "Essential", shouldShowButton: false)
-            return header
-        }
-        
-        return UICollectionReusableView()
-    }
-}
-

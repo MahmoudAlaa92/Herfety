@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class CardItemCollectionViewSection: CollectionViewProvider {
     // MARK: - Properties
     let productItems: [ProductItem]
     var headerConfigurator: ((HeaderView) -> Void)?
+    let selectedItem = PassthroughSubject<ProductItem, Never>()
     
     // MARK: - Init
     init(productItems: [ProductItem]) {
@@ -42,7 +44,14 @@ class CardItemCollectionViewSection: CollectionViewProvider {
         return cell
     }
 }
-
+// MARK: - Delegate
+//
+extension CardItemCollectionViewSection: CollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = productItems[indexPath.item]
+        selectedItem.send(item)
+    }
+}
 // MARK: - Layout
 //
 struct CardProductSectionLayoutProvider: LayoutSectionProvider {

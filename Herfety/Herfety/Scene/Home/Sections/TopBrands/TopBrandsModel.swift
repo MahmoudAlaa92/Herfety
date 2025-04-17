@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct TopBrandsItems {
+struct TopBrandsItem {
     let name: String 
     let image: UIImage
     let logo: UIImage

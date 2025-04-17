@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class CategoryCollectionViewSection: CollectionViewProvider {
     
+    // MARK: - Properties
     let categoryItems: [CategryItem]
-    
+    let categorySelection = PassthroughSubject<CategryItem, Never>()
+    // MARK: - Init
     init(categoryItems: [CategryItem]) {
         self.categoryItems = categoryItems
     }
@@ -59,7 +62,16 @@ extension CategoryCollectionViewSection: HeaderAndFooterProvider {
         return UICollectionReusableView()
     }
 }
-
+// MARK: - Delegate
+//
+extension CategoryCollectionViewSection: CollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectedItems = categoryItems[indexPath.item]
+        categorySelection.send(selectedItems)
+    }
+}
+  
 // MARK: - Layout
 //
 struct CategoriesSectionLayoutSection: LayoutSectionProvider {

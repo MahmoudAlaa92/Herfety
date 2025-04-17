@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 class TopBrandsCollectionViewSection: CollectionViewProvider {
     
     // MARK: - Properties
-    let topBrandsItems: [TopBrandsItems]
-    
+    let topBrandsItems: [TopBrandsItem]
+    let selectedBrand = PassthroughSubject<TopBrandsItem, Never>()
     // MARK: - Init
-    init(topBrandsItems: [TopBrandsItems]) {
+    init(topBrandsItems: [TopBrandsItem]) {
         self.topBrandsItems = topBrandsItems
     }
     
@@ -42,7 +43,33 @@ class TopBrandsCollectionViewSection: CollectionViewProvider {
         cell.offerBrands.text = item.offer
         return cell
     }
+}
+// MARK: - Delegate
+//
+extension TopBrandsCollectionViewSection: CollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = topBrandsItems[indexPath.item]
+        selectedBrand.send(item)
+    }
+}
+// MARK: - Header And Foter for category
+//
+extension TopBrandsCollectionViewSection: HeaderAndFooterProvider {
     
+    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == "Header" {
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HeaderView.headerIdentifier,
+                for: indexPath) as! HeaderView
+            
+            header.configure(title: "Top ", description: "Brands", shouldShowButton: false)
+            return header
+        }
+        
+        return UICollectionReusableView()
+    }
 }
 
 // MARK: - Layout
@@ -68,26 +95,5 @@ struct TopBrandsSectionLayoutProvider: LayoutSectionProvider {
                                                                       elementKind: "Header",
                                                                       alignment: .top)]
         return section
-    }
-    
-}
-
-// MARK: - Header And Foter for category
-//
-extension TopBrandsCollectionViewSection: HeaderAndFooterProvider {
-    
-    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if kind == "Header" {
-            let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: HeaderView.headerIdentifier,
-                for: indexPath) as! HeaderView
-            
-            header.configure(title: "Top ", description: "Brands", shouldShowButton: false)
-            return header
-        }
-        
-        return UICollectionReusableView()
     }
 }

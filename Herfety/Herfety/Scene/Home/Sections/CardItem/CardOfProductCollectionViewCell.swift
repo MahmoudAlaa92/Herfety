@@ -62,7 +62,6 @@ extension CardOfProductCollectionViewCell {
         
         savePrice.font = .footnote
         savePrice.textColor = .primaryGreen
-        
     }
 }
 // MARK: - Actions

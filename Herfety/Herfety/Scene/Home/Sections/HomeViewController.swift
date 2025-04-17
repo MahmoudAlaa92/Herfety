@@ -6,32 +6,26 @@
 //
 
 import UIKit
-
-protocol CollectionViewProvider {
-    func registerCells(in collectionView: UICollectionView)
-    var numberOfItems: Int { get }
-    func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-}
-protocol HeaderAndFooterProvider {
-    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
-}
-protocol LayoutSectionProvider {
-    func layoutSection() -> NSCollectionLayoutSection
-}
+import Combine
 
 class HomeViewController: UIViewController {
     
     // MARK: - Properties
     //
     private var navigationBarBehavior: HomeNavBar?
-    private let viewModel = HomeViewModel()
+    private(set) var viewModel = HomeViewModel()
     private var sections: [CollectionViewProvider] = []
     private var layoutSections:[LayoutSectionProvider] = []
     
+    private var categoryItem: CategoryCollectionViewSection?
+    private var cardItem: CardItemCollectionViewSection?
+    private var topBrandItem: TopBrandsCollectionViewSection?
+    private var dailyEssentialItem: DailyEssentailCollectionViewSection?
+    ///
+    private var subscriptions = Set<AnyCancellable>()
     // MARK: - Outlets
     //
     @IBOutlet weak var collectionView: UICollectionView!
-    
     // MARK: - Lifecycle
     //
     override func viewDidLoad() {
@@ -40,35 +34,7 @@ class HomeViewController: UIViewController {
         setUpCollectionView()
         cofigureCompositianalLayout()
         configureNavBar()
-    }
-    
-    // Configure Provider
-    //
-    private func configureSections() {
-        let sliderProvider = SliderCollectionViewSection(sliderItems: viewModel.sliderItems)
-        let categorProvider = CategoryCollectionViewSection(categoryItems: viewModel.categoryItems)
-        let cardProvider = CardItemCollectionViewSection(productItems: viewModel.productItems)
-        cardProvider.headerConfigurator = { header in
-            header.configure(title: "the best deal on ", description: "Jewelry & Accessories", shouldShowButton: true)
-        }
-        let topBrands = TopBrandsCollectionViewSection(topBrandsItems: viewModel.topBrandsItems)
-        let dailyEssentailItems = DailyEssentailCollectionViewSection(dailyEssentail: viewModel.dailyEssentailItems)
-        sections = [sliderProvider, categorProvider, cardProvider, topBrands, dailyEssentailItems]
-        
-        layoutSections.append(SliderSectionLayoutProvider())
-        layoutSections.append(CategoriesSectionLayoutSection())
-        layoutSections.append(CardProductSectionLayoutProvider())
-        layoutSections.append(TopBrandsSectionLayoutProvider())
-        layoutSections.append(DailyEssentailSectionLayoutProvider())
-    }
-    
-    func configureNavBar() {
-        navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
-        navigationBarBehavior?.configure(onNotification: {
-            print("searchBtn is tapped")
-        }, onSearch: {
-            print("NotificationBtn is tapped")
-        },userName: "Mahmoud Alaa", userImage: Images.profilePhoto)
+        bindViewModel()
     }
     
     private func setUpCollectionView() {
@@ -80,11 +46,50 @@ class HomeViewController: UIViewController {
     }
 }
 
-// MARK: - Configure Layout
+// MARK: - Configuration
 //
 extension HomeViewController {
-    private func cofigureCompositianalLayout() {
+    
+    /// Configure Sections
+    private func configureSections() {
+        let sliderProvider = SliderCollectionViewSection(sliderItems: viewModel.sliderItems)
+        let categoryProvider = CategoryCollectionViewSection(categoryItems: viewModel.categoryItems)
+        self.categoryItem = categoryProvider
 
+        let cardProvider = CardItemCollectionViewSection(productItems: viewModel.productItems)
+        self.cardItem = cardProvider
+        cardProvider.headerConfigurator = { header in
+            header.configure(title: "the best deal on", description: "Jewelry & Accessories", shouldShowButton: true)
+        }
+
+        let topBrands = TopBrandsCollectionViewSection(topBrandsItems: viewModel.topBrandsItems)
+        self.topBrandItem = topBrands
+
+        let dailyEssentials = DailyEssentailCollectionViewSection(dailyEssentail: viewModel.dailyEssentailItems)
+        self.dailyEssentialItem = dailyEssentials
+
+        sections = [sliderProvider, categoryProvider, cardProvider, topBrands, dailyEssentials]
+
+        layoutSections = [
+            SliderSectionLayoutProvider(),
+            CategoriesSectionLayoutSection(),
+            CardProductSectionLayoutProvider(),
+            TopBrandsSectionLayoutProvider(),
+            DailyEssentailSectionLayoutProvider()
+        ]
+    }
+    /// NavBar
+    func configureNavBar() {
+        navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
+        navigationBarBehavior?.configure(onNotification: {
+            print("searchBtn is tapped")
+        }, onSearch: {
+            print("NotificationBtn is tapped")
+        },userName: "Mahmoud Alaa", userImage: Images.profilePhoto)
+    }
+    /// CompositianalLayout
+    private func cofigureCompositianalLayout() {
+        
         let layoutFactory = SectionsLayout(providers: layoutSections)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
@@ -92,7 +97,13 @@ extension HomeViewController {
 
 // MARK: - UICollectionViewDelegate
 //
-extension HomeViewController: UICollectionViewDelegate {}
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectable = sections[indexPath.section] as? CollectionViewDelegate {
+            selectable.collectionView(collectionView, didSelectItemAt: indexPath)
+        }
+    }
+}
 // MARK: - UICollectionViewDataSource
 //
 extension HomeViewController: UICollectionViewDataSource {
@@ -107,8 +118,8 @@ extension HomeViewController: UICollectionViewDataSource {
         return sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
     
-// MARK: - Header And Footer
-//
+    // MARK: - Header And Footer
+    //
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if let provider = sections[indexPath.section] as? HeaderAndFooterProvider {
@@ -116,5 +127,76 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         /// provider does not support headers/footers.
         return UICollectionReusableView()
+    }
+}
+// MARK: - Binding ViewModel
+//
+extension HomeViewController {
+    private func bindViewModel() {
+        bindSliderItems()
+        bindCategoryItems()
+        bindProductItems()
+        bindTopBrandsItems()
+        bindDailyEssentialsItems()
+    }
+    
+    // MARK: - Slider Items
+    private func bindSliderItems() {
+        viewModel
+            .$sliderItems
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }.store(in: &subscriptions)
+    }
+    // MARK: - Category Items
+    private func bindCategoryItems() {
+        viewModel.$categoryItems
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &subscriptions)
+        
+        categoryItem?.categorySelection.sink { [weak self] value in
+            let vc = ProductsViewController(viewModel: ProductsViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }.store(in: &subscriptions)
+    }
+    // MARK: - Product Items
+    private func bindProductItems() {
+        viewModel.$productItems
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &subscriptions)
+        
+        cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
+            let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).store(in: &subscriptions)
+    }
+    // MARK: - Top Brands
+    private func bindTopBrandsItems() {
+        viewModel.$topBrandsItems
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &subscriptions)
+        
+        topBrandItem?.selectedBrand.sink(receiveValue: { [weak self] value in
+            let vc = ProductsViewController(viewModel: ProductsViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).store(in: &subscriptions)
+    }
+    // MARK: - Daily Essentials
+    private func bindDailyEssentialsItems() {
+        viewModel.$dailyEssentailItems
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &subscriptions)
+        dailyEssentialItem?.selectedItem.sink(receiveValue: { [weak self] value in
+            let vc = ProductsViewController(viewModel: ProductsViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).store(in: &subscriptions)
     }
 }
