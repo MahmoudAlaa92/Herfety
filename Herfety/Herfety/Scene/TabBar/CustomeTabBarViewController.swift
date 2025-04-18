@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class CustomeTabBarViewController: UITabBarController {
 
     var tabItem = UITabBarItem()
@@ -35,14 +34,12 @@ class CustomeTabBarViewController: UITabBarController {
         viewControllers = [homeViewController, wishListViewController, cartViewController, profileViewController]
         
         setUpViews()
-        
-        customTab(selectedImage: Images.homeSelected, deselectedImage: Images.homeIcon, indexOfTab: 0, tabTitle: "")
-        customTab(selectedImage: Images.wishlistSelected, deselectedImage: Images.heartIcon, indexOfTab: 1, tabTitle: "")
-        customTab(selectedImage: Images.cartSelected, deselectedImage: Images.cartIcon, indexOfTab: 2, tabTitle: "")
-        customTab(selectedImage: Images.profileSelected, deselectedImage: Images.profileIcon, indexOfTab: 3, tabTitle: "")
-        
+        createCustomTabBar()
     }
-
+}
+// MARK: - Configurations
+//
+extension CustomeTabBarViewController {
     func setUpViews(){
         self.tabBar.layer.masksToBounds = true
         self.tabBar.isTranslucent = true
@@ -53,6 +50,12 @@ class CustomeTabBarViewController: UITabBarController {
         self.tabBar.layer.borderColor = Colors.labelGray.cgColor
     }
     
+    func createCustomTabBar(){
+        customTab(selectedImage: Images.homeSelected, deselectedImage: Images.homeIcon, indexOfTab: 0, tabTitle: "")
+        customTab(selectedImage: Images.wishlistSelected, deselectedImage: Images.heartIcon, indexOfTab: 1, tabTitle: "")
+        customTab(selectedImage: Images.cartSelected, deselectedImage: Images.cartIcon, indexOfTab: 2, tabTitle: "")
+        customTab(selectedImage: Images.profileSelected, deselectedImage: Images.profileIcon, indexOfTab: 3, tabTitle: "")
+    }
     
     func customTab(selectedImage image1 : UIImage , deselectedImage image2: UIImage , indexOfTab index: Int , tabTitle title: String) {
      
@@ -62,5 +65,4 @@ class CustomeTabBarViewController: UITabBarController {
         tabItem.title = .none
         tabItem.imageInsets.bottom = -20
     }
-    
 }

@@ -11,7 +11,6 @@ class WishListViewController: UIViewController {
 
     // MARK: - Properties
     //
-    private let viewModel = WishListViewModel()
     private var providers = [CollectionViewProvider]()
     private var layoutProviders = [LayoutSectionProvider]()
     
@@ -25,7 +24,6 @@ class WishListViewController: UIViewController {
         cofigureCompositianalLayout()
         setUpCollectionView()
         view.backgroundColor = Colors.hBackgroundColor
-
     }
 }
 // MARK: - Configure
@@ -34,8 +32,11 @@ extension WishListViewController {
     
     /// Configure Provider
     private func configureProvider() {
-        let wishListProvider = WishlistCollectionViewSection(whishlistItems: viewModel.wishlistItems)
-        providers = [wishListProvider]
+        CustomeTabBarViewModel.shared.$Wishlist.sink { [weak self] value in
+            let wishListProvider = WishlistCollectionViewSection(whishlistItems: value)
+            self?.providers = [wishListProvider]
+            self?.collectionView.reloadData()
+        }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
         
         layoutProviders.append(WishlistSectionLayoutProvider())
     }

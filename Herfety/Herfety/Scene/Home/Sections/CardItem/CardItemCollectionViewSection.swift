@@ -41,6 +41,11 @@ class CardItemCollectionViewSection: CollectionViewProvider {
         cell.priceProduct.text = item.price
         cell.offerProduct.text = " \(item.offerPrice)\nOFF"
         cell.savePrice.text = item.savePrice
+        
+        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
+        cell.configureProduct(with: wishlistItem)
+        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
+        cell.configureOrder(with: orderItem)
         return cell
     }
 }

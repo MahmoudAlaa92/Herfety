@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class InfoViewModel {
     
     var infoItems: [InfoModel] = [

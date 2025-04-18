@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct WishlistItems {
+struct WishlistItem: Equatable {
     let name: String
     let description: String
     let price: String

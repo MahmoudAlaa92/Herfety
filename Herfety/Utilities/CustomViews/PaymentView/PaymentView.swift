@@ -57,6 +57,8 @@ extension PaymentView {
     func configure(with viewModel: PaymentView.Model) {
         self.subTotalPrice.text = "$\(viewModel.subTotal)"
         subTotalPrice.font = .callout
+        self.shipingLabel.text = "$\(viewModel.shipping)"
+        shipingPrice.font = .callout
         self.bagTotalPrice.text = "$\(viewModel.shipping)"
         bagTotalPrice.font = .callout
         self.bagTotalLabel.text = "$\(viewModel.total)"

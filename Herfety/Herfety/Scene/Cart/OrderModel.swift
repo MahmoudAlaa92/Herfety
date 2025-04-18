@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct OrderModel {
+struct OrderModel: Equatable {
     var name: String
     var description: String
     var price: Double

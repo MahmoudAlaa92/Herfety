@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class OrderViewController: UIViewController {
     
@@ -22,7 +23,8 @@ class OrderViewController: UIViewController {
     private var viewModel = OrderViewModel()
     private var sections: [CollectionViewProvider] = []
     private var layoutProviders: [LayoutSectionProvider] = []
-    
+    ///
+    var subscriptions = Set<AnyCancellable>()
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +63,6 @@ extension OrderViewController: UICollectionViewDataSource {
         return UICollectionReusableView()
     }
 }
-
 // MARK: - Configurations
 //
 private extension OrderViewController {
@@ -73,13 +74,15 @@ private extension OrderViewController {
     
     private func setUpCollectionView() {
         collectionView.dataSource =  self
-        
         sections.forEach { $0.registerCells(in: collectionView) }
     }
     
     private func configureProvider() {
-        let orderProvider = OrderCollectionViewSection(orderItems: viewModel.orderItems)
-        sections = [orderProvider]
+        CustomeTabBarViewModel.shared.$orders.sink { [weak self] value in
+            let orderProvider = OrderCollectionViewSection(orderItems: value)
+            self?.sections = [orderProvider]
+            self?.collectionView.reloadData()
+        }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
         
         layoutProviders.append(OrderSectionLayoutProvider())
     }
@@ -107,10 +110,20 @@ extension OrderViewController {
     
     private func bindViewModel() {
         // Navigate to Shipping VC
+        bindOrderItems()
         viewModel.navigationToShipping = { [weak self] in
             let shippingVC = InfoViewController()
             self?.navigationController?.pushViewController(shippingVC, animated: true)
         }
+    }
+    private func bindOrderItems() {
+        // Bind payment info
+        viewModel.$paymentInfo
+            .receive(on: RunLoop.main)
+            .sink { [weak self] paymentModel in
+                self?.paymentView.configure(with: paymentModel)
+            }
+            .store(in: &subscriptions)
     }
 }
 

@@ -11,10 +11,10 @@ import UIKit
 class WishlistCollectionViewSection: CollectionViewProvider {
     
     // MARK: - Properties
-    private let whishlistItems: [WishlistItems]
+    private let whishlistItems: [WishlistItem]
     
     // MARK: - Init
-    init(whishlistItems: [WishlistItems]) {
+    init(whishlistItems: [WishlistItem]) {
         self.whishlistItems = whishlistItems
     }
     
@@ -37,8 +37,7 @@ class WishlistCollectionViewSection: CollectionViewProvider {
         cell.imageCell.image = item.image
         cell.nameCell.text = item.name
         cell.descriptionCell.text = item.description
-        cell.priceCell.text = item.price
-        
+        cell.priceCell.text = "\(item.price)"
         return cell
     }
 }

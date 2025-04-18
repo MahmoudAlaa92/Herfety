@@ -13,7 +13,6 @@ class OrderCollectionViewCell: UICollectionViewCell {
     static let identifier = "OrderCollectionViewCell"
     
     // MARK: - Outlets
-    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imageProduct: UIImageView!
     
@@ -24,9 +23,11 @@ class OrderCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var numberOfProduct: UILabel!
     
     @IBOutlet weak var minusAndPlusView: UIView!
+    // MARK: - Propertes
+    var countOrder: Int = 1
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         configure()
         configureUi()
     }
@@ -60,8 +61,14 @@ extension OrderCollectionViewCell {
 //
 extension OrderCollectionViewCell {
     @IBAction func minusButtonTapped(_ sender: UIButton) {
+        if countOrder > 1 {
+            countOrder -= 1
+            numberOfProduct.text = "\(countOrder)"
+        }
     }
     
     @IBAction func plusButtonTapped(_ sender: UIButton) {
+        countOrder += 1
+        numberOfProduct.text = "\(countOrder)"
     }
 }
