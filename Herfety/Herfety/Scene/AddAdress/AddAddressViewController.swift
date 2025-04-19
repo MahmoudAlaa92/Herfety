@@ -59,7 +59,11 @@ extension AddAddressViewController {
         else{
             return
         }
-        CustomeTabBarViewModel.shared.infos.append(InfoModel(name: name, address: address, phone: phone))
+        let addressValue = InfoModel(name: name, address: address, phone: phone)
+        
+        if !CustomeTabBarViewModel.shared.infos.contains(where: { $0 == addressValue }) {
+            CustomeTabBarViewModel.shared.infos.append(addressValue)
+        }
         self.navigationController?.popViewController(animated: true)
     }
 }
