@@ -29,8 +29,8 @@ class HomeViewModel {
     
     @Published var productItems: [ProductItem] = [
        .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+       .init(name: "Jewelry2", image: Images.jewelry, price: "$1000", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
+       .init(name: "Jewelry", image: Images.jewelry2, price: "$2000", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
        .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
        .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500")
     ]

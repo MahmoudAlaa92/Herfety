@@ -82,8 +82,16 @@ private extension OrderViewController {
             let orderProvider = OrderCollectionViewSection(orderItems: value)
             self?.sections = [orderProvider]
             self?.collectionView.reloadData()
+            
+            /// Combine subscription to count updates
+            orderProvider.countUpdateSubject
+                .sink { [weak self] index, newCount in
+                    self?.viewModel.updateOrderCount(at: index, to: newCount)
+                }
+                .store(in: &self!.subscriptions)
         }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
-        
+        #warning("👆check force wrap in self")
+
         layoutProviders.append(OrderSectionLayoutProvider())
     }
     

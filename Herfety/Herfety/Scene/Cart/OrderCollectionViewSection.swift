@@ -6,12 +6,13 @@
 //
 
 import UIKit
-
+import Combine
 
 class OrderCollectionViewSection: CollectionViewProvider {
-    
+    // MARK: - Properties
     let orderItems: [OrderModel]
-    
+    let countUpdateSubject = PassthroughSubject<(Int, Int), Never>()
+    // MARK: - Init
     init(orderItems: [OrderModel]) {
         self.orderItems = orderItems
     }
@@ -36,10 +37,12 @@ class OrderCollectionViewSection: CollectionViewProvider {
         cell.imageProduct.image = item.image
         cell.numberOfProduct.text = "\(item.numberOfOrders)"
         cell.priceProduct.text = "\(item.price)"
+        cell.onChangeCountOrder = { [weak self] newCount in
+            self?.countUpdateSubject.send((indexPath.item, newCount))
+        }
         return cell
     }
 }
-
 // MARK: - Header And Foter for category
 //
 extension OrderCollectionViewSection: HeaderAndFooterProvider {

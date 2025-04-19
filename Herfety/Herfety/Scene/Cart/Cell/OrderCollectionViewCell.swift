@@ -4,14 +4,20 @@
 //
 //  Created by Mahmoud Alaa on 11/02/2025.
 //
-
 import UIKit
 
 class OrderCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier = "OrderCollectionViewCell"
-    
+    var countOrder: Int = 1 {
+        didSet {
+            onChangeCountOrder?(countOrder)
+            numberOfProduct.text = "\(countOrder)"
+        }
+    }
+    ///
+    var onChangeCountOrder: ((Int) -> Void)?
     // MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imageProduct: UIImageView!
@@ -23,8 +29,6 @@ class OrderCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var numberOfProduct: UILabel!
     
     @IBOutlet weak var minusAndPlusView: UIView!
-    // MARK: - Propertes
-    var countOrder: Int = 1
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,14 +65,10 @@ extension OrderCollectionViewCell {
 //
 extension OrderCollectionViewCell {
     @IBAction func minusButtonTapped(_ sender: UIButton) {
-        if countOrder > 1 {
-            countOrder -= 1
-            numberOfProduct.text = "\(countOrder)"
-        }
+        if countOrder > 1 { countOrder -= 1 }
     }
     
     @IBAction func plusButtonTapped(_ sender: UIButton) {
         countOrder += 1
-        numberOfProduct.text = "\(countOrder)"
     }
 }

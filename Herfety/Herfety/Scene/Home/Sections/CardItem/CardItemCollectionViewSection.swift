@@ -86,7 +86,6 @@ struct CardProductSectionLayoutProvider: LayoutSectionProvider {
         return section
     }
 }
-
 // MARK: - Header And Foter for category
 //
 extension CardItemCollectionViewSection: HeaderAndFooterProvider {
