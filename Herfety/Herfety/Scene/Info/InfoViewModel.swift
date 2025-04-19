@@ -4,31 +4,25 @@
 //
 //  Created by Mahmoud Alaa on 13/02/2025.
 //
-
 import UIKit
+import Combine
 
 class InfoViewModel {
+    // MARK: - Properties
+    var infoItems: [InfoModel] = []
+    var navigationToPayment: (()-> Void)?
     
-    var infoItems: [InfoModel] = [
-        InfoModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
-        InfoModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
-        InfoModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
-        InfoModel(name: "Mahmoud", address: "Aswan", phone: "01142128919"),
-    ]
-    
+    init() {
+      observeInfoItems()
+    }
     func numberOfItems() -> Int {
         return infoItems.count
     }
-    
-    var navigationToPayment: (()-> Void)?
-    
     func didTapPlusButton(navigationController: UINavigationController?) {
         // navigate to address screen
         let addressVC = AddAddressViewController(viewModel: AddAddressViewModel())
-        addressVC.delegate = self
         navigationController?.pushViewController(addressVC, animated: true)
     }
-    
     func didTapPaymentButton() {
         if infoItems.isEmpty {
             // Show Alert of Warning
@@ -39,13 +33,12 @@ class InfoViewModel {
         }
     }
 }
-
-// MARK: - Delegate
+// MARK: - Privagte Handlers
 //
-extension InfoViewModel: AddAddressViewControllerDelegate {
-    func didAddAddress(_ address: InfoModel) {
-        self.infoItems.append(address)
-        
-        NotificationCenter.default.post(name: Notification.Name("infoItemsUpdated"), object: nil)
+extension InfoViewModel {
+    private func observeInfoItems() {
+        CustomeTabBarViewModel.shared.$infos.sink { [weak self] infoItems in
+            self?.infoItems = infoItems
+        }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
     }
 }

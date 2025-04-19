@@ -26,6 +26,7 @@ class CustomeTabBarViewModel: ObservableObject {
     @Published var cart: [WishlistItem] = []
     @Published var orders: [OrderModel] = []
     @Published var Wishlist: [WishlistItem] = []
+    @Published var infos: [InfoModel] = []
     @Published var notificationsIsRead: Bool = false
     ///
     var subscriptions = Set<AnyCancellable>()

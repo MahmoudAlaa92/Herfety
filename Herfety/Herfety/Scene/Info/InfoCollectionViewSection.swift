@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 13/02/2025.
 //
-
 import UIKit
 
 class InfoCollectionViewSection: CollectionViewDataSource {
