@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class CategoryCollectionViewSection: CollectionViewProvider {
+class CategoryCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
     let categoryItems: [CategryItem]

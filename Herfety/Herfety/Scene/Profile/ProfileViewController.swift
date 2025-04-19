@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Properties
     private var nameViewModel: NameViewModel
     private var profileListViewModel: ProfileListViewModel
-    private var sections: [CollectionViewProvider] = []
+    private var sections: [CollectionViewDataSource] = []
     private var layoutSections: [LayoutSectionProvider] = []
     // MARK: - Init
     init(nameViewModel: NameViewModel, profileListViewModel: ProfileListViewModel){

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileListCollectionViewSection: CollectionViewProvider {
+class ProfileListCollectionViewSection: CollectionViewDataSource {
     
     private let items: [ProfileListItem]
     init(items: [ProfileListItem]) {

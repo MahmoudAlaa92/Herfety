@@ -8,7 +8,7 @@
 import UIKit
 
 
-class WishlistCollectionViewSection: CollectionViewProvider {
+class WishlistCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
     private let whishlistItems: [WishlistItem]

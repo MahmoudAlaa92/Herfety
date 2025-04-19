@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewCollectionViewSection: CollectionViewProvider {
+class ReviewCollectionViewSection: CollectionViewDataSource {
     
     let reviewItems: [Review]
     let product: Product

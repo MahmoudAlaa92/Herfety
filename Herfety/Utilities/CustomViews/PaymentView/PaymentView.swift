@@ -15,8 +15,8 @@ class PaymentView: UIView {
     @IBOutlet weak var shipingLabel: UILabel!
     @IBOutlet weak var shipingPrice: UILabel!
     
-    @IBOutlet weak var bagTotalLabel: UILabel!
-    @IBOutlet weak var bagTotalPrice: UILabel!
+    @IBOutlet weak var TotalLabel: UILabel!
+    @IBOutlet weak var TotalPrice: UILabel!
     
     @IBOutlet weak var numberOfItems: UILabel!
     
@@ -56,13 +56,14 @@ extension PaymentView {
     /// - Parameter viewModel: The ViewModel containing the data to be displayed.
     func configure(with viewModel: PaymentView.Model) {
         self.subTotalPrice.text = "$\(viewModel.subTotal)"
-        subTotalPrice.font = .callout
-        self.shipingLabel.text = "$\(viewModel.shipping)"
-        shipingPrice.font = .callout
-        self.bagTotalPrice.text = "$\(viewModel.shipping)"
-        bagTotalPrice.font = .callout
-        self.bagTotalLabel.text = "$\(viewModel.total)"
-        bagTotalLabel.font = .callout
+        self.subTotalPrice.font = .callout
+        
+        self.shipingPrice.text = "$\(viewModel.shipping)"
+        self.shipingPrice.font = .callout
+        
+        self.TotalPrice.text = "$\(viewModel.total)"
+        self.TotalPrice.font = .callout
+        
         self.numberOfItems.text = "(\(viewModel.numberOfItems) item)"
         self.numberOfItems.font = .body
         
@@ -71,8 +72,8 @@ extension PaymentView {
         subTotalLabel.font = .title3
         shipingLabel.text = "Shiping :"
         shipingLabel.font = .title3
-        bagTotalLabel.text = "Big Total :"
-        bagTotalLabel.font = .title3
+        TotalLabel.text = "Total :"
+        TotalLabel.font = .title3
         
         /// Style View
         numberOfItems.textColor = Colors.labelGray

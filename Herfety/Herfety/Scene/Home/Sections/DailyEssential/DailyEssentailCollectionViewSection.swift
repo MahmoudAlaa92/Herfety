@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class DailyEssentailCollectionViewSection: CollectionViewProvider {
+class DailyEssentailCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
     let dailyEssentail: [DailyEssentialyItem]

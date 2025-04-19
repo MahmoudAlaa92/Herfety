@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingCollectionViewSection: CollectionViewProvider {
+class SettingCollectionViewSection: CollectionViewDataSource {
     
     private let items: [SettingItem]
     

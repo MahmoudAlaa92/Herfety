@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NameOfProfileCollectionViewSection: CollectionViewProvider {
+class NameOfProfileCollectionViewSection: CollectionViewDataSource {
     
     let sectionName: Name
     init(sectionName: Name) {

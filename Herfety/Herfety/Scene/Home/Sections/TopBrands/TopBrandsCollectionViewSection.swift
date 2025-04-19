@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class TopBrandsCollectionViewSection: CollectionViewProvider {
+class TopBrandsCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
     let topBrandsItems: [TopBrandsItem]

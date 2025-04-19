@@ -4,26 +4,23 @@
 //
 //  Created by Mahmoud Alaa on 13/02/2025.
 //
-
 import UIKit
+import Combine
 
 class InfoViewController: UIViewController {
-
     // MARK: - Properties
     private var viewModel = InfoViewModel()
-    private var sections: [CollectionViewProvider] = []
+    private var sections: [CollectionViewDataSource] = []
     private var layoutProviders: [LayoutSectionProvider] = []
     private var navigationBarBehavior: InfoNavBar?
-    
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var paymentButton: PrimaryButton!
-    
+    ///
+    var subscriptions = Set<AnyCancellable>()
     // MARK: - Lifcycle
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureSections()
         configureCompositianalLayout()
         setUpCollectionView()
@@ -33,34 +30,33 @@ class InfoViewController: UIViewController {
         configureNotificationCenter()
     }
 }
-
 // MARK: - Configuration
 //
 extension InfoViewController {
     
     private func setUpCollectionView() {
         collectionView.dataSource = self
-
         sections.forEach { $0.registerCells(in: collectionView) }
     }
+    /// Configure Section
     private func configureSections() {
-        let infoSection = InfoCollectionViewSection(infoItems: viewModel.infoItems)
-        sections = [infoSection]
-        
-        layoutProviders = [InfoSectionLayoutProvider()]
+        CustomeTabBarViewModel.shared.$infos.sink { [weak self] infoItems in
+            let infoSection = InfoCollectionViewSection(infoItems: infoItems)
+            self?.sections = [infoSection]
+            self?.layoutProviders = [InfoSectionLayoutProvider()]
+            self?.collectionView.reloadData()
+        }.store(in: &subscriptions)
     }
-    // Configure Layout
+    /// Configure Layout
     private func configureCompositianalLayout() {
         let layoutFactory = SectionsLayout(providers: layoutProviders)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
-    
-    // Configure UI
+    /// Configure UI
     private func configureUI() {
         paymentButton.title = "Proceed to payment"
     }
-    
-    // Set up Navigation Bar
+    /// Set up Navigation Bar
     private func setUpNavigationBar() {
         
         navigationItem.backButtonTitle = ""
@@ -73,13 +69,11 @@ extension InfoViewController {
             self.viewModel.didTapPlusButton(navigationController: navigationController)
         })
     }
-    
-    // Notification Center
+    /// Notification Center
     private func configureNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: Notification.Name("infoItemsUpdated"), object: nil)
     }
-    
-    // Reloud collectionView
+    /// Reloud collectionView
    @objc private func reloadCollectionView() {
        configureSections()
        DispatchQueue.main.async { [weak self] in
@@ -87,7 +81,6 @@ extension InfoViewController {
        }
     }
 }
-
 // MARK: - UICollectionViewDataSource
 //
 extension InfoViewController: UICollectionViewDataSource {
@@ -102,11 +95,10 @@ extension InfoViewController: UICollectionViewDataSource {
         sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
 }
-
 // MARK: - Binding
 //
 extension InfoViewController {
-    // Navigate to Credit Card
+    /// Navigate to Credit Card
     private func bindViewModel() {
         viewModel.navigationToPayment = { [weak self] in
             let creditCardVC = CreditCardViewController(viewModel: CreditCardViewModel())

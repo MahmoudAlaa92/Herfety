@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ProductsViewController: UIViewController {
 
@@ -14,19 +15,18 @@ class ProductsViewController: UIViewController {
     
     // MARK: - Properties
     private(set) var viewModel: ProductsViewModel
-    private var sections = [CollectionViewProvider]()
+    private var sections = [CollectionViewDataSource]()
     private var layoutSections = [LayoutSectionProvider]()
-    
+    ///
+    var subscriptions = Set<AnyCancellable>()
     // MARK: Init
     init(viewModel: ProductsViewModel){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,6 @@ class ProductsViewController: UIViewController {
         configureLayout()
         setUpCollectionView()
     }
-
 }
 // MARK: - Configuraion
 //
@@ -43,19 +42,19 @@ extension ProductsViewController {
     private func configureSections() {
         let products = ProductsCollectionViewSection(Products: viewModel.productItems)
         sections = [products]
-        
+        products.selectedItem.sink { [weak self] products in
+            let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }.store(in: &subscriptions)
         layoutSections.append(ProductsCollectionViewSectionLayout())
     }
-
     private func configureLayout() {
         let factory = SectionsLayout(providers: layoutSections)
         collectionView.setCollectionViewLayout(factory.createLayout(), animated: true)
     }
-    
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         sections.forEach({ $0.registerCells(in: collectionView)})
     }
 }
@@ -68,11 +67,16 @@ extension ProductsViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         sections[section].numberOfItems
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
 }
 // MARK: - UICollectionViewDelegate
 //
-extension ProductsViewController: UICollectionViewDelegate {}
+extension ProductsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectable = sections[indexPath.section] as? CollectionViewDelegate {
+            selectable.collectionView(collectionView, didSelectItemAt: indexPath)
+        }
+    }
+}

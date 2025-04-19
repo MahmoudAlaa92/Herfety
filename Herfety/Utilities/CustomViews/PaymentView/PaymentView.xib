@@ -11,8 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentView" customModule="Herfety" customModuleProvider="target">
             <connections>
-                <outlet property="bagTotalLabel" destination="cov-lQ-cRO" id="rcQ-f8-xMu"/>
-                <outlet property="bagTotalPrice" destination="Tpv-Sv-cfK" id="KRc-ut-d8i"/>
+                <outlet property="TotalLabel" destination="cov-lQ-cRO" id="rcQ-f8-xMu"/>
+                <outlet property="TotalPrice" destination="Tpv-Sv-cfK" id="k9t-Hk-A2a"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Pxo-iG-lfx"/>
                 <outlet property="numberOfItems" destination="OLZ-9J-vbx" id="YPt-Br-QIW"/>
                 <outlet property="shipingLabel" destination="OYb-fG-8H3" id="Jqf-Tx-5LU"/>

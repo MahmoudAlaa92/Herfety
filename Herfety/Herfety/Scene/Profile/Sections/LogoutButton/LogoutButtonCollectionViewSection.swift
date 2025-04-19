@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LogoutButtonCollectionViewSection: CollectionViewProvider {
+class LogoutButtonCollectionViewSection: CollectionViewDataSource {
     
     func registerCells(in collectionView: UICollectionView) {
         /// Cell

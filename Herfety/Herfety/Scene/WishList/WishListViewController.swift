@@ -11,7 +11,7 @@ class WishListViewController: UIViewController {
 
     // MARK: - Properties
     //
-    private var providers = [CollectionViewProvider]()
+    private var providers = [CollectionViewDataSource]()
     private var layoutProviders = [LayoutSectionProvider]()
     
     // MARK: - Outlets

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductDetailsCollectionViewSection: CollectionViewProvider {
+class ProductDetailsCollectionViewSection: CollectionViewDataSource {
     
     let productItems: Product
     
