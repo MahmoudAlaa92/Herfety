@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     private var sections: [CollectionViewDataSource] = []
     private var layoutSections:[LayoutSectionProvider] = []
     
+    private var sliderItem: SliderCollectionViewSection?
     private var categoryItem: CategoryCollectionViewSection?
     private var cardItem: CardItemCollectionViewSection?
     private var topBrandItem: TopBrandsCollectionViewSection?
@@ -53,6 +54,8 @@ extension HomeViewController {
     /// Configure Sections
     private func configureSections() {
         let sliderProvider = SliderCollectionViewSection(sliderItems: viewModel.sliderItems)
+        self.sliderItem = sliderProvider
+        
         let categoryProvider = CategoryCollectionViewSection(categoryItems: viewModel.categoryItems)
         self.categoryItem = categoryProvider
 
@@ -116,7 +119,6 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
-    
     // MARK: - Header And Footer
     //
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -138,7 +140,6 @@ extension HomeViewController {
         bindTopBrandsItems()
         bindDailyEssentialsItems()
     }
-    
     // MARK: - Slider Items
     private func bindSliderItems() {
         viewModel
@@ -146,6 +147,11 @@ extension HomeViewController {
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
             }.store(in: &subscriptions)
+        ///
+        sliderItem?.selectedItem.sink { [weak self] sliderItem in
+            let vc = ProductsViewController(viewModel: ProductsViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }.store(in: &subscriptions)
     }
     // MARK: - Category Items
     private func bindCategoryItems() {
@@ -154,7 +160,7 @@ extension HomeViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
-        
+        ///
         categoryItem?.categorySelection.sink { [weak self] value in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
             self?.navigationController?.pushViewController(vc, animated: true)
@@ -167,7 +173,7 @@ extension HomeViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
-        
+        ///
         cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
             self?.navigationController?.pushViewController(vc, animated: true)
@@ -180,7 +186,7 @@ extension HomeViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
-        
+        ///
         topBrandItem?.selectedBrand.sink(receiveValue: { [weak self] value in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
             self?.navigationController?.pushViewController(vc, animated: true)
@@ -193,6 +199,7 @@ extension HomeViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
+        ///
         dailyEssentialItem?.selectedItem.sink(receiveValue: { [weak self] value in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
             self?.navigationController?.pushViewController(vc, animated: true)
