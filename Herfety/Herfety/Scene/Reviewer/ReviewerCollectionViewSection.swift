@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewerCollectionViewSection: CollectionViewProvider {
+class ReviewerCollectionViewSection: CollectionViewDataSource {
     
     let reviewers: [Reviewer]
     

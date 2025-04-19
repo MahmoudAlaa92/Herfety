@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CollectionViewProvider {
+protocol CollectionViewDataSource {
     func registerCells(in collectionView: UICollectionView)
     var numberOfItems: Int { get }
     func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
@@ -18,7 +18,6 @@ protocol HeaderAndFooterProvider {
 protocol LayoutSectionProvider {
     func layoutSection() -> NSCollectionLayoutSection
 }
-
 // MARK: - Delegate
 //
 protocol CollectionViewDelegate {

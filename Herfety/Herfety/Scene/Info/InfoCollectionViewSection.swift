@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoCollectionViewSection: CollectionViewProvider {
+class InfoCollectionViewSection: CollectionViewDataSource {
     
     let infoItems: [InfoModel]
     

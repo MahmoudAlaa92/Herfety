@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     //
     private var navigationBarBehavior: HomeNavBar?
     private(set) var viewModel = HomeViewModel()
-    private var sections: [CollectionViewProvider] = []
+    private var sections: [CollectionViewDataSource] = []
     private var layoutSections:[LayoutSectionProvider] = []
     
     private var categoryItem: CategoryCollectionViewSection?
@@ -94,7 +94,6 @@ extension HomeViewController {
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
 }
-
 // MARK: - UICollectionViewDelegate
 //
 extension HomeViewController: UICollectionViewDelegate {

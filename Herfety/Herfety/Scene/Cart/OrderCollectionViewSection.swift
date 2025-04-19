@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class OrderCollectionViewSection: CollectionViewProvider {
+class OrderCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
     let orderItems: [OrderModel]
     let countUpdateSubject = PassthroughSubject<(Int, Int), Never>()

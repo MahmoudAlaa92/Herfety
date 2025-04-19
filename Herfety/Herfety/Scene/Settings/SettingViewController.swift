@@ -13,7 +13,7 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     // MARK: - Properties
     private(set) var settingViewModel: SettingViewModel
-    private(set) var sections: [CollectionViewProvider] = []
+    private(set) var sections: [CollectionViewDataSource] = []
     private(set) var layoutSections: [LayoutSectionProvider] = []
     // MARK: - Init
     init(settingViewModel: SettingViewModel) {

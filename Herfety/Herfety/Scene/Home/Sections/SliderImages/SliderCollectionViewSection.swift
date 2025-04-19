@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SliderCollectionViewSection: CollectionViewProvider {
+class SliderCollectionViewSection: CollectionViewDataSource {
     
     private let sliderItems: [SliderItem]
     

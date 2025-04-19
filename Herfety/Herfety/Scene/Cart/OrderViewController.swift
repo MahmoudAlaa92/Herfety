@@ -21,7 +21,7 @@ class OrderViewController: UIViewController {
         return orderViewModel.paymentInfo
     }()
     private var viewModel = OrderViewModel()
-    private var sections: [CollectionViewProvider] = []
+    private var sections: [CollectionViewDataSource] = []
     private var layoutProviders: [LayoutSectionProvider] = []
     ///
     var subscriptions = Set<AnyCancellable>()
@@ -37,7 +37,6 @@ class OrderViewController: UIViewController {
         bindViewModel()
     }
 }
-
 // MARK: - UICollectionViewDataSource
 //
 extension OrderViewController: UICollectionViewDataSource {
@@ -80,17 +79,18 @@ private extension OrderViewController {
     private func configureProvider() {
         CustomeTabBarViewModel.shared.$orders.sink { [weak self] value in
             let orderProvider = OrderCollectionViewSection(orderItems: value)
-            self?.sections = [orderProvider]
-            self?.collectionView.reloadData()
+            guard let self = self else { return }
+            self.sections = [orderProvider]
+            self.collectionView.reloadData()
             
             /// Combine subscription to count updates
             orderProvider.countUpdateSubject
                 .sink { [weak self] index, newCount in
-                    self?.viewModel.updateOrderCount(at: index, to: newCount)
+                    guard let self = self else { return }
+                    self.viewModel.updateOrderCount(at: index, to: newCount)
                 }
-                .store(in: &self!.subscriptions)
+                .store(in: &self.subscriptions)
         }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
-        #warning("👆check force wrap in self")
 
         layoutProviders.append(OrderSectionLayoutProvider())
     }
@@ -111,7 +111,6 @@ private extension OrderViewController {
         navigationItem.backButtonTitle = ""
     }
 }
-
 // MARK: - Binding
 //
 extension OrderViewController {
@@ -134,7 +133,6 @@ extension OrderViewController {
             .store(in: &subscriptions)
     }
 }
-
 // MARK: - Actions
 //
 extension OrderViewController {
@@ -144,7 +142,6 @@ extension OrderViewController {
         viewModel.didTapPayment()
     }
 }
-
 // MARK: - Private Handlers ???
 //
 extension OrderViewController {}

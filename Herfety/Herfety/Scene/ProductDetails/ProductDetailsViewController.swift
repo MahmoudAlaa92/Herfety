@@ -14,7 +14,7 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     ///
     private var viewModel: ProductDetailsViewModel
-    private var sections: [CollectionViewProvider] = []
+    private var sections: [CollectionViewDataSource] = []
     private var layoutSections: [LayoutSectionProvider] = []
     
     // MARK: - Init

@@ -6,23 +6,23 @@
 //
 
 import UIKit
+import Combine
 
-class ProductsCollectionViewSection: CollectionViewProvider {
-    
+class ProductsCollectionViewSection: CollectionViewDataSource {
+    // MARK: - Properties
     let Products: [ProductItem]
+    let selectedItem = PassthroughSubject<ProductItem, Never>()
     
+    // MARK: - Init
     init(Products: [ProductItem]) {
         self.Products = Products
     }
-    
     func registerCells(in collectionView: UICollectionView) {
         collectionView.register(UINib(nibName: CardOfProductCollectionViewCell.cellIdentifier, bundle: nil), forCellWithReuseIdentifier: CardOfProductCollectionViewCell.cellIdentifier)
     }
-    
     var numberOfItems: Int {
         return Products.count
     }
-    
     func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardOfProductCollectionViewCell.cellIdentifier, for: indexPath) as? CardOfProductCollectionViewCell else {
             return UICollectionViewCell()
@@ -34,8 +34,19 @@ class ProductsCollectionViewSection: CollectionViewProvider {
         cell.offerPrice.text = item.discountPrice
         cell.priceProduct.text = item.price
         cell.savePrice.text = item.savePrice
-        
+        #warning("Handle Dry principle here")
+        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
+        cell.configureProduct(with: wishlistItem)
+        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
+        cell.configureOrder(with: orderItem)
         return cell
+    }
+}
+// MARK: - Delegate
+//
+extension ProductsCollectionViewSection: CollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedItem.send(Products[indexPath.item])
     }
 }
 // MARK: - Layout
@@ -55,5 +66,4 @@ struct ProductsCollectionViewSectionLayout: LayoutSectionProvider {
 
         return section
     }
-    
 }

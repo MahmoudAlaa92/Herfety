@@ -13,7 +13,7 @@ class ReviewersViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     ///
     private var viewModel: ReviewerViewModel
-    private var sections: [CollectionViewProvider] = []
+    private var sections: [CollectionViewDataSource] = []
     private var sectionsLayout: [LayoutSectionProvider] = []
     
     // MARK: - Init
