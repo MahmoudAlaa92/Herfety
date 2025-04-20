@@ -4,43 +4,39 @@
 //
 //  Created by Mahmoud Alaa on 14/02/2025.
 //
-
 import UIKit
 
 class InfoNavBar {
-    
     // MARK: - Properties
     private unowned var navigationItem: UINavigationItem
     private unowned var navigationController: UINavigationController?
     private var navigationBarButtonItems: [UIBarButtonItem] = []
     private var plusBtn: () -> Void = {}
-    
     // MARK: - Init
     init(navigationItem: UINavigationItem , navigationController: UINavigationController?) {
         self.navigationItem = navigationItem
         self.navigationController = navigationController
     }
 }
-
-// MARK: - Configure
+// MARK: - Configuration
 //
 extension InfoNavBar {
     
-    func configure(title: String = "", titleColor: UIColor = .black, onPlus: @escaping () -> Void) {
+    func configure(title: String = "", titleColor: UIColor = .black, onPlus: @escaping () -> Void, showRighBtn: Bool = true) {
         self.plusBtn = onPlus
-        
-        let plusButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(onPlusBtnTapped))
-        
-        /// Set right button
-        navigationBarButtonItems = [plusButton]
-        navigationItem.rightBarButtonItems = navigationBarButtonItems
-        
+        if showRighBtn {
+            let plusButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(onPlusBtnTapped))
+            
+            /// Set right button
+            navigationBarButtonItems = [plusButton]
+            navigationItem.rightBarButtonItems = navigationBarButtonItems
+        }
         /// Set title
         navigationItem.title = title
         
         /// Customize navigation bar appearance
         let appearance = UINavigationBarAppearance()
-        appearance.shadowColor = .clear
+        appearance.shadowColor = nil
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemBackground
         appearance.titleTextAttributes = [.foregroundColor: titleColor, .font: UIFont.title2]
@@ -56,7 +52,6 @@ extension InfoNavBar {
         }
     }
 }
-
 // MARK: - Actions
 //
 extension InfoNavBar {

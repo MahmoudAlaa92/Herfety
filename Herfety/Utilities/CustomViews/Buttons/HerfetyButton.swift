@@ -8,7 +8,6 @@ class HerfetyButton: UIButton {
             updateButtonConfiguration()
         }
     }
-    
     var image: UIImage? {
         didSet {
             updateButtonConfiguration()
@@ -19,16 +18,18 @@ class HerfetyButton: UIButton {
         super.init(frame: frame)
         setUp()
     }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUp()
     }
-    
+    // MARK: - SetUp
     func setUp() {
         let height: CGFloat = 52
         setTitleColor(.white, for: .normal)
-        layer.cornerRadius = 10
+        layer.cornerRadius = 20
+        layer.masksToBounds = true
+        layer.borderWidth = 1
+        layer.borderColor = Colors.primaryBlue.cgColor
         heightAnchor.constraint(equalToConstant: height).isActive = true
         titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         
@@ -39,7 +40,6 @@ class HerfetyButton: UIButton {
             config.cornerStyle = .medium
             config.imagePlacement = .leading /// Ensure the image is on the left
             config.baseBackgroundColor = Colors.primaryBlue
-            
             self.configuration = config
             updateButtonConfiguration()
         }
@@ -50,11 +50,11 @@ class HerfetyButton: UIButton {
 extension HerfetyButton {
     
     /// Update button configuration
-    private func updateButtonConfiguration() {
+     func updateButtonConfiguration() {
         if #available(iOS 15.0, *) {
             var config = self.configuration ?? UIButton.Configuration.filled()
-            config.title = title
-            config.image = image
+            config.title = self.title
+            config.image = self.image
             let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.title3]
             config.attributedTitle = AttributedString(title ?? "", attributes: AttributeContainer(attributes))
             self.configuration = config

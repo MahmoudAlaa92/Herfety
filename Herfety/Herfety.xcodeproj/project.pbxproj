@@ -66,7 +66,6 @@
 		1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF442D56DFF300F7CEEA /* CardOfProductModel.swift */; };
 		1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF462D56E07E00F7CEEA /* DailyEssentialyModel.swift */; };
 		1562A4412DAA9B8500459EB5 /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4402DAA9B8500459EB5 /* Logout.swift */; };
-		1562A4442DAAA80200459EB5 /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4432DAAA80200459EB5 /* Generated-Images.swift */; };
 		1562A4482DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1562A4472DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib */; };
 		1562A4492DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4462DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift */; };
 		1562A44B2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A44A2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift */; };
@@ -95,6 +94,20 @@
 		1589FC192D51785700240754 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1589FC112D51785700240754 /* SceneDelegate.swift */; };
 		1589FC1F2D51808600240754 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1589FC1E2D51808600240754 /* HomeViewController.xib */; };
 		1589FC202D51808600240754 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1589FC1D2D51808600240754 /* HomeViewController.swift */; };
+		158A7E792DB52A7500B89684 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158A7E772DB52A7500B89684 /* SplashViewController.xib */; };
+		158A7E7A2DB52A7500B89684 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7E762DB52A7500B89684 /* SplashViewController.swift */; };
+		158A7E832DB52DE500B89684 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 158A7E822DB52DE500B89684 /* Lottie */; };
+		158A7E8D2DB53EF600B89684 /* HerfetyAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 158A7E8C2DB53EF600B89684 /* HerfetyAnimation.json */; };
+		158A7E9C2DB5401800B89684 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158A7E8F2DB5401800B89684 /* LoginViewController.xib */; };
+		158A7E9E2DB5401800B89684 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7E8E2DB5401800B89684 /* LoginViewController.swift */; };
+		158A7E9F2DB5401800B89684 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7E912DB5401800B89684 /* LoginViewModel.swift */; };
+		158A7EA92DB557A700B89684 /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EA82DB557A700B89684 /* FacebookButton.swift */; };
+		158A7EAB2DB55CC400B89684 /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EAA2DB55CC400B89684 /* Generated-Images.swift */; };
+		158A7EAD2DB5663100B89684 /* GoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EAC2DB5663100B89684 /* GoogleButton.swift */; };
+		158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EAE2DB566C900B89684 /* AppleButton.swift */; };
+		158A7EB52DB56EF400B89684 /* HRTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158A7EB32DB56EF400B89684 /* HRTextField.xib */; };
+		158A7EB62DB56EF400B89684 /* HRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EB22DB56EF400B89684 /* HRTextField.swift */; };
+		158A7EB82DB58D3100B89684 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EB72DB58D3100B89684 /* SecondaryButton.swift */; };
 		158B39CE2D7A380B00D58B07 /* ProfileListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39CD2D7A380B00D58B07 /* ProfileListModel.swift */; };
 		158B39D12D7A399E00D58B07 /* SectionDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39D02D7A399E00D58B07 /* SectionDecorationView.swift */; };
 		158B39D32D7A41F800D58B07 /* ProfileListCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39D22D7A41F800D58B07 /* ProfileListCollectionViewSection.swift */; };
@@ -219,7 +232,6 @@
 		1548CF442D56DFF300F7CEEA /* CardOfProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOfProductModel.swift; sourceTree = "<group>"; };
 		1548CF462D56E07E00F7CEEA /* DailyEssentialyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEssentialyModel.swift; sourceTree = "<group>"; };
 		1562A4402DAA9B8500459EB5 /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
-		1562A4432DAAA80200459EB5 /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		1562A4462DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButttonCollectionViewCell.swift; sourceTree = "<group>"; };
 		1562A4472DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoutButttonCollectionViewCell.xib; sourceTree = "<group>"; };
 		1562A44A2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButtonCollectionViewSection.swift; sourceTree = "<group>"; };
@@ -250,6 +262,19 @@
 		1589FC112D51785700240754 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1589FC1D2D51808600240754 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1589FC1E2D51808600240754 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		158A7E762DB52A7500B89684 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		158A7E772DB52A7500B89684 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
+		158A7E8C2DB53EF600B89684 /* HerfetyAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HerfetyAnimation.json; sourceTree = "<group>"; };
+		158A7E8E2DB5401800B89684 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		158A7E8F2DB5401800B89684 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		158A7E912DB5401800B89684 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		158A7EA82DB557A700B89684 /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
+		158A7EAA2DB55CC400B89684 /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
+		158A7EAC2DB5663100B89684 /* GoogleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleButton.swift; sourceTree = "<group>"; };
+		158A7EAE2DB566C900B89684 /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
+		158A7EB22DB56EF400B89684 /* HRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRTextField.swift; sourceTree = "<group>"; };
+		158A7EB32DB56EF400B89684 /* HRTextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HRTextField.xib; sourceTree = "<group>"; };
+		158A7EB72DB58D3100B89684 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		158B39CD2D7A380B00D58B07 /* ProfileListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListModel.swift; sourceTree = "<group>"; };
 		158B39D02D7A399E00D58B07 /* SectionDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDecorationView.swift; sourceTree = "<group>"; };
 		158B39D22D7A41F800D58B07 /* ProfileListCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListCollectionViewSection.swift; sourceTree = "<group>"; };
@@ -319,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15FB21C32D75209C0002B576 /* Cosmos in Frameworks */,
+				158A7E832DB52DE500B89684 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,8 +382,8 @@
 		151631242D5D553200BA088E /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				158A7EAA2DB55CC400B89684 /* Generated-Images.swift */,
 				151631312D5D56CF00BA088E /* Generated-Colors.swift */,
-				1562A4432DAAA80200459EB5 /* Generated-Images.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -409,6 +435,7 @@
 				151631342D5D63DD00BA088E /* PaymentView */,
 				157F91062D62B9DC005381FB /* AddressTextField */,
 				15955C0F2D67588F00673BE7 /* CardView */,
+				158A7EA52DB540A200B89684 /* TextField */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -646,8 +673,12 @@
 			children = (
 				15840BD42D5D7CAA006F8B67 /* HerfetyButton.swift */,
 				15840BD62D5D80F7006F8B67 /* PrimaryButton.swift */,
+				158A7EB72DB58D3100B89684 /* SecondaryButton.swift */,
 				154167A12D9E6467007E4CAA /* GenderButton.swift */,
 				1562A4402DAA9B8500459EB5 /* Logout.swift */,
+				158A7EA82DB557A700B89684 /* FacebookButton.swift */,
+				158A7EAC2DB5663100B89684 /* GoogleButton.swift */,
+				158A7EAE2DB566C900B89684 /* AppleButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -696,6 +727,8 @@
 		1589FC1C2D51802300240754 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				158A7E782DB52A7500B89684 /* Splash */,
+				158A7E9A2DB5401800B89684 /* Auth */,
 				15E5B66A2D709CCD00C0383D /* ProductDetails */,
 				15FB21C72D7530FD0002B576 /* Reviewer */,
 				153F6AAD2D597C9B00317F49 /* NavBar */,
@@ -729,6 +762,67 @@
 				1548CF3D2D56DB6000F7CEEA /* CardOfProductCollectionViewCell.xib */,
 			);
 			path = CardItem;
+			sourceTree = "<group>";
+		};
+		158A7E782DB52A7500B89684 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				158A7E8C2DB53EF600B89684 /* HerfetyAnimation.json */,
+				158A7E762DB52A7500B89684 /* SplashViewController.swift */,
+				158A7E772DB52A7500B89684 /* SplashViewController.xib */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		158A7E902DB5401800B89684 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				158A7E8E2DB5401800B89684 /* LoginViewController.swift */,
+				158A7E8F2DB5401800B89684 /* LoginViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		158A7E922DB5401800B89684 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				158A7E912DB5401800B89684 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		158A7E932DB5401800B89684 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				158A7E902DB5401800B89684 /* View */,
+				158A7E922DB5401800B89684 /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		158A7E9A2DB5401800B89684 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				158A7E932DB5401800B89684 /* Login */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		158A7EA52DB540A200B89684 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				158A7EB42DB56EF400B89684 /* HRTextField */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		158A7EB42DB56EF400B89684 /* HRTextField */ = {
+			isa = PBXGroup;
+			children = (
+				158A7EB22DB56EF400B89684 /* HRTextField.swift */,
+				158A7EB32DB56EF400B89684 /* HRTextField.xib */,
+			);
+			path = HRTextField;
 			sourceTree = "<group>";
 		};
 		158B39CF2D7A397200D58B07 /* SublementaryView */ = {
@@ -1052,6 +1146,7 @@
 			name = Herfety;
 			packageProductDependencies = (
 				15FB21C22D75209C0002B576 /* Cosmos */,
+				158A7E822DB52DE500B89684 /* Lottie */,
 			);
 			productName = Herfety;
 			productReference = 1589FBF22D51781D00240754 /* Herfety.app */;
@@ -1083,6 +1178,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */,
+				158A7E812DB52DE500B89684 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1589FBF32D51781D00240754 /* Products */;
@@ -1100,6 +1196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				153F6AAB2D59563F00317F49 /* ProfileViewController.xib in Resources */,
+				158A7E792DB52A7500B89684 /* SplashViewController.xib in Resources */,
 				15CD44BD2D5293AE00E58C6F /* DailyEssentailCollectionViewCell.xib in Resources */,
 				157F910C2D62CA13005381FB /* AddressTextField.xib in Resources */,
 				15CD44AE2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib in Resources */,
@@ -1119,9 +1216,11 @@
 				157F91182D62E804005381FB /* AlertViewController.xib in Resources */,
 				151DF4282D5BABF000A3AD98 /* PaymentView.xib in Resources */,
 				15E5B68A2D70F58F00C0383D /* ProductDetailsViewController.xib in Resources */,
+				158A7E8D2DB53EF600B89684 /* HerfetyAnimation.json in Resources */,
 				15CE60FA2D73C3A60032617B /* TitleReviewsCollectionReusableView.xib in Resources */,
 				156CD83F2D6A463D00D6DA77 /* ProductsViewController.xib in Resources */,
 				153F6AA72D59562B00317F49 /* OrderViewController.xib in Resources */,
+				158A7EB52DB56EF400B89684 /* HRTextField.xib in Resources */,
 				1511F3CD2D5554D100D986CF /* DMSans-Medium.ttf in Resources */,
 				1511F3CE2D5554D100D986CF /* DMSans.ttf in Resources */,
 				157E04732D554242000170FC /* colors.stencil in Resources */,
@@ -1138,6 +1237,7 @@
 				15955C1C2D67797500673BE7 /* CreditCardViewController.xib in Resources */,
 				157E046F2D553F6E000170FC /* Colors.xcassets in Resources */,
 				157F91032D62B774005381FB /* AddAddressViewController.xib in Resources */,
+				158A7E9C2DB5401800B89684 /* LoginViewController.xib in Resources */,
 				154112132D56983400F248F7 /* HeaderView.xib in Resources */,
 				15FB21CB2D7531740002B576 /* ReviewersViewController.xib in Resources */,
 				15F927CE2D5AC5E50038CEB8 /* OrderCollectionViewCell.xib in Resources */,
@@ -1156,6 +1256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15FB21D62D7543080002B576 /* ReviewerViewModel.swift in Sources */,
+				158A7EB62DB56EF400B89684 /* HRTextField.swift in Sources */,
 				158F8D512D7252DC00D8E768 /* DescriptionProductDetails.swift in Sources */,
 				15A3C3CB2D78863B00AE6CFA /* NameOfProfileCollectionViewSection.swift in Sources */,
 				1562A4412DAA9B8500459EB5 /* Logout.swift in Sources */,
@@ -1166,13 +1267,15 @@
 				15A4F5E52DB28FD6000EACEA /* CustomeTabBarViewModel.swift in Sources */,
 				15CD44C52D52A3BC00E58C6F /* HomeViewModel.swift in Sources */,
 				15CE60F22D73B3CB0032617B /* ReviewCollectionViewCell.swift in Sources */,
-				1562A4442DAAA80200459EB5 /* Generated-Images.swift in Sources */,
+				158A7E9E2DB5401800B89684 /* LoginViewController.swift in Sources */,
+				158A7E9F2DB5401800B89684 /* LoginViewModel.swift in Sources */,
 				15CD44B42D52716D00E58C6F /* CategoriesCollectionViewCell.swift in Sources */,
 				151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */,
 				151631262D5D556D00BA088E /* Fonts+Style.swift in Sources */,
 				15840BD52D5D7CAA006F8B67 /* HerfetyButton.swift in Sources */,
 				151DF42C2D5BAC6000A3AD98 /* PaymentView.swift in Sources */,
 				15955C1B2D67797500673BE7 /* CreditCardViewController.swift in Sources */,
+				158A7EA92DB557A700B89684 /* FacebookButton.swift in Sources */,
 				15760D852D692DFC0033BC0D /* AddAddressViewModel.swift in Sources */,
 				1541679C2D9D373B007E4CAA /* SettingViewModel.swift in Sources */,
 				15A4F5E82DB2981E000EACEA /* Notification.swift in Sources */,
@@ -1200,6 +1303,7 @@
 				158B39D32D7A41F800D58B07 /* ProfileListCollectionViewSection.swift in Sources */,
 				158B39CE2D7A380B00D58B07 /* ProfileListModel.swift in Sources */,
 				154167942D9D33E8007E4CAA /* LabelAndTextFieldCollectionViewCell.swift in Sources */,
+				158A7EAD2DB5663100B89684 /* GoogleButton.swift in Sources */,
 				1548CF3F2D56DB6000F7CEEA /* CardOfProductCollectionViewCell.swift in Sources */,
 				1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */,
 				1541679E2D9D37B0007E4CAA /* SettingModel.swift in Sources */,
@@ -1207,6 +1311,7 @@
 				1589FC202D51808600240754 /* HomeViewController.swift in Sources */,
 				153F6AAC2D59563F00317F49 /* ProfileViewController.swift in Sources */,
 				153F6AB22D597DF200317F49 /* WishlistCollectionViewCell.swift in Sources */,
+				158A7EAB2DB55CC400B89684 /* Generated-Images.swift in Sources */,
 				15166A7A2D5823CF00F8F35C /* TopBrandsCollectionViewSection.swift in Sources */,
 				15A3C3CD2D788B1A00AE6CFA /* NameModel.swift in Sources */,
 				15A3C3CF2D788C0600AE6CFA /* NameViewModel.swift in Sources */,
@@ -1226,6 +1331,7 @@
 				158B39E92D7A8B7B00D58B07 /* SettingFooter.swift in Sources */,
 				15F927CF2D5AC5E50038CEB8 /* OrderCollectionViewCell.swift in Sources */,
 				15CD44C32D52A10200E58C6F /* HomeModel.swift in Sources */,
+				158A7E7A2DB52A7500B89684 /* SplashViewController.swift in Sources */,
 				154112152D56B23A00F248F7 /* CategoryCollectionViewSection.swift in Sources */,
 				15760D812D68A6640033BC0D /* CreditCardViewModel.swift in Sources */,
 				15CE60F42D73B69D0032617B /* ReviewCollectionViewSection.swift in Sources */,
@@ -1243,10 +1349,12 @@
 				15A5EC922D77E125003E49AB /* ProfileListCollectionViewCell.swift in Sources */,
 				1532F3512D5E8EB5003223A1 /* InfoViewModel.swift in Sources */,
 				158B39E12D7A869F00D58B07 /* SettingHeader.swift in Sources */,
+				158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */,
 				15CE60FB2D73C3A60032617B /* TitleReviewsCollectionReusableView.swift in Sources */,
 				153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */,
 				1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */,
 				154167A22D9E6467007E4CAA /* GenderButton.swift in Sources */,
+				158A7EB82DB58D3100B89684 /* SecondaryButton.swift in Sources */,
 				15CE60F62D73BA050032617B /* ReviewModel.swift in Sources */,
 				153B7FD52D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift in Sources */,
 				157F91142D62CF5F005381FB /* AddAddressModel.swift in Sources */,
@@ -1472,6 +1580,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		158A7E812DB52DE500B89684 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 		15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/Cosmos?tab=readme-ov-file";
@@ -1483,6 +1599,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		158A7E822DB52DE500B89684 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 158A7E812DB52DE500B89684 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		15FB21C22D75209C0002B576 /* Cosmos */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */;
