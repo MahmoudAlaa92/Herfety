@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 27/02/2025.
 //
-
 import UIKit
 
 class ProductDetailsViewController: UIViewController {
@@ -16,7 +15,7 @@ class ProductDetailsViewController: UIViewController {
     private var viewModel: ProductDetailsViewModel
     private var sections: [CollectionViewDataSource] = []
     private var layoutSections: [LayoutSectionProvider] = []
-    
+    private var navBarBehavior: InfoNavBar?
     // MARK: - Init
     init(viewModel:  ProductDetailsViewModel) {
         self.viewModel = viewModel
@@ -29,6 +28,7 @@ class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavigationBar()
         setUpCollectionView()
         configureSections()
         configureLayoutSections()
@@ -37,12 +37,19 @@ class ProductDetailsViewController: UIViewController {
 // MARK: - Configuration
 //
 extension ProductDetailsViewController {
-    // CollectoinView
+    /// NavBar
+    private func setUpNavigationBar() {
+        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
+            /// don't add plus button in loginVC
+        }, showRighBtn: false)
+    }
+    /// CollectoinView
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    // Sections
+    /// Sections
     private func configureSections() {
         let imagesProducts = ProductDetailsCollectionViewSection(productItems: viewModel.productItems)
         let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItems)
@@ -54,7 +61,7 @@ extension ProductDetailsViewController {
         
         sections.forEach( { $0.registerCells(in: collectionView) } )
     }
-    // Layout
+    /// Layout
     private func configureLayoutSections() {
         let productImages = ProductDetailsCollectionViewProvider()
         let review = ReviewCollectionViewSectionLayout()

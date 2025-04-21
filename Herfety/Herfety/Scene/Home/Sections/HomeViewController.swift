@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 04/02/2025.
 //
-
 import UIKit
 import Combine
 
@@ -46,7 +45,6 @@ class HomeViewController: UIViewController {
         sections.forEach { $0.registerCells(in: collectionView) }
     }
 }
-
 // MARK: - Configuration
 //
 extension HomeViewController {
@@ -83,6 +81,7 @@ extension HomeViewController {
     }
     /// NavBar
     func configureNavBar() {
+        navigationItem.backButtonTitle = ""
         navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
         navigationBarBehavior?.configure(onNotification: {
             print("searchBtn is tapped")
@@ -139,6 +138,8 @@ extension HomeViewController {
         bindProductItems()
         bindTopBrandsItems()
         bindDailyEssentialsItems()
+        bindWishlist()
+        bindOrders()
     }
     // MARK: - Slider Items
     private func bindSliderItems() {
@@ -204,5 +205,57 @@ extension HomeViewController {
             let vc = ProductsViewController(viewModel: ProductsViewModel())
             self?.navigationController?.pushViewController(vc, animated: true)
         }).store(in: &subscriptions)
+    }
+    // MARK: - Wishlist
+    private func bindWishlist() {
+        CustomeTabBarViewModel.shared.$Wishlist
+            .dropFirst()
+            .sink { [weak self] wishlist in
+                guard let self = self else { return }
+                /// Trigger alert presentation
+                let alertItem = AlertModel(
+                    message: "Added To Wishlist",
+                    buttonTitle: "Ok",
+                    image: .success,
+                    status: .success
+                )
+                self.presentCustomAlert(with: alertItem)
+            }
+            .store(in: &subscriptions)
+    }
+    // MARK: - Orders
+    private func bindOrders() {
+        CustomeTabBarViewModel.shared.$orders
+            .dropFirst()
+            .sink { [weak self] Order in
+                guard let self = self else { return }
+                /// Trigger alert presentation
+                let alertItem = AlertModel(
+                    message: "Added To Order",
+                    buttonTitle: "Ok",
+                    image: .success,
+                    status: .success
+                )
+                self.presentCustomAlert(with: alertItem)
+            }
+            .store(in: &subscriptions)
+    }
+}
+// MARK: - Private Handler
+//
+extension HomeViewController {
+    func presentCustomAlert(with alertItem: AlertModel) {
+        let alertVC = AlertViewController(nibName: "AlertViewController", bundle: nil)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        alertVC.loadViewIfNeeded() /// Ensure outlets are connected
+
+        alertVC.show(alertItem: alertItem)
+
+        /// Optional: dismiss on button press
+        alertVC.actionHandler = { [weak alertVC] in
+            alertVC?.dismiss(animated: true)
+        }
+        self.present(alertVC, animated: true)
     }
 }

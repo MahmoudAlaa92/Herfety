@@ -15,4 +15,3 @@ class PrimaryButton: HerfetyButton {
         backgroundColor = Colors.primaryBlue
     }
 }
-

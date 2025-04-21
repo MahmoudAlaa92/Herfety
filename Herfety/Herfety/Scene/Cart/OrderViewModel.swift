@@ -18,7 +18,6 @@ class OrderViewModel: ObservableObject {
     init() {
         observeOrderUpdates()
         observeOrderItems()
-        
     }
     func didTapPayment() {
         if orderItems.isEmpty {
@@ -30,7 +29,8 @@ class OrderViewModel: ObservableObject {
     func updateOrderCount(at index: Int, to newCount: Int) {
         guard orderItems.indices.contains(index) else { return }
             orderItems[index].numberOfOrders = newCount
-            CustomeTabBarViewModel.shared.orders = orderItems
+            #warning("when increase the alert showed solve this error here")
+         // CustomeTabBarViewModel.shared.orders = orderItems
     }
 }
 // MARK: - Private Handlers

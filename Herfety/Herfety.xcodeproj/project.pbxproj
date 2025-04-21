@@ -107,7 +107,7 @@
 		158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EAE2DB566C900B89684 /* AppleButton.swift */; };
 		158A7EB52DB56EF400B89684 /* HRTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158A7EB32DB56EF400B89684 /* HRTextField.xib */; };
 		158A7EB62DB56EF400B89684 /* HRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EB22DB56EF400B89684 /* HRTextField.swift */; };
-		158A7EB82DB58D3100B89684 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EB72DB58D3100B89684 /* SecondaryButton.swift */; };
+		158A7EB82DB58D3100B89684 /* SecondaryButtonn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EB72DB58D3100B89684 /* SecondaryButtonn.swift */; };
 		158B39CE2D7A380B00D58B07 /* ProfileListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39CD2D7A380B00D58B07 /* ProfileListModel.swift */; };
 		158B39D12D7A399E00D58B07 /* SectionDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39D02D7A399E00D58B07 /* SectionDecorationView.swift */; };
 		158B39D32D7A41F800D58B07 /* ProfileListCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B39D22D7A41F800D58B07 /* ProfileListCollectionViewSection.swift */; };
@@ -153,6 +153,8 @@
 		15CE60F62D73BA050032617B /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CE60F52D73BA050032617B /* ReviewModel.swift */; };
 		15CE60FA2D73C3A60032617B /* TitleReviewsCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CE60F92D73C3A60032617B /* TitleReviewsCollectionReusableView.xib */; };
 		15CE60FB2D73C3A60032617B /* TitleReviewsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CE60F82D73C3A60032617B /* TitleReviewsCollectionReusableView.swift */; };
+		15D0F5892DB67D4C00967C7F /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0F5862DB67D4C00967C7F /* SuccessViewController.swift */; };
+		15D0F58A2DB67D4C00967C7F /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D0F5872DB67D4C00967C7F /* SuccessViewController.xib */; };
 		15E5B67E2D70E9D300C0383D /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E5B67A2D70E9D300C0383D /* ProductDetailsViewModel.swift */; };
 		15E5B67F2D70E9D300C0383D /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E5B67B2D70E9D300C0383D /* ProductModel.swift */; };
 		15E5B6892D70F58F00C0383D /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E5B6872D70F58F00C0383D /* ProductDetailsViewController.swift */; };
@@ -274,7 +276,7 @@
 		158A7EAE2DB566C900B89684 /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
 		158A7EB22DB56EF400B89684 /* HRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRTextField.swift; sourceTree = "<group>"; };
 		158A7EB32DB56EF400B89684 /* HRTextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HRTextField.xib; sourceTree = "<group>"; };
-		158A7EB72DB58D3100B89684 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		158A7EB72DB58D3100B89684 /* SecondaryButtonn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButtonn.swift; sourceTree = "<group>"; };
 		158B39CD2D7A380B00D58B07 /* ProfileListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListModel.swift; sourceTree = "<group>"; };
 		158B39D02D7A399E00D58B07 /* SectionDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDecorationView.swift; sourceTree = "<group>"; };
 		158B39D22D7A41F800D58B07 /* ProfileListCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListCollectionViewSection.swift; sourceTree = "<group>"; };
@@ -320,6 +322,8 @@
 		15CE60F52D73BA050032617B /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		15CE60F82D73C3A60032617B /* TitleReviewsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleReviewsCollectionReusableView.swift; sourceTree = "<group>"; };
 		15CE60F92D73C3A60032617B /* TitleReviewsCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleReviewsCollectionReusableView.xib; sourceTree = "<group>"; };
+		15D0F5862DB67D4C00967C7F /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
+		15D0F5872DB67D4C00967C7F /* SuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessViewController.xib; sourceTree = "<group>"; };
 		15E5B67A2D70E9D300C0383D /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		15E5B67B2D70E9D300C0383D /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		15E5B6872D70F58F00C0383D /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
@@ -673,7 +677,7 @@
 			children = (
 				15840BD42D5D7CAA006F8B67 /* HerfetyButton.swift */,
 				15840BD62D5D80F7006F8B67 /* PrimaryButton.swift */,
-				158A7EB72DB58D3100B89684 /* SecondaryButton.swift */,
+				158A7EB72DB58D3100B89684 /* SecondaryButtonn.swift */,
 				154167A12D9E6467007E4CAA /* GenderButton.swift */,
 				1562A4402DAA9B8500459EB5 /* Logout.swift */,
 				158A7EA82DB557A700B89684 /* FacebookButton.swift */,
@@ -804,6 +808,7 @@
 			isa = PBXGroup;
 			children = (
 				158A7E932DB5401800B89684 /* Login */,
+				15D0F5882DB67D4C00967C7F /* SuccessScreen */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1067,6 +1072,15 @@
 			path = TitleReviews;
 			sourceTree = "<group>";
 		};
+		15D0F5882DB67D4C00967C7F /* SuccessScreen */ = {
+			isa = PBXGroup;
+			children = (
+				15D0F5862DB67D4C00967C7F /* SuccessViewController.swift */,
+				15D0F5872DB67D4C00967C7F /* SuccessViewController.xib */,
+			);
+			path = SuccessScreen;
+			sourceTree = "<group>";
+		};
 		15E5B66A2D709CCD00C0383D /* ProductDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1218,6 +1232,7 @@
 				15E5B68A2D70F58F00C0383D /* ProductDetailsViewController.xib in Resources */,
 				158A7E8D2DB53EF600B89684 /* HerfetyAnimation.json in Resources */,
 				15CE60FA2D73C3A60032617B /* TitleReviewsCollectionReusableView.xib in Resources */,
+				15D0F58A2DB67D4C00967C7F /* SuccessViewController.xib in Resources */,
 				156CD83F2D6A463D00D6DA77 /* ProductsViewController.xib in Resources */,
 				153F6AA72D59562B00317F49 /* OrderViewController.xib in Resources */,
 				158A7EB52DB56EF400B89684 /* HRTextField.xib in Resources */,
@@ -1333,6 +1348,7 @@
 				15CD44C32D52A10200E58C6F /* HomeModel.swift in Sources */,
 				158A7E7A2DB52A7500B89684 /* SplashViewController.swift in Sources */,
 				154112152D56B23A00F248F7 /* CategoryCollectionViewSection.swift in Sources */,
+				15D0F5892DB67D4C00967C7F /* SuccessViewController.swift in Sources */,
 				15760D812D68A6640033BC0D /* CreditCardViewModel.swift in Sources */,
 				15CE60F42D73B69D0032617B /* ReviewCollectionViewSection.swift in Sources */,
 				15E5B6892D70F58F00C0383D /* ProductDetailsViewController.swift in Sources */,
@@ -1354,7 +1370,7 @@
 				153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */,
 				1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */,
 				154167A22D9E6467007E4CAA /* GenderButton.swift in Sources */,
-				158A7EB82DB58D3100B89684 /* SecondaryButton.swift in Sources */,
+				158A7EB82DB58D3100B89684 /* SecondaryButtonn.swift in Sources */,
 				15CE60F62D73BA050032617B /* ReviewModel.swift in Sources */,
 				153B7FD52D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift in Sources */,
 				157F91142D62CF5F005381FB /* AddAddressModel.swift in Sources */,

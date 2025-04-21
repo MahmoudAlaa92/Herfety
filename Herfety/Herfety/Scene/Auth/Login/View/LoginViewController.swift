@@ -20,9 +20,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var googleButton: GoogleButton!
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var orLabel: UILabel!
-    
     // MARK: - Properties
     let viewModel: LoginViewModel
+    private var navBarBehavior: InfoNavBar?
     // MARK: - Init
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -34,36 +34,19 @@ class LoginViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backButtonTitle = ""
         configureViews()
+        setUpNavigationBar()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         /// Keep nav bar visible
         navigationController?.setNavigationBarHidden(false, animated: false)
-        
-        /// hide the line
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.shadowColor = nil /// removes the bottom line
-        appearance.backgroundColor = .systemBackground
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.black, .font: UIFont.title2]
-        
-        // Optional: If you have a custom back button image
-        appearance.setBackIndicatorImage(
-            Images.iconBack.withRenderingMode(.alwaysOriginal),
-            transitionMaskImage: Images.iconBack.withRenderingMode(.alwaysOriginal)
-        )
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    // MARK: - UI Setup
+    // MARK: - Setup UI
     /// Configures the initial appearance of UI elements
     private func configureViews() {
         view.backgroundColor = Colors.hPrimaryBackground
@@ -80,6 +63,13 @@ class LoginViewController: UIViewController {
         configureEmailTextField()
         configurePasswordTextField()
         configureLabelsUI()
+    }
+    /// NavBar
+    private func setUpNavigationBar() {
+        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
+            /// don't add plus button in loginVC
+        }, showRighBtn: false)
     }
     /// Configures email text field with title and placeholder
     private func configureEmailTextField() {
@@ -101,8 +91,18 @@ class LoginViewController: UIViewController {
         subtitleLabel.font = .callout
         orLabel.textColor = Colors.primaryBlue
     }
+}
+// MARK: - Actions
+//
+extension LoginViewController {
     @IBAction func loginButtonTapped(_ sender: UIButton) {
+        let vc = SuccessViewController()
+        vc.modalPresentationStyle = .fullScreen
         
-        viewModel.loginButtonTapped()
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = vc
+            window.makeKeyAndVisible()
+        }
     }
 }

@@ -13,7 +13,6 @@ class CardOfProductCollectionViewCell: UICollectionViewCell {
     static let cellIdentifier: String = "CardOfProductCollectionViewCell"
     var product: WishlistItem!
     var order: OrderModel!
-    
     // MARK: - Outlets
     //
     @IBOutlet weak var topBackground: UIView!

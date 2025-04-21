@@ -26,6 +26,7 @@ class HerfetyButton: UIButton {
     func setUp() {
         let height: CGFloat = 52
         setTitleColor(.white, for: .normal)
+        setTitle(self.title, for: .normal)
         layer.cornerRadius = 20
         layer.masksToBounds = true
         layer.borderWidth = 1
@@ -48,15 +49,15 @@ class HerfetyButton: UIButton {
 // MARK: - Configuration
 //
 extension HerfetyButton {
-    
     /// Update button configuration
      func updateButtonConfiguration() {
         if #available(iOS 15.0, *) {
             var config = self.configuration ?? UIButton.Configuration.filled()
             config.title = self.title
             config.image = self.image
+            /// font
             let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.title3]
-            config.attributedTitle = AttributedString(title ?? "", attributes: AttributeContainer(attributes))
+            config.attributedTitle = AttributedString(self.title ?? "", attributes: AttributeContainer(attributes))
             self.configuration = config
         }
     }

@@ -17,6 +17,7 @@ class ProductsViewController: UIViewController {
     private(set) var viewModel: ProductsViewModel
     private var sections = [CollectionViewDataSource]()
     private var layoutSections = [LayoutSectionProvider]()
+    private var navBarBehavior: InfoNavBar?
     ///
     var subscriptions = Set<AnyCancellable>()
     // MARK: Init
@@ -30,6 +31,7 @@ class ProductsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavigationBar()
         configureSections()
         configureLayout()
         setUpCollectionView()
@@ -38,7 +40,14 @@ class ProductsViewController: UIViewController {
 // MARK: - Configuraion
 //
 extension ProductsViewController {
-
+    /// NavBar
+    private func setUpNavigationBar() {
+        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
+            /// don't add plus button in loginVC
+        }, showRighBtn: false)
+    }
+    /// Section
     private func configureSections() {
         let products = ProductsCollectionViewSection(Products: viewModel.productItems)
         sections = [products]
@@ -48,10 +57,12 @@ extension ProductsViewController {
         }.store(in: &subscriptions)
         layoutSections.append(ProductsCollectionViewSectionLayout())
     }
+    /// Layout
     private func configureLayout() {
         let factory = SectionsLayout(providers: layoutSections)
         collectionView.setCollectionViewLayout(factory.createLayout(), animated: true)
     }
+    /// Collection
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self

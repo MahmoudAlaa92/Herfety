@@ -12,8 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="Herfety" customModuleProvider="target">
             <connections>
                 <outlet property="HerfetyView" destination="kDb-hr-3Is" id="n8y-EI-gsI"/>
-                <outlet property="loginButton" destination="n9b-fm-NYy" id="Sgf-o5-NZm"/>
-                <outlet property="signupButton" destination="Z3r-r3-Wo7" id="a6A-Zb-Ncx"/>
+                <outlet property="loginButton" destination="n9b-fm-NYy" id="niX-z0-kAj"/>
+                <outlet property="signUpButton" destination="Z3r-r3-Wo7" id="sK4-T9-Ql7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -41,7 +41,7 @@
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Button"/>
                                     <connections>
-                                        <action selector="loginPressed:" destination="-1" eventType="touchUpInside" id="6H1-uq-ct8"/>
+                                        <action selector="loginPressed:" destination="-1" eventType="touchUpInside" id="VjM-29-Sfx"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z3r-r3-Wo7" customClass="PrimaryButton" customModule="Herfety" customModuleProvider="target">
@@ -49,6 +49,9 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="signUpPressed:" destination="-1" eventType="touchUpInside" id="fjJ-w5-Q0F"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>

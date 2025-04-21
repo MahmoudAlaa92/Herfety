@@ -11,7 +11,7 @@ class SplashViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var loginButton: SecondaryButtonn!
-    @IBOutlet weak var signupButton: PrimaryButton!
+    @IBOutlet weak var signUpButton: PrimaryButton!
     @IBOutlet weak var HerfetyView: LottieAnimationView!
     // MARK: - Properties
     private var navigationBarBehavior: InfoNavBar?
@@ -25,9 +25,8 @@ class SplashViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backButtonTitle = ""
-        setUpNavigationBar()
         setup()
+        setUpNavigationBar()
         makeAnimation()
     }
     /// lottie Animation
@@ -38,8 +37,8 @@ class SplashViewController: UIViewController {
     }
     // MARK: - Setup Buttons
     private func setup() {
-        signupButton.title = "SignUp"
         loginButton.title = "Login"
+        signUpButton.title = "SignUp"
     }
 }
 // MARK: - Configuration
@@ -48,24 +47,17 @@ extension SplashViewController {
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
         navigationItem.backButtonTitle = ""
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
-        navigationController?.navigationBar.layer.shadowOpacity = 0
-        ///
-        navigationBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
-        navigationBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
-            
-        }, showRighBtn: false)
     }
 }
 // MARK: - Actions
 //
 extension SplashViewController {
+    
     @IBAction func loginPressed(_ sender: Any) {
         let vc = LoginViewController(viewModel: LoginViewModel())
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func signUpPressed(_ sender: Any) {
     }
 }

@@ -36,8 +36,8 @@ extension InfoNavBar {
         
         /// Customize navigation bar appearance
         let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground() /// this line must to be first to hide the line
         appearance.shadowColor = nil
-        appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemBackground
         appearance.titleTextAttributes = [.foregroundColor: titleColor, .font: UIFont.title2]
         
