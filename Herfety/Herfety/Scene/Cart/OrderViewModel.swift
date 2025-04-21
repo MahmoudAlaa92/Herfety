@@ -29,7 +29,7 @@ class OrderViewModel: ObservableObject {
     func updateOrderCount(at index: Int, to newCount: Int) {
         guard orderItems.indices.contains(index) else { return }
             orderItems[index].numberOfOrders = newCount
-            #warning("when increase the alert showed solve this error here")
+            // TODO: when increase the alert showed, solve this logic here
          // CustomeTabBarViewModel.shared.orders = orderItems
     }
 }

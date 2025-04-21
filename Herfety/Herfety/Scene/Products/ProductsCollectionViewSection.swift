@@ -34,7 +34,7 @@ class ProductsCollectionViewSection: CollectionViewDataSource {
         cell.offerPrice.text = item.discountPrice
         cell.priceProduct.text = item.price
         cell.savePrice.text = item.savePrice
-        #warning("Handle Dry principle here")
+        // TODO: handle Dry principle here
         let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
         cell.configureProduct(with: wishlistItem)
         let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)

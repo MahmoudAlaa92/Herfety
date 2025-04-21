@@ -66,11 +66,9 @@ extension WishlistCollectionViewCell {
     
     @IBAction func removeFromWhishlist(_ sender: UIButton) {
         // Remove From Whishlist
-        print("Remove From Whishlist")
     }
     
     @IBAction func addToCart(_ sender: UIButton) {
         // Add To Cart
-        print("Add to Cart")
     }
 }

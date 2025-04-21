@@ -35,6 +35,19 @@ class HomeViewController: UIViewController {
         cofigureCompositianalLayout()
         configureNavBar()
         bindViewModel()
+        
+        let productRemote: ProductRemoteProtocol = ProductRemote(network: AlamofireNetwork())
+
+        productRemote.loadAllProducts { result in
+            switch result {
+            case .success(let products):
+                print("✅ Loaded \(products.count) products")
+                products.forEach { print("• id: \(String(describing: $0.id)) - name: \(String(describing: $0.name)) ") }
+                
+            case .failure(let error):
+                print("❌ Failed to load products:", error.localizedDescription)
+            }
+        }
     }
     
     private func setUpCollectionView() {

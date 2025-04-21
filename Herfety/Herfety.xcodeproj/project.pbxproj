@@ -78,6 +78,16 @@
 		157E046F2D553F6E000170FC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 157E046E2D553F6E000170FC /* Colors.xcassets */; };
 		157E04732D554242000170FC /* colors.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 157E04722D554242000170FC /* colors.stencil */; };
 		157E04762D554252000170FC /* images.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 157E04752D554252000170FC /* images.stencil */; };
+		157F42812DB6D979000305D6 /* RemoteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42802DB6D979000305D6 /* RemoteError.swift */; };
+		157F42872DB6DAAC000305D6 /* AlamofireNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42862DB6DAAC000305D6 /* AlamofireNetwork.swift */; };
+		157F42892DB6DAD0000305D6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42882DB6DAD0000305D6 /* Network.swift */; };
+		157F428C2DB6DB38000305D6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 157F428B2DB6DB38000305D6 /* Alamofire */; };
+		157F42902DB6DD4E000305D6 /* HerfetyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F428F2DB6DD4E000305D6 /* HerfetyRequest.swift */; };
+		157F42942DB6DDEF000305D6 /* RemoteErrorValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42932DB6DDEF000305D6 /* RemoteErrorValidator.swift */; };
+		157F42962DB6DE11000305D6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42952DB6DE11000305D6 /* Setting.swift */; };
+		157F42982DB6E1E7000305D6 /* Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42972DB6E1E7000305D6 /* Remote.swift */; };
+		157F429A2DB6EF4A000305D6 /* Productt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42992DB6EF4A000305D6 /* Productt.swift */; };
+		157F429C2DB6EFBD000305D6 /* ProductRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F429B2DB6EFBD000305D6 /* ProductRemote.swift */; };
 		157F91032D62B774005381FB /* AddAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157F91022D62B774005381FB /* AddAddressViewController.xib */; };
 		157F91042D62B774005381FB /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F91012D62B774005381FB /* AddAddressViewController.swift */; };
 		157F910C2D62CA13005381FB /* AddressTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157F910B2D62CA13005381FB /* AddressTextField.xib */; };
@@ -246,6 +256,15 @@
 		157E046E2D553F6E000170FC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		157E04722D554242000170FC /* colors.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = colors.stencil; sourceTree = "<group>"; };
 		157E04752D554252000170FC /* images.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = images.stencil; sourceTree = "<group>"; };
+		157F42802DB6D979000305D6 /* RemoteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteError.swift; sourceTree = "<group>"; };
+		157F42862DB6DAAC000305D6 /* AlamofireNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetwork.swift; sourceTree = "<group>"; };
+		157F42882DB6DAD0000305D6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		157F428F2DB6DD4E000305D6 /* HerfetyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerfetyRequest.swift; sourceTree = "<group>"; };
+		157F42932DB6DDEF000305D6 /* RemoteErrorValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteErrorValidator.swift; sourceTree = "<group>"; };
+		157F42952DB6DE11000305D6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		157F42972DB6E1E7000305D6 /* Remote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Remote.swift; sourceTree = "<group>"; };
+		157F42992DB6EF4A000305D6 /* Productt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Productt.swift; sourceTree = "<group>"; };
+		157F429B2DB6EFBD000305D6 /* ProductRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRemote.swift; sourceTree = "<group>"; };
 		157F91012D62B774005381FB /* AddAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
 		157F91022D62B774005381FB /* AddAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAddressViewController.xib; sourceTree = "<group>"; };
 		157F910B2D62CA13005381FB /* AddressTextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressTextField.xib; sourceTree = "<group>"; };
@@ -347,6 +366,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				157F428C2DB6DB38000305D6 /* Alamofire in Frameworks */,
 				15FB21C32D75209C0002B576 /* Cosmos in Frameworks */,
 				158A7E832DB52DE500B89684 /* Lottie in Frameworks */,
 			);
@@ -633,6 +653,70 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		157F427E2DB6D78F000305D6 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				157F427F2DB6D964000305D6 /* Models */,
+				157F42822DB6DA0A000305D6 /* Network */,
+				157F42832DB6DA3E000305D6 /* Remote */,
+				157F42842DB6DA56000305D6 /* Requests */,
+				157F42852DB6DA5F000305D6 /* Validators */,
+				157F42922DB6DDB6000305D6 /* Setting */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		157F427F2DB6D964000305D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				157F42802DB6D979000305D6 /* RemoteError.swift */,
+				157F42992DB6EF4A000305D6 /* Productt.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		157F42822DB6DA0A000305D6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				157F42882DB6DAD0000305D6 /* Network.swift */,
+				157F42862DB6DAAC000305D6 /* AlamofireNetwork.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		157F42832DB6DA3E000305D6 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				157F42972DB6E1E7000305D6 /* Remote.swift */,
+				157F429B2DB6EFBD000305D6 /* ProductRemote.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		157F42842DB6DA56000305D6 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				157F428F2DB6DD4E000305D6 /* HerfetyRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		157F42852DB6DA5F000305D6 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				157F42932DB6DDEF000305D6 /* RemoteErrorValidator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		157F42922DB6DDB6000305D6 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				157F42952DB6DE11000305D6 /* Setting.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		157F91052D62B780005381FB /* AddAdress */ = {
 			isa = PBXGroup;
 			children = (
@@ -693,6 +777,7 @@
 				1589FC132D51785700240754 /* Herfety */,
 				1589FC1B2D51801900240754 /* Resources */,
 				15840BD22D5D7C26006F8B67 /* Utilities */,
+				157F427E2DB6D78F000305D6 /* Networking */,
 				1589FC212D51818E00240754 /* Frameworks */,
 				1589FBF32D51781D00240754 /* Products */,
 			);
@@ -1161,6 +1246,7 @@
 			packageProductDependencies = (
 				15FB21C22D75209C0002B576 /* Cosmos */,
 				158A7E822DB52DE500B89684 /* Lottie */,
+				157F428B2DB6DB38000305D6 /* Alamofire */,
 			);
 			productName = Herfety;
 			productReference = 1589FBF22D51781D00240754 /* Herfety.app */;
@@ -1193,6 +1279,7 @@
 			packageReferences = (
 				15FB21C12D75209C0002B576 /* XCRemoteSwiftPackageReference "Cosmos" */,
 				158A7E812DB52DE500B89684 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				157F428A2DB6DB38000305D6 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1589FBF32D51781D00240754 /* Products */;
@@ -1305,7 +1392,9 @@
 				15955C112D6759C400673BE7 /* CardView.swift in Sources */,
 				1532F34F2D5E8DF7003223A1 /* InfoCollectionViewSection.swift in Sources */,
 				156CD8422D6A4A6000D6DA77 /* ProductsViewModel.swift in Sources */,
+				157F42902DB6DD4E000305D6 /* HerfetyRequest.swift in Sources */,
 				157F911B2D62EFFD005381FB /* AlertStatus.swift in Sources */,
+				157F42942DB6DDEF000305D6 /* RemoteErrorValidator.swift in Sources */,
 				156CD8442D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift in Sources */,
 				1562A4492DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift in Sources */,
 				153F6A9D2D59538100317F49 /* CustomeTabBarViewController.swift in Sources */,
@@ -1315,6 +1404,7 @@
 				15CD44C12D529B0300E58C6F /* SliderCollectionViewSection.swift in Sources */,
 				15F927C62D5A55BC0038CEB8 /* WishlistCollectionViewSection.swift in Sources */,
 				1532F34D2D5E876F003223A1 /* InfoShippingCollectionViewCell.swift in Sources */,
+				157F42892DB6DAD0000305D6 /* Network.swift in Sources */,
 				158B39D32D7A41F800D58B07 /* ProfileListCollectionViewSection.swift in Sources */,
 				158B39CE2D7A380B00D58B07 /* ProfileListModel.swift in Sources */,
 				154167942D9D33E8007E4CAA /* LabelAndTextFieldCollectionViewCell.swift in Sources */,
@@ -1333,6 +1423,7 @@
 				15FB21CA2D7531740002B576 /* ReviewersViewController.swift in Sources */,
 				154112122D56983400F248F7 /* HeaderView.swift in Sources */,
 				1532F3592D5EB297003223A1 /* InfoNavBar.swift in Sources */,
+				157F42982DB6E1E7000305D6 /* Remote.swift in Sources */,
 				156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */,
 				1562A44B2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift in Sources */,
 				154167A02D9DFA5F007E4CAA /* SettingCollectionViewSection.swift in Sources */,
@@ -1347,6 +1438,7 @@
 				15F927CF2D5AC5E50038CEB8 /* OrderCollectionViewCell.swift in Sources */,
 				15CD44C32D52A10200E58C6F /* HomeModel.swift in Sources */,
 				158A7E7A2DB52A7500B89684 /* SplashViewController.swift in Sources */,
+				157F42962DB6DE11000305D6 /* Setting.swift in Sources */,
 				154112152D56B23A00F248F7 /* CategoryCollectionViewSection.swift in Sources */,
 				15D0F5892DB67D4C00967C7F /* SuccessViewController.swift in Sources */,
 				15760D812D68A6640033BC0D /* CreditCardViewModel.swift in Sources */,
@@ -1357,6 +1449,7 @@
 				153B7FD82D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift in Sources */,
 				158B39DC2D7A85E100D58B07 /* SettingViewController.swift in Sources */,
 				15166A6F2D57AE1B00F8F35C /* CardItemCollectionViewSection.swift in Sources */,
+				157F42812DB6D979000305D6 /* RemoteError.swift in Sources */,
 				153F6A942D58FBA800317F49 /* DailyEssentailCollectionViewSection.swift in Sources */,
 				151631282D5D55DB00BA088E /* UIButton+Style.swift in Sources */,
 				15F420672DB1278B00FCDF71 /* CollectionViewSectionProtocols.swift in Sources */,
@@ -1366,6 +1459,8 @@
 				1532F3512D5E8EB5003223A1 /* InfoViewModel.swift in Sources */,
 				158B39E12D7A869F00D58B07 /* SettingHeader.swift in Sources */,
 				158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */,
+				157F429A2DB6EF4A000305D6 /* Productt.swift in Sources */,
+				157F42872DB6DAAC000305D6 /* AlamofireNetwork.swift in Sources */,
 				15CE60FB2D73C3A60032617B /* TitleReviewsCollectionReusableView.swift in Sources */,
 				153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */,
 				1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */,
@@ -1381,6 +1476,7 @@
 				15CD44AF2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift in Sources */,
 				152E8EB82D6662AF005766FB /* AlertModel.swift in Sources */,
 				157F91042D62B774005381FB /* AddAddressViewController.swift in Sources */,
+				157F429C2DB6EFBD000305D6 /* ProductRemote.swift in Sources */,
 				158B39D12D7A399E00D58B07 /* SectionDecorationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1596,6 +1692,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		157F428A2DB6DB38000305D6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 		158A7E812DB52DE500B89684 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -1615,6 +1719,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		157F428B2DB6DB38000305D6 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 157F428A2DB6DB38000305D6 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		158A7E822DB52DE500B89684 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 158A7E812DB52DE500B89684 /* XCRemoteSwiftPackageReference "lottie-ios" */;
