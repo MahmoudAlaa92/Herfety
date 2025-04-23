@@ -17,13 +17,7 @@ class HomeViewModel {
     ]
     
     @Published var categoryItems: [CategoryElement] = []
-    @Published var productItems: [ProductItem] = [
-       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry2", image: Images.jewelry, price: "$1000", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry", image: Images.jewelry2, price: "$2000", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500")
-    ]
+    @Published var productItems: [Products] = []
     
     @Published var topBrandsItems: [TopBrandsItem] = [
        .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
@@ -63,6 +57,20 @@ extension HomeViewModel {
             case .success(let categories):
                 DispatchQueue.main.async {
                     self?.categoryItems = categories
+                }
+            case .failure(let error):
+                assertionFailure("Error when fetching categories: \(error)")
+            }
+        }
+    }
+    
+    func fetchProductItems() {
+        let ProductsRemote: ProductsRemoteProtocol = ProductsRemote(network: AlamofireNetwork())
+        ProductsRemote.loadAllProducts { [weak self] result in
+            switch result {
+            case .success(let Products):
+                DispatchQueue.main.async {
+                    self?.productItems = Products
                 }
             case .failure(let error):
                 assertionFailure("Error when fetching categories: \(error)")

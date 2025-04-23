@@ -48,6 +48,7 @@ class HomeViewController: UIViewController {
 //                print("❌ Failed to load products:", error.localizedDescription)
 //            }
 //        }
+        
     }
     
     private func setUpCollectionView() {
@@ -184,8 +185,10 @@ extension HomeViewController {
     }
     // MARK: - Product Items
     private func bindProductItems() {
+        viewModel.fetchProductItems()
         viewModel.$productItems
-            .sink { [weak self] _ in
+            .sink { [weak self] newItems in
+                self?.cardItem?.productItems = newItems
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)

@@ -54,7 +54,9 @@ extension CardOfProductCollectionViewCell {
         offerProduct.font = .caption1
         offerProduct.numberOfLines = 2
         
-        nameProduct.font = .title3
+        nameProduct.font = .callout
+        nameProduct.numberOfLines = 2
+        nameProduct.lineBreakMode = .byWordWrapping
         
         priceProduct.font = .callout
         offerPrice.font = .body

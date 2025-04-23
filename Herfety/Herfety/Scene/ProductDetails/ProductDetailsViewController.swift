@@ -51,13 +51,13 @@ extension ProductDetailsViewController {
     }
     /// Sections
     private func configureSections() {
-        let imagesProducts = ProductDetailsCollectionViewSection(productItems: viewModel.productItems)
-        let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItems)
-        let recommendItems = CardItemCollectionViewSection(productItems: viewModel.recommendItems)
-        recommendItems.headerConfigurator = { header in
-            header.configure(title: "Recommended for you", description: "", shouldShowButton: false)
-        }
-        sections = [imagesProducts, reviews, recommendItems]
+//        let imagesProducts = ProductDetailsCollectionViewSection(productItems: viewModel.productItems)
+//        let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItems)
+//        let recommendItems = CardItemCollectionViewSection(productItems: viewModel.recommendItems)
+//        recommendItems.headerConfigurator = { header in
+//            header.configure(title: "Recommended for you", description: "", shouldShowButton: false)
+//        }
+//        sections = [imagesProducts, reviews, recommendItems]
         
         sections.forEach( { $0.registerCells(in: collectionView) } )
     }

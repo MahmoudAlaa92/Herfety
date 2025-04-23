@@ -10,12 +10,12 @@ import Combine
 
 class CardItemCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
-    let productItems: [ProductItem]
+    var productItems: [Products]
     var headerConfigurator: ((HeaderView) -> Void)?
-    let selectedItem = PassthroughSubject<ProductItem, Never>()
+    let selectedItem = PassthroughSubject<Products, Never>()
     
     // MARK: - Init
-    init(productItems: [ProductItem]) {
+    init(productItems: [Products]) {
         self.productItems = productItems
     }
     /// RegisterCell
@@ -31,22 +31,35 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
     }
     
     func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardOfProductCollectionViewCell.cellIdentifier, for: indexPath) as? CardOfProductCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
         let item = productItems[indexPath.item]
-        cell.imageProduct.image = item.image
         cell.nameProduct.text = item.name
-        cell.offerPrice.text = item.discountPrice
-        cell.priceProduct.text = item.price
-        cell.offerProduct.text = " \(item.offerPrice)\nOFF"
-        cell.savePrice.text = item.savePrice
+        cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))
+        
+        var price = item.price ?? 0
+        var offer = item.offerPrice ?? 0
+        let discount = (Double(offer) / 100.0) * Double(price)
+        let finalPrice = Double(price) + discount
+        
+        cell.offerPrice.text = "$" + String(format: "%.2f", finalPrice)
+
+        cell.offerProduct.text = "\(Int(item.offerPrice ?? 0))%\nOFF"
+        price = item.price ?? 0
+        offer = item.offerPrice ?? 0
+        let savedAmount = (Double(offer) / 100.0) * Double(price)
+        cell.savePrice.text = "Save $" + String(format: "%.2f", savedAmount)
+        cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
+
         
         // TODO: handle Dry principle here
-        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
-        cell.configureProduct(with: wishlistItem)
-        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
-        cell.configureOrder(with: orderItem)
+//        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
+//        cell.configureProduct(with: wishlistItem)
+//        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
+//        cell.configureOrder(with: orderItem)
         return cell
     }
 }
