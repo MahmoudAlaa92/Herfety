@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct CategryItem {
-    let name: String
-    let image: UIImage
-}
+//struct CategoryElement {
+//    let name: String
+//    let image: UIImage
+//}

@@ -11,10 +11,10 @@ import Combine
 class CategoryCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
-    let categoryItems: [CategryItem]
-    let categorySelection = PassthroughSubject<CategryItem, Never>()
+    var categoryItems: [CategoryElement]
+    let categorySelection = PassthroughSubject<CategoryElement, Never>()
     // MARK: - Init
-    init(categoryItems: [CategryItem]) {
+    init(categoryItems: [CategoryElement]) {
         self.categoryItems = categoryItems
     }
     /// Register cell
@@ -38,8 +38,13 @@ class CategoryCollectionViewSection: CollectionViewDataSource {
         }
         
         let item = categoryItems[indexPath.item]
-        cell.imageOfCategory.image = item.image
         cell.nameOfCategory.text = item.name
+        if let imageUrl = item.icon {
+            cell.imageOfCategory.setImage(with: imageUrl, placeholderImage: Images.loading)
+        } else{
+            cell.imageOfCategory.image = Images.loading
+        }
+
         return cell
     }
 }

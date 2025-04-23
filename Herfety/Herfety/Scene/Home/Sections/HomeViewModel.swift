@@ -16,17 +16,7 @@ class HomeViewModel {
         .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
     ]
     
-    @Published var categoryItems: [CategryItem] = [
-       .init(name: "Jewelry", image: Images.jewelry),
-       .init(name: "Offers", image: Images.offers),
-       .init(name: "Home Décor", image: Images.homeDecore),
-       .init(name: "Fashion & Textiles", image: Images.fashion),
-       .init(name: "Jewelry", image: Images.jewelry),
-       .init(name: "Jewelry", image: Images.jewelry),
-       .init(name: "Jewelry", image: Images.jewelry),
-       .init(name: "Jewelry", image: Images.jewelry),
-    ]
-    
+    @Published var categoryItems: [CategoryElement] = []
     @Published var productItems: [ProductItem] = [
        .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
        .init(name: "Jewelry2", image: Images.jewelry, price: "$1000", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
@@ -61,5 +51,22 @@ class HomeViewModel {
         case .none: return 0
         }
     }
-    
+}
+
+// MARK: - Fetching
+//
+extension HomeViewModel {
+    func fetchCategoryItems() {
+        let catergoryRemote: CategoryRemoteProtocol = CategoryRemote(network: AlamofireNetwork())
+        catergoryRemote.loadAllCategories { [weak self] result in
+            switch result {
+            case .success(let categories):
+                DispatchQueue.main.async {
+                    self?.categoryItems = categories
+                }
+            case .failure(let error):
+                assertionFailure("Error when fetching categories: \(error)")
+            }
+        }
+    }
 }
