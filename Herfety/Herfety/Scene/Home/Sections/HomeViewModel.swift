@@ -21,16 +21,17 @@ class HomeViewModel {
     @Published var productItems: [Products] = []
     
     @Published var topBrandsItems: [TopBrandsItem] = [
-       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+        .init(name: "Leath", image: Images.artLogo, logo: Images.sliderImage1, offer: "UP to 50% OFF"),
+       .init(name: "Rhine", image: Images.tradeLogo, logo: Images.imageOfArt, offer: "UP to 60% OFF"),
+        .init(name: "Handmade", image: Images.logo, logo: Images.chain, offer: "UP to 70% OFF"),
+        .init(name: "Organ", image: Images.artLogo, logo: Images.imageOfArt2, offer: "UP to 80% OFF"),
     ]
     
     @Published var dailyEssentailItems: [DailyEssentialyItem] = [
-       .init(image: Images.homeDecore, name: "Home Décor ", offer: "UP to 50% OFF"),
-       .init(image: Images.art, name: "Art & Collectibles ", offer: "UP to 30% OFF"),
-       .init(image: Images.craft, name: "Kids’ Crafts & Toys ", offer: "UP to 10% OFF"),
+        .init(image: Images.homeDecore, name: "Home Décor ", offer: "UP to 50% OFF"),
+        .init(image: Images.art, name: "Art & Collectibles ", offer: "UP to 60% OFF"),
+        .init(image: Images.craft, name: "Handmade Materials: crepe", offer: "UP to 70% OFF"),
+        .init(image: Images.fashion, name: "Kids’ Crafts & Toys ", offer: "UP to 80% OFF"),
     ]
     
     func numberOfSections() -> Int {
@@ -51,6 +52,7 @@ class HomeViewModel {
 // MARK: - Fetching
 //
 extension HomeViewModel {
+    // MARK:  Categories
     func fetchCategoryItems() {
         let catergoryRemote: CategoryRemoteProtocol = CategoryRemote(network: AlamofireNetwork())
         catergoryRemote.loadAllCategories { [weak self] result in
@@ -64,7 +66,7 @@ extension HomeViewModel {
             }
         }
     }
-    
+    // MARK: Products
     func fetchProductItems() {
         let ProductsRemote: ProductsRemoteProtocol = ProductsRemote(network: AlamofireNetwork())
         ProductsRemote.loadAllProducts { [weak self] result in

@@ -12,7 +12,7 @@ class DailyEssentailCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
     let dailyEssentail: [DailyEssentialyItem]
-    let selectedItem: PassthroughSubject<DailyEssentialyItem, Never> = .init()
+    let selectedItem: PassthroughSubject<(DailyEssentialyItem, Int), Never> = .init()
     // MARK: - Init
     init(dailyEssentail: [DailyEssentialyItem]) {
         self.dailyEssentail = dailyEssentail
@@ -66,7 +66,7 @@ extension DailyEssentailCollectionViewSection: HeaderAndFooterProvider {
 extension DailyEssentailCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = dailyEssentail[indexPath.item]
-        selectedItem.send(item)
+        selectedItem.send((item, indexPath.row))
     }
 }
 // MARK: - Layout

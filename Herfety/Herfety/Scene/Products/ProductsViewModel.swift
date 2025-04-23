@@ -15,6 +15,7 @@ class ProductsViewModel {
 // MARK: - Handlers
 //
 extension ProductsViewModel {
+    // MARK: Products of SliderItems & DailyEssential (10% to 80%)
     func fetchProductItems(discount: Int) {
         let productItems: OfferRemoteProtocol = OfferRemote(network: AlamofireNetwork())
         productItems.loadSpecificOffer(disount: discount) { [weak self] result in

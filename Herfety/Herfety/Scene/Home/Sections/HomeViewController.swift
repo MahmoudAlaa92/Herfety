@@ -163,9 +163,9 @@ extension HomeViewController {
                 self?.collectionView.reloadData()
             }.store(in: &subscriptions)
         ///
-        sliderItem?.selectedItem.sink { [weak self] sliderItem in
+        sliderItem?.selectedItem.sink { [weak self] sliderItems in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
-            vc.viewModel.fetchProductItems(discount: (sliderItem.1+1)*10)
+            vc.viewModel.fetchProductItems(discount: (sliderItems.1+1)*10)
             self?.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
     }
@@ -207,8 +207,9 @@ extension HomeViewController {
             }
             .store(in: &subscriptions)
         ///
-        topBrandItem?.selectedBrand.sink(receiveValue: { [weak self] value in
+        topBrandItem?.selectedBrand.sink(receiveValue: { [weak self] items in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
+            vc.viewModel.fetchProductItems(discount: (items.1+5)*10)
             self?.navigationController?.pushViewController(vc, animated: true)
         }).store(in: &subscriptions)
     }
@@ -220,8 +221,9 @@ extension HomeViewController {
             }
             .store(in: &subscriptions)
         ///
-        dailyEssentialItem?.selectedItem.sink(receiveValue: { [weak self] value in
+        dailyEssentialItem?.selectedItem.sink(receiveValue: { [weak self] items in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
+            vc.viewModel.fetchProductItems(discount: (items.1+5)*10)
             self?.navigationController?.pushViewController(vc, animated: true)
         }).store(in: &subscriptions)
     }
