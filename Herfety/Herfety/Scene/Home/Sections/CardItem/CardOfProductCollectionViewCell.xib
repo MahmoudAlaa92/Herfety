@@ -83,10 +83,10 @@
                                         </constraints>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uqe-kQ-Ve7">
-                                        <rect key="frame" x="106.66666666666669" y="35" width="60" height="60"/>
+                                        <rect key="frame" x="106.66666666666669" y="35" width="60" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="cRw-sQ-6dN"/>
-                                            <constraint firstAttribute="height" constant="60" id="hiO-zy-3RC"/>
+                                            <constraint firstAttribute="height" constant="90" id="hiO-zy-3RC"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -94,7 +94,6 @@
                                 <constraints>
                                     <constraint firstItem="w1P-Rf-bcw" firstAttribute="top" secondItem="ROg-EM-5pa" secondAttribute="top" id="2sH-26-nJI"/>
                                     <constraint firstItem="uqe-kQ-Ve7" firstAttribute="centerX" secondItem="ROg-EM-5pa" secondAttribute="centerX" id="AwX-QF-Zmd"/>
-                                    <constraint firstItem="uqe-kQ-Ve7" firstAttribute="centerY" secondItem="ROg-EM-5pa" secondAttribute="centerY" id="H2H-6z-FK1"/>
                                     <constraint firstAttribute="height" constant="130" id="YJB-tp-au6"/>
                                     <constraint firstItem="ghn-qi-HdU" firstAttribute="leading" secondItem="ROg-EM-5pa" secondAttribute="leading" id="oYw-AW-PPs"/>
                                     <constraint firstItem="ghn-qi-HdU" firstAttribute="top" secondItem="ROg-EM-5pa" secondAttribute="top" id="sfy-oZ-Th0"/>
@@ -162,6 +161,7 @@
                             <constraint firstItem="ROg-EM-5pa" firstAttribute="top" secondItem="J4N-ff-2V6" secondAttribute="top" id="EaA-r0-yrr"/>
                             <constraint firstItem="ROg-EM-5pa" firstAttribute="leading" secondItem="J4N-ff-2V6" secondAttribute="leading" id="FoW-zh-pcx"/>
                             <constraint firstAttribute="bottom" secondItem="Q6S-j0-DjQ" secondAttribute="bottom" id="Gy3-F8-oed"/>
+                            <constraint firstItem="Q6S-j0-DjQ" firstAttribute="top" secondItem="uqe-kQ-Ve7" secondAttribute="bottom" constant="5" id="axa-8l-Kr2"/>
                             <constraint firstItem="Q6S-j0-DjQ" firstAttribute="leading" secondItem="J4N-ff-2V6" secondAttribute="leading" id="v0R-NG-dIX"/>
                             <constraint firstAttribute="trailing" secondItem="Q6S-j0-DjQ" secondAttribute="trailing" id="vl4-95-NPN"/>
                         </constraints>
