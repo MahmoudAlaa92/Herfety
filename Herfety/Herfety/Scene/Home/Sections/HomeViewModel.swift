@@ -11,9 +11,10 @@ import Combine
 class HomeViewModel {
     
     @Published var sliderItems: [SliderItem] = [
-        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
-        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
-        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
+        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 10% OFF", image: Images.sliderImage1),
+        .init(name: "Own Style, Own Story", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 20% OFF", image: Images.chain),
+        .init(name: "Dress Bold, Live True", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 30% OFF", image: Images.imageOfArt),
+        .init(name: "Be Unique, Be You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 40% OFF", image: Images.jewelry)
     ]
     
     @Published var categoryItems: [CategoryElement] = []

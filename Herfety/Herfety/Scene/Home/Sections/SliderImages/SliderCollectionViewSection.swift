@@ -10,7 +10,7 @@ import Combine
 class SliderCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
     private let sliderItems: [SliderItem]
-    let selectedItem = PassthroughSubject<SliderItem, Never>()
+    let selectedItem = PassthroughSubject<(SliderItem, Int), Never>()
     // MARK: - Init
     init(sliderItems: [SliderItem]) {
         self.sliderItems = sliderItems
@@ -36,7 +36,7 @@ class SliderCollectionViewSection: CollectionViewDataSource {
 //
 extension SliderCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedItem.send(sliderItems[indexPath.item])
+        selectedItem.send((sliderItems[indexPath.item], indexPath.row))
     }
 }
 // MARK: - Layout

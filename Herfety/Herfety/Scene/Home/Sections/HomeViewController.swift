@@ -165,6 +165,7 @@ extension HomeViewController {
         ///
         sliderItem?.selectedItem.sink { [weak self] sliderItem in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
+            vc.viewModel.fetchProductItems(discount: (sliderItem.1+1)*10)
             self?.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
     }

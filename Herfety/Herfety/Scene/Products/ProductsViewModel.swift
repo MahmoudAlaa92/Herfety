@@ -6,14 +6,24 @@
 //
 
 import UIKit
+import Combine
 
 class ProductsViewModel {
-    
-    var productItems: [ProductItem] = [
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-    ]
+    // MARK: - Properties
+    @Published var productItems: [Offer] = []
+}
+// MARK: - Handlers
+//
+extension ProductsViewModel {
+    func fetchProductItems(discount: Int) {
+        let productItems: OfferRemoteProtocol = OfferRemote(network: AlamofireNetwork())
+        productItems.loadSpecificOffer(disount: discount) { [weak self] result in
+            switch result {
+            case .success(let offers):
+                    self?.productItems = offers
+            case .failure(let error):
+                assertionFailure("Error when reteive productIetms in ProductsViewModel \(error)")
+            }
+        }
+    }
 }

@@ -10,11 +10,11 @@ import Combine
 
 class ProductsCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
-    let Products: [ProductItem]
-    let selectedItem = PassthroughSubject<ProductItem, Never>()
+    var Products: [Offer]
+    let selectedItem = PassthroughSubject<Offer, Never>()
     
     // MARK: - Init
-    init(Products: [ProductItem]) {
+    init(Products: [Offer]) {
         self.Products = Products
     }
     func registerCells(in collectionView: UICollectionView) {
@@ -27,18 +27,38 @@ class ProductsCollectionViewSection: CollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardOfProductCollectionViewCell.cellIdentifier, for: indexPath) as? CardOfProductCollectionViewCell else {
             return UICollectionViewCell()
         }
+        // TODO: Handle DRY Principle for this part
         let item = Products[indexPath.item]
         cell.nameProduct.text = item.name
-        cell.imageProduct.image = item.image
-        cell.offerProduct.text = "\(item.offerPrice)\nOFF"
-        cell.offerPrice.text = item.discountPrice
-        cell.priceProduct.text = item.price
-        cell.savePrice.text = item.savePrice
-        // TODO: handle Dry principle here
-        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
-        cell.configureProduct(with: wishlistItem)
-        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
-        cell.configureOrder(with: orderItem)
+        cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))
+        
+        var price = item.price ?? 0
+        var offer = item.offerPrice ?? 0
+        let discount = (Double(offer) / 100.0) * Double(price)
+        let finalPrice = Double(price) + discount
+        
+        cell.offerPrice.text = "$" + String(format: "%.2f", finalPrice)
+
+        cell.offerProduct.text = "\(Int(item.offerPrice ?? 0))%\nOFF"
+        price = item.price ?? 0
+        offer = item.offerPrice ?? 0
+        let savedAmount = (Double(offer) / 100.0) * Double(price)
+        cell.savePrice.text = "Save $" + String(format: "%.2f", savedAmount)
+        cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
+//        cell.nameProduct.text = item.name
+//        if let imageUrl = item.thumbImage {
+//            cell.imageProduct.setImage(with: imageUrl, placeholderImage: Images.loading)
+//        }
+//        cell.offerProduct.text = "\(Int(item.offerPrice ?? 0) )%\nOFF"
+//        cell.offerPrice.text = "$\(item.offerPrice ?? 0)"
+//        cell.priceProduct.text = "$\(item.price ?? 0)"
+//        cell.savePrice.text = "\(item.offerPrice ?? 0)"
+        
+//        // TODO: handle Dry principle here
+//        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
+//        cell.configureProduct(with: wishlistItem)
+//        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
+//        cell.configureOrder(with: orderItem)
         return cell
     }
 }
@@ -58,7 +78,7 @@ struct ProductsCollectionViewSectionLayout: LayoutSectionProvider {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(200))
+                                               heightDimension: .absolute(220))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         
