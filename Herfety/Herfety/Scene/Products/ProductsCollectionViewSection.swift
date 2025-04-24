@@ -10,11 +10,11 @@ import Combine
 
 class ProductsCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
-    var Products: [Offer]
-    let selectedItem = PassthroughSubject<Offer, Never>()
+    var Products: [Products]
+    let selectedItem = PassthroughSubject<Products, Never>()
     
     // MARK: - Init
-    init(Products: [Offer]) {
+    init(Products: [Products]) {
         self.Products = Products
     }
     func registerCells(in collectionView: UICollectionView) {

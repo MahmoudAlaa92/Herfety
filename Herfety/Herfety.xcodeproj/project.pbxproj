@@ -87,7 +87,6 @@
 		157F42942DB6DDEF000305D6 /* RemoteErrorValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42932DB6DDEF000305D6 /* RemoteErrorValidator.swift */; };
 		157F42962DB6DE11000305D6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42952DB6DE11000305D6 /* Setting.swift */; };
 		157F42982DB6E1E7000305D6 /* Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42972DB6E1E7000305D6 /* Remote.swift */; };
-		157F429A2DB6EF4A000305D6 /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F42992DB6EF4A000305D6 /* Offer.swift */; };
 		157F429C2DB6EFBD000305D6 /* OfferRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F429B2DB6EFBD000305D6 /* OfferRemote.swift */; };
 		157F91032D62B774005381FB /* AddAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157F91022D62B774005381FB /* AddAddressViewController.xib */; };
 		157F91042D62B774005381FB /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F91012D62B774005381FB /* AddAddressViewController.swift */; };
@@ -270,7 +269,6 @@
 		157F42932DB6DDEF000305D6 /* RemoteErrorValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteErrorValidator.swift; sourceTree = "<group>"; };
 		157F42952DB6DE11000305D6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		157F42972DB6E1E7000305D6 /* Remote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Remote.swift; sourceTree = "<group>"; };
-		157F42992DB6EF4A000305D6 /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
 		157F429B2DB6EFBD000305D6 /* OfferRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferRemote.swift; sourceTree = "<group>"; };
 		157F91012D62B774005381FB /* AddAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
 		157F91022D62B774005381FB /* AddAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAddressViewController.xib; sourceTree = "<group>"; };
@@ -681,9 +679,8 @@
 		157F427F2DB6D964000305D6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				157F42992DB6EF4A000305D6 /* Offer.swift */,
-				1599B8972DB85F5A00A48510 /* Category.swift */,
 				1599B89D2DB86D4800A48510 /* Products.swift */,
+				1599B8972DB85F5A00A48510 /* Category.swift */,
 				157F42802DB6D979000305D6 /* RemoteError.swift */,
 			);
 			path = Models;
@@ -1483,7 +1480,6 @@
 				1532F3512D5E8EB5003223A1 /* InfoViewModel.swift in Sources */,
 				158B39E12D7A869F00D58B07 /* SettingHeader.swift in Sources */,
 				158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */,
-				157F429A2DB6EF4A000305D6 /* Offer.swift in Sources */,
 				157F42872DB6DAAC000305D6 /* AlamofireNetwork.swift in Sources */,
 				15CE60FB2D73C3A60032617B /* TitleReviewsCollectionReusableView.swift in Sources */,
 				153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */,

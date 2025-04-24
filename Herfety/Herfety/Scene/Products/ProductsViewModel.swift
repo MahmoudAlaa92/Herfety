@@ -9,7 +9,7 @@ import Combine
 
 class ProductsViewModel {
     // MARK: - Properties
-    @Published var productItems: [Offer] = []
+    @Published var productItems: [Products] = []
 }
 // MARK: - Handlers
 //

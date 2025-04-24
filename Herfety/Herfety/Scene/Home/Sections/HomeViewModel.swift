@@ -66,6 +66,7 @@ extension HomeViewModel {
             }
         }
     }
+    // TODO: change the Dispatch queue here for UI
     // MARK: Products
     func fetchProductItems() {
         let ProductsRemote: ProductsRemoteProtocol = ProductsRemote(network: AlamofireNetwork())

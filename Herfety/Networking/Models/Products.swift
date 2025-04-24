@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 23/04/2025.
 //
-
 import Foundation
 
 // MARK: - Product
@@ -33,6 +32,83 @@ struct Products: Codable {
         case couponID = "couponId"
         case qty, shortDescription, longDescription, sku, price, offerPrice, offerStartDate, offerEndDate, productType, isApproved, seoTitle, seoDescription, createdAt, updatedAt, brand, category, coupon, cartItems, carts, productImagesGallery, productReviews, wishList, users, adminProducts, admins, vendors, vendorProducts, orders, ordersProducts
     }
+    init(
+           id: Int? = nil,
+           name: String? = nil,
+           slug: String? = nil,
+           thumbImage: String? = nil,
+           vendorID: Int? = nil,
+           categoryID: Int? = nil,
+           brandID: Int? = nil,
+           couponID: JSONNull? = nil,
+           qty: Int? = nil,
+           shortDescription: String? = nil,
+           longDescription: String? = nil,
+           sku: String? = nil,
+           price: Double? = nil,
+           offerPrice: Double? = nil,
+           offerStartDate: String? = nil,
+           offerEndDate: String? = nil,
+           productType: String? = nil,
+           isApproved: Int? = nil,
+           seoTitle: String? = nil,
+           seoDescription: String? = nil,
+           createdAt: String? = nil,
+           updatedAt: String? = nil,
+           brand: JSONNull? = nil,
+           category: JSONNull? = nil,
+           coupon: JSONNull? = nil,
+           cartItems: [JSONAny]? = nil,
+           carts: [JSONAny]? = nil,
+           productImagesGallery: [JSONAny]? = nil,
+           productReviews: [JSONAny]? = nil,
+           wishList: [JSONAny]? = nil,
+           users: [JSONAny]? = nil,
+           adminProducts: [JSONAny]? = nil,
+           admins: [JSONAny]? = nil,
+           vendors: [JSONAny]? = nil,
+           vendorProducts: [JSONAny]? = nil,
+           orders: [JSONAny]? = nil,
+           ordersProducts: [JSONAny]? = nil
+       ) {
+           self.id = id
+           self.name = name
+           self.slug = slug
+           self.thumbImage = thumbImage
+           self.vendorID = vendorID
+           self.categoryID = categoryID
+           self.brandID = brandID
+           self.couponID = couponID
+           self.qty = qty
+           self.shortDescription = shortDescription
+           self.longDescription = longDescription
+           self.sku = sku
+           self.price = price
+           self.offerPrice = offerPrice
+           self.offerStartDate = offerStartDate
+           self.offerEndDate = offerEndDate
+           self.productType = productType
+           self.isApproved = isApproved
+           self.seoTitle = seoTitle
+           self.seoDescription = seoDescription
+           self.createdAt = createdAt
+           self.updatedAt = updatedAt
+           self.brand = brand
+           self.category = category
+           self.coupon = coupon
+           self.cartItems = cartItems
+           self.carts = carts
+           self.productImagesGallery = productImagesGallery
+           self.productReviews = productReviews
+           self.wishList = wishList
+           self.users = users
+           self.adminProducts = adminProducts
+           self.admins = admins
+           self.vendors = vendors
+           self.vendorProducts = vendorProducts
+           self.orders = orders
+           self.ordersProducts = ordersProducts
+       }
 }
 
 class JSONCodingKey: CodingKey {
@@ -52,6 +128,31 @@ class JSONCodingKey: CodingKey {
 
     var stringValue: String {
             return key
+    }
+}
+// MARK: - Encode/decode helpers
+class JSONNull: Codable, Hashable {
+    
+    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
+        return true
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(0)
+    }
+    
+    public init() {}
+    
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if !container.decodeNil() {
+            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encodeNil()
     }
 }
 
