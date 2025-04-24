@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 22/02/2025.
 //
-
 import UIKit
 import Combine
 
@@ -24,6 +23,19 @@ extension ProductsViewModel {
                     self?.productItems = offers
             case .failure(let error):
                 assertionFailure("Error when reteive productIetms in ProductsViewModel \(error)")
+            }
+        }
+    }
+    // MARK: Products of Categories
+    func fetchProductItems(nameOfCategory: String) {
+        let productItems: GetProductsOfCategoryRemote = GetProductsOfCategoryRemote(network: AlamofireNetwork())
+        productItems.loadAllProducts(name: nameOfCategory) { result in
+            switch result {
+            case.success(let products):
+                print(products)
+                self.productItems = products
+            case .failure(let error):
+                print(error)
             }
         }
     }

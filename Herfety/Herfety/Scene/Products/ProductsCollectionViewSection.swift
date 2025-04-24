@@ -45,14 +45,6 @@ class ProductsCollectionViewSection: CollectionViewDataSource {
         let savedAmount = (Double(offer) / 100.0) * Double(price)
         cell.savePrice.text = "Save $" + String(format: "%.2f", savedAmount)
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
-//        cell.nameProduct.text = item.name
-//        if let imageUrl = item.thumbImage {
-//            cell.imageProduct.setImage(with: imageUrl, placeholderImage: Images.loading)
-//        }
-//        cell.offerProduct.text = "\(Int(item.offerPrice ?? 0) )%\nOFF"
-//        cell.offerPrice.text = "$\(item.offerPrice ?? 0)"
-//        cell.priceProduct.text = "$\(item.price ?? 0)"
-//        cell.savePrice.text = "\(item.offerPrice ?? 0)"
         
 //        // TODO: handle Dry principle here
 //        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)

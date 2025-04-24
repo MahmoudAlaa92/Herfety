@@ -179,8 +179,9 @@ extension HomeViewController {
             }
             .store(in: &subscriptions)
         ///
-        categoryItem?.categorySelection.sink { [weak self] value in
+        categoryItem?.categorySelection.sink { [weak self] item in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
+            vc.viewModel.fetchProductItems(nameOfCategory: item.name ?? "")
             self?.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
     }

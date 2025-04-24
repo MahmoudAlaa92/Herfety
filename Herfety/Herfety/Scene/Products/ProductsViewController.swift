@@ -98,11 +98,12 @@ extension ProductsViewController: UICollectionViewDelegate {
 //
 extension ProductsViewController {
     private func bindViewModel() {
-        viewModel.$productItems.sink { [weak self] newItems in
-            self?.productsItems?.Products = newItems
-            self?.collectionView.reloadData()
-        }.store(in: &subscriptions)
+        viewModel.$productItems
+            .receive(on: DispatchQueue.main)
+            .sink{ [weak self] newItems in
+                self?.productsItems?.Products = newItems
+                self?.collectionView.reloadData()
+            }.store(in: &subscriptions)
     }
 }
-
 #warning("Dispatch .recieving in mian thread to referch tht uit in all home Attend")
