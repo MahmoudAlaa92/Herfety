@@ -5,33 +5,38 @@
 //  Created by Mahmoud Alaa on 27/02/2025.
 //
 import UIKit
+import Combine
 
 class ProductDetailsViewController: UIViewController {
-    
     // MARK: - Properties
     //
     @IBOutlet weak var collectionView: UICollectionView!
     ///
-    private var viewModel: ProductDetailsViewModel
+    private(set) var viewModel: ProductDetailsViewModel
     private var sections: [CollectionViewDataSource] = []
     private var layoutSections: [LayoutSectionProvider] = []
     private var navBarBehavior: InfoNavBar?
+    private var productDetialsSection: ProductDetailsCollectionViewSection?
+    private var reviewDetailsSection: ReviewCollectionViewSection?
+    private var recommendedProductsSection: CardItemCollectionViewSection?
+    ///
+    private var subscriptions = Set<AnyCancellable>()
     // MARK: - Init
     init(viewModel:  ProductDetailsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
         setUpCollectionView()
         configureSections()
         configureLayoutSections()
+        bindViewModel()
     }
 }
 // MARK: - Configuration
@@ -41,7 +46,7 @@ extension ProductDetailsViewController {
     private func setUpNavigationBar() {
         navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
         navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
-            /// don't add plus button in loginVC
+            /// don't add plus button in VC
         }, showRighBtn: false)
     }
     /// CollectoinView
@@ -51,13 +56,19 @@ extension ProductDetailsViewController {
     }
     /// Sections
     private func configureSections() {
-//        let imagesProducts = ProductDetailsCollectionViewSection(productItems: viewModel.productItems)
-//        let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItems)
-//        let recommendItems = CardItemCollectionViewSection(productItems: viewModel.recommendItems)
-//        recommendItems.headerConfigurator = { header in
-//            header.configure(title: "Recommended for you", description: "", shouldShowButton: false)
-//        }
-//        sections = [imagesProducts, reviews, recommendItems]
+        let productDetials = ProductDetailsCollectionViewSection(productItems: viewModel.productItem)
+        self.productDetialsSection = productDetials
+        
+        let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItem)
+        self.reviewDetailsSection = reviews
+        
+        let recommendItems = CardItemCollectionViewSection(productItems: viewModel.recommendItems)
+        self.recommendedProductsSection = recommendItems
+        
+        recommendItems.headerConfigurator = { header in
+            header.configure(title: "Recommended for you", description: "", shouldShowButton: false)
+        }
+        sections = [productDetials, reviews, recommendItems]
         
         sections.forEach( { $0.registerCells(in: collectionView) } )
     }
@@ -99,5 +110,36 @@ extension ProductDetailsViewController: UICollectionViewDataSource {
 }
 // MARK: - UICollectionViewDelegate
 //
-extension ProductDetailsViewController:  UICollectionViewDelegate {}
-
+extension ProductDetailsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectable = sections[indexPath.section] as? CollectionViewDelegate {
+            selectable.collectionView(collectionView, didSelectItemAt: indexPath)
+        }
+    }
+}
+// MARK: - Binding ViewModel
+//
+extension ProductDetailsViewController {
+    func bindViewModel() {
+        viewModel.$productItem.sink { _ in
+            self.collectionView.reloadData()
+        }.store(in: &subscriptions)
+        
+        /// recommended items
+        viewModel.$recommendItems
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newItems in
+            self?.recommendedProductsSection?.productItems = newItems
+            self?.collectionView.reloadData()
+        }.store(in: &subscriptions)
+        /// selected her
+        recommendedProductsSection?.selectedItem.sink(receiveValue: { [weak self] value in
+            let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
+            vc.viewModel.productItem = value
+            vc.viewModel.fetchProductItems()
+            
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).store(in: &subscriptions)
+    }
+    
+}

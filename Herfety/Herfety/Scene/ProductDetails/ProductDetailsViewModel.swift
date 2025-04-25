@@ -12,10 +12,10 @@ class ProductDetailsViewModel {
     
     @Published var reviewsItems: [Review] = [
         Review(comment: "This Is Good", image: Images.profilePhoto),
-        Review(comment: "This Is Good", image: Images.profilePhoto)
+        Review(comment: "This Is Great", image: Images.profilePhoto)
     ]
     
-   @Published  var recommendItems: [Products] = []
+    @Published  var recommendItems: [Products] = []
 }
 // MARK: - Handlers
 extension ProductDetailsViewModel {

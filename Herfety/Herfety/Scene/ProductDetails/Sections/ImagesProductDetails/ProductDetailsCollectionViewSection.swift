@@ -4,14 +4,13 @@
 //
 //  Created by Mahmoud Alaa on 28/02/2025.
 //
-
 import UIKit
 
 class ProductDetailsCollectionViewSection: CollectionViewDataSource {
     
-    let productItems: Product
+    var productItems: Products
     
-    init(productItems: Product) {
+    init(productItems: Products) {
         self.productItems = productItems
     }
     
@@ -25,16 +24,15 @@ class ProductDetailsCollectionViewSection: CollectionViewDataSource {
     }
     
     var numberOfItems: Int {
-        return productItems.image.count
+        return 1
     }
     
     func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesProductDetailsCollectionViewCell.identifier, for: indexPath) as? ImagesProductDetailsCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
-        cell.imageProduct.image = productItems.image[indexPath.row]
-        cell.indexProduct.text = "\(indexPath.row+1)/\(productItems.image.count)"
+        cell.imageProduct.setImage(with: productItems.thumbImage ?? "", placeholderImage: Images.loading)
+        cell.indexProduct.text = "1/1"
         return cell
     }
 }
@@ -84,7 +82,10 @@ extension ProductDetailsCollectionViewSection: HeaderAndFooterProvider {
             ofKind: kind,
             withReuseIdentifier: TitleProductDetails.identifier,
             for: indexPath) as? TitleProductDetails {
-            header.configure(titleLabl: "Elegance Shades", priceLabel: "L.E65,000", avaliableLabel: "Avaliable in stok")
+            header.configure(
+                titleLabl: productItems.name ?? "",
+                priceLabel: "$" + String(format: "%.2f", productItems.price ?? 0.0),
+                avaliableLabel:  (productItems.qty != nil && productItems.qty ?? 0 > 0) ? "Avaliable in stok" : "Not Avaliable")
             return header
         }
         else if kind == DescriptionProductDetails.identifier,
@@ -92,7 +93,7 @@ extension ProductDetailsCollectionViewSection: HeaderAndFooterProvider {
                     ofKind: kind,
                     withReuseIdentifier: DescriptionProductDetails.identifier,
                     for: indexPath) as? DescriptionProductDetails {
-            footer.configure(descriptionLabel: productItems.description)
+            footer.configure(descriptionLabel: productItems.longDescription ?? "")
             return footer
         }
         return UICollectionReusableView()

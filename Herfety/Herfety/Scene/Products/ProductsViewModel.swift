@@ -33,7 +33,9 @@ extension ProductsViewModel {
             switch result {
             case.success(let products):
                 print(products)
-                self.productItems = products
+                DispatchQueue.main.async {
+                    self.productItems = products
+                }
             case .failure(let error):
                 print(error)
             }

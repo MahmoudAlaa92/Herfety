@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 08/02/2025.
 //
-
 import UIKit
 import Combine
 
@@ -12,7 +11,7 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
     var productItems: [Products]
     var headerConfigurator: ((HeaderView) -> Void)?
-    let selectedItem = PassthroughSubject<Products, Never>()
+    var selectedItem = PassthroughSubject<Products, Never>()
     
     // MARK: - Init
     init(productItems: [Products]) {
