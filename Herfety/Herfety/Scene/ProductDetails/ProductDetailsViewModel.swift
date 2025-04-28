@@ -8,25 +8,28 @@
 import Foundation
 
 class ProductDetailsViewModel {
-    var productItems: Product =
-    Product(image: [Images.chain, Images.jewelry, Images.fashion],
-            name: "Jewelary",
-            price: "$200.00",
-            review: 20,
-            reviewCount: 108,
-            rating: 4.0,
-            availableCount: 100)
+    @Published var productItem: Products = Products()
     
-    var reviewsItems: [Review] = [
+    @Published var reviewsItems: [Review] = [
         Review(comment: "This Is Good", image: Images.profilePhoto),
-        Review(comment: "This Is Good", image: Images.profilePhoto)
+        Review(comment: "This Is Great", image: Images.profilePhoto)
     ]
     
-    var recommendItems: [ProductItem] = [
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-        ProductItem(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500")
-    ]
+    @Published  var recommendItems: [Products] = []
+}
+// MARK: - Handlers
+extension ProductDetailsViewModel {
+    func fetchProductItems() {
+        let ProductsRemote: ProductsRemoteProtocol = ProductsRemote(network: AlamofireNetwork())
+        ProductsRemote.loadAllProducts { [weak self] result in
+            switch result {
+            case .success(let Products):
+                DispatchQueue.main.async {
+                    self?.recommendItems = Products
+                }
+            case .failure(let error):
+                assertionFailure("Error when fetching categories: \(error)")
+            }
+        }
+    }
 }

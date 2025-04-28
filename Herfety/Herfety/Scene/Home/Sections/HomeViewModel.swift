@@ -11,41 +11,27 @@ import Combine
 class HomeViewModel {
     
     @Published var sliderItems: [SliderItem] = [
-        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
-        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
-        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 80% OFF", image: Images.sliderImage1),
+        .init(name: "Wear Art, Wear You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 10% OFF", image: Images.sliderImage1),
+        .init(name: "Own Style, Own Story", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 20% OFF", image: Images.chain),
+        .init(name: "Dress Bold, Live True", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 30% OFF", image: Images.imageOfArt),
+        .init(name: "Be Unique, Be You", description: "Discover Unique Handmade Treasures for Your Journey!", offer: "UP to 40% OFF", image: Images.jewelry)
     ]
     
-    @Published var categoryItems: [CategryItem] = [
-       .init(name: "Jewelry", image: Images.jewelry),
-       .init(name: "Offers", image: Images.offers),
-       .init(name: "Home Décor", image: Images.homeDecore),
-       .init(name: "Fashion & Textiles", image: Images.fashion),
-       .init(name: "Jewelry", image: Images.jewelry),
-       .init(name: "Jewelry", image: Images.jewelry),
-       .init(name: "Jewelry", image: Images.jewelry),
-       .init(name: "Jewelry", image: Images.jewelry),
-    ]
-    
-    @Published var productItems: [ProductItem] = [
-       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry2", image: Images.jewelry, price: "$1000", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry", image: Images.jewelry2, price: "$2000", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500"),
-       .init(name: "Jewelry", image: Images.chain, price: "$10499", discountPrice: "$14999", offerPrice: "30%", savePrice: "Save - $4500")
-    ]
+    @Published var categoryItems: [CategoryElement] = []
+    @Published var productItems: [Products] = []
     
     @Published var topBrandsItems: [TopBrandsItem] = [
-       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
-       .init(name: "Art Fire", image: Images.artLogo, logo: Images.imageOfArt, offer: "UP to 50% OFF"),
+        .init(name: "Leath", image: Images.artLogo, logo: Images.sliderImage1, offer: "UP to 50% OFF"),
+       .init(name: "Rhine", image: Images.tradeLogo, logo: Images.imageOfArt, offer: "UP to 60% OFF"),
+        .init(name: "Handmade", image: Images.logo, logo: Images.chain, offer: "UP to 70% OFF"),
+        .init(name: "Organ", image: Images.artLogo, logo: Images.imageOfArt2, offer: "UP to 80% OFF"),
     ]
     
     @Published var dailyEssentailItems: [DailyEssentialyItem] = [
-       .init(image: Images.homeDecore, name: "Home Décor ", offer: "UP to 50% OFF"),
-       .init(image: Images.art, name: "Art & Collectibles ", offer: "UP to 30% OFF"),
-       .init(image: Images.craft, name: "Kids’ Crafts & Toys ", offer: "UP to 10% OFF"),
+        .init(image: Images.homeDecore, name: "Home Décor ", offer: "UP to 50% OFF"),
+        .init(image: Images.art, name: "Art & Collectibles ", offer: "UP to 60% OFF"),
+        .init(image: Images.craft, name: "Handmade Materials: crepe", offer: "UP to 70% OFF"),
+        .init(image: Images.fashion, name: "Kids’ Crafts & Toys ", offer: "UP to 80% OFF"),
     ]
     
     func numberOfSections() -> Int {
@@ -61,5 +47,38 @@ class HomeViewModel {
         case .none: return 0
         }
     }
-    
+}
+
+// MARK: - Fetching
+//
+extension HomeViewModel {
+    // MARK:  Categories
+    func fetchCategoryItems() {
+        let catergoryRemote: CategoryRemoteProtocol = CategoryRemote(network: AlamofireNetwork())
+        catergoryRemote.loadAllCategories { [weak self] result in
+            switch result {
+            case .success(let categories):
+                DispatchQueue.main.async {
+                    self?.categoryItems = categories
+                }
+            case .failure(let error):
+                assertionFailure("Error when fetching categories: \(error)")
+            }
+        }
+    }
+    // TODO: change the Dispatch queue here for UI
+    // MARK: Products
+    func fetchProductItems() {
+        let ProductsRemote: ProductsRemoteProtocol = ProductsRemote(network: AlamofireNetwork())
+        ProductsRemote.loadAllProducts { [weak self] result in
+            switch result {
+            case .success(let Products):
+                DispatchQueue.main.async {
+                    self?.productItems = Products
+                }
+            case .failure(let error):
+                assertionFailure("Error when fetching categories: \(error)")
+            }
+        }
+    }
 }

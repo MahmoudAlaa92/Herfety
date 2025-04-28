@@ -18,6 +18,7 @@ class ProductsViewController: UIViewController {
     private var sections = [CollectionViewDataSource]()
     private var layoutSections = [LayoutSectionProvider]()
     private var navBarBehavior: InfoNavBar?
+    private var productsItems: ProductsCollectionViewSection?
     ///
     var subscriptions = Set<AnyCancellable>()
     // MARK: Init
@@ -35,6 +36,7 @@ class ProductsViewController: UIViewController {
         configureSections()
         configureLayout()
         setUpCollectionView()
+        bindViewModel()
     }
 }
 // MARK: - Configuraion
@@ -50,6 +52,7 @@ extension ProductsViewController {
     /// Section
     private func configureSections() {
         let products = ProductsCollectionViewSection(Products: viewModel.productItems)
+        self.productsItems = products
         sections = [products]
         products.selectedItem.sink { [weak self] products in
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
@@ -91,3 +94,16 @@ extension ProductsViewController: UICollectionViewDelegate {
         }
     }
 }
+// MARK: - BindingViewModel
+//
+extension ProductsViewController {
+    private func bindViewModel() {
+        viewModel.$productItems
+            .receive(on: DispatchQueue.main)
+            .sink{ [weak self] newItems in
+                self?.productsItems?.Products = newItems
+                self?.collectionView.reloadData()
+            }.store(in: &subscriptions)
+    }
+}
+

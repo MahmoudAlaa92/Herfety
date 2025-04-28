@@ -54,13 +54,33 @@ extension CardOfProductCollectionViewCell {
         offerProduct.font = .caption1
         offerProduct.numberOfLines = 2
         
-        nameProduct.font = .title3
+        nameProduct.font = .callout
+        nameProduct.numberOfLines = 2
+        nameProduct.lineBreakMode = .byWordWrapping
         
         priceProduct.font = .callout
         offerPrice.font = .body
         
         savePrice.font = .footnote
         savePrice.textColor = .primaryGreen
+        /// Add a light strikethrough line to the offerPrice label
+        if let offerPriceText = offerPrice.text {
+            let attributeString = NSMutableAttributedString(string: offerPriceText)
+            /// Apply a single line strikethrough style
+            attributeString.addAttribute(
+                .strikethroughStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSRange(location: 0, length: attributeString.length)
+            )
+            /// Set the strikethrough color to a light gray
+            attributeString.addAttribute(
+                .strikethroughColor,
+                value: UIColor.lightGray,
+                range: NSRange(location: 0, length: attributeString.length)
+            )
+            /// Apply the attributed string to the label
+            offerPrice.attributedText = attributeString
+        }
     }
     /// Configure the product Details
     ///

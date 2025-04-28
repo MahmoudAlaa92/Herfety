@@ -12,7 +12,7 @@ class TopBrandsCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
     let topBrandsItems: [TopBrandsItem]
-    let selectedBrand = PassthroughSubject<TopBrandsItem, Never>()
+    let selectedBrand = PassthroughSubject<(TopBrandsItem, Int), Never>()
     // MARK: - Init
     init(topBrandsItems: [TopBrandsItem]) {
         self.topBrandsItems = topBrandsItems
@@ -49,7 +49,7 @@ class TopBrandsCollectionViewSection: CollectionViewDataSource {
 extension TopBrandsCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = topBrandsItems[indexPath.item]
-        selectedBrand.send(item)
+        selectedBrand.send((item, indexPath.row))
     }
 }
 // MARK: - Header And Foter for category

@@ -10,8 +10,8 @@ import UIKit
 class ReviewCollectionViewSection: CollectionViewDataSource {
     
     let reviewItems: [Review]
-    let product: Product
-    init(reviewItems: [Review], rating: Product) {
+    let product: Products
+    init(reviewItems: [Review], rating: Products) {
         self.reviewItems = reviewItems
         self.product = rating
     }
@@ -84,7 +84,8 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
             ofKind: TitleReviewsCollectionReusableView.identifier,
             withReuseIdentifier: TitleReviewsCollectionReusableView.identifier,
             for: indexPath) as? TitleReviewsCollectionReusableView {
-            header.configure(numberOfReviews: reviewItems.count, rating: product.rating)
+            // TODO: change the defualt rating here
+            header.configure(numberOfReviews: reviewItems.count, rating: 3.5)
             return header
         } else if kind == ButtonCollectionReusableView.identifier,
                   let footer = collectionView.dequeueReusableSupplementaryView(

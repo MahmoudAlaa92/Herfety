@@ -35,6 +35,20 @@ class HomeViewController: UIViewController {
         cofigureCompositianalLayout()
         configureNavBar()
         bindViewModel()
+        
+//        let productRemote: ProductRemoteProtocol = ProductRemote(network: AlamofireNetwork())
+//
+//        productRemote.loadAllProducts { result in
+//            switch result {
+//            case .success(let products):
+//                print("✅ Loaded \(products.count) products")
+//                products.forEach { print("• id: \(String(describing: $0.id)) - name: \(String(describing: $0.name)) ") }
+//                
+//            case .failure(let error):
+//                print("❌ Failed to load products:", error.localizedDescription)
+//            }
+//        }
+        
     }
     
     private func setUpCollectionView() {
@@ -149,34 +163,42 @@ extension HomeViewController {
                 self?.collectionView.reloadData()
             }.store(in: &subscriptions)
         ///
-        sliderItem?.selectedItem.sink { [weak self] sliderItem in
+        sliderItem?.selectedItem.sink { [weak self] sliderItems in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
+            vc.viewModel.fetchProductItems(discount: (sliderItems.1+1)*10)
             self?.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
     }
     // MARK: - Category Items
     private func bindCategoryItems() {
+        viewModel.fetchCategoryItems()
         viewModel.$categoryItems
-            .sink { [weak self] _ in
+            .sink { [weak self] newItems in
+                self?.categoryItem?.categoryItems = newItems
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
         ///
-        categoryItem?.categorySelection.sink { [weak self] value in
+        categoryItem?.categorySelection.sink { [weak self] item in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
+            vc.viewModel.fetchProductItems(nameOfCategory: item.name ?? "")
             self?.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
     }
     // MARK: - Product Items
     private func bindProductItems() {
+        viewModel.fetchProductItems()
         viewModel.$productItems
-            .sink { [weak self] _ in
+            .sink { [weak self] newItems in
+                self?.cardItem?.productItems = newItems
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
         ///
         cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
+            vc.viewModel.productItem = value
+            vc.viewModel.fetchProductItems()
             self?.navigationController?.pushViewController(vc, animated: true)
         }).store(in: &subscriptions)
     }
@@ -188,8 +210,9 @@ extension HomeViewController {
             }
             .store(in: &subscriptions)
         ///
-        topBrandItem?.selectedBrand.sink(receiveValue: { [weak self] value in
+        topBrandItem?.selectedBrand.sink(receiveValue: { [weak self] items in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
+            vc.viewModel.fetchProductItems(discount: (items.1+5)*10)
             self?.navigationController?.pushViewController(vc, animated: true)
         }).store(in: &subscriptions)
     }
@@ -201,8 +224,9 @@ extension HomeViewController {
             }
             .store(in: &subscriptions)
         ///
-        dailyEssentialItem?.selectedItem.sink(receiveValue: { [weak self] value in
+        dailyEssentialItem?.selectedItem.sink(receiveValue: { [weak self] items in
             let vc = ProductsViewController(viewModel: ProductsViewModel())
+            vc.viewModel.fetchProductItems(discount: (items.1+5)*10)
             self?.navigationController?.pushViewController(vc, animated: true)
         }).store(in: &subscriptions)
     }

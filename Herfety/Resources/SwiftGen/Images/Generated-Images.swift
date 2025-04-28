@@ -166,9 +166,6 @@ public enum Images {
     public static var iconEdit: UIImage {
         UIImage(named: "icon-edit")!
     }
-    public static var iconFacebook1: UIImage {
-        UIImage(named: "icon-facebook 1")!
-    }
     public static var iconFacebook: UIImage {
         UIImage(named: "icon-facebook")!
     }
@@ -204,6 +201,9 @@ public enum Images {
     }
     public static var iconSuccess: UIImage {
         UIImage(named: "icon-success")!
+    }
+    public static var loading: UIImage {
+        UIImage(named: "loading")!
     }
     public static var logout: UIImage {
         UIImage(named: "logout")!

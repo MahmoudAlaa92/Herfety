@@ -44,17 +44,20 @@ class SliderImagesCollectionViewCell: UICollectionViewCell {
         rightButton.clipsToBounds = true
         
         topLabel.font = .callout
-        middleLabel.font = .title3
+        middleLabel.font = .calloutBold
         bottomLabel.font = .body
         
         topLabel.textColor = Colors.secondaryGray
         middleLabel.textColor = Colors.secondaryGray
         bottomLabel.textColor = Colors.secondaryGray
         
-        topLabel.numberOfLines = 0
-        middleLabel.numberOfLines = 1
-        bottomLabel.numberOfLines = 0
+        topLabel.numberOfLines = 2
+        middleLabel.numberOfLines = 2
+        bottomLabel.numberOfLines = 2
         
+        topLabel.lineBreakMode = .byWordWrapping
+        middleLabel.lineBreakMode = .byWordWrapping
+        bottomLabel.lineBreakMode = .byWordWrapping
     }
 
 }
