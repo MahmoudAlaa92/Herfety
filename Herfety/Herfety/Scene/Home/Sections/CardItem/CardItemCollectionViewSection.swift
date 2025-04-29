@@ -55,8 +55,10 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
 
         
         // TODO: handle Dry principle here
-//        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
-//        cell.configureProduct(with: wishlistItem)
+        let wishlistItem =  item
+        
+        cell.configureProduct(with: wishlistItem)
+        
 //        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
 //        cell.configureOrder(with: orderItem)
         return cell

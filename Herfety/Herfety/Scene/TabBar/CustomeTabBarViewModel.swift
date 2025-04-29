@@ -25,7 +25,7 @@ class CustomeTabBarViewModel: ObservableObject {
     @Published var isLogin: Bool = false
     @Published var cart: [WishlistItem] = []
     @Published var orders: [OrderModel] = []
-    @Published var Wishlist: [WishlistItem] = []
+    @Published var Wishlist: [Products] = []
     @Published var infos: [InfoModel] = []
     @Published var notificationsIsRead: Bool = false
     ///
@@ -38,5 +38,29 @@ class CustomeTabBarViewModel: ObservableObject {
         cart.removeAll()
         orders.removeAll()
         Wishlist.removeAll()
+    }
+    
+    init(){
+        fetchWishlistItems()
+    }
+}
+
+// MARK: - Fetching
+//
+extension CustomeTabBarViewModel {
+    // MARK: Products of Categories
+    func fetchWishlistItems(id: Int = 1) {
+        let productItems: GetProductsOfWishlistRemote = GetProductsOfWishlistRemote(network: AlamofireNetwork())
+        productItems.loadAllProducts(userId: id) { result in
+            switch result {
+            case.success(let products):
+                DispatchQueue.main.async {
+                    self.Wishlist = products
+                    
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

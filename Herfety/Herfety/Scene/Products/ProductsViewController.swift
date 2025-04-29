@@ -56,6 +56,7 @@ extension ProductsViewController {
         sections = [products]
         products.selectedItem.sink { [weak self] products in
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
+            vc.viewModel.productItem = products
             self?.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
         layoutSections.append(ProductsCollectionViewSectionLayout())

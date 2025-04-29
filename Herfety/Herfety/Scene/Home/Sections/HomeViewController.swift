@@ -22,6 +22,8 @@ class HomeViewController: UIViewController {
     private var topBrandItem: TopBrandsCollectionViewSection?
     private var dailyEssentialItem: DailyEssentailCollectionViewSection?
     ///
+    private var hasInitialWishlistLoaded = false
+    ///
     private var subscriptions = Set<AnyCancellable>()
     // MARK: - Outlets
     //
@@ -160,6 +162,7 @@ extension HomeViewController {
         viewModel
             .$sliderItems
             .sink { [weak self] _ in
+                
                 self?.collectionView.reloadData()
             }.store(in: &subscriptions)
         ///
@@ -174,8 +177,10 @@ extension HomeViewController {
         viewModel.fetchCategoryItems()
         viewModel.$categoryItems
             .sink { [weak self] newItems in
-                self?.categoryItem?.categoryItems = newItems
-                self?.collectionView.reloadData()
+                DispatchQueue.main.async {
+                    self?.categoryItem?.categoryItems = newItems
+                    self?.collectionView.reloadData()
+                }
             }
             .store(in: &subscriptions)
         ///
@@ -189,9 +194,10 @@ extension HomeViewController {
     private func bindProductItems() {
         viewModel.fetchProductItems()
         viewModel.$productItems
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] newItems in
-                self?.cardItem?.productItems = newItems
-                self?.collectionView.reloadData()
+                    self?.cardItem?.productItems = newItems
+                    self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
         ///
@@ -236,6 +242,11 @@ extension HomeViewController {
             .dropFirst()
             .sink { [weak self] wishlist in
                 guard let self = self else { return }
+                /// Skip the first assignment (initial data load)
+                if !self.hasInitialWishlistLoaded {
+                    self.hasInitialWishlistLoaded = true
+                    return
+                }
                 /// Trigger alert presentation
                 let alertItem = AlertModel(
                     message: "Added To Wishlist",
