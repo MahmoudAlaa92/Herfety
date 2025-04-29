@@ -14,14 +14,12 @@ struct Products: Codable, Equatable {
     let thumbImage: String?
     let vendorID, categoryID, brandID: Int?
 
-    let qty: Int?
+    var qty: Int?
     let shortDescription, longDescription, sku: String?
     let price, offerPrice: Double?
     let offerStartDate, offerEndDate, productType: String?
     let isApproved: Int?
     let seoTitle, seoDescription, createdAt, updatedAt: String?
-
-   
 
     enum CodingKeys: String, CodingKey {
         case id, name, slug, thumbImage

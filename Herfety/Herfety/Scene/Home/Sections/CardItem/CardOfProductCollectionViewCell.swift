@@ -12,7 +12,7 @@ class CardOfProductCollectionViewCell: UICollectionViewCell {
     //
     static let cellIdentifier: String = "CardOfProductCollectionViewCell"
     var product: Products!
-    var order: OrderModel!
+    var order: Products!
     // MARK: - Outlets
     //
     @IBOutlet weak var topBackground: UIView!
@@ -92,7 +92,7 @@ extension CardOfProductCollectionViewCell {
     ///
     ///  - Parameter order: The `order` containing the data to be displayed in `orders` page
     ///
-    func configureOrder(with order: OrderModel) {
+    func configureOrder(with order: Products) {
         self.order = order
     }
 }

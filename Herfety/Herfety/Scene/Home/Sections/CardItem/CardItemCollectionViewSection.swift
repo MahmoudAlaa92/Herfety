@@ -53,15 +53,11 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
         cell.savePrice.text = "Save $" + String(format: "%.2f", savedAmount)
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
 
-        
-        // TODO: handle Dry principle here
-
-        let wishlistItem =  item
-        
-        cell.configureProduct(with: wishlistItem)
-        
-//        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
-//        cell.configureOrder(with: orderItem)
+        cell.configureProduct(with: item)
+        // TODO: change this logic in future
+        var orderItems = item
+        orderItems.qty = 1
+        cell.configureOrder(with: orderItems)
         return cell
     }
 }

@@ -24,7 +24,7 @@ class CustomeTabBarViewModel: ObservableObject {
     @Published var tabBarIsHidden: Bool = false
     @Published var isLogin: Bool = false
     @Published var cart: [WishlistItem] = []
-    @Published var orders: [OrderModel] = []
+    @Published var orders: [Products] = []
     @Published var Wishlist: [Products] = []
     @Published var infos: [InfoModel] = []
     @Published var notificationsIsRead: Bool = false
@@ -59,7 +59,7 @@ extension CustomeTabBarViewModel {
                     
                 }
             case .failure(let error):
-                assertionFailure("error here")
+                assertionFailure("error here \(error)")
             }
         }
     }
