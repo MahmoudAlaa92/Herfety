@@ -32,12 +32,14 @@ extension WishListViewController {
     
     /// Configure Provider
     private func configureProvider() {
-        CustomeTabBarViewModel.shared.$Wishlist.sink { [weak self] value in
+        CustomeTabBarViewModel
+            .shared
+            .$Wishlist
+            .sink { [weak self] value in
             let wishListProvider = WishlistCollectionViewSection(whishlistItems: value)
             self?.providers = [wishListProvider]
             self?.collectionView.reloadData()
         }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
-        
         layoutProviders.append(WishlistSectionLayoutProvider())
     }
     
