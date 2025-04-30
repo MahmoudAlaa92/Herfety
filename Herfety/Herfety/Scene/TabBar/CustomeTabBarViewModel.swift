@@ -48,15 +48,34 @@ class CustomeTabBarViewModel: ObservableObject {
 // MARK: - Fetching
 //
 extension CustomeTabBarViewModel {
-    // MARK: Products of Categories
+    // MARK: Wishlist
     func fetchWishlistItems(id: Int = 1) {
-        let productItems: GetProductsOfWishlistRemote = GetProductsOfWishlistRemote(network: AlamofireNetwork())
+        let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
         productItems.loadAllProducts(userId: id) { result in
             switch result {
             case.success(let products):
                 DispatchQueue.main.async {
                     self.Wishlist = products
                     
+                }
+            case .failure(let error):
+                assertionFailure("error here \(error)")
+            }
+        }
+    }
+}
+// MARK: - Removing
+//
+extension CustomeTabBarViewModel {
+    // MARK: Wishlist
+    func deleteWishlistItem(userId: Int, productId: Int) {
+        let productItem = ProductsOfWishlistRemote(network: AlamofireNetwork())
+        productItem.removeProduct(userId: userId, productId: productId) { result in
+            switch result {
+            case.success(let products):
+                print("Deleted Succufuly")
+                DispatchQueue.main.async {
+//                    self.Wishlist = products
                 }
             case .failure(let error):
                 assertionFailure("error here \(error)")

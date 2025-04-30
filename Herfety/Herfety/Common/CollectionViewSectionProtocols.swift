@@ -23,3 +23,7 @@ protocol LayoutSectionProvider {
 protocol CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
 }
+protocol ContextMenuProvider {
+    func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
+}
+

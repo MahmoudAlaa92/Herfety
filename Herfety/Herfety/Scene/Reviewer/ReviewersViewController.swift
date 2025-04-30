@@ -15,6 +15,7 @@ class ReviewersViewController: UIViewController {
     private var viewModel: ReviewerViewModel
     private var sections: [CollectionViewDataSource] = []
     private var sectionsLayout: [LayoutSectionProvider] = []
+    private var navBarBehavior: InfoNavBar?
     
     // MARK: - Init
     init(viewModel: ReviewerViewModel) {
@@ -25,10 +26,10 @@ class ReviewersViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavigationBar()
         setUpCollectionView()
         configureSections()
         configureLayoutSections()
@@ -53,6 +54,13 @@ extension ReviewersViewController {
         let layoutFactory = SectionsLayout(providers: sectionsLayout)
         
         collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
+    }
+    
+    private func setUpNavigationBar() {
+        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
+            print("Yes")
+        }, showRighBtn: true)
     }
 }
 // MARK: - UICollectionViewDataSource

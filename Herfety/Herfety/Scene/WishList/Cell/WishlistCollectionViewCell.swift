@@ -29,6 +29,7 @@ class WishlistCollectionViewCell: UICollectionViewCell {
         // Initialization code
         configure()
         configureContainerView()
+        
     }
 }
 // MARK: - Configure

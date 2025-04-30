@@ -10,7 +10,7 @@ import UIKit
 class WishlistCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
-    private let whishlistItems: [Products]
+    private var whishlistItems: [Products]
     
     // MARK: - Init
     init(whishlistItems: [Products]) {
@@ -57,10 +57,26 @@ extension WishlistCollectionViewSection: HeaderAndFooterProvider {
             header.configure(title:  "Wishlist", description: "", titleFont:.title1, titleColor: Colors.primaryBlue, shouldShowButton: false)
             return header
         }
-        
         return UICollectionReusableView()
     }
+    
 }
+// MARK: - Delegate
+//
+extension WishlistCollectionViewSection: ContextMenuProvider {
+    func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
+                var wishlist = CustomeTabBarViewModel.shared.Wishlist
+                
+                wishlist.remove(at: indexPath.item)
+                CustomeTabBarViewModel.shared.Wishlist = wishlist
+            }
+            return UIMenu(title: "", children: [delete])
+        }
+    }
+}
+
 // MARK: - Layout
 //
 struct WishlistSectionLayoutProvider: LayoutSectionProvider {
@@ -73,7 +89,6 @@ struct WishlistSectionLayoutProvider: LayoutSectionProvider {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-//        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
     
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 0
@@ -81,6 +96,7 @@ struct WishlistSectionLayoutProvider: LayoutSectionProvider {
                                                                       heightDimension: .absolute(50)),
                                                     elementKind: "Header",
                                                     alignment: .top)]
+        
         return section
     }
 }

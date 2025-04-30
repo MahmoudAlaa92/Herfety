@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150ABBDC2DC2E0D700C1A7AD /* Wishlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150ABBDB2DC2E0D700C1A7AD /* Wishlist.swift */; };
 		1511F3CB2D5554D100D986CF /* DMSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1511F3C62D5554D100D986CF /* DMSans-Bold.ttf */; };
 		1511F3CC2D5554D100D986CF /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1511F3C82D5554D100D986CF /* DMSans-Regular.ttf */; };
 		1511F3CD2D5554D100D986CF /* DMSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1511F3C72D5554D100D986CF /* DMSans-Medium.ttf */; };
@@ -65,7 +66,6 @@
 		1548CF432D56DFA900F7CEEA /* CategoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF422D56DFA900F7CEEA /* CategoriesModel.swift */; };
 		1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF442D56DFF300F7CEEA /* CardOfProductModel.swift */; };
 		1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF462D56E07E00F7CEEA /* DailyEssentialyModel.swift */; };
-
 		1555876D2DC12EDE00342236 /* WishlistRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555876C2DC12EDE00342236 /* WishlistRemote.swift */; };
 		15625FD82DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15625FD72DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift */; };
 		1562A4412DAA9B8500459EB5 /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4402DAA9B8500459EB5 /* Logout.swift */; };
@@ -192,6 +192,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		150ABBDB2DC2E0D700C1A7AD /* Wishlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wishlist.swift; sourceTree = "<group>"; };
 		1511F3C52D5554D100D986CF /* DMSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DMSans.ttf; sourceTree = "<group>"; };
 		1511F3C62D5554D100D986CF /* DMSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans-Bold.ttf"; sourceTree = "<group>"; };
 		1511F3C72D5554D100D986CF /* DMSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans-Medium.ttf"; sourceTree = "<group>"; };
@@ -250,7 +251,6 @@
 		1548CF422D56DFA900F7CEEA /* CategoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesModel.swift; sourceTree = "<group>"; };
 		1548CF442D56DFF300F7CEEA /* CardOfProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOfProductModel.swift; sourceTree = "<group>"; };
 		1548CF462D56E07E00F7CEEA /* DailyEssentialyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEssentialyModel.swift; sourceTree = "<group>"; };
-
 		1555876C2DC12EDE00342236 /* WishlistRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistRemote.swift; sourceTree = "<group>"; };
 		15625FD72DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsOfCategoryRemote.swift; sourceTree = "<group>"; };
 		1562A4402DAA9B8500459EB5 /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
@@ -686,6 +686,7 @@
 				1599B89D2DB86D4800A48510 /* Products.swift */,
 				1599B8972DB85F5A00A48510 /* Category.swift */,
 				157F42802DB6D979000305D6 /* RemoteError.swift */,
+				150ABBDB2DC2E0D700C1A7AD /* Wishlist.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -707,7 +708,6 @@
 				1599B8992DB85FE500A48510 /* CategoryRemote.swift */,
 				1599B89F2DB86D9A00A48510 /* ProductsRemote.swift */,
 				15625FD72DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift */,
-
 				1555876C2DC12EDE00342236 /* WishlistRemote.swift */,
 			);
 			path = Remote;
@@ -1471,6 +1471,7 @@
 				15CE60F42D73B69D0032617B /* ReviewCollectionViewSection.swift in Sources */,
 				15E5B6892D70F58F00C0383D /* ProductDetailsViewController.swift in Sources */,
 				158F8D482D72444E00D8E768 /* TitleProductDetails.swift in Sources */,
+				150ABBDC2DC2E0D700C1A7AD /* Wishlist.swift in Sources */,
 				15CD44C72D52A73000E58C6F /* SectionsLayout.swift in Sources */,
 				153B7FD82D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift in Sources */,
 				158B39DC2D7A85E100D58B07 /* SettingViewController.swift in Sources */,

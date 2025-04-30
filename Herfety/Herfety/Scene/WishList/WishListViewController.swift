@@ -51,6 +51,7 @@ extension WishListViewController {
     
     /// Configure Layout
     private func cofigureCompositianalLayout() {
+
         let layoutFactory = SectionsLayout(providers: layoutProviders)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
@@ -58,7 +59,16 @@ extension WishListViewController {
 
 // MARK: - UICollectionViewDelegate
 //
-extension WishListViewController: UICollectionViewDelegate {}
+extension WishListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        contextMenuConfigurationForItemAt indexPath: IndexPath,
+                        point: CGPoint) -> UIContextMenuConfiguration? {
+        if let providers = providers[indexPath.section] as? ContextMenuProvider {
+            return providers.contextMenuConfiguration(for: collectionView, at: indexPath, point: point)
+        }
+        return nil
+    }
+}
 
 // MARK: - UICollectionViewDataSource
 //

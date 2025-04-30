@@ -33,7 +33,10 @@ class OrderCollectionViewSection: CollectionViewDataSource {
         let item = orderItems[indexPath.item]
         
         cell.nameProduct.text = item.name
-        cell.descriptionProduct.text = item.shortDescription.map({String($0.prefix(30))})
+        cell.descriptionProduct.text = item.shortDescription?
+            .split(separator: " ")
+            .prefix(4)
+            .joined(separator: " ")
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         cell.numberOfProduct.text = "\(1)"
         cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))

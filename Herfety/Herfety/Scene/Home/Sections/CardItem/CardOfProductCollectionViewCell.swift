@@ -115,7 +115,7 @@ extension CardOfProductCollectionViewCell {
     
     private func updateWhishlistItems() {
         if !CustomeTabBarViewModel.shared.Wishlist.contains(where: { $0 == self.product }) {
-            let productItems: GetProductsOfWishlistRemote = GetProductsOfWishlistRemote(network: AlamofireNetwork())
+            let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
             productItems.addNewProduct(userId: 1, productId: product.id ?? 1) { result in
                 CustomeTabBarViewModel.shared.fetchWishlistItems(id: 1)
             }
