@@ -142,6 +142,7 @@ extension ProductDetailsViewController {
         }).store(in: &subscriptions)
         
         bindWishlist()
+        bindReviewrs()
     }
     // MARK: - Wishlist
     private func bindWishlist() {
@@ -160,6 +161,13 @@ extension ProductDetailsViewController {
                 self.presentCustomAlert(with: alertItem)
             }
             .store(in: &subscriptions)
+    }
+    // MARK: - Reviewrs
+    private func bindReviewrs() {
+        reviewDetailsSection?.reviewrsButton.sink { [weak self] reviewrs in
+            let vc = ReviewersViewController(viewModel: ReviewerViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }.store(in: &subscriptions)
     }
 }
 // MARK: - Private Hanlder

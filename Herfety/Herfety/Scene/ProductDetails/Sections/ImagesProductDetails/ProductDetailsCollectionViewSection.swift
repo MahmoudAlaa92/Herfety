@@ -87,6 +87,7 @@ extension ProductDetailsCollectionViewSection: HeaderAndFooterProvider {
                 priceLabel: "$" + String(format: "%.2f", productItems.price ?? 0.0),
                 avaliableLabel:  (productItems.qty != nil && productItems.qty ?? 0 > 0) ? "Avaliable in stok" : "Not Avaliable")
             header.configureProduct(with: productItems)
+            
             return header
         }
         else if kind == DescriptionProductDetails.identifier,
