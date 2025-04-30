@@ -36,7 +36,7 @@ class OrderCollectionViewSection: CollectionViewDataSource {
         cell.descriptionProduct.text = item.shortDescription.map({String($0.prefix(30))})
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         cell.numberOfProduct.text = "\(1)"
-        cell.priceProduct.text = "\(item.price ?? 0.0)"
+        cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))
         cell.onChangeCountOrder = { [weak self] newCount in
             self?.countUpdateSubject.send((indexPath.item, newCount))
         }

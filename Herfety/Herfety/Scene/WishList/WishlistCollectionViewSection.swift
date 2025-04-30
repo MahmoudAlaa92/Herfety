@@ -33,10 +33,13 @@ class WishlistCollectionViewSection: CollectionViewDataSource {
             return UICollectionViewCell()
         }
         let item = whishlistItems[indexPath.item]
-        cell.imageCell.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
+        
         cell.nameCell.text = item.name
+        cell.imageCell.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         cell.descriptionCell.text = item.shortDescription
-        cell.priceCell.text = "\(item.price ?? 0.0)"
+        cell.priceCell.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))
+        cell.configureOrder(with: item)
+
         return cell
     }
 }
