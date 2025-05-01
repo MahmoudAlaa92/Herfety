@@ -58,9 +58,8 @@ extension ProductDetailsViewController {
     private func configureSections() {
         let productDetials = ProductDetailsCollectionViewSection(productItems: viewModel.productItem)
         self.productDetialsSection = productDetials
-        
+   
         let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItem)
-        self.reviewDetailsSection = reviews
         
         let recommendItems = CardItemCollectionViewSection(productItems: viewModel.recommendItems)
         self.recommendedProductsSection = recommendItems

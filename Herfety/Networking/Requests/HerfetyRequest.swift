@@ -65,6 +65,6 @@ private extension HerfetyRequest {
     ///
     var encoder: ParameterEncoding {
 
-        return method == .get ? URLEncoding.queryString : JSONEncoding.default // URLEncoding.httpBody
+        return method == .get || method == .delete ? URLEncoding.queryString : JSONEncoding.default // URLEncoding.httpBody
     }
 }

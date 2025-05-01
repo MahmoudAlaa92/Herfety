@@ -77,7 +77,7 @@ private extension OrderViewController {
     }
     
     private func configureProvider() {
-        CustomeTabBarViewModel.shared.$orders.sink { [weak self] value in
+        CustomeTabBarViewModel.shared.$cartItems.sink { [weak self] value in
             let orderProvider = OrderCollectionViewSection(orderItems: value)
             guard let self = self else { return }
             self.sections = [orderProvider]

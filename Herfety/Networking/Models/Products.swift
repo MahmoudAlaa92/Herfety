@@ -6,8 +6,6 @@
 //
 import Foundation
 
-// MARK: - Product
-
 struct Products: Codable, Equatable {
     let id: Int?
     let name, slug: String?
@@ -22,7 +20,8 @@ struct Products: Codable, Equatable {
     let seoTitle, seoDescription, createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, slug, thumbImage
+        case id
+        case name, slug, thumbImage
         case vendorID = "vendorId"
         case categoryID = "categoryId"
         case brandID = "brandId"

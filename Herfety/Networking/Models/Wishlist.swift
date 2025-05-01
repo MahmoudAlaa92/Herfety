@@ -8,28 +8,62 @@
 import Foundation
 
 struct Wishlist: Codable, Equatable {
-    let userID, productID: Int?
+    let userID, productID: Int??
     let name: String?
-    let qty: Int?
+    var qty: Int?
     let price: Double?
-    let offerPrice: Int?
-    let offerStartDate, offerEndDate: String
-    let brandID: Int?
+    let offerPrice: Double?
+    let offerStartDate, offerEndDate: String?
     let categoryID: Int?
-    let couponID: Int?
     let createdAt, updatedAt: String?
     let isApproved: Int?
     let longDescription, shortDescription, seoDescription: String?
     let thumbImage: String?
     let productType: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
         case productID = "productId"
         case name, qty, price, offerPrice, offerStartDate, offerEndDate
-        case brandID = "brandId"
         case categoryID = "categoryId"
-        case couponID = "couponId"
         case createdAt, updatedAt, isApproved, longDescription, shortDescription, seoDescription, thumbImage, productType
     }
+    
+    init(
+           userID: Int? = nil,
+           productID: Int? = nil,
+           name: String? = nil,
+           qty: Int? = nil,
+           price: Double? = nil,
+           offerPrice: Double? = nil,
+           offerStartDate: String? = nil,
+           offerEndDate: String? = nil,
+           categoryID: Int? = nil,
+           createdAt: String? = nil,
+           updatedAt: String? = nil,
+           isApproved: Int? = nil,
+           longDescription: String? = nil,
+           shortDescription: String? = nil,
+           seoDescription: String? = nil,
+           thumbImage: String? = nil,
+           productType: String? = nil
+       ) {
+           self.userID = userID
+           self.productID = productID
+           self.name = name
+           self.qty = qty
+           self.price = price
+           self.offerPrice = offerPrice
+           self.offerStartDate = offerStartDate
+           self.offerEndDate = offerEndDate
+           self.categoryID = categoryID
+           self.createdAt = createdAt
+           self.updatedAt = updatedAt
+           self.isApproved = isApproved
+           self.longDescription = longDescription
+           self.shortDescription = shortDescription
+           self.seoDescription = seoDescription
+           self.thumbImage = thumbImage
+           self.productType = productType
+       }
 }

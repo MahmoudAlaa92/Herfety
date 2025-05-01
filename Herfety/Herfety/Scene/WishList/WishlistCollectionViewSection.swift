@@ -10,10 +10,10 @@ import UIKit
 class WishlistCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
-    private var whishlistItems: [Products]
+    private var whishlistItems: [Wishlist]
     
     // MARK: - Init
-    init(whishlistItems: [Products]) {
+    init(whishlistItems: [Wishlist]) {
         self.whishlistItems = whishlistItems
     }
     
@@ -37,7 +37,8 @@ class WishlistCollectionViewSection: CollectionViewDataSource {
         cell.nameCell.text = item.name
         cell.imageCell.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         cell.descriptionCell.text = item.shortDescription
-        cell.priceCell.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))
+        cell.priceCell.text = "$" +  String(format: "%.2f", Double(item.price ?? 0.0))
+        
         cell.configureOrder(with: item)
 
         return cell
@@ -67,10 +68,11 @@ extension WishlistCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
-                var wishlist = CustomeTabBarViewModel.shared.Wishlist
-                
-                wishlist.remove(at: indexPath.item)
-                CustomeTabBarViewModel.shared.Wishlist = wishlist
+                let wishlist = CustomeTabBarViewModel.shared.Wishlist[indexPath.row]
+                // TODO: change the user Id with userLogin
+                #warning("Change the user id")
+                CustomeTabBarViewModel.shared.deleteWishlistItem(userId: 1, productId: (wishlist.userID ?? 1) ?? 1)
+                CustomeTabBarViewModel.shared.Wishlist.remove(at: indexPath.row)
             }
             return UIMenu(title: "", children: [delete])
         }

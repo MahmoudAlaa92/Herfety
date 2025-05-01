@@ -12,11 +12,11 @@ class ReviewCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
     let reviewItems: [Review]
-    let product: Products
+    let product: Wishlist
     let reviewrsButton = PassthroughSubject<[Review], Never>()
-    
+
     // MARK: - Init
-    init(reviewItems: [Review], rating: Products) {
+    init(reviewItems: [Review], rating: Wishlist) {
         self.reviewItems = reviewItems
         self.product = rating
     }
@@ -103,6 +103,7 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
                     for: indexPath) as? ButtonCollectionReusableView {
             footer.configure(with: .init(title: "Add To Cart", target: self, action: #selector(addToCart)))
             footer.configureProduct(with: self.product)
+            
             return footer
         }
         return UICollectionReusableView()

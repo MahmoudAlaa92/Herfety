@@ -4,14 +4,14 @@
 //
 //  Created by Mahmoud Alaa on 02/03/2025.
 //
-
 import UIKit
 
 class ButtonCollectionReusableView: UICollectionReusableView {
-
+    
     // MARK: - Properties
     static let identifier = "ButtonCollectionReusableView"
-    var order: Products!
+    var order: Wishlist!
+
     // MARK: - Outlets
     @IBOutlet weak var button: PrimaryButton!
     
@@ -31,7 +31,7 @@ extension ButtonCollectionReusableView {
     ///
     ///  - Parameter order: The `order` containing the data to be displayed in `orders` page
     ///
-    func configureProduct(with order: Products) {
+    func configureProduct(with order: Wishlist) {
         self.order = order
     }
 }
@@ -39,10 +39,14 @@ extension ButtonCollectionReusableView {
 //
 extension ButtonCollectionReusableView {
     @IBAction func addToCart(_ sender: Any) {
-        if !CustomeTabBarViewModel.shared.orders.contains(where: { $0 == self.order }) {
-            // TODO: change this logic in future
-            order.qty = 1
-            CustomeTabBarViewModel.shared.orders.append(order)
+        
+        if var orderItem =  order,
+           !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order }) {
+            orderItem.qty = CustomeTabBarViewModel.shared.countProductDetails
+            CustomeTabBarViewModel.shared.cartItems.append(orderItem)
+        } else {
+            #warning("show alert, the item added before")
+            print("Added")
         }
     }
 }

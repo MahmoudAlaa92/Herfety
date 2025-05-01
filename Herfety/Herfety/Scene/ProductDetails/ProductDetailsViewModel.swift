@@ -6,10 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 class ProductDetailsViewModel {
-    @Published var productItem: Products = Products()
-    
+    @Published var productItem: Wishlist = Wishlist()
     @Published var reviewsItems: [Review] = [
         Review(comment: "This Is Good", image: Images.profilePhoto),
         Review(comment: "This Is Great", image: Images.profilePhoto)

@@ -10,10 +10,10 @@ import Combine
 
 class OrderCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
-    let orderItems: [Products]
+    let orderItems: [Wishlist]
     let countUpdateSubject = PassthroughSubject<(Int, Int), Never>()
     // MARK: - Init
-    init(orderItems: [Products]) {
+    init(orderItems: [Wishlist]) {
         self.orderItems = orderItems
     }
     func registerCells(in collectionView: UICollectionView) {
@@ -33,13 +33,13 @@ class OrderCollectionViewSection: CollectionViewDataSource {
         let item = orderItems[indexPath.item]
         
         cell.nameProduct.text = item.name
-        cell.descriptionProduct.text = item.shortDescription?
+        cell.descriptionProduct.text = item.shortDescription ?? ""
             .split(separator: " ")
             .prefix(4)
             .joined(separator: " ")
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
-        cell.numberOfProduct.text = "\(1)"
-        cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))
+        cell.numberOfProduct.text = "\(item.qty ?? 1)"
+        cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0.0))
         cell.onChangeCountOrder = { [weak self] newCount in
             self?.countUpdateSubject.send((indexPath.item, newCount))
         }

@@ -19,15 +19,16 @@ class CustomeTabBarViewModel: ObservableObject {
     static let shared = CustomeTabBarViewModel()
     ///
     @UserDefault<Bool>(key: \.login) var login
+    @UserDefault<Int>(key: \.userId) var userId
     ///
     @Published var selectedTab: TabBarItems = .home
     @Published var tabBarIsHidden: Bool = false
     @Published var isLogin: Bool = false
-    @Published var cart: [WishlistItem] = []
-    @Published var orders: [Products] = []
-    @Published var Wishlist: [Products] = []
+    @Published var orders: [WishlistItem] = []
+    @Published var cartItems: [Wishlist] = []
+    @Published var Wishlist: [Wishlist] = []
     @Published var infos: [InfoModel] = []
-    @Published var notificationsIsRead: Bool = false
+    @Published var countProductDetails: Int = 1
     ///
     var subscriptions = Set<AnyCancellable>()
     ///
@@ -35,13 +36,14 @@ class CustomeTabBarViewModel: ObservableObject {
         selectedTab = .home
         isLogin = false
         login = false
-        cart.removeAll()
         orders.removeAll()
+        cartItems.removeAll()
         Wishlist.removeAll()
     }
     
     init(){
         fetchWishlistItems()
+        userId = 1
     }
 }
 
@@ -56,10 +58,9 @@ extension CustomeTabBarViewModel {
             case.success(let products):
                 DispatchQueue.main.async {
                     self.Wishlist = products
-                    
                 }
             case .failure(let error):
-                assertionFailure("error here \(error)")
+                print("error: \(error)")
             }
         }
     }
@@ -71,14 +72,13 @@ extension CustomeTabBarViewModel {
     func deleteWishlistItem(userId: Int, productId: Int) {
         let productItem = ProductsOfWishlistRemote(network: AlamofireNetwork())
         productItem.removeProduct(userId: userId, productId: productId) { result in
-            switch result {
-            case.success(let products):
-                print("Deleted Succufuly")
-                DispatchQueue.main.async {
-//                    self.Wishlist = products
+            DispatchQueue.main.async {
+                switch result {
+                case.success(_):
+                    print("Deleted Succufuly")
+                case .failure(let error):
+                    print("error \(error)")
                 }
-            case .failure(let error):
-                assertionFailure("error here \(error)")
             }
         }
     }

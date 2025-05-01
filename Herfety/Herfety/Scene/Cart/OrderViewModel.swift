@@ -9,7 +9,7 @@ import Combine
 
 class OrderViewModel: ObservableObject {
     // MARK: - Properties
-    @Published var orderItems: [Products] = []
+    @Published var orderItems: [Wishlist] = []
     @Published private(set) var paymentInfo: PaymentView.Model = PaymentView.Model(subTotal: 0, shipping: 0, total: 0, numberOfItems: 0)
     var navigationToShipping: (() -> Void)?
     ///
@@ -39,7 +39,7 @@ extension OrderViewModel {
     private func observeOrderUpdates() {
         CustomeTabBarViewModel
             .shared
-            .$orders
+            .$cartItems
             .receive(on: DispatchQueue.main)
             .assign(to: &$orderItems)
     }

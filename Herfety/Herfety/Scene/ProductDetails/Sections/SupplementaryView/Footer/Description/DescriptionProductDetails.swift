@@ -4,30 +4,33 @@
 //
 //  Created by Mahmoud Alaa on 28/02/2025.
 //
-
 import UIKit
 
 class DescriptionProductDetails: UICollectionReusableView {
-    
+    // MARK: - Properties
     static let identifier: String = "DescriptionProductDetails"
     
+    ///
+    var productCount: Int {
+        get { return Int(numberProduct.text ?? "1") ?? 1 }
+        set {
+            numberProduct.text = "\(newValue)"
+            CustomeTabBarViewModel.shared.countProductDetails = newValue
+        }
+    }
     // MARK: - Outlets
     @IBOutlet weak var descriptionTitle: UILabel!
     @IBOutlet weak var numberProduct: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var minusAndPlusStackView: UIStackView!
-    var productCount: Int {
-        get { return Int(numberProduct.text ?? "1") ?? 1 }
-        set { numberProduct.text = "\(newValue)" }
-    }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureUI()
     }
 }
-
 // MARK: - Configuration
 //
 extension DescriptionProductDetails {

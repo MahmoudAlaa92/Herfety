@@ -260,7 +260,7 @@ extension HomeViewController {
     }
     // MARK: - Orders
     private func bindOrders() {
-        CustomeTabBarViewModel.shared.$orders
+        CustomeTabBarViewModel.shared.$cartItems
             .dropFirst()
             .sink { [weak self] Order in
                 guard let self = self else { return }
