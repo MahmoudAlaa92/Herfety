@@ -22,6 +22,7 @@ struct HerfetyRequest: URLRequestConvertible {
 
     /// Parameters
     ///
+
     let parameters: [String: Sendable]
 
     /// Designated Initializer.
@@ -31,6 +32,7 @@ struct HerfetyRequest: URLRequestConvertible {
     ///     - path: RPC that should be called.
     ///     - parameters: Collection of Key/Value parameters, to be forwarded to the Jetpack Connected site.
     ///
+
     init(method: HTTPMethod, path: String, parameters: [String: Sendable]? = nil) {
         self.method = method
         self.path = path
@@ -62,6 +64,7 @@ private extension HerfetyRequest {
     /// Returns the Parameters Encoder
     ///
     var encoder: ParameterEncoding {
-        return method == .get ? URLEncoding.queryString : JSONEncoding.default // URLEncoding.httpBody
+
+        return method == .get || method == .delete ? URLEncoding.queryString : JSONEncoding.default // URLEncoding.httpBody
     }
 }

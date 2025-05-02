@@ -12,7 +12,7 @@ class InfoViewController: UIViewController {
     private var viewModel = InfoViewModel()
     private var sections: [CollectionViewDataSource] = []
     private var layoutProviders: [LayoutSectionProvider] = []
-    private var navigationBarBehavior: InfoNavBar?
+    private var navigationBarBehavior: HerfetyNavigationController?
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var paymentButton: PrimaryButton!
@@ -61,7 +61,7 @@ extension InfoViewController {
         
         navigationItem.backButtonTitle = ""
         
-        navigationBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navigationBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
         
         navigationBarBehavior?.configure(title: "Info", titleColor: .primaryBlue, onPlus: { [weak self] in
             guard let self = self else { return }

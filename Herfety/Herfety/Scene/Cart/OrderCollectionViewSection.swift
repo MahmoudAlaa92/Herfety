@@ -10,10 +10,10 @@ import Combine
 
 class OrderCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
-    let orderItems: [OrderModel]
+    let orderItems: [Wishlist]
     let countUpdateSubject = PassthroughSubject<(Int, Int), Never>()
     // MARK: - Init
-    init(orderItems: [OrderModel]) {
+    init(orderItems: [Wishlist]) {
         self.orderItems = orderItems
     }
     func registerCells(in collectionView: UICollectionView) {
@@ -33,14 +33,34 @@ class OrderCollectionViewSection: CollectionViewDataSource {
         let item = orderItems[indexPath.item]
         
         cell.nameProduct.text = item.name
-        cell.descriptionProduct.text = item.description
-        cell.imageProduct.image = item.image
-        cell.numberOfProduct.text = "\(item.numberOfOrders)"
-        cell.priceProduct.text = "\(item.price)"
+        cell.descriptionProduct.text = item.shortDescription? .split(separator: " ")
+            .prefix(3)
+            .joined(separator: " ") ?? ""
+           
+        cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
+        cell.numberOfProduct.text = "\(item.qty ?? 1)"
+        cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0.0))
         cell.onChangeCountOrder = { [weak self] newCount in
             self?.countUpdateSubject.send((indexPath.item, newCount))
         }
         return cell
+    }
+}
+// MARK: - Delegate
+//
+extension OrderCollectionViewSection: ContextMenuProvider {
+    func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
+                /*
+                let items = CustomeTabBarViewModel.shared
+                let wishlist = items.orders[indexPath.row]
+                let userId = items.userId ?? 1
+                 */
+                
+            }
+            return UIMenu(title: "", children: [delete])
+        }
     }
 }
 // MARK: - Header And Foter for category

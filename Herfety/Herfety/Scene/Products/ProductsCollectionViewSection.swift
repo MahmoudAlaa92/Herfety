@@ -11,7 +11,7 @@ import Combine
 class ProductsCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
     var Products: [Products]
-    let selectedItem = PassthroughSubject<Products, Never>()
+    let selectedItem = PassthroughSubject<Wishlist, Never>()
     
     // MARK: - Init
     init(Products: [Products]) {
@@ -46,11 +46,10 @@ class ProductsCollectionViewSection: CollectionViewDataSource {
         cell.savePrice.text = "Save $" + String(format: "%.2f", savedAmount)
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         
-//        // TODO: handle Dry principle here
-//        let wishlistItem =  WishlistItem(name: item.name, description: "New Item", price: item.price, image: item.image)
-//        cell.configureProduct(with: wishlistItem)
-//        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
-//        cell.configureOrder(with: orderItem)
+        let userId = CustomeTabBarViewModel.shared.userId ?? 1
+        let itemToAdded = Wishlist(userID: userId, productID: item.id, name: item.name, qty: item.qty, price: item.price, offerPrice: item.offerPrice, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, categoryID: item.categoryID, createdAt: item.createdAt, updatedAt: item.updatedAt, isApproved: item.isApproved, longDescription: item.longDescription, shortDescription: item.shortDescription, seoDescription: item.seoDescription, thumbImage: item.thumbImage, productType: item.productType)
+        
+        cell.configureProduct(with: itemToAdded)
         return cell
     }
 }
@@ -58,7 +57,10 @@ class ProductsCollectionViewSection: CollectionViewDataSource {
 //
 extension ProductsCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedItem.send(Products[indexPath.item])
+        let item = Products[indexPath.item]
+        let userId = CustomeTabBarViewModel.shared.userId
+        let wishListItem = Wishlist(userID: userId, productID: item.id, name: item.name, qty: item.qty, price: item.price, offerPrice: item.offerPrice, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, categoryID: item.categoryID, createdAt: item.createdAt, updatedAt: item.updatedAt, isApproved: item.isApproved, longDescription: item.longDescription, shortDescription: item.shortDescription, seoDescription: item.seoDescription, thumbImage: item.thumbImage, productType: item.productType)
+        selectedItem.send(wishListItem)
     }
 }
 // MARK: - Layout

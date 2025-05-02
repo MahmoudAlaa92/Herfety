@@ -19,15 +19,16 @@ class CustomeTabBarViewModel: ObservableObject {
     static let shared = CustomeTabBarViewModel()
     ///
     @UserDefault<Bool>(key: \.login) var login
+    @UserDefault<Int>(key: \.userId) var userId
+    var isWishlistItemDeleted = false
     ///
     @Published var selectedTab: TabBarItems = .home
-    @Published var tabBarIsHidden: Bool = false
     @Published var isLogin: Bool = false
-    @Published var cart: [WishlistItem] = []
-    @Published var orders: [OrderModel] = []
-    @Published var Wishlist: [Products] = []
+    @Published var orders: [WishlistItem] = []
+    @Published var cartItems: [Wishlist] = []
+    @Published var Wishlist: [Wishlist] = []
     @Published var infos: [InfoModel] = []
-    @Published var notificationsIsRead: Bool = false
+    @Published var countProductDetails: Int = 1
     ///
     var subscriptions = Set<AnyCancellable>()
     ///
@@ -35,31 +36,50 @@ class CustomeTabBarViewModel: ObservableObject {
         selectedTab = .home
         isLogin = false
         login = false
-        cart.removeAll()
         orders.removeAll()
+        cartItems.removeAll()
         Wishlist.removeAll()
     }
     
     init(){
-        fetchWishlistItems()
+        userId = 1
+        fetchWishlistItems(id: userId ?? 1)
     }
 }
-
 // MARK: - Fetching
 //
 extension CustomeTabBarViewModel {
-    // MARK: Products of Categories
+    // MARK: Wishlist
     func fetchWishlistItems(id: Int = 1) {
-        let productItems: GetProductsOfWishlistRemote = GetProductsOfWishlistRemote(network: AlamofireNetwork())
-        productItems.loadAllProducts(userId: id) { result in
+        let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
+        productItems.loadAllProducts(userId: id) { [weak self] result in
             switch result {
             case.success(let products):
                 DispatchQueue.main.async {
-                    self.Wishlist = products
-                    
+                    self?.Wishlist = products
                 }
             case .failure(let error):
-                print(error)
+                print("error: \(error)")
+            }
+        }
+    }
+}
+// MARK: - Removing
+//
+extension CustomeTabBarViewModel {
+    // MARK: Wishlist
+    func deleteWishlistItem(userId: Int, productId: Int, indexPath: IndexPath) {
+        let productItem = ProductsOfWishlistRemote(network: AlamofireNetwork())
+        productItem.removeProduct(userId: userId, productId: productId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case.success(let message):
+                    self?.isWishlistItemDeleted = true
+                    self?.Wishlist.remove(at: indexPath.row)
+                    print(message)
+                case .failure(let error):
+                    print("error \(error)")
+                }
             }
         }
     }

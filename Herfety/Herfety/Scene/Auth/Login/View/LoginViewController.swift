@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var orLabel: UILabel!
     // MARK: - Properties
     let viewModel: LoginViewModel
-    private var navBarBehavior: InfoNavBar?
+    private var navBarBehavior: HerfetyNavigationController?
     // MARK: - Init
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -66,7 +66,7 @@ class LoginViewController: UIViewController {
     }
     /// NavBar
     private func setUpNavigationBar() {
-        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
         navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
             /// don't add plus button in loginVC
         }, showRighBtn: false)

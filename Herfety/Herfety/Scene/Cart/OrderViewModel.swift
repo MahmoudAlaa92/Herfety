@@ -9,7 +9,7 @@ import Combine
 
 class OrderViewModel: ObservableObject {
     // MARK: - Properties
-    @Published var orderItems: [OrderModel] = []
+    @Published var orderItems: [Wishlist] = []
     @Published private(set) var paymentInfo: PaymentView.Model = PaymentView.Model(subTotal: 0, shipping: 0, total: 0, numberOfItems: 0)
     var navigationToShipping: (() -> Void)?
     ///
@@ -28,7 +28,7 @@ class OrderViewModel: ObservableObject {
     }
     func updateOrderCount(at index: Int, to newCount: Int) {
         guard orderItems.indices.contains(index) else { return }
-            orderItems[index].numberOfOrders = newCount
+            orderItems[index].qty = newCount
             // TODO: when increase the alert showed, solve this logic here
          // CustomeTabBarViewModel.shared.orders = orderItems
     }
@@ -39,7 +39,7 @@ extension OrderViewModel {
     private func observeOrderUpdates() {
         CustomeTabBarViewModel
             .shared
-            .$orders
+            .$cartItems
             .receive(on: DispatchQueue.main)
             .assign(to: &$orderItems)
     }
@@ -47,11 +47,21 @@ extension OrderViewModel {
     private func observeOrderItems() {
         $orderItems
             .map { orderItems -> PaymentView.Model in
-                let subTotal = orderItems.reduce(0.0) { $0 + ($1.price * Double($1.numberOfOrders)) }
+                let subTotal = orderItems.reduce(0.0) {
+                    let price = $1.price ?? 0.0
+                    let quantity = Double($1.qty ?? 0)
+                    return $0 + (price * quantity)
+                }
                 let shipping: Double = subTotal > 0 ? 10.0 : 0.0
                 let total = subTotal + shipping
-                let numberOfItems = orderItems.reduce(0) { $0 + $1.numberOfOrders }
-                return PaymentView.Model(subTotal: subTotal, shipping: shipping, total: total, numberOfItems: numberOfItems)
+                let numberOfItems = orderItems.reduce(0) { $0 + ($1.qty ?? 0) }
+
+                return PaymentView.Model(
+                    subTotal: subTotal,
+                    shipping: shipping,
+                    total: total,
+                    numberOfItems: numberOfItems
+                )
             }
             .receive(on: DispatchQueue.main)
             .assign(to: &$paymentInfo)

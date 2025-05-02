@@ -1,6 +1,6 @@
 //
 //  CardItemProvider.swift
-//  Herfety/Users/work in/Herfety/Herfety/Herfety/Scene/Home/HomeViewController.swift
+//  Herfety
 //
 //  Created by Mahmoud Alaa on 08/02/2025.
 //
@@ -11,7 +11,7 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
     var productItems: [Products]
     var headerConfigurator: ((HeaderView) -> Void)?
-    var selectedItem = PassthroughSubject<Products, Never>()
+    var selectedItem = PassthroughSubject<Wishlist, Never>()
     
     // MARK: - Init
     init(productItems: [Products]) {
@@ -30,7 +30,7 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
     }
     
     func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardOfProductCollectionViewCell.cellIdentifier, for: indexPath) as? CardOfProductCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -45,22 +45,18 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
         let finalPrice = Double(price) + discount
         
         cell.offerPrice.text = "$" + String(format: "%.2f", finalPrice)
-
+        
         cell.offerProduct.text = "\(Int(item.offerPrice ?? 0))%\nOFF"
         price = item.price ?? 0
         offer = item.offerPrice ?? 0
         let savedAmount = (Double(offer) / 100.0) * Double(price)
         cell.savePrice.text = "Save $" + String(format: "%.2f", savedAmount)
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
-
         
-        // TODO: handle Dry principle here
-        let wishlistItem =  item
+        let userId = CustomeTabBarViewModel.shared.userId ?? 1
+        let itemToAdded = Wishlist(userID: userId, productID: item.id, name: item.name, qty: item.qty, price: item.price, offerPrice: item.offerPrice, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, categoryID: item.categoryID, createdAt: item.createdAt, updatedAt: item.updatedAt, isApproved: item.isApproved, longDescription: item.longDescription, shortDescription: item.shortDescription, seoDescription: item.seoDescription, thumbImage: item.thumbImage, productType: item.productType)
         
-        cell.configureProduct(with: wishlistItem)
-        
-//        let orderItem = OrderModel(name: item.name, description: "New Item", price: Double(item.price.dropFirst()) ?? 0.00 , image: item.image, numberOfOrders: 1)
-//        cell.configureOrder(with: orderItem)
+        cell.configureProduct(with: itemToAdded)
         return cell
     }
 }
@@ -69,7 +65,9 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
 extension CardItemCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = productItems[indexPath.item]
-        selectedItem.send(item)
+        let userId = CustomeTabBarViewModel.shared.userId ?? 1
+        let wishListItem = Wishlist(userID: userId, productID: item.id, name: item.name, qty: item.qty, price: item.price, offerPrice: item.offerPrice, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, categoryID: item.categoryID, createdAt: item.createdAt, updatedAt: item.updatedAt, isApproved: item.isApproved, longDescription: item.longDescription, shortDescription: item.shortDescription, seoDescription: item.seoDescription, thumbImage: item.thumbImage, productType: item.productType)
+        selectedItem.send(wishListItem)
     }
 }
 // MARK: - Layout

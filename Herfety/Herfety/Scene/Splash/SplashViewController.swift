@@ -14,7 +14,7 @@ class SplashViewController: UIViewController {
     @IBOutlet weak var signUpButton: PrimaryButton!
     @IBOutlet weak var HerfetyView: LottieAnimationView!
     // MARK: - Properties
-    private var navigationBarBehavior: InfoNavBar?
+    private var navigationBarBehavior: HerfetyNavigationController?
     // MARK: - Init
     init() {
         super.init(nibName: nil, bundle: nil)

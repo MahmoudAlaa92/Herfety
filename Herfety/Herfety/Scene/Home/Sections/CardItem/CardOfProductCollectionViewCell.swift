@@ -11,8 +11,7 @@ class CardOfProductCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     //
     static let cellIdentifier: String = "CardOfProductCollectionViewCell"
-    var product: Products!
-    var order: OrderModel!
+    var productOfWishlist: Wishlist!
     // MARK: - Outlets
     //
     @IBOutlet weak var topBackground: UIView!
@@ -84,16 +83,9 @@ extension CardOfProductCollectionViewCell {
     }
     /// Configure the product Details
     ///
-    ///  - Parameter product: The `product` containing the data to be displayed in `whishlist` page
-    func configureProduct(with product: Products) {
-        self.product = product
-    }
-    /// Configure the order Details
-    ///
-    ///  - Parameter order: The `order` containing the data to be displayed in `orders` page
-    ///
-    func configureOrder(with order: OrderModel) {
-        self.order = order
+    ///  - Parameter product: The `product` containing the data to be displayed in `Wishlist & Cart` page
+    func configureProduct(with product: Wishlist) {
+        self.productOfWishlist = product
     }
 }
 // MARK: - Actions
@@ -114,18 +106,20 @@ extension CardOfProductCollectionViewCell {
 extension CardOfProductCollectionViewCell {
     
     private func updateWhishlistItems() {
-        if !CustomeTabBarViewModel.shared.Wishlist.contains(where: { $0 == self.product }) {
-            let productItems: GetProductsOfWishlistRemote = GetProductsOfWishlistRemote(network: AlamofireNetwork())
-            productItems.addNewProduct(userId: 1, productId: product.id ?? 1) { result in
-                print(result)
-                CustomeTabBarViewModel.shared.fetchWishlistItems(id: 1)
+        if !CustomeTabBarViewModel.shared.Wishlist.contains(where: { $0 == self.productOfWishlist }) {
+            let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
+            
+            productItems.addNewProduct(userId: CustomeTabBarViewModel.shared.userId ?? 1, productId: (productOfWishlist.productID ?? 1)) { result in
+                CustomeTabBarViewModel.shared.fetchWishlistItems(id: CustomeTabBarViewModel.shared.userId ?? 1)
             }
         }
     }
     
     private func updataCartItems() {
-        if !CustomeTabBarViewModel.shared.orders.contains(where: { $0 == self.order }) {
-            CustomeTabBarViewModel.shared.orders.append(order)
+        if var itemToAdd = productOfWishlist ,
+           !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.productOfWishlist })  {
+            itemToAdd.qty = 1
+            CustomeTabBarViewModel.shared.cartItems.append(itemToAdd)
         }
     }
 }

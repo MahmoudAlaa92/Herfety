@@ -5,12 +5,13 @@
 //  Created by Mahmoud Alaa on 28/02/2025.
 //
 import UIKit
+import Combine
 
 class ProductDetailsCollectionViewSection: CollectionViewDataSource {
     
-    var productItems: Products
+    var productItems: Wishlist
     
-    init(productItems: Products) {
+    init(productItems: Wishlist) {
         self.productItems = productItems
     }
     
@@ -31,7 +32,7 @@ class ProductDetailsCollectionViewSection: CollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesProductDetailsCollectionViewCell.identifier, for: indexPath) as? ImagesProductDetailsCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.imageProduct.setImage(with: productItems.thumbImage ?? "", placeholderImage: Images.loading)
+        cell.imageProduct.setImage(with: productItems.thumbImage ?? " ", placeholderImage: Images.loading)
         cell.indexProduct.text = "1/1"
         return cell
     }
@@ -84,8 +85,10 @@ extension ProductDetailsCollectionViewSection: HeaderAndFooterProvider {
             for: indexPath) as? TitleProductDetails {
             header.configure(
                 titleLabl: productItems.name ?? "",
-                priceLabel: "$" + String(format: "%.2f", productItems.price ?? 0.0),
-                avaliableLabel:  (productItems.qty != nil && productItems.qty ?? 0 > 0) ? "Avaliable in stok" : "Not Avaliable")
+                priceLabel: "$" + String(format: "%.2f", productItems.price ?? 0),
+                avaliableLabel:  (productItems.qty != nil) && (productItems.qty ?? 0) > 0  ? "Avaliable in stok" : "Not Avaliable")
+            header.configureProduct(with: productItems)
+            
             return header
         }
         else if kind == DescriptionProductDetails.identifier,
@@ -94,6 +97,7 @@ extension ProductDetailsCollectionViewSection: HeaderAndFooterProvider {
                     withReuseIdentifier: DescriptionProductDetails.identifier,
                     for: indexPath) as? DescriptionProductDetails {
             footer.configure(descriptionLabel: productItems.longDescription ?? "")
+               
             return footer
         }
         return UICollectionReusableView()

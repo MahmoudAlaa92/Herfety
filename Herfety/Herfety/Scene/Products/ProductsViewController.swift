@@ -17,7 +17,7 @@ class ProductsViewController: UIViewController {
     private(set) var viewModel: ProductsViewModel
     private var sections = [CollectionViewDataSource]()
     private var layoutSections = [LayoutSectionProvider]()
-    private var navBarBehavior: InfoNavBar?
+    private var navBarBehavior: HerfetyNavigationController?
     private var productsItems: ProductsCollectionViewSection?
     ///
     var subscriptions = Set<AnyCancellable>()
@@ -44,7 +44,7 @@ class ProductsViewController: UIViewController {
 extension ProductsViewController {
     /// NavBar
     private func setUpNavigationBar() {
-        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
         navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
             /// don't add plus button in loginVC
         }, showRighBtn: false)

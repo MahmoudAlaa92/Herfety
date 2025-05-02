@@ -4,14 +4,18 @@
 //
 //  Created by Mahmoud Alaa on 01/03/2025.
 //
-
 import UIKit
+import Combine
 
 class ReviewCollectionViewSection: CollectionViewDataSource {
     
+    // MARK: - Properties
     let reviewItems: [Review]
-    let product: Products
-    init(reviewItems: [Review], rating: Products) {
+    let product: Wishlist
+    let reviewrsButton = PassthroughSubject<[Review], Never>()
+
+    // MARK: - Init
+    init(reviewItems: [Review], rating: Wishlist) {
         self.reviewItems = reviewItems
         self.product = rating
     }
@@ -36,10 +40,10 @@ class ReviewCollectionViewSection: CollectionViewDataSource {
         let item = reviewItems[indexPath.row]
         cell.commentReviewer.text = item.comment
         cell.imageReviewer.image = item.image
+        
         return cell
     }
 }
-
 // MARK: - Layout
 //
 struct ReviewCollectionViewSectionLayout: LayoutSectionProvider {
@@ -86,6 +90,9 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
             for: indexPath) as? TitleReviewsCollectionReusableView {
             // TODO: change the defualt rating here
             header.configure(numberOfReviews: reviewItems.count, rating: 3.5)
+            header.onShowReviewrsTapped = { [weak self] in
+                self?.reviewrsButton.send(self?.reviewItems ?? [])
+            }
             return header
         } else if kind == ButtonCollectionReusableView.identifier,
                   let footer = collectionView.dequeueReusableSupplementaryView(
@@ -93,6 +100,8 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
                     withReuseIdentifier: ButtonCollectionReusableView.identifier,
                     for: indexPath) as? ButtonCollectionReusableView {
             footer.configure(with: .init(title: "Add To Cart", target: self, action: #selector(addToCart)))
+            footer.configureProduct(with: self.product)
+            
             return footer
         }
         return UICollectionReusableView()

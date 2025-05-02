@@ -9,8 +9,11 @@ import UIKit
 
 class TitleProductDetails: UICollectionReusableView {
     
+    // MARK: - Properties
     static let identifier: String = "TitleProductDetails"
+    var product: Wishlist!
     
+    // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
@@ -37,11 +40,27 @@ extension TitleProductDetails {
         priceLabel.font = .body
         avaliableLabel.font = .body
     }
+    
+    /// Configure the product Details
+    ///
+    ///  - Parameter product: The `product` containing the data to be displayed in `whishlist` page
+    func configureProduct(with product: Wishlist) {
+        self.product = product
+    }
 }
 // MARK: - Actions
 //
 extension TitleProductDetails {
     @IBAction func addToWhishlist(_ sender: Any) {
-        
+        if !CustomeTabBarViewModel.shared.Wishlist.contains(where: { $0 == self.product }) {
+            let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
+            
+            let userId = CustomeTabBarViewModel.shared.userId ?? 1
+            productItems.addNewProduct(userId: userId, productId: (product.productID ?? 1)) { result in
+                CustomeTabBarViewModel.shared.fetchWishlistItems(id: userId)
+            }
+        } else {
+            //TODO: show warning the item Added before
+        }
     }
 }

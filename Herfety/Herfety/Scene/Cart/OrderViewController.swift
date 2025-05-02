@@ -62,6 +62,17 @@ extension OrderViewController: UICollectionViewDataSource {
         return UICollectionReusableView()
     }
 }
+extension OrderViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        contextMenuConfigurationForItemAt indexPath: IndexPath,
+                        point: CGPoint) -> UIContextMenuConfiguration? {
+        if let providers = sections[indexPath.section] as? ContextMenuProvider {
+            return providers.contextMenuConfiguration(for: collectionView, at: indexPath, point: point)
+        }
+        return nil
+    }
+}
+
 // MARK: - Configurations
 //
 private extension OrderViewController {
@@ -73,11 +84,12 @@ private extension OrderViewController {
     
     private func setUpCollectionView() {
         collectionView.dataSource =  self
+        collectionView.delegate = self
         sections.forEach { $0.registerCells(in: collectionView) }
     }
     
     private func configureProvider() {
-        CustomeTabBarViewModel.shared.$orders.sink { [weak self] value in
+        CustomeTabBarViewModel.shared.$cartItems.sink { [weak self] value in
             let orderProvider = OrderCollectionViewSection(orderItems: value)
             guard let self = self else { return }
             self.sections = [orderProvider]

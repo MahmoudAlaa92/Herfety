@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class InfoNavBar {
+class HerfetyNavigationController {
     // MARK: - Properties
     private unowned var navigationItem: UINavigationItem
     private unowned var navigationController: UINavigationController?
@@ -20,7 +20,7 @@ class InfoNavBar {
 }
 // MARK: - Configuration
 //
-extension InfoNavBar {
+extension HerfetyNavigationController {
     
     func configure(title: String = "", titleColor: UIColor = .black, onPlus: @escaping () -> Void, showRighBtn: Bool = true) {
         self.plusBtn = onPlus
@@ -54,7 +54,7 @@ extension InfoNavBar {
 }
 // MARK: - Actions
 //
-extension InfoNavBar {
+extension HerfetyNavigationController {
     @objc private func onPlusBtnTapped() {
         plusBtn()
     }

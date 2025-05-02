@@ -6,25 +6,26 @@
 //
 import Foundation
 
-// MARK: - Product
 struct Products: Codable, Equatable {
     let id: Int?
     let name, slug: String?
     let thumbImage: String?
     let vendorID, categoryID, brandID: Int?
-    let qty: Int?
+
+    var qty: Int?
     let shortDescription, longDescription, sku: String?
     let price, offerPrice: Double?
     let offerStartDate, offerEndDate, productType: String?
     let isApproved: Int?
     let seoTitle, seoDescription, createdAt, updatedAt: String?
-   
 
     enum CodingKeys: String, CodingKey {
-        case id, name, slug, thumbImage
+        case id
+        case name, slug, thumbImage
         case vendorID = "vendorId"
         case categoryID = "categoryId"
         case brandID = "brandId"
+
         case qty, shortDescription, longDescription, sku, price, offerPrice, offerStartDate, offerEndDate, productType, isApproved, seoTitle, seoDescription, createdAt, updatedAt
     }
     init(
@@ -49,6 +50,7 @@ struct Products: Codable, Equatable {
            seoDescription: String? = nil,
            createdAt: String? = nil,
            updatedAt: String? = nil,
+
        ) {
            self.id = id
            self.name = name
@@ -57,6 +59,7 @@ struct Products: Codable, Equatable {
            self.vendorID = vendorID
            self.categoryID = categoryID
            self.brandID = brandID
+
            self.qty = qty
            self.shortDescription = shortDescription
            self.longDescription = longDescription

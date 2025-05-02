@@ -15,7 +15,7 @@ class ProductDetailsViewController: UIViewController {
     private(set) var viewModel: ProductDetailsViewModel
     private var sections: [CollectionViewDataSource] = []
     private var layoutSections: [LayoutSectionProvider] = []
-    private var navBarBehavior: InfoNavBar?
+    private var navBarBehavior: HerfetyNavigationController?
     private var productDetialsSection: ProductDetailsCollectionViewSection?
     private var reviewDetailsSection: ReviewCollectionViewSection?
     private var recommendedProductsSection: CardItemCollectionViewSection?
@@ -44,7 +44,7 @@ class ProductDetailsViewController: UIViewController {
 extension ProductDetailsViewController {
     /// NavBar
     private func setUpNavigationBar() {
-        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
         navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
             /// don't add plus button in VC
         }, showRighBtn: false)
@@ -58,7 +58,7 @@ extension ProductDetailsViewController {
     private func configureSections() {
         let productDetials = ProductDetailsCollectionViewSection(productItems: viewModel.productItem)
         self.productDetialsSection = productDetials
-        
+   
         let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItem)
         self.reviewDetailsSection = reviews
         
@@ -129,9 +129,9 @@ extension ProductDetailsViewController {
         viewModel.$recommendItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newItems in
-            self?.recommendedProductsSection?.productItems = newItems
-            self?.collectionView.reloadData()
-        }.store(in: &subscriptions)
+                self?.recommendedProductsSection?.productItems = newItems
+                self?.collectionView.reloadData()
+            }.store(in: &subscriptions)
         /// selected her
         recommendedProductsSection?.selectedItem.sink(receiveValue: { [weak self] value in
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
@@ -140,6 +140,51 @@ extension ProductDetailsViewController {
             
             self?.navigationController?.pushViewController(vc, animated: true)
         }).store(in: &subscriptions)
+        
+        bindWishlist()
+        bindReviewrs()
     }
-    
+    // MARK: - Wishlist
+    private func bindWishlist() {
+        CustomeTabBarViewModel.shared.$Wishlist
+            .dropFirst()
+            .sink { [weak self] wishlist in
+                guard let self = self else { return }
+                
+                /// Trigger alert presentation
+                let alertItem = AlertModel(
+                    message: "Added To Wishlist",
+                    buttonTitle: "Ok",
+                    image: .success,
+                    status: .success
+                )
+                self.presentCustomAlert(with: alertItem)
+            }
+            .store(in: &subscriptions)
+    }
+    // MARK: - Reviewrs
+    private func bindReviewrs() {
+        reviewDetailsSection?.reviewrsButton.sink { [weak self] reviewrs in
+            let vc = ReviewersViewController(viewModel: ReviewerViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }.store(in: &subscriptions)
+    }
+}
+// MARK: - Private Hanlder
+//
+extension ProductDetailsViewController {
+    func presentCustomAlert(with alertItem: AlertModel) {
+        let alertVC = AlertViewController(nibName: "AlertViewController", bundle: nil)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        alertVC.loadViewIfNeeded() /// Ensure outlets are connected
+        
+        alertVC.show(alertItem: alertItem)
+        
+        /// Optional: dismiss on button press
+        alertVC.actionHandler = { [weak alertVC] in
+            alertVC?.dismiss(animated: true)
+        }
+        self.present(alertVC, animated: true)
+    }
 }

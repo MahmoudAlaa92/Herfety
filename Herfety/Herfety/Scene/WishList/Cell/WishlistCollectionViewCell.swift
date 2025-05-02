@@ -9,8 +9,9 @@ import UIKit
 
 class WishlistCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
     static let identifier: String = "WishlistCollectionViewCell"
-    
+    var order: Wishlist!
     // MARK: - Outelets
     //
     @IBOutlet weak var containerView: UIView!
@@ -28,12 +29,22 @@ class WishlistCollectionViewCell: UICollectionViewCell {
         // Initialization code
         configure()
         configureContainerView()
+        
     }
-    
 }
 // MARK: - Configure
 //
 extension WishlistCollectionViewCell {
+    
+    
+    /// Configure the order Details
+    ///
+    ///  - Parameter order: The `order` containing the data to be displayed in `wishlist` page
+    ///
+    func configureOrder(with order: Wishlist) {
+        self.order = order
+    }
+    
     private func configure() {
         imageCell.contentMode = .scaleAspectFit
         
@@ -48,18 +59,14 @@ extension WishlistCollectionViewCell {
     
     /// Configures the appearance of the container view, including shadows and corner radius.
     private func configureContainerView() {
-        
         containerView.backgroundColor = Colors.hMainTheme
         containerView.layer.shadowColor = Colors.primaryBlue.cgColor
         containerView.layer.shadowOffset = .zero
         containerView.layer.shadowOpacity = 0.15
         containerView.layer.shadowRadius = 2
         containerView.layer.cornerRadius = 20
-        
-        
     }
 }
-
 // MARK: - Actions
 //
 extension WishlistCollectionViewCell {
@@ -69,6 +76,10 @@ extension WishlistCollectionViewCell {
     }
     
     @IBAction func addToCart(_ sender: UIButton) {
-        // Add To Cart
+        if var itemToAdd = order,
+           !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order })  {
+            itemToAdd.qty = 1
+            CustomeTabBarViewModel.shared.cartItems.append(itemToAdd)
+        }
     }
 }

@@ -7,14 +7,13 @@
 
 import Foundation
 
-
 protocol ProductsOfWishlistRemoteProtocol {
-    func loadAllProducts(userId: Int, completion: @escaping (Result<[Products], Error>) -> Void)
+    func loadAllProducts(userId: Int, completion: @escaping (Result<[Wishlist], Error>) -> Void)
 }
 
-class GetProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
+class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
     /// .get
-    func loadAllProducts(userId: Int, completion: @escaping (Result<[Products], Error>) -> Void) {
+    func loadAllProducts(userId: Int, completion: @escaping (Result<[Wishlist], Error>) -> Void) {
         let parameters = ["id": userId]
         let request = HerfetyRequest(method: .get, path: "api/WishLists", parameters: parameters)
         enqueue(request, completion: completion)
@@ -29,6 +28,14 @@ class GetProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
         let request = HerfetyRequest(method: .post, path: "api/WishLists", parameters: parameters)
         enqueue(request, completion: completion)
     }
-
+    /// .delete
+    func removeProduct(userId: Int, productId: Int, completion: @escaping (Result<WishlistMessage, Error>) -> Void) {
+        let parameters: [String: Sendable] = [
+            "UserId": userId,
+            "ProductId": productId
+        ]
+        
+        let request = HerfetyRequest(method: .delete, path: "api/WishLists", parameters: parameters)
+        enqueue(request, completion: completion)
+    }
 }
-

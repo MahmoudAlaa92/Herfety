@@ -10,7 +10,7 @@ class OrderCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier = "OrderCollectionViewCell"
-    var countOrder: Int = 1 {
+    var countOrder: Int = CustomeTabBarViewModel.shared.countProductDetails {
         didSet {
             onChangeCountOrder?(countOrder)
             numberOfProduct.text = "\(countOrder)"
