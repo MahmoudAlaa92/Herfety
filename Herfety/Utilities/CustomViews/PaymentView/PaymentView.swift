@@ -7,7 +7,7 @@
 import UIKit
 
 class PaymentView: UIView {
-    
+    // MARK: - Outlets
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var subTotalLabel: UILabel!
     @IBOutlet weak var subTotalPrice: UILabel!
@@ -55,13 +55,13 @@ extension PaymentView {
     ///
     /// - Parameter viewModel: The ViewModel containing the data to be displayed.
     func configure(with viewModel: PaymentView.Model) {
-        self.subTotalPrice.text = "$\(viewModel.subTotal)"
+        self.subTotalPrice.text = "$" +  String(format: "%.2f",(viewModel.subTotal))
         self.subTotalPrice.font = .callout
         
         self.shipingPrice.text = "$\(viewModel.shipping)"
         self.shipingPrice.font = .callout
         
-        self.TotalPrice.text = "$\(viewModel.total)"
+        self.TotalPrice.text = "$" +  String(format: "%.2f",(viewModel.total))
         self.TotalPrice.font = .callout
         
         self.numberOfItems.text = "(\(viewModel.numberOfItems) item)"

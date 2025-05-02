@@ -76,8 +76,10 @@ extension WishlistCollectionViewCell {
     }
     
     @IBAction func addToCart(_ sender: UIButton) {
-        if !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order }) {
-            CustomeTabBarViewModel.shared.cartItems.append(order)
+        if var itemToAdd = order,
+           !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order })  {
+            itemToAdd.qty = 1
+            CustomeTabBarViewModel.shared.cartItems.append(itemToAdd)
         }
     }
 }

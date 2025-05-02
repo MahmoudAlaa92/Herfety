@@ -36,15 +36,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="56.666666666666664"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7j-AW-Ixf">
-                                            <rect key="frame" x="0.0" y="0.0" width="279" height="56.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="259" height="56.666666666666664"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYF-JE-ctc">
-                                            <rect key="frame" x="305" y="0.0" width="70" height="56.666666666666664"/>
+                                            <rect key="frame" x="285" y="0.0" width="90" height="56.666666666666664"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="70" id="rmq-pp-Dp8"/>
+                                                <constraint firstAttribute="width" constant="90" id="rmq-pp-Dp8"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -68,15 +68,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="56.666666666666664"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYb-fG-8H3">
-                                            <rect key="frame" x="0.0" y="0.0" width="279" height="56.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="259" height="56.666666666666664"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mbo-t8-JJN">
-                                            <rect key="frame" x="305" y="0.0" width="70" height="56.666666666666664"/>
+                                            <rect key="frame" x="285" y="0.0" width="90" height="56.666666666666664"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="70" id="cWe-lg-fSA"/>
+                                                <constraint firstAttribute="width" constant="90" id="cWe-lg-fSA"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -100,13 +100,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="56.666666666666664"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cov-lQ-cRO">
-                                            <rect key="frame" x="0.0" y="0.0" width="205" height="56.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="185" height="56.666666666666664"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLZ-9J-vbx">
-                                            <rect key="frame" x="220" y="0.0" width="70" height="56.666666666666664"/>
+                                            <rect key="frame" x="200" y="0.0" width="70" height="56.666666666666664"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="3Zr-4M-fxv"/>
                                             </constraints>
@@ -115,9 +115,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpv-Sv-cfK">
-                                            <rect key="frame" x="305" y="0.0" width="70" height="56.666666666666664"/>
+                                            <rect key="frame" x="285" y="0.0" width="90" height="56.666666666666664"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="70" id="nhg-kr-Ktx"/>
+                                                <constraint firstAttribute="width" constant="90" id="nhg-kr-Ktx"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
