@@ -15,7 +15,7 @@ class ProductDetailsViewController: UIViewController {
     private(set) var viewModel: ProductDetailsViewModel
     private var sections: [CollectionViewDataSource] = []
     private var layoutSections: [LayoutSectionProvider] = []
-    private var navBarBehavior: InfoNavBar?
+    private var navBarBehavior: HerfetyNavigationController?
     private var productDetialsSection: ProductDetailsCollectionViewSection?
     private var reviewDetailsSection: ReviewCollectionViewSection?
     private var recommendedProductsSection: CardItemCollectionViewSection?
@@ -44,7 +44,7 @@ class ProductDetailsViewController: UIViewController {
 extension ProductDetailsViewController {
     /// NavBar
     private func setUpNavigationBar() {
-        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
         navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
             /// don't add plus button in VC
         }, showRighBtn: false)

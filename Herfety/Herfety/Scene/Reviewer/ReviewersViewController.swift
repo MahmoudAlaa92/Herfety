@@ -15,7 +15,7 @@ class ReviewersViewController: UIViewController {
     private var viewModel: ReviewerViewModel
     private var sections: [CollectionViewDataSource] = []
     private var sectionsLayout: [LayoutSectionProvider] = []
-    private var navBarBehavior: InfoNavBar?
+    private var navBarBehavior: HerfetyNavigationController?
     
     // MARK: - Init
     init(viewModel: ReviewerViewModel) {
@@ -57,7 +57,7 @@ extension ReviewersViewController {
     }
     
     private func setUpNavigationBar() {
-        navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
         navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
         }, showRighBtn: true)
     }
