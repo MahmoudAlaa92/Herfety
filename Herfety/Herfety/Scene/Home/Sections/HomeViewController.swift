@@ -37,20 +37,6 @@ class HomeViewController: UIViewController {
         cofigureCompositianalLayout()
         configureNavBar()
         bindViewModel()
-        
-//        let productRemote: ProductRemoteProtocol = ProductRemote(network: AlamofireNetwork())
-//
-//        productRemote.loadAllProducts { result in
-//            switch result {
-//            case .success(let products):
-//                print("✅ Loaded \(products.count) products")
-//                products.forEach { print("• id: \(String(describing: $0.id)) - name: \(String(describing: $0.name)) ") }
-//                
-//            case .failure(let error):
-//                print("❌ Failed to load products:", error.localizedDescription)
-//            }
-//        }
-        
     }
     
     private func setUpCollectionView() {
@@ -248,12 +234,14 @@ extension HomeViewController {
                     return
                 }
                 /// Trigger alert presentation
+                let trigger = CustomeTabBarViewModel.shared.isWishlistItemDeleted
                 let alertItem = AlertModel(
-                    message: "Added To Wishlist",
+                    message: trigger == true ?  "Deleted From Wishlist": "Added To Wishlist",
                     buttonTitle: "Ok",
                     image: .success,
                     status: .success
                 )
+                CustomeTabBarViewModel.shared.isWishlistItemDeleted = false
                 self.presentCustomAlert(with: alertItem)
             }
             .store(in: &subscriptions)

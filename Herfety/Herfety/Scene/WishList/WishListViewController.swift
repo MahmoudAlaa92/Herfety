@@ -11,7 +11,7 @@ class WishListViewController: UIViewController {
 
     // MARK: - Properties
     //
-    private var providers = [CollectionViewDataSource]()
+    private var sections = [CollectionViewDataSource]()
     private var layoutProviders = [LayoutSectionProvider]()
     
     // MARK: - Outlets
@@ -37,7 +37,7 @@ extension WishListViewController {
             .$Wishlist
             .sink { [weak self] value in
             let wishListProvider = WishlistCollectionViewSection(whishlistItems: value)
-            self?.providers = [wishListProvider]
+            self?.sections = [wishListProvider]
             self?.collectionView.reloadData()
         }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
         layoutProviders.append(WishlistSectionLayoutProvider())
@@ -46,7 +46,7 @@ extension WishListViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        providers.forEach { $0.registerCells(in: collectionView) }
+        sections.forEach { $0.registerCells(in: collectionView) }
     }
     
     /// Configure Layout
@@ -63,7 +63,7 @@ extension WishListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         contextMenuConfigurationForItemAt indexPath: IndexPath,
                         point: CGPoint) -> UIContextMenuConfiguration? {
-        if let providers = providers[indexPath.section] as? ContextMenuProvider {
+        if let providers = sections[indexPath.section] as? ContextMenuProvider {
             return providers.contextMenuConfiguration(for: collectionView, at: indexPath, point: point)
         }
         return nil
@@ -75,15 +75,15 @@ extension WishListViewController: UICollectionViewDelegate {
 extension WishListViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return providers.count
+        return sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        providers[section].numberOfItems
+        sections[section].numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return providers[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
+        return sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
 }
 
@@ -91,7 +91,7 @@ extension WishListViewController: UICollectionViewDataSource {
 //
 extension WishListViewController {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if let provider = providers[indexPath.section] as? HeaderAndFooterProvider {
+        if let provider = sections[indexPath.section] as? HeaderAndFooterProvider {
             return provider.cellForItems(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         }
         return UICollectionReusableView()

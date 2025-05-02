@@ -9,7 +9,6 @@ import UIKit
 class DescriptionProductDetails: UICollectionReusableView {
     // MARK: - Properties
     static let identifier: String = "DescriptionProductDetails"
-    
     ///
     var productCount: Int {
         get { return Int(numberProduct.text ?? "1") ?? 1 }
@@ -24,7 +23,6 @@ class DescriptionProductDetails: UICollectionReusableView {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var minusAndPlusStackView: UIStackView!
-
     
     override func awakeFromNib() {
         super.awakeFromNib()

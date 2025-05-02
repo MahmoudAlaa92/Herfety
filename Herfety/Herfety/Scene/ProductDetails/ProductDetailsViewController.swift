@@ -60,6 +60,7 @@ extension ProductDetailsViewController {
         self.productDetialsSection = productDetials
    
         let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItem)
+        self.reviewDetailsSection = reviews
         
         let recommendItems = CardItemCollectionViewSection(productItems: viewModel.recommendItems)
         self.recommendedProductsSection = recommendItems

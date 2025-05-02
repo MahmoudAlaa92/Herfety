@@ -67,7 +67,6 @@ extension WishlistCollectionViewCell {
         containerView.layer.cornerRadius = 20
     }
 }
-
 // MARK: - Actions
 //
 extension WishlistCollectionViewCell {
@@ -78,9 +77,7 @@ extension WishlistCollectionViewCell {
     
     @IBAction func addToCart(_ sender: UIButton) {
         if !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order }) {
-            // TODO: change this logic in future
-            #warning("change this")
-//            order.qty = 1
             CustomeTabBarViewModel.shared.cartItems.append(order)
-        }    }
+        }
+    }
 }

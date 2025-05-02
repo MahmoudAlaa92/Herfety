@@ -8,7 +8,7 @@
 import Foundation
 
 struct Wishlist: Codable, Equatable {
-    let userID, productID: Int??
+    let userID, productID: Int?
     let name: String?
     var qty: Int?
     let price: Double?
@@ -66,4 +66,8 @@ struct Wishlist: Codable, Equatable {
            self.thumbImage = thumbImage
            self.productType = productType
        }
+}
+
+struct WishlistMessage: Codable {
+    let message: String?
 }

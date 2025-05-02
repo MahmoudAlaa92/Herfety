@@ -33,10 +33,10 @@ class OrderCollectionViewSection: CollectionViewDataSource {
         let item = orderItems[indexPath.item]
         
         cell.nameProduct.text = item.name
-        cell.descriptionProduct.text = item.shortDescription ?? ""
-            .split(separator: " ")
-            .prefix(4)
-            .joined(separator: " ")
+        cell.descriptionProduct.text = item.shortDescription? .split(separator: " ")
+            .prefix(3)
+            .joined(separator: " ") ?? ""
+           
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         cell.numberOfProduct.text = "\(item.qty ?? 1)"
         cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0.0))
@@ -44,6 +44,23 @@ class OrderCollectionViewSection: CollectionViewDataSource {
             self?.countUpdateSubject.send((indexPath.item, newCount))
         }
         return cell
+    }
+}
+// MARK: - Delegate
+//
+extension OrderCollectionViewSection: ContextMenuProvider {
+    func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
+                /*
+                let items = CustomeTabBarViewModel.shared
+                let wishlist = items.orders[indexPath.row]
+                let userId = items.userId ?? 1
+                 */
+                
+            }
+            return UIMenu(title: "", children: [delete])
+        }
     }
 }
 // MARK: - Header And Foter for category

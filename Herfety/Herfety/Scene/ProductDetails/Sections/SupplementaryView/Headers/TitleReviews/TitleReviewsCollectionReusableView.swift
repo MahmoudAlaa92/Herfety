@@ -24,7 +24,6 @@ class TitleReviewsCollectionReusableView: UICollectionReusableView {
         super.awakeFromNib()
         configureUI()
     }
-    
 }
 // MARK: - Configuration
 //

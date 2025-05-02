@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol ProductsOfWishlistRemoteProtocol {
     func loadAllProducts(userId: Int, completion: @escaping (Result<[Wishlist], Error>) -> Void)
 }
@@ -30,7 +29,7 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
         enqueue(request, completion: completion)
     }
     /// .delete
-    func removeProduct(userId: Int, productId: Int, completion: @escaping (Result<[Wishlist], Error>) -> Void) {
+    func removeProduct(userId: Int, productId: Int, completion: @escaping (Result<WishlistMessage, Error>) -> Void) {
         let parameters: [String: Sendable] = [
             "UserId": userId,
             "ProductId": productId
@@ -40,4 +39,3 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
         enqueue(request, completion: completion)
     }
 }
-

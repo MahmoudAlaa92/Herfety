@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 01/03/2025.
 //
-
 import UIKit
 import Combine
 
@@ -41,10 +40,10 @@ class ReviewCollectionViewSection: CollectionViewDataSource {
         let item = reviewItems[indexPath.row]
         cell.commentReviewer.text = item.comment
         cell.imageReviewer.image = item.image
+        
         return cell
     }
 }
-
 // MARK: - Layout
 //
 struct ReviewCollectionViewSectionLayout: LayoutSectionProvider {
@@ -92,8 +91,7 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
             // TODO: change the defualt rating here
             header.configure(numberOfReviews: reviewItems.count, rating: 3.5)
             header.onShowReviewrsTapped = { [weak self] in
-                guard let self = self else { return }
-                self.reviewrsButton.send(reviewItems)
+                self?.reviewrsButton.send(self?.reviewItems ?? [])
             }
             return header
         } else if kind == ButtonCollectionReusableView.identifier,

@@ -56,11 +56,11 @@ extension TitleProductDetails {
             let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
             
             let userId = CustomeTabBarViewModel.shared.userId ?? 1
-            productItems.addNewProduct(userId: userId, productId: (product.productID ?? 1) ?? 1) { result in
+            productItems.addNewProduct(userId: userId, productId: (product.productID ?? 1)) { result in
                 CustomeTabBarViewModel.shared.fetchWishlistItems(id: userId)
             }
         } else {
-            #warning("show warning the item Added before")
+            //TODO: show warning the item Added before
         }
     }
 }

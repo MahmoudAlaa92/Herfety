@@ -59,7 +59,6 @@ extension ReviewersViewController {
     private func setUpNavigationBar() {
         navBarBehavior = InfoNavBar(navigationItem: navigationItem, navigationController: navigationController)
         navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
-            print("Yes")
         }, showRighBtn: true)
     }
 }

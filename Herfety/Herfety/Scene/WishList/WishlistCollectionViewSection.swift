@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 10/02/2025.
 //
-
 import UIKit
 
 class WishlistCollectionViewSection: CollectionViewDataSource {
@@ -68,17 +67,16 @@ extension WishlistCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
-                let wishlist = CustomeTabBarViewModel.shared.Wishlist[indexPath.row]
-                // TODO: change the user Id with userLogin
-                #warning("Change the user id")
-                CustomeTabBarViewModel.shared.deleteWishlistItem(userId: 1, productId: (wishlist.userID ?? 1) ?? 1)
-                CustomeTabBarViewModel.shared.Wishlist.remove(at: indexPath.row)
+                let items = CustomeTabBarViewModel.shared
+                let wishlist = items.Wishlist[indexPath.row]
+                let userId = items.userId ?? 1
+                CustomeTabBarViewModel.shared.deleteWishlistItem(userId: userId, productId: (wishlist.productID ?? 1), indexPath: indexPath)
+                
             }
             return UIMenu(title: "", children: [delete])
         }
     }
 }
-
 // MARK: - Layout
 //
 struct WishlistSectionLayoutProvider: LayoutSectionProvider {

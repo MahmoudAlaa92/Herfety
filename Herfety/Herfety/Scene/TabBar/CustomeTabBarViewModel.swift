@@ -20,9 +20,9 @@ class CustomeTabBarViewModel: ObservableObject {
     ///
     @UserDefault<Bool>(key: \.login) var login
     @UserDefault<Int>(key: \.userId) var userId
+    var isWishlistItemDeleted = false
     ///
     @Published var selectedTab: TabBarItems = .home
-    @Published var tabBarIsHidden: Bool = false
     @Published var isLogin: Bool = false
     @Published var orders: [WishlistItem] = []
     @Published var cartItems: [Wishlist] = []
@@ -42,22 +42,21 @@ class CustomeTabBarViewModel: ObservableObject {
     }
     
     init(){
-        fetchWishlistItems()
         userId = 1
+        fetchWishlistItems(id: userId ?? 1)
     }
 }
-
 // MARK: - Fetching
 //
 extension CustomeTabBarViewModel {
     // MARK: Wishlist
     func fetchWishlistItems(id: Int = 1) {
         let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
-        productItems.loadAllProducts(userId: id) { result in
+        productItems.loadAllProducts(userId: id) { [weak self] result in
             switch result {
             case.success(let products):
                 DispatchQueue.main.async {
-                    self.Wishlist = products
+                    self?.Wishlist = products
                 }
             case .failure(let error):
                 print("error: \(error)")
@@ -69,13 +68,15 @@ extension CustomeTabBarViewModel {
 //
 extension CustomeTabBarViewModel {
     // MARK: Wishlist
-    func deleteWishlistItem(userId: Int, productId: Int) {
+    func deleteWishlistItem(userId: Int, productId: Int, indexPath: IndexPath) {
         let productItem = ProductsOfWishlistRemote(network: AlamofireNetwork())
-        productItem.removeProduct(userId: userId, productId: productId) { result in
+        productItem.removeProduct(userId: userId, productId: productId) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case.success(_):
-                    print("Deleted Succufuly")
+                case.success(let message):
+                    self?.isWishlistItemDeleted = true
+                    self?.Wishlist.remove(at: indexPath.row)
+                    print(message)
                 case .failure(let error):
                     print("error \(error)")
                 }
