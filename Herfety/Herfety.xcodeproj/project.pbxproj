@@ -114,7 +114,6 @@
 		158A7E8D2DB53EF600B89684 /* HerfetyAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 158A7E8C2DB53EF600B89684 /* HerfetyAnimation.json */; };
 		158A7E9C2DB5401800B89684 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158A7E8F2DB5401800B89684 /* LoginViewController.xib */; };
 		158A7E9E2DB5401800B89684 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7E8E2DB5401800B89684 /* LoginViewController.swift */; };
-		158A7E9F2DB5401800B89684 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7E912DB5401800B89684 /* LoginViewModel.swift */; };
 		158A7EA92DB557A700B89684 /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EA82DB557A700B89684 /* FacebookButton.swift */; };
 		158A7EAD2DB5663100B89684 /* GoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EAC2DB5663100B89684 /* GoogleButton.swift */; };
 		158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A7EAE2DB566C900B89684 /* AppleButton.swift */; };
@@ -147,6 +146,9 @@
 		1599B8A02DB86D9A00A48510 /* ProductsRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B89F2DB86D9A00A48510 /* ProductsRemote.swift */; };
 		159B57852DCBCA5300CDD958 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B57822DCBCA5300CDD958 /* SignupViewController.swift */; };
 		159B57862DCBCA5300CDD958 /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 159B57832DCBCA5300CDD958 /* SignupViewController.xib */; };
+		159B57882DCBD2E000CDD958 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B57872DCBD2E000CDD958 /* SplashViewModel.swift */; };
+		159B578A2DCBD65400CDD958 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B57892DCBD65400CDD958 /* LoginViewModel.swift */; };
+		159B578C2DCBEB7200CDD958 /* LoginViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B578B2DCBEB7200CDD958 /* LoginViewModelType.swift */; };
 		15A3C3CB2D78863B00AE6CFA /* NameOfProfileCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3C3CA2D78863B00AE6CFA /* NameOfProfileCollectionViewSection.swift */; };
 		15A3C3CD2D788B1A00AE6CFA /* NameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3C3CC2D788B1A00AE6CFA /* NameModel.swift */; };
 		15A3C3CF2D788C0600AE6CFA /* NameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A3C3CE2D788C0600AE6CFA /* NameViewModel.swift */; };
@@ -304,7 +306,6 @@
 		158A7E8C2DB53EF600B89684 /* HerfetyAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HerfetyAnimation.json; sourceTree = "<group>"; };
 		158A7E8E2DB5401800B89684 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		158A7E8F2DB5401800B89684 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		158A7E912DB5401800B89684 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		158A7EA82DB557A700B89684 /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
 		158A7EAC2DB5663100B89684 /* GoogleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleButton.swift; sourceTree = "<group>"; };
 		158A7EAE2DB566C900B89684 /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
@@ -336,6 +337,9 @@
 		1599B89F2DB86D9A00A48510 /* ProductsRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsRemote.swift; sourceTree = "<group>"; };
 		159B57822DCBCA5300CDD958 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		159B57832DCBCA5300CDD958 /* SignupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignupViewController.xib; sourceTree = "<group>"; };
+		159B57872DCBD2E000CDD958 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		159B57892DCBD65400CDD958 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		159B578B2DCBEB7200CDD958 /* LoginViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelType.swift; sourceTree = "<group>"; };
 		15A3C3CA2D78863B00AE6CFA /* NameOfProfileCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameOfProfileCollectionViewSection.swift; sourceTree = "<group>"; };
 		15A3C3CC2D788B1A00AE6CFA /* NameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameModel.swift; sourceTree = "<group>"; };
 		15A3C3CE2D788C0600AE6CFA /* NameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewModel.swift; sourceTree = "<group>"; };
@@ -697,10 +701,7 @@
 				1599B8972DB85F5A00A48510 /* Category.swift */,
 				157F42802DB6D979000305D6 /* RemoteError.swift */,
 				150ABBDB2DC2E0D700C1A7AD /* Wishlist.swift */,
-
 				1517FFC12DC822A200F1D7BD /* Order.swift */,
-
-
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -894,6 +895,7 @@
 				158A7E8C2DB53EF600B89684 /* HerfetyAnimation.json */,
 				158A7E762DB52A7500B89684 /* SplashViewController.swift */,
 				158A7E772DB52A7500B89684 /* SplashViewController.xib */,
+				159B57872DCBD2E000CDD958 /* SplashViewModel.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -901,25 +903,18 @@
 		158A7E902DB5401800B89684 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				159B578B2DCBEB7200CDD958 /* LoginViewModelType.swift */,
+				159B57892DCBD65400CDD958 /* LoginViewModel.swift */,
 				158A7E8E2DB5401800B89684 /* LoginViewController.swift */,
 				158A7E8F2DB5401800B89684 /* LoginViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		158A7E922DB5401800B89684 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				158A7E912DB5401800B89684 /* LoginViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		158A7E932DB5401800B89684 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				158A7E902DB5401800B89684 /* View */,
-				158A7E922DB5401800B89684 /* ViewModel */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1427,8 +1422,8 @@
 				15CD44C52D52A3BC00E58C6F /* HomeViewModel.swift in Sources */,
 				15CE60F22D73B3CB0032617B /* ReviewCollectionViewCell.swift in Sources */,
 				158A7E9E2DB5401800B89684 /* LoginViewController.swift in Sources */,
-				158A7E9F2DB5401800B89684 /* LoginViewModel.swift in Sources */,
 				15CD44B42D52716D00E58C6F /* CategoriesCollectionViewCell.swift in Sources */,
+				159B57882DCBD2E000CDD958 /* SplashViewModel.swift in Sources */,
 				151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */,
 				151631262D5D556D00BA088E /* Fonts+Style.swift in Sources */,
 				15840BD52D5D7CAA006F8B67 /* HerfetyButton.swift in Sources */,
@@ -1472,6 +1467,7 @@
 				158A7EAD2DB5663100B89684 /* GoogleButton.swift in Sources */,
 				1548CF3F2D56DB6000F7CEEA /* CardOfProductCollectionViewCell.swift in Sources */,
 				1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */,
+				159B578C2DCBEB7200CDD958 /* LoginViewModelType.swift in Sources */,
 				1541679E2D9D37B0007E4CAA /* SettingModel.swift in Sources */,
 				15840BD72D5D80F7006F8B67 /* PrimaryButton.swift in Sources */,
 				1589FC202D51808600240754 /* HomeViewController.swift in Sources */,
@@ -1482,6 +1478,7 @@
 				15A3C3CF2D788C0600AE6CFA /* NameViewModel.swift in Sources */,
 				15FB21CA2D7531740002B576 /* ReviewersViewController.swift in Sources */,
 				154112122D56983400F248F7 /* HeaderView.swift in Sources */,
+				159B578A2DCBD65400CDD958 /* LoginViewModel.swift in Sources */,
 				1532F3592D5EB297003223A1 /* HerfetyNavigationController.swift in Sources */,
 				157F42982DB6E1E7000305D6 /* Remote.swift in Sources */,
 				156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */,

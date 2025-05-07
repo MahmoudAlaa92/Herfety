@@ -109,18 +109,27 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="30"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="facebookTapped:" destination="-1" eventType="touchUpInside" id="fbe-6q-6Y2"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfK-uw-nAV" customClass="GoogleButton" customModule="Herfety" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="40" width="345" height="38.333333333333343"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="Continue with Google"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                    <connections>
+                                                        <action selector="googleTapped:" destination="-1" eventType="touchUpInside" id="OrQ-Hc-5x1"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbr-kT-ZOl" customClass="AppleButton" customModule="Herfety" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="88.333333333333371" width="345" height="38.333333333333343"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="Continue with Apple"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                    <connections>
+                                                        <action selector="appleTapped:" destination="-1" eventType="touchUpInside" id="3AG-M1-SWQ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -145,7 +154,7 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="t06-Ks-nTE"/>
                 </scrollView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXy-Jh-17F">
-                    <rect key="frame" x="188.66666666666666" y="606.66666666666663" width="15.666666666666657" height="20.333333333333371"/>
+                    <rect key="frame" x="188.66666666666666" y="708.33333333333337" width="15.666666666666657" height="20.333333333333371"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>

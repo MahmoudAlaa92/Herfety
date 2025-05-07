@@ -15,8 +15,11 @@ class SplashViewController: UIViewController {
     @IBOutlet weak var HerfetyView: LottieAnimationView!
     // MARK: - Properties
     private var navigationBarBehavior: HerfetyNavigationController?
+    private let viewModel: SplashViewModel
+
     // MARK: - Init
-    init() {
+    init(viewModel:SplashViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -28,6 +31,7 @@ class SplashViewController: UIViewController {
         setup()
         setUpNavigationBar()
         makeAnimation()
+        bindViewModel()
     }
     /// lottie Animation
     private func makeAnimation() {
@@ -49,15 +53,32 @@ extension SplashViewController {
         navigationItem.backButtonTitle = ""
     }
 }
+// MARK: - Binding
+//
+extension SplashViewController {
+    private func bindViewModel() {
+        viewModel.onLoginTapped = { [weak self] in
+            guard let self else { return }
+            let loginVC = LoginViewController(viewModel: LoginViewModel())
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }
+        
+        viewModel.onSignUpTapped = { [weak self] in
+            guard let self else { return }
+            let signUpVC = SignupViewController()
+            self.navigationController?.pushViewController(signUpVC, animated: true)
+        }
+    }
+}
 // MARK: - Actions
 //
 extension SplashViewController {
     
     @IBAction func loginPressed(_ sender: Any) {
-        let vc = LoginViewController(viewModel: LoginViewModel())
-        self.navigationController?.pushViewController(vc, animated: true)
+        viewModel.loginTapped()
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
+        viewModel.signUpTapped()
     }
 }

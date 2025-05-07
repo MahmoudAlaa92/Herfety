@@ -21,10 +21,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var orLabel: UILabel!
     // MARK: - Properties
-    let viewModel: LoginViewModel
+    var viewModel: LoginViewModelType
     private var navBarBehavior: HerfetyNavigationController?
     // MARK: - Init
-    init(viewModel: LoginViewModel) {
+    init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -36,7 +36,9 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         configureViews()
         setUpNavigationBar()
+        bindViewModel()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         /// Keep nav bar visible
@@ -46,7 +48,10 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    // MARK: - Setup UI
+}
+// MARK: - Configuration
+//
+extension LoginViewController {
     /// Configures the initial appearance of UI elements
     private func configureViews() {
         view.backgroundColor = Colors.hPrimaryBackground
@@ -75,11 +80,14 @@ class LoginViewController: UIViewController {
     private func configureEmailTextField() {
         emailTextField.title = "Email"
         emailTextField.placeholder = "MahmoudAlaa.wr@gmail.com"
+        emailTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
     }
     /// Configures password text field with title and placeholder
     private func configurePasswordTextField() {
         passwordTextField.title = "Password"
         passwordTextField.placeholder = "*******"
+        passwordTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     /// Configures appearance of labels
     private func configureLabelsUI() {
@@ -92,17 +100,53 @@ class LoginViewController: UIViewController {
         orLabel.textColor = Colors.primaryBlue
     }
 }
+// MARK: - Binding
+//
+extension LoginViewController {
+    
+    private func bindViewModel() {
+        viewModel.onLoginTapped = {
+            let vc = SuccessViewController()
+            vc.modalPresentationStyle = .fullScreen
+            
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first {
+                window.rootViewController = vc
+                window.makeKeyAndVisible()
+            }
+        }
+        
+        viewModel.configureOnButtonEnabled { [weak self] value in
+            self?.loginButton.isEnabled = value
+        }
+    }
+}
+// MARK: - Private Handlers
+//
+extension LoginViewController {
+    @objc func textDidChange(_ sender: UITextField) {
+        guard let text = sender.text else { return }
+        
+        if sender == emailTextField.textfield {
+            viewModel.updateEmail(text)
+        } else if sender == passwordTextField.textfield {
+            viewModel.updatePassword(text)
+        }
+    }
+}
 // MARK: - Actions
 //
 extension LoginViewController {
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        let vc = SuccessViewController()
-        vc.modalPresentationStyle = .fullScreen
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            window.rootViewController = vc
-            window.makeKeyAndVisible()
-        }
+        viewModel.loginTapped()
+    }
+    
+    @IBAction func facebookTapped(_ sender: Any) {
+    }
+    
+    @IBAction func googleTapped(_ sender: Any) {
+    }
+    
+    @IBAction func appleTapped(_ sender: Any) {
     }
 }

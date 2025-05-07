@@ -2,7 +2,7 @@
 
 import UIKit
 
-protocol EMTextFieldDelegate: AnyObject {
+protocol HRTextFieldDelegate: AnyObject {
 }
 class HRTextField: UIView {
     // MARK: - IBOutlet
@@ -20,7 +20,7 @@ class HRTextField: UIView {
         get { textfield.placeholder }
         set { textfield.placeholder = newValue }
     }
-    weak var delegate: EMTextFieldDelegate?
+    weak var delegate: HRTextFieldDelegate?
     // MARK: - Init
     //
     override init(frame: CGRect) {
