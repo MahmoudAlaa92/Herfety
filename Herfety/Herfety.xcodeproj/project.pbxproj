@@ -697,7 +697,10 @@
 				1599B8972DB85F5A00A48510 /* Category.swift */,
 				157F42802DB6D979000305D6 /* RemoteError.swift */,
 				150ABBDB2DC2E0D700C1A7AD /* Wishlist.swift */,
+
 				1517FFC12DC822A200F1D7BD /* Order.swift */,
+
+
 			);
 			path = Models;
 			sourceTree = "<group>";
