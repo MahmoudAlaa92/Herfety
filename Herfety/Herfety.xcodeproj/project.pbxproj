@@ -40,6 +40,8 @@
 		1532F3592D5EB297003223A1 /* HerfetyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3582D5EB297003223A1 /* HerfetyNavigationController.swift */; };
 		153944E62DCF7BB1008465BB /* MultipartFormDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944E52DCF7BB1008465BB /* MultipartFormDataRequest.swift */; };
 		153944E82DCF857E008465BB /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944E72DCF857E008465BB /* SignupViewModel.swift */; };
+		153944EA2DCFA9A3008465BB /* LoginRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944E92DCFA9A3008465BB /* LoginRemote.swift */; };
+		153944EC2DCFA9C1008465BB /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944EB2DCFA9C1008465BB /* Login.swift */; };
 		153B7FD52D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B7FD42D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift */; };
 		153B7FD82D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B7FD62D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift */; };
 		153B7FD92D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153B7FD72D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib */; };
@@ -237,6 +239,8 @@
 		1532F3582D5EB297003223A1 /* HerfetyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerfetyNavigationController.swift; sourceTree = "<group>"; };
 		153944E52DCF7BB1008465BB /* MultipartFormDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataRequest.swift; sourceTree = "<group>"; };
 		153944E72DCF857E008465BB /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		153944E92DCFA9A3008465BB /* LoginRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRemote.swift; sourceTree = "<group>"; };
+		153944EB2DCFA9C1008465BB /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		153B7FD42D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsCollectionViewSection.swift; sourceTree = "<group>"; };
 		153B7FD62D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesProductDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		153B7FD72D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesProductDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -714,6 +718,7 @@
 				1517FFC12DC822A200F1D7BD /* Order.swift */,
 				1567200F2DCE718C00D8AFCA /* Registration.swift */,
 				156720112DCE72E700D8AFCA /* RegisterUser.swift */,
+				153944EB2DCFA9C1008465BB /* Login.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -738,6 +743,7 @@
 				1555876C2DC12EDE00342236 /* WishlistRemote.swift */,
 				1517FFC32DC8237B00F1D7BD /* OrdersRemote.swift */,
 				1567200D2DCE70E400D8AFCA /* RegisterRemote.swift */,
+				153944E92DCFA9A3008465BB /* LoginRemote.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -1515,6 +1521,7 @@
 				15FE4B3F2DC4563100B9474F /* SearchTextField.swift in Sources */,
 				1599B89A2DB85FE500A48510 /* CategoryRemote.swift in Sources */,
 				15F927CF2D5AC5E50038CEB8 /* OrderCollectionViewCell.swift in Sources */,
+				153944EC2DCFA9C1008465BB /* Login.swift in Sources */,
 				15625FD82DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift in Sources */,
 				15CD44C32D52A10200E58C6F /* HomeModel.swift in Sources */,
 				158A7E7A2DB52A7500B89684 /* SplashViewController.swift in Sources */,
@@ -1544,6 +1551,7 @@
 				158B39E12D7A869F00D58B07 /* SettingHeader.swift in Sources */,
 				158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */,
 				157F42872DB6DAAC000305D6 /* AlamofireNetwork.swift in Sources */,
+				153944EA2DCFA9A3008465BB /* LoginRemote.swift in Sources */,
 				15CE60FB2D73C3A60032617B /* TitleReviewsCollectionReusableView.swift in Sources */,
 				153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */,
 				1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */,

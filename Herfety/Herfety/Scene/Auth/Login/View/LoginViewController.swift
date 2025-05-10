@@ -87,6 +87,7 @@ extension LoginViewController {
     private func configurePasswordTextField() {
         passwordTextField.title = "Password"
         passwordTextField.placeholder = "*******"
+        passwordTextField.textfield.isSecureTextEntry = true
         passwordTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     /// Configures appearance of labels
@@ -105,21 +106,28 @@ extension LoginViewController {
 extension LoginViewController {
     
     private func bindViewModel() {
-        viewModel.onLoginTapped = {
-            let vc = SuccessViewController()
-            vc.modalPresentationStyle = .fullScreen
-            
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let window = windowScene.windows.first {
-                window.rootViewController = vc
-                window.makeKeyAndVisible()
-            }
-        }
-        
-        viewModel.configureOnButtonEnabled { [weak self] value in
-            self?.loginButton.isEnabled = value
-        }
-    }
+          viewModel.onLoginTapped = { [weak self] in
+              let vc = SuccessViewController()
+              vc.modalPresentationStyle = .fullScreen
+              self?.present(vc, animated: true)
+          }
+          
+          viewModel.onError = { [weak self] errorMessage in
+              let alert = UIAlertController(
+                  title: "Login Failed",
+                  message: errorMessage,
+                  preferredStyle: .alert
+              )
+              alert.addAction(UIAlertAction(title: "OK", style: .default))
+              self?.present(alert, animated: true)
+          }
+          
+          viewModel.configureOnButtonEnabled { [weak self] isEnabled in
+              self?.loginButton.isEnabled = isEnabled
+              self?.loginButton.alpha = isEnabled ? 1.0 : 0.5
+          }
+      }
+    
 }
 // MARK: - Private Handlers
 //

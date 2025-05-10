@@ -23,7 +23,8 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var loginButton: PrimaryButton!
     // MARK: - Properties
-      private let viewModel = SignupViewModel()
+    private let viewModel = SignupViewModel()
+    private var navBarBehavior: HerfetyNavigationController?
     
     // MARK: - Life Cycle Methods
     //
@@ -31,10 +32,19 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backButtonTitle = ""
         configureViews()
+        setUpNavigationBar()
         bindViewModel()
     }
     
     // MARK: - UI Setup
+    
+    /// NavBar
+    private func setUpNavigationBar() {
+        navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
+        navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
+            /// don't add plus button in loginVC
+        }, showRighBtn: false)
+    }
     
     /// Configures the initial appearance of UI elements
     private func configureViews() {
@@ -121,7 +131,7 @@ extension SignupViewController {
             successVC.modalPresentationStyle = .fullScreen
             self?.present(successVC, animated: true)
         }
-
+        
         viewModel.onError = { [weak self] errorMessage in
             let alertItem = AlertModel(
                 message: errorMessage,
