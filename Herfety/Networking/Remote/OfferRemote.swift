@@ -14,12 +14,22 @@ protocol OfferRemoteProtocol {
 
 class OfferRemote: Remote, OfferRemoteProtocol {
      func loadAllOffer(completion: @escaping (Result<[Products], Error>) -> Void) {
-        let request = HerfetyRequest(method: .get, path: "api/Home/GetOffer")
+         
+        let request = HerfetyRequest(
+            method: .get,
+            path: "api/Home/GetOffer")
+         
         enqueue(request, completion: completion)
     }
     func loadSpecificOffer(disount: Int, completion: @escaping (Result<[Products], any Error>) -> Void) {
+        
         let parameters = ["offer": disount]
-        let request = HerfetyRequest(method: .get, path: "api/Home/GetOffer" ,parameters: parameters)
+        
+        let request = HerfetyRequest(
+            method: .get,
+            path: "api/Home/GetOffer" ,
+            parameters: parameters)
+        
         enqueue(request, completion: completion)
     }
 }

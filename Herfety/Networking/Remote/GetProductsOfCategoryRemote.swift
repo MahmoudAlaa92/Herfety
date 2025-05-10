@@ -14,7 +14,12 @@ protocol GetProductsOfCatergoryRemoteProtocol {
 class GetProductsOfCategoryRemote: Remote, GetProductsOfCatergoryRemoteProtocol {
     func loadAllProducts(name: String ,completion: @escaping (Result<[Products], Error>) -> Void) {
         let parameters = ["Name": name]
-        let request = HerfetyRequest(method: .get, path: "api/Categories/GetProducts", parameters: parameters)
+        
+        let request = HerfetyRequest(
+            method: .get,
+            path: "api/Categories/GetProducts",
+            parameters: parameters)
+        
         enqueue(request, completion: completion)
     }
 }

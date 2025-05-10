@@ -13,7 +13,10 @@ protocol ProductsRemoteProtocol {
 
 class ProductsRemote: Remote, ProductsRemoteProtocol {
     func loadAllProducts(completion: @escaping (Result<[Products], Error>) -> Void) {
-        let request = HerfetyRequest(method: .get, path: "api/Home/Offers")
+        let request = HerfetyRequest(
+            method: .get,
+            path: "api/Home/Offers")
+        
         enqueue(request, completion: completion)
     }
 }

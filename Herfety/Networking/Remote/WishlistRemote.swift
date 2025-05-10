@@ -15,7 +15,11 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
     /// .get
     func loadAllProducts(userId: Int, completion: @escaping (Result<[Wishlist], Error>) -> Void) {
         let parameters = ["id": userId]
-        let request = HerfetyRequest(method: .get, path: "api/WishLists", parameters: parameters)
+        let request = HerfetyRequest(
+            method: .get,
+            path: "api/WishLists",
+            parameters: parameters)
+        
         enqueue(request, completion: completion)
     }
     /// .post
@@ -25,7 +29,11 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
             "userId": userId
         ]
         
-        let request = HerfetyRequest(method: .post, path: "api/WishLists", parameters: parameters)
+        let request = HerfetyRequest(
+            method: .post,
+            path: "api/WishLists",
+            parameters: parameters)
+        
         enqueue(request, completion: completion)
     }
     /// .delete
@@ -35,7 +43,11 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
             "ProductId": productId
         ]
         
-        let request = HerfetyRequest(method: .delete, path: "api/WishLists", parameters: parameters)
+        let request = HerfetyRequest(
+            method: .delete,
+            path: "api/WishLists",
+            parameters: parameters)
+        
         enqueue(request, completion: completion)
     }
 }

@@ -13,7 +13,11 @@ protocol CategoryRemoteProtocol {
 
 class CategoryRemote: Remote, CategoryRemoteProtocol {
     func loadAllCategories(completion: @escaping (Result<[CategoryElement], Error>) -> Void) {
-        let request = HerfetyRequest(method: .get, path: "api/Categories/")
+        
+        let request = HerfetyRequest(
+            method: .get,
+            path: "api/Categories/")
+        
         enqueue(request, completion: completion)
     }
 }

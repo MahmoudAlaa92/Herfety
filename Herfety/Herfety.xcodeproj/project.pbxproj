@@ -38,6 +38,8 @@
 		1532F3512D5E8EB5003223A1 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3502D5E8EB5003223A1 /* InfoViewModel.swift */; };
 		1532F3532D5E8EC1003223A1 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3522D5E8EC1003223A1 /* InfoModel.swift */; };
 		1532F3592D5EB297003223A1 /* HerfetyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3582D5EB297003223A1 /* HerfetyNavigationController.swift */; };
+		153944E62DCF7BB1008465BB /* MultipartFormDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944E52DCF7BB1008465BB /* MultipartFormDataRequest.swift */; };
+		153944E82DCF857E008465BB /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944E72DCF857E008465BB /* SignupViewModel.swift */; };
 		153B7FD52D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B7FD42D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift */; };
 		153B7FD82D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B7FD62D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift */; };
 		153B7FD92D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153B7FD72D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib */; };
@@ -233,6 +235,8 @@
 		1532F3502D5E8EB5003223A1 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		1532F3522D5E8EC1003223A1 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		1532F3582D5EB297003223A1 /* HerfetyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerfetyNavigationController.swift; sourceTree = "<group>"; };
+		153944E52DCF7BB1008465BB /* MultipartFormDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataRequest.swift; sourceTree = "<group>"; };
+		153944E72DCF857E008465BB /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		153B7FD42D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsCollectionViewSection.swift; sourceTree = "<group>"; };
 		153B7FD62D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesProductDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		153B7FD72D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesProductDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -742,6 +746,7 @@
 			isa = PBXGroup;
 			children = (
 				157F428F2DB6DD4E000305D6 /* HerfetyRequest.swift */,
+				153944E52DCF7BB1008465BB /* MultipartFormDataRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1048,6 +1053,7 @@
 			children = (
 				159B57822DCBCA5300CDD958 /* SignupViewController.swift */,
 				159B57832DCBCA5300CDD958 /* SignupViewController.xib */,
+				153944E72DCF857E008465BB /* SignupViewModel.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -1434,6 +1440,7 @@
 				156720102DCE718C00D8AFCA /* Registration.swift in Sources */,
 				15CD44B42D52716D00E58C6F /* CategoriesCollectionViewCell.swift in Sources */,
 				159B57882DCBD2E000CDD958 /* SplashViewModel.swift in Sources */,
+				153944E62DCF7BB1008465BB /* MultipartFormDataRequest.swift in Sources */,
 				151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */,
 				151631262D5D556D00BA088E /* Fonts+Style.swift in Sources */,
 				15840BD52D5D7CAA006F8B67 /* HerfetyButton.swift in Sources */,
@@ -1495,6 +1502,7 @@
 				156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */,
 				1517FFC22DC822A200F1D7BD /* Order.swift in Sources */,
 				1562A44B2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift in Sources */,
+				153944E82DCF857E008465BB /* SignupViewModel.swift in Sources */,
 				154167A02D9DFA5F007E4CAA /* SettingCollectionViewSection.swift in Sources */,
 				153F6AA82D59562B00317F49 /* OrderViewController.swift in Sources */,
 				15A5EC8B2D77DD10003E49AB /* NameCollectionViewCell.swift in Sources */,

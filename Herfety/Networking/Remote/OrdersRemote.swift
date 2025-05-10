@@ -30,7 +30,12 @@ class GetAllOrdersRemote: Remote, OrderRemoteProtocol {
             
             "currencyName" : order.currencyName ?? "VISA",
         ] as [String : Sendable]
-        let request = HerfetyRequest(method: .post, path: "api/Orders", parameters: parameter)
+        
+        let request = HerfetyRequest(
+            method: .post,
+            path: "api/Orders",
+            parameters: parameter)
+        
         enqueue(request, completion: completion)
     }
 }

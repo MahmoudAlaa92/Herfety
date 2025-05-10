@@ -15,14 +15,34 @@ class AlamofireNetwork: Network {
 
     /// Executes the specified Network Request. Upon completion, the payload will be sent back to the caller as a Data instance.
     ///
-    public func responseData(
-        for request: URLRequestConvertible,
-        completion: @escaping (Result<Data, Error>) -> Void
-    ) {
-        AF.request(request).responseData { response in
-            completion(response.result.toSwiftResult())
-        }
-    }
+    public func responseData(for request: URLRequestConvertible, completion: @escaping (Result<Data, Error>) -> Void) {
+          if let multipartRequest = request as? MultipartFormDataRequest {
+              // Extract the URLRequest
+              let urlRequest = try! multipartRequest.asURLRequest()
+              
+              // Build multipart data using parameters
+              AF.upload(
+                  multipartFormData: { multipart in
+                      for (key, value) in multipartRequest.parameters {
+                          if let data = "\(value)".data(using: .utf8) {
+                              multipart.append(data, withName: key)
+                          }
+                      }
+                  },
+                  to: urlRequest.url!,  // Safely unwrap (ensure URL is valid)
+                  method: multipartRequest.method,
+                  headers: urlRequest.headers
+              )
+              .responseData { response in
+                  completion(response.result.toSwiftResult())
+              }
+          } else {
+              AF.request(request).responseData { response in
+                  completion(response.result.toSwiftResult())
+              }
+          }
+      }
+    
 
     /// Executes the specified Network Request. Upon completion, the payload or error will be emitted to the publisher.
     /// Only one value will be emitted and the request cannot be retried.
