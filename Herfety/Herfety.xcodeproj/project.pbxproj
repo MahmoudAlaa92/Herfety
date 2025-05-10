@@ -74,6 +74,9 @@
 		1562A4482DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1562A4472DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib */; };
 		1562A4492DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4462DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift */; };
 		1562A44B2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A44A2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift */; };
+		1567200E2DCE70E400D8AFCA /* RegisterRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567200D2DCE70E400D8AFCA /* RegisterRemote.swift */; };
+		156720102DCE718C00D8AFCA /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567200F2DCE718C00D8AFCA /* Registration.swift */; };
+		156720122DCE72E700D8AFCA /* RegisterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156720112DCE72E700D8AFCA /* RegisterUser.swift */; };
 		156CD83F2D6A463D00D6DA77 /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156CD83E2D6A463D00D6DA77 /* ProductsViewController.xib */; };
 		156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD83D2D6A463D00D6DA77 /* ProductsViewController.swift */; };
 		156CD8422D6A4A6000D6DA77 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD8412D6A4A6000D6DA77 /* ProductsViewModel.swift */; };
@@ -266,6 +269,9 @@
 		1562A4462DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButttonCollectionViewCell.swift; sourceTree = "<group>"; };
 		1562A4472DAACA4E00459EB5 /* LogoutButttonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoutButttonCollectionViewCell.xib; sourceTree = "<group>"; };
 		1562A44A2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButtonCollectionViewSection.swift; sourceTree = "<group>"; };
+		1567200D2DCE70E400D8AFCA /* RegisterRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRemote.swift; sourceTree = "<group>"; };
+		1567200F2DCE718C00D8AFCA /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
+		156720112DCE72E700D8AFCA /* RegisterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUser.swift; sourceTree = "<group>"; };
 		156CD83D2D6A463D00D6DA77 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		156CD83E2D6A463D00D6DA77 /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
 		156CD8412D6A4A6000D6DA77 /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
@@ -702,6 +708,8 @@
 				157F42802DB6D979000305D6 /* RemoteError.swift */,
 				150ABBDB2DC2E0D700C1A7AD /* Wishlist.swift */,
 				1517FFC12DC822A200F1D7BD /* Order.swift */,
+				1567200F2DCE718C00D8AFCA /* Registration.swift */,
+				156720112DCE72E700D8AFCA /* RegisterUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -725,6 +733,7 @@
 				15625FD72DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift */,
 				1555876C2DC12EDE00342236 /* WishlistRemote.swift */,
 				1517FFC32DC8237B00F1D7BD /* OrdersRemote.swift */,
+				1567200D2DCE70E400D8AFCA /* RegisterRemote.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -1422,6 +1431,7 @@
 				15CD44C52D52A3BC00E58C6F /* HomeViewModel.swift in Sources */,
 				15CE60F22D73B3CB0032617B /* ReviewCollectionViewCell.swift in Sources */,
 				158A7E9E2DB5401800B89684 /* LoginViewController.swift in Sources */,
+				156720102DCE718C00D8AFCA /* Registration.swift in Sources */,
 				15CD44B42D52716D00E58C6F /* CategoriesCollectionViewCell.swift in Sources */,
 				159B57882DCBD2E000CDD958 /* SplashViewModel.swift in Sources */,
 				151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */,
@@ -1480,6 +1490,7 @@
 				154112122D56983400F248F7 /* HeaderView.swift in Sources */,
 				159B578A2DCBD65400CDD958 /* LoginViewModel.swift in Sources */,
 				1532F3592D5EB297003223A1 /* HerfetyNavigationController.swift in Sources */,
+				1567200E2DCE70E400D8AFCA /* RegisterRemote.swift in Sources */,
 				157F42982DB6E1E7000305D6 /* Remote.swift in Sources */,
 				156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */,
 				1517FFC22DC822A200F1D7BD /* Order.swift in Sources */,
@@ -1528,6 +1539,7 @@
 				15CE60FB2D73C3A60032617B /* TitleReviewsCollectionReusableView.swift in Sources */,
 				153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */,
 				1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */,
+				156720122DCE72E700D8AFCA /* RegisterUser.swift in Sources */,
 				154167A22D9E6467007E4CAA /* GenderButton.swift in Sources */,
 				158A7EB82DB58D3100B89684 /* SecondaryButtonn.swift in Sources */,
 				15CE60F62D73BA050032617B /* ReviewModel.swift in Sources */,

@@ -8,9 +8,9 @@
 import UIKit
 
 class ProfileListCollectionViewCell: UICollectionViewCell {
-
+   // MARK: - ProPreties
     static let identifier: String = "ProfileListCollectionViewCell"
-    
+   // MARK: - Outlets
     @IBOutlet weak var imageOfView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!

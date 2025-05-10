@@ -45,7 +45,7 @@ extension SettingViewController {
         /// 1) First list
         let firstList = SettingCollectionViewSection(items: settingViewModel.firstList)
         /// 2) Second list
-        let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList)
+        let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList, navContoller: navigationController)
         /// 3) Logout button
         let logoutButton = LogoutButtonCollectionViewSection()
         

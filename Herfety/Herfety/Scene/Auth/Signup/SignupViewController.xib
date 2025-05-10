@@ -13,9 +13,12 @@
             <connections>
                 <outlet property="confirmPasswordTextField" destination="hlI-PP-RRt" id="aAn-o0-Iiv"/>
                 <outlet property="emailTextField" destination="Ecg-wI-jkA" id="FAZ-HT-h39"/>
+                <outlet property="firstNameTextField" destination="0YZ-mv-Zo2" id="XBB-ne-p0Y"/>
+                <outlet property="lastNameTextField" destination="Y6N-jH-4nS" id="edV-C5-rCE"/>
                 <outlet property="loginButton" destination="ph3-R6-0JI" id="ZGX-5h-8SQ"/>
                 <outlet property="logoImage" destination="eYo-es-09g" id="bWp-nJ-a8w"/>
                 <outlet property="passwordTextField" destination="M9W-vW-rtH" id="ROG-vP-IU0"/>
+                <outlet property="phoneNumber" destination="hEc-dT-vaV" id="JoF-kU-m0i"/>
                 <outlet property="subtitleLabel" destination="fdl-HD-qDE" id="fIe-Xl-vbR"/>
                 <outlet property="titleLabel" destination="Udo-Me-EA2" id="gQ5-Ag-V08"/>
                 <outlet property="usernameTextField" destination="PuQ-4E-eRE" id="KDM-Ns-rD6"/>
@@ -31,10 +34,10 @@
                     <rect key="frame" x="0.0" y="118" width="393" height="905"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tts-Yd-XlU">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="896"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="1325"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="9Fh-EV-8oo">
-                                    <rect key="frame" x="24" y="0.0" width="345" height="896"/>
+                                    <rect key="frame" x="24" y="0.0" width="345" height="1325"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mQ2-O5-jX2">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="136"/>
@@ -66,33 +69,48 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Hfb-Sx-HsF">
-                                            <rect key="frame" x="0.0" y="260.66666666666674" width="345" height="557"/>
+                                            <rect key="frame" x="0.0" y="260.66666666666674" width="345" height="986"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PuQ-4E-eRE" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0YZ-mv-Zo2" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="128"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecg-wI-jkA" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6N-jH-4nS" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="142.99999999999994" width="345" height="128"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M9W-vW-rtH" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PuQ-4E-eRE" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="285.99999999999994" width="345" height="128"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlI-PP-RRt" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecg-wI-jkA" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="428.99999999999994" width="345" height="128.00000000000006"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M9W-vW-rtH" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="572" width="345" height="128"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlI-PP-RRt" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="715" width="345" height="128"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEc-dT-vaV" customClass="HRTextField" customModule="Herfety" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="858" width="345" height="128"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8TH-K8-PLP">
-                                            <rect key="frame" x="0.0" y="857.66666666666663" width="345" height="38.333333333333371"/>
+                                            <rect key="frame" x="0.0" y="1286.6666666666667" width="345" height="38.333333333333258"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph3-R6-0JI" customClass="HerfetyButton" customModule="Herfety" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="38.333333333333336"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                    <connections>
+                                                        <action selector="loginTapped:" destination="-1" eventType="touchUpInside" id="ihY-Xe-Yog"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>

@@ -51,7 +51,7 @@ class CustomeTabBarViewModel: ObservableObject {
 extension CustomeTabBarViewModel {
     // MARK: Wishlist
     func fetchWishlistItems(id: Int = 1) {
-        let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
+        let productItems: ProductsOfWishlistRemoteProtocol = ProductsOfWishlistRemote(network: AlamofireNetwork())
         productItems.loadAllProducts(userId: id) { [weak self] result in
             switch result {
             case.success(let products):

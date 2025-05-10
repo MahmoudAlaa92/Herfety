@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     //
     private var navigationBarBehavior: HomeNavBar?
-    private(set) var viewModel = HomeViewModel()
+    private var viewModel = HomeViewModel()
     private var sections: [CollectionViewDataSource] = []
     private var layoutSections:[LayoutSectionProvider] = []
     

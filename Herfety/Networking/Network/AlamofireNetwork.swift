@@ -31,6 +31,7 @@ class AlamofireNetwork: Network {
         -> AnyPublisher<Result<Data, Error>, Never> {
         return Future { promise in
             AF.request(request).responseData { response in
+                
                 let result = response.result.toSwiftResult()
                 promise(.success(result))
             }

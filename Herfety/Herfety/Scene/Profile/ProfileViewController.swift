@@ -45,9 +45,9 @@ extension ProfileViewController {
         // 1) Header
         let name = NameOfProfileCollectionViewSection(sectionName: nameViewModel.nameItem)
         // 2) First list
-        let firstList = ProfileListCollectionViewSection(items: profileListViewModel.firstList)
+        let firstList = ProfileListCollectionViewSection(items: profileListViewModel.firstList, navContoller: navigationController)
         // 3) Second list
-        let secondList = ProfileListCollectionViewSection(items: profileListViewModel.secondList)
+        let secondList = ProfileListCollectionViewSection(items: profileListViewModel.secondList, navContoller: navigationController)
         
         sections = [name, firstList, secondList]
         sections.forEach( { $0.registerCells(in: collectionView) })
@@ -86,4 +86,10 @@ extension ProfileViewController: UICollectionViewDataSource {
 }
 // MARK: - Delegate
 //
-extension ProfileViewController: UICollectionViewDelegate { }
+extension ProfileViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectable = sections[indexPath.section] as? CollectionViewDelegate {
+            selectable.collectionView(collectionView, didSelectItemAt: indexPath)
+        }
+    }
+}

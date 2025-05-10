@@ -10,6 +10,6 @@ import UIKit
 class NameViewModel {
     var nameItem: Name = Name(
         name: "Mahmoud Alaa",
-        email: "MahmoudAlaa@gmail.com",
+        email: "MahmoudAlaa.Wr@gmail.com",
         image: Images.profilePhoto)
 }

@@ -10,7 +10,6 @@ import UIKit
 class ProfileListViewModel {
     
     var firstList: [ProfileListItem] = [
-        ProfileListItem(title: "Personal details", icon: Images.iconPersonalDetails),
         ProfileListItem(title: "My Order", icon: Images.iconMyCard),
         ProfileListItem(title: "My Favourites", icon: Images.iconMyFavourites),
         ProfileListItem(title: "Shipping Address", icon: Images.iconShippingAddress),

@@ -10,8 +10,11 @@ import UIKit
 class ProfileListCollectionViewSection: CollectionViewDataSource {
     
     private let items: [ProfileListItem]
-    init(items: [ProfileListItem]) {
+    weak var navController: UINavigationController?
+    
+    init(items: [ProfileListItem], navContoller: UINavigationController?) {
         self.items = items
+        self.navController = navContoller
     }
     
     func registerCells(in collectionView: UICollectionView) {
@@ -34,13 +37,46 @@ class ProfileListCollectionViewSection: CollectionViewDataSource {
         cell.imageOfView.image = item.icon
         cell.nameLabel.text = item.title
         cell.languageLabel.text = ""
+        
         return cell
+    }
+}
+// MARK: - Delegate
+//
+extension ProfileListCollectionViewSection: CollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO: Change navigation with coordinator
+        if indexPath.section == 1 {
+            let item = items[indexPath.item]
+            
+            switch item.title {
+            case "My Order":
+                break
+            case "My Favourites":
+                let vc = WishListViewController()
+                self.navController?.pushViewController(vc, animated: true)
+                break
+            case "Shipping Address":
+                
+                break
+            case "My Card":
+                
+                break
+            case "Settings":
+                let vc = SettingViewController(settingViewModel: SettingViewModel())
+                self.navController?.pushViewController(vc, animated: true)
+                break
+            default:
+                break
+            }
+        }
+        
     }
 }
 // MARK: - Layout
 //
 struct ProfileListLayoutSection: LayoutSectionProvider {
-
+    
     func layoutSection() -> NSCollectionLayoutSection {
         /// Item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -56,7 +92,7 @@ struct ProfileListLayoutSection: LayoutSectionProvider {
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 50, trailing: 15)
         
         section.decorationItems = [.background(elementKind: SectionDecorationView.identifier) ]
-
+        
         return section
     }
 }
