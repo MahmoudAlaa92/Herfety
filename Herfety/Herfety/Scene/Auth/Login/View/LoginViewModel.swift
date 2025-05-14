@@ -73,7 +73,7 @@ extension LoginViewModel: LoginViewModelOutput {
 //
 extension LoginViewModel {
     private func updateEnabledStateButton() {
-        let isValid = !email.isEmpty && !password.isEmpty && password.count >= 6
+        let isValid = !email.isEmpty && !password.isEmpty
         onLoginButtonEnabled?(isValid)
     }
 }

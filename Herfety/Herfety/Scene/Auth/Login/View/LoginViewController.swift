@@ -14,6 +14,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    
+    @IBOutlet weak var forgetPassword: UIButton!
     @IBOutlet weak var loginButton: PrimaryButton!
     @IBOutlet weak var facebookButton: FacebookButton!
     @IBOutlet weak var appleButton: AppleButton!
@@ -68,6 +70,7 @@ extension LoginViewController {
         configureEmailTextField()
         configurePasswordTextField()
         configureLabelsUI()
+        configureButtonUI()
     }
     /// NavBar
     private func setUpNavigationBar() {
@@ -78,8 +81,8 @@ extension LoginViewController {
     }
     /// Configures email text field with title and placeholder
     private func configureEmailTextField() {
-        emailTextField.title = "Email"
-        emailTextField.placeholder = "MahmoudAlaa.wr@gmail.com"
+        emailTextField.title = "User Name"
+        emailTextField.placeholder = "MahmoudAlaa"
         emailTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
     }
@@ -99,6 +102,11 @@ extension LoginViewController {
         subtitleLabel.textColor = Colors.hSocialButton
         subtitleLabel.font = .callout
         orLabel.textColor = Colors.primaryBlue
+    }
+    /// Configures appearance of Button
+    private func configureButtonUI() {
+        forgetPassword.setTitleColor(Colors.primaryBlue, for: .normal)
+        forgetPassword.setTitle("Forget the password", for: .normal)
     }
 }
 // MARK: - Binding
@@ -149,6 +157,10 @@ extension LoginViewController {
         viewModel.loginTapped()
     }
     
+    @IBAction func forgetThePassword(_ sender: Any) {
+        let vc = ForgetPasswordViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     @IBAction func facebookTapped(_ sender: Any) {
     }
     

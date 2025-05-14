@@ -13,17 +13,16 @@ protocol LoginRemoteProtocol {
 
 class LoginRemote: Remote, LoginRemoteProtocol {
     func login(email: String, password: String, completion: @escaping (Result<Registration, Error>) -> Void) {
+        
         let parameters: [String: Sendable] = [
             "UserName": email,
             "Password": password
         ]
-   print(parameters)
         let request = HerfetyRequest(
             method: .post,
             path: "api/RegisterUser/LogIn",
             parameters: parameters
         )
-        
         enqueue(request, completion: completion)
     }
 }

@@ -7,23 +7,21 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
+class ForgetPasswordViewController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var firstNameTextField: HRTextField!
-    @IBOutlet weak var lastNameTextField: HRTextField!
     @IBOutlet weak var usernameTextField: HRTextField!
-    @IBOutlet weak var emailTextField: HRTextField!
-    @IBOutlet weak var passwordTextField: HRTextField!
+    @IBOutlet weak var currentPasswordTextField: HRTextField!
+    @IBOutlet weak var newPasswordTextField: HRTextField!
     @IBOutlet weak var confirmPasswordTextField: HRTextField!
     
-    @IBOutlet weak var phoneNumber: HRTextField!
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var loginButton: PrimaryButton!
+    
+    @IBOutlet weak var resetBtn: HerfetyButton!
     // MARK: - Properties
-    private let viewModel = SignupViewModel()
+    private let viewModel = ForgetPasswordViewModel()
     private var navBarBehavior: HerfetyNavigationController?
     
     // MARK: - Life Cycle Methods
@@ -35,9 +33,7 @@ class SignupViewController: UIViewController {
         setUpNavigationBar()
         bindViewModel()
     }
-    
     // MARK: - UI Setup
-    
     /// NavBar
     private func setUpNavigationBar() {
         navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
@@ -45,7 +41,6 @@ class SignupViewController: UIViewController {
             /// don't add plus button in loginVC
         }, showRighBtn: false)
     }
-    
     /// Configures the initial appearance of UI elements
     private func configureViews() {
         view.backgroundColor = Colors.hBackgroundColor
@@ -54,98 +49,72 @@ class SignupViewController: UIViewController {
         logoImage.image = Images.logo
         
         // Buttons UI
-        loginButton.title = "Sign Up"
+        resetBtn.title = "Reset Password"
         
         configureUsernameTextField()
-        configureEmailTextField()
         configurePasswordTextField()
-        configurePhoneTextField()
         configureLabelsUI()
     }
-    
     /// Configures username text field with title and placeholder
     private func configureUsernameTextField() {
-        firstNameTextField.title = "First name"
-        firstNameTextField.placeholder = "Enter your First name"
-        
-        lastNameTextField.title = "Last name"
-        lastNameTextField.placeholder = "Enter your last name"
         
         usernameTextField.title = "User Name"
         usernameTextField.placeholder = "Enter your name here"
+        usernameTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
-    
-    /// Configures email text field with title and placeholder
-    private func configureEmailTextField() {
-        emailTextField.title = "Email"
-        emailTextField.placeholder = "Enter your email here"
-    }
-    
     /// Configures password text field with title and placeholder
     private func configurePasswordTextField() {
         // Password TextField UI
-        passwordTextField.title = "Password"
-        passwordTextField.placeholder = "*******"
-        
+        currentPasswordTextField.title = "Current Password"
+        currentPasswordTextField.placeholder = "*******"
+        currentPasswordTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        newPasswordTextField.title = "New Password"
+        newPasswordTextField.placeholder = "*******"
+        newPasswordTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         // Confirm Password TextField UI
         confirmPasswordTextField.title = "Confirm Password"
         confirmPasswordTextField.placeholder = "*******"
-    }
-    /// Configures password text field with title and placeholder
-    private func configurePhoneTextField() {
-        // Phone TextField UI
-        phoneNumber.title = "Phone Number"
-        phoneNumber.placeholder = "+(20) 112 201 201"
+        confirmPasswordTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
     /// Configures appearance of labels
     private func configureLabelsUI() {
-        titleLabel.text = "Sign Up"
+        titleLabel.text = "Forget the password"
         titleLabel.textColor = Colors.primaryBlue
         
-        subtitleLabel.text = "Create an new account"
+        subtitleLabel.text = "Change Password"
         subtitleLabel.textColor = Colors.hSocialButton
-    }
-}
-// MARK: - Actions
-//
-extension SignupViewController {
-    @IBAction func loginTapped(_ sender: Any) {
-        viewModel.firstName = firstNameTextField.textfield.text ?? ""
-        viewModel.lastName = lastNameTextField.textfield.text ?? ""
-        viewModel.username = usernameTextField.textfield.text ?? ""
-        viewModel.email = emailTextField.textfield.text ?? ""
-        viewModel.password = passwordTextField.textfield.text ?? ""
-        viewModel.confirmPassword = confirmPasswordTextField.textfield.text ?? ""
-        viewModel.phone = phoneNumber.textfield.text ?? ""
-        
-        viewModel.registerUser()
     }
 }
 // MARK: - Binding
 //
-extension SignupViewController {
+extension ForgetPasswordViewController {
     private func bindViewModel() {
-        viewModel.onSuccess = { [weak self] value in
-            let successVC = SuccessViewController()
-            successVC.modalPresentationStyle = .fullScreen
-            self?.present(successVC, animated: true)
+        viewModel.onResetTapped = { [weak self] in
+            let vc = SuccessViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self?.present(vc, animated: true)
         }
         
         viewModel.onError = { [weak self] errorMessage in
-            let alertItem = AlertModel(
+            let alert = UIAlertController(
+                title: "Login Failed",
                 message: errorMessage,
-                buttonTitle: "Ok",
-                image: .warning,
-                status: .error
+                preferredStyle: .alert
             )
-            self?.presentCustomAlert(with: alertItem)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(alert, animated: true)
+        }
+        
+        viewModel.configureOnButtonEnabled { [weak self] isEnabled in
+            self?.resetBtn.isEnabled = isEnabled
+            self?.resetBtn.alpha = isEnabled ? 1.0 : 0.5
         }
     }
 }
 // MARK: - Alert Presentation
 //
-extension SignupViewController {
+extension ForgetPasswordViewController {
     func presentCustomAlert(with alertItem: AlertModel) {
         let alertVC = AlertViewController(
             nibName: "AlertViewController",
@@ -154,8 +123,6 @@ extension SignupViewController {
         alertVC.modalPresentationStyle = .overFullScreen
         alertVC.modalTransitionStyle = .crossDissolve
         alertVC.loadViewIfNeeded()
-        /// Ensure outlets are connected
-        
         alertVC.show(alertItem: alertItem)
         
         /// Optional: dismiss on button press
@@ -163,5 +130,32 @@ extension SignupViewController {
             alertVC?.dismiss(animated: true)
         }
         self.present(alertVC, animated: true)
+    }
+}
+// MARK: - Private Handlers
+//
+extension ForgetPasswordViewController {
+    @objc func textDidChange(_ sender: UITextField) {
+        guard let text = sender.text else { return }
+        
+        if sender == usernameTextField.textfield {
+            viewModel.upadateUserName(text)
+        }
+        else if sender == currentPasswordTextField.textfield {
+            viewModel.upadteCurrentPassword(text)
+        }
+        else if sender == newPasswordTextField.textfield {
+            viewModel.upadteNewPassword(text)
+        }
+        else if sender == confirmPasswordTextField.textfield {
+            viewModel.upadteConfirmPassword(text)
+        }
+    }
+}
+// MARK: - Actions
+//
+extension ForgetPasswordViewController {
+    @IBAction func resetPassword(_ sender: Any) {
+        viewModel.resetTapped()
     }
 }
