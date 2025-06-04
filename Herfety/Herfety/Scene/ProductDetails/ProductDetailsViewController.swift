@@ -59,7 +59,7 @@ extension ProductDetailsViewController {
         let productDetials = ProductDetailsCollectionViewSection(productItems: viewModel.productItem)
         self.productDetialsSection = productDetials
    
-        let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviewsItems, rating: viewModel.productItem)
+        let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviews, rating: viewModel.productItem)
         self.reviewDetailsSection = reviews
         
         let recommendItems = CardItemCollectionViewSection(productItems: viewModel.recommendItems)
@@ -134,7 +134,8 @@ extension ProductDetailsViewController {
             }.store(in: &subscriptions)
         /// selected her
         recommendedProductsSection?.selectedItem.sink(receiveValue: { [weak self] value in
-            let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
+            #warning("")
+            let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: value.productID ?? 93))
             vc.viewModel.productItem = value
             vc.viewModel.fetchProductItems()
             
@@ -143,6 +144,7 @@ extension ProductDetailsViewController {
         
         bindWishlist()
         bindReviewrs()
+        bindUpadateReviews()
     }
     // MARK: - Wishlist
     private func bindWishlist() {
@@ -168,6 +170,13 @@ extension ProductDetailsViewController {
             let vc = ReviewersViewController(viewModel: ReviewerViewModel())
             self?.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
+    }
+    //onReviewsUpdated
+    private func bindUpadateReviews() {
+        viewModel.onReviewsUpdated = { [weak self] in
+            self?.configureLayoutSections()
+            self?.configureSections()
+        }
     }
 }
 // MARK: - Private Hanlder

@@ -51,7 +51,6 @@ extension ForgetPasswordViewModel {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let response):
-                        print(response.message)
                         self?.handleResetSuccess(response: response)
                     case .failure(let error):
                         self?.handleLoginError(error)

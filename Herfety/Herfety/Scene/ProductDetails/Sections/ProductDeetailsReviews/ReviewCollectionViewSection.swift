@@ -10,12 +10,12 @@ import Combine
 class ReviewCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
-    let reviewItems: [Review]
+    let reviewItems: [Reviewrr]
     let product: Wishlist
-    let reviewrsButton = PassthroughSubject<[Review], Never>()
+    let reviewrsButton = PassthroughSubject<[Reviewrr], Never>()
 
     // MARK: - Init
-    init(reviewItems: [Review], rating: Wishlist) {
+    init(reviewItems: [Reviewrr], rating: Wishlist) {
         self.reviewItems = reviewItems
         self.product = rating
     }
@@ -30,7 +30,7 @@ class ReviewCollectionViewSection: CollectionViewDataSource {
     }
     
     var numberOfItems: Int {
-        return reviewItems.count
+        return reviewItems.count > 2 ? 2 : reviewItems.count
     }
     
     func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -38,9 +38,9 @@ class ReviewCollectionViewSection: CollectionViewDataSource {
             return UICollectionViewCell()
         }
         let item = reviewItems[indexPath.row]
-        cell.commentReviewer.text = item.comment
-        cell.imageReviewer.image = item.image
-        
+        cell.commentReviewer.text = item.review
+        cell.imageReviewer.setImage(with: item.product?.thumbImage ?? "", placeholderImage: Images.profilePhoto) 
+        #warning("")
         return cell
     }
 }

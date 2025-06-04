@@ -188,7 +188,8 @@ extension HomeViewController {
             .store(in: &subscriptions)
         ///
         cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
-            let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel())
+            #warning("")
+            let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: value.productID ?? 93))
             vc.viewModel.productItem = value
             vc.viewModel.fetchProductItems()
             self?.navigationController?.pushViewController(vc, animated: true)

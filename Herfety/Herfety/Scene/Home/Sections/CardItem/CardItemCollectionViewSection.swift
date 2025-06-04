@@ -88,12 +88,12 @@ struct CardProductSectionLayoutProvider: LayoutSectionProvider {
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
         section.interGroupSpacing = 10
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                                           heightDimension: .absolute(56)), elementKind: "Header", alignment: .top)
-        sectionHeader.contentInsets = NSDirectionalEdgeInsets(top: 14, leading: 0, bottom: 0, trailing: 0)
+        sectionHeader.contentInsets = NSDirectionalEdgeInsets(top: -16, leading: 0, bottom: 0, trailing: 0)
         
         section.boundarySupplementaryItems = [sectionHeader]
         return section

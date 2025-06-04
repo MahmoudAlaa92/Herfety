@@ -14,6 +14,8 @@
 		1511F3CE2D5554D100D986CF /* DMSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1511F3C52D5554D100D986CF /* DMSans.ttf */; };
 		151563542DD4B6FE0001CCEE /* ResetPasswordRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151563532DD4B6FE0001CCEE /* ResetPasswordRemote.swift */; };
 		151563562DD4B7420001CCEE /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151563552DD4B7420001CCEE /* ResetPassword.swift */; };
+		1515635A2DD4DF980001CCEE /* Reviewerr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151563592DD4DF980001CCEE /* Reviewerr.swift */; };
+		1515635C2DD4E0090001CCEE /* ReviewRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1515635B2DD4E0090001CCEE /* ReviewRemote.swift */; };
 		151631262D5D556D00BA088E /* Fonts+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151631252D5D556D00BA088E /* Fonts+Style.swift */; };
 		151631282D5D55DB00BA088E /* UIButton+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151631272D5D55DB00BA088E /* UIButton+Style.swift */; };
 		151631322D5D56CF00BA088E /* Generated-Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151631312D5D56CF00BA088E /* Generated-Colors.swift */; };
@@ -219,6 +221,8 @@
 		1511F3C82D5554D100D986CF /* DMSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans-Regular.ttf"; sourceTree = "<group>"; };
 		151563532DD4B6FE0001CCEE /* ResetPasswordRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordRemote.swift; sourceTree = "<group>"; };
 		151563552DD4B7420001CCEE /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
+		151563592DD4DF980001CCEE /* Reviewerr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviewerr.swift; sourceTree = "<group>"; };
+		1515635B2DD4E0090001CCEE /* ReviewRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRemote.swift; sourceTree = "<group>"; };
 		151631252D5D556D00BA088E /* Fonts+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fonts+Style.swift"; sourceTree = "<group>"; };
 		151631272D5D55DB00BA088E /* UIButton+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Style.swift"; sourceTree = "<group>"; };
 		151631312D5D56CF00BA088E /* Generated-Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Colors.swift"; sourceTree = "<group>"; };
@@ -732,6 +736,7 @@
 				156720112DCE72E700D8AFCA /* RegisterUser.swift */,
 				153944EB2DCFA9C1008465BB /* Login.swift */,
 				151563552DD4B7420001CCEE /* ResetPassword.swift */,
+				151563592DD4DF980001CCEE /* Reviewerr.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -758,6 +763,7 @@
 				1567200D2DCE70E400D8AFCA /* RegisterRemote.swift */,
 				153944E92DCFA9A3008465BB /* LoginRemote.swift */,
 				151563532DD4B6FE0001CCEE /* ResetPasswordRemote.swift */,
+				1515635B2DD4E0090001CCEE /* ReviewRemote.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -1468,6 +1474,7 @@
 				1589FC182D51785700240754 /* AppDelegate.swift in Sources */,
 				15A4F5E52DB28FD6000EACEA /* CustomeTabBarViewModel.swift in Sources */,
 				15CD44C52D52A3BC00E58C6F /* HomeViewModel.swift in Sources */,
+				1515635A2DD4DF980001CCEE /* Reviewerr.swift in Sources */,
 				15CE60F22D73B3CB0032617B /* ReviewCollectionViewCell.swift in Sources */,
 				158A7E9E2DB5401800B89684 /* LoginViewController.swift in Sources */,
 				156720102DCE718C00D8AFCA /* Registration.swift in Sources */,
@@ -1591,6 +1598,7 @@
 				158A7EB82DB58D3100B89684 /* SecondaryButtonn.swift in Sources */,
 				15CE60F62D73BA050032617B /* ReviewModel.swift in Sources */,
 				153B7FD52D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift in Sources */,
+				1515635C2DD4E0090001CCEE /* ReviewRemote.swift in Sources */,
 				157F91142D62CF5F005381FB /* AddAddressModel.swift in Sources */,
 				15E5B67E2D70E9D300C0383D /* ProductDetailsViewModel.swift in Sources */,
 				15E5B67F2D70E9D300C0383D /* ProductModel.swift in Sources */,
