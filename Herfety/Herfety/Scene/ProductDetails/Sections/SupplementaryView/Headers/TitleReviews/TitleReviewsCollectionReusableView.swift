@@ -13,7 +13,7 @@ class TitleReviewsCollectionReusableView: UICollectionReusableView {
     // MARK: - Properties
     static let identifier = "TitleReviewsCollectionReusableView"
     lazy var cosmosView = CosmosView()
-    var onShowReviewrsTapped: (() -> Void)?
+    var onShowAllReviewrsTapped: (() -> Void)?
     // MARK: - Outlets
     @IBOutlet weak var titleReview: UILabel!
     
@@ -64,6 +64,6 @@ extension TitleReviewsCollectionReusableView {
 extension TitleReviewsCollectionReusableView {
     
     @IBAction func showReviewers(_ sender: Any) {
-        onShowReviewrsTapped?()
+        onShowAllReviewrsTapped?()
     }
 }

@@ -12,7 +12,7 @@ class ReviewersViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var collectionView: UICollectionView!
     ///
-    private var viewModel: ReviewerViewModel
+    var viewModel: ReviewerViewModel
     private var sections: [CollectionViewDataSource] = []
     private var sectionsLayout: [LayoutSectionProvider] = []
     private var navBarBehavior: HerfetyNavigationController?
@@ -58,7 +58,8 @@ extension ReviewersViewController {
     
     private func setUpNavigationBar() {
         navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
-        navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
+        navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: { [weak self]  in
+            self?.viewModel.didTapPlusButton(navigationController: self?.navigationController)
         }, showRighBtn: true)
     }
 }

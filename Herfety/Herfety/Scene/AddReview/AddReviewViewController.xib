@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddReviewViewController" customModule="Herfety" customModuleProvider="target">
+            <connections>
+                <outlet property="AddReviewTextField" destination="Rf3-WI-icP" id="Qh4-I8-QIz"/>
+                <outlet property="addButton" destination="KSr-V7-f59" id="ao4-N5-Mrq"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b05-ek-XHG">
+                    <rect key="frame" x="0.0" y="118" width="393" height="666"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLH-5d-odi" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="500"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="F27-d6-937">
+                                    <rect key="frame" x="20" y="10" width="353" height="490"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rf3-WI-icP" customClass="AddressTextField" customModule="Herfety" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="235"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSr-V7-f59" customClass="PrimaryButton" customModule="Herfety" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="255" width="353" height="235"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                            <connections>
+                                                <action selector="addPressed:" destination="-1" eventType="touchUpInside" id="zwk-9Y-lcK"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="F27-d6-937" secondAttribute="trailing" constant="20" id="VgZ-k9-9p1"/>
+                                <constraint firstAttribute="bottom" secondItem="F27-d6-937" secondAttribute="bottom" id="Yyj-tP-Vys"/>
+                                <constraint firstItem="F27-d6-937" firstAttribute="leading" secondItem="mLH-5d-odi" secondAttribute="leading" constant="20" id="aVA-D3-T8Z"/>
+                                <constraint firstItem="F27-d6-937" firstAttribute="top" secondItem="mLH-5d-odi" secondAttribute="top" constant="10" id="z2l-Lg-NWg"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="mLH-5d-odi" firstAttribute="trailing" secondItem="pSz-y5-BcR" secondAttribute="trailing" id="MDI-Bo-Cz3"/>
+                        <constraint firstItem="mLH-5d-odi" firstAttribute="width" secondItem="5eT-rV-taF" secondAttribute="width" id="im5-qe-d2Y"/>
+                        <constraint firstItem="mLH-5d-odi" firstAttribute="leading" secondItem="pSz-y5-BcR" secondAttribute="leading" id="ktT-cf-P2a"/>
+                        <constraint firstItem="mLH-5d-odi" firstAttribute="bottom" secondItem="pSz-y5-BcR" secondAttribute="bottom" id="rZa-Zi-eov"/>
+                        <constraint firstItem="mLH-5d-odi" firstAttribute="top" secondItem="pSz-y5-BcR" secondAttribute="top" id="wfM-F4-sXG"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="pSz-y5-BcR"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="5eT-rV-taF"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="b05-ek-XHG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="P9N-pP-pj1"/>
+                <constraint firstItem="b05-ek-XHG" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Rt3-W7-Wh9"/>
+                <constraint firstItem="b05-ek-XHG" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="TrN-wM-7Pm"/>
+                <constraint firstItem="b05-ek-XHG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ks9-pa-xxu"/>
+            </constraints>
+            <point key="canvasLocation" x="-2.2900763358778624" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

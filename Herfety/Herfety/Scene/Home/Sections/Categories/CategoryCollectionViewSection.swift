@@ -93,7 +93,7 @@ struct CategoriesSectionLayoutSection: LayoutSectionProvider {
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
         
         section.boundarySupplementaryItems = [
         .init(layoutSize: .init(widthDimension: .

@@ -58,7 +58,7 @@ extension ProductDetailsViewController {
     private func configureSections() {
         let productDetials = ProductDetailsCollectionViewSection(productItems: viewModel.productItem)
         self.productDetialsSection = productDetials
-   
+        
         let reviews = ReviewCollectionViewSection(reviewItems: viewModel.reviews, rating: viewModel.productItem)
         self.reviewDetailsSection = reviews
         
@@ -121,6 +121,7 @@ extension ProductDetailsViewController: UICollectionViewDelegate {
 //
 extension ProductDetailsViewController {
     func bindViewModel() {
+        
         viewModel.$productItem.sink { _ in
             self.collectionView.reloadData()
         }.store(in: &subscriptions)
@@ -134,7 +135,7 @@ extension ProductDetailsViewController {
             }.store(in: &subscriptions)
         /// selected her
         recommendedProductsSection?.selectedItem.sink(receiveValue: { [weak self] value in
-            #warning("")
+            #warning("user id here")
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: value.productID ?? 93))
             vc.viewModel.productItem = value
             vc.viewModel.fetchProductItems()
@@ -167,15 +168,23 @@ extension ProductDetailsViewController {
     // MARK: - Reviewrs
     private func bindReviewrs() {
         reviewDetailsSection?.reviewrsButton.sink { [weak self] reviewrs in
+            guard let self = self else { return }
             let vc = ReviewersViewController(viewModel: ReviewerViewModel())
-            self?.navigationController?.pushViewController(vc, animated: true)
+            vc.viewModel.reviersItems = reviewrs
+            self.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
     }
-    //onReviewsUpdated
+    /// Reviews Updated
     private func bindUpadateReviews() {
         viewModel.onReviewsUpdated = { [weak self] in
-            self?.configureLayoutSections()
-            self?.configureSections()
+            
+            guard let self = self else { return }
+
+            self.reviewDetailsSection?.reviewItems = self.viewModel.reviews
+
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
 }

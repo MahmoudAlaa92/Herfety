@@ -9,9 +9,9 @@ import UIKit
 
 class ReviewerCollectionViewSection: CollectionViewDataSource {
     
-    let reviewers: [Reviewer]
+    let reviewers: [Reviewrr]
     
-    init(reviewers: [Reviewer]) {
+    init(reviewers: [Reviewrr]) {
         self.reviewers = reviewers
     }
     func registerCells(in collectionView: UICollectionView) {
@@ -30,11 +30,16 @@ class ReviewerCollectionViewSection: CollectionViewDataSource {
             return UICollectionViewCell()
         }
         let item = reviewers[indexPath.row]
-        cell.nameReviewer.text = item.name
-        cell.imageView.image = item.image
-        cell.commentReviewer.text = item.comment
-        cell.dateReviewer.text = item.date
-        cell.cosmosView.rating = item.rating
+
+        cell.nameReviewer.text = item.user?.userName ?? "No Name"
+        if let imageUrl = item.user?.image, !imageUrl.isEmpty {
+            cell.imageView.setImage(with: imageUrl, placeholderImage: Images.iconPersonalDetails)
+        } else {
+            cell.imageView.image = Images.iconPersonalDetails
+        }
+        cell.commentReviewer.text = item.review
+        cell.dateReviewer.text = item.createdAt
+        cell.cosmosView.rating = Double(item.rating) ?? 0.0
         return cell
     }
     

@@ -12,6 +12,8 @@
 		1511F3CC2D5554D100D986CF /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1511F3C82D5554D100D986CF /* DMSans-Regular.ttf */; };
 		1511F3CD2D5554D100D986CF /* DMSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1511F3C72D5554D100D986CF /* DMSans-Medium.ttf */; };
 		1511F3CE2D5554D100D986CF /* DMSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1511F3C52D5554D100D986CF /* DMSans.ttf */; };
+		1513DD462DF3811D001EB3B3 /* AddReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1513DD442DF3811D001EB3B3 /* AddReviewViewController.swift */; };
+		1513DD472DF3811D001EB3B3 /* AddReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1513DD452DF3811D001EB3B3 /* AddReviewViewController.xib */; };
 		151563542DD4B6FE0001CCEE /* ResetPasswordRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151563532DD4B6FE0001CCEE /* ResetPasswordRemote.swift */; };
 		151563562DD4B7420001CCEE /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151563552DD4B7420001CCEE /* ResetPassword.swift */; };
 		1515635A2DD4DF980001CCEE /* Reviewerr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151563592DD4DF980001CCEE /* Reviewerr.swift */; };
@@ -76,6 +78,8 @@
 		1548CF432D56DFA900F7CEEA /* CategoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF422D56DFA900F7CEEA /* CategoriesModel.swift */; };
 		1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF442D56DFF300F7CEEA /* CardOfProductModel.swift */; };
 		1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548CF462D56E07E00F7CEEA /* DailyEssentialyModel.swift */; };
+		154B7D222DF3824B00854E61 /* AddReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B7D212DF3824B00854E61 /* AddReview.swift */; };
+		154B7D242DF3835900854E61 /* AddReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B7D232DF3835900854E61 /* AddReviewViewModel.swift */; };
 		1555876D2DC12EDE00342236 /* WishlistRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555876C2DC12EDE00342236 /* WishlistRemote.swift */; };
 		15625FD82DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15625FD72DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift */; };
 		1562A4412DAA9B8500459EB5 /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1562A4402DAA9B8500459EB5 /* Logout.swift */; };
@@ -219,6 +223,8 @@
 		1511F3C62D5554D100D986CF /* DMSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans-Bold.ttf"; sourceTree = "<group>"; };
 		1511F3C72D5554D100D986CF /* DMSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans-Medium.ttf"; sourceTree = "<group>"; };
 		1511F3C82D5554D100D986CF /* DMSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans-Regular.ttf"; sourceTree = "<group>"; };
+		1513DD442DF3811D001EB3B3 /* AddReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewController.swift; sourceTree = "<group>"; };
+		1513DD452DF3811D001EB3B3 /* AddReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddReviewViewController.xib; sourceTree = "<group>"; };
 		151563532DD4B6FE0001CCEE /* ResetPasswordRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordRemote.swift; sourceTree = "<group>"; };
 		151563552DD4B7420001CCEE /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		151563592DD4DF980001CCEE /* Reviewerr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviewerr.swift; sourceTree = "<group>"; };
@@ -283,6 +289,8 @@
 		1548CF422D56DFA900F7CEEA /* CategoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesModel.swift; sourceTree = "<group>"; };
 		1548CF442D56DFF300F7CEEA /* CardOfProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOfProductModel.swift; sourceTree = "<group>"; };
 		1548CF462D56E07E00F7CEEA /* DailyEssentialyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEssentialyModel.swift; sourceTree = "<group>"; };
+		154B7D212DF3824B00854E61 /* AddReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReview.swift; sourceTree = "<group>"; };
+		154B7D232DF3835900854E61 /* AddReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewModel.swift; sourceTree = "<group>"; };
 		1555876C2DC12EDE00342236 /* WishlistRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistRemote.swift; sourceTree = "<group>"; };
 		15625FD72DBAFA6700C8BA20 /* GetProductsOfCategoryRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsOfCategoryRemote.swift; sourceTree = "<group>"; };
 		1562A4402DAA9B8500459EB5 /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
@@ -451,6 +459,17 @@
 				151631252D5D556D00BA088E /* Fonts+Style.swift */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		1513DD3F2DF37B3D001EB3B3 /* AddReview */ = {
+			isa = PBXGroup;
+			children = (
+				154B7D212DF3824B00854E61 /* AddReview.swift */,
+				154B7D232DF3835900854E61 /* AddReviewViewModel.swift */,
+				1513DD442DF3811D001EB3B3 /* AddReviewViewController.swift */,
+				1513DD452DF3811D001EB3B3 /* AddReviewViewController.xib */,
+			);
+			path = AddReview;
 			sourceTree = "<group>";
 		};
 		151631232D5D54DB00BA088E /* LaunchScreen */ = {
@@ -796,8 +815,8 @@
 		157F91052D62B780005381FB /* AddAdress */ = {
 			isa = PBXGroup;
 			children = (
-				15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */,
 				157F91132D62CF5F005381FB /* AddAddressModel.swift */,
+				15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */,
 				157F91012D62B774005381FB /* AddAddressViewController.swift */,
 				157F91022D62B774005381FB /* AddAddressViewController.xib */,
 			);
@@ -896,6 +915,7 @@
 				158A7E9A2DB5401800B89684 /* Auth */,
 				15E5B66A2D709CCD00C0383D /* ProductDetails */,
 				15FB21C72D7530FD0002B576 /* Reviewer */,
+				1513DD3F2DF37B3D001EB3B3 /* AddReview */,
 				153F6AAD2D597C9B00317F49 /* NavBar */,
 				153F6A992D59527200317F49 /* TabBar */,
 				15CD44AA2D5268F800E58C6F /* Home */,
@@ -1447,6 +1467,7 @@
 				158A7E9C2DB5401800B89684 /* LoginViewController.xib in Resources */,
 				154112132D56983400F248F7 /* HeaderView.xib in Resources */,
 				15FB21CB2D7531740002B576 /* ReviewersViewController.xib in Resources */,
+				1513DD472DF3811D001EB3B3 /* AddReviewViewController.xib in Resources */,
 				159B57862DCBCA5300CDD958 /* SignupViewController.xib in Resources */,
 				15F927CE2D5AC5E50038CEB8 /* OrderCollectionViewCell.xib in Resources */,
 				1517EC952D74ABF7007CCBF7 /* ButtonCollectionReusableView.xib in Resources */,
@@ -1490,6 +1511,7 @@
 				15760D852D692DFC0033BC0D /* AddAddressViewModel.swift in Sources */,
 				1541679C2D9D373B007E4CAA /* SettingViewModel.swift in Sources */,
 				15A4F5E82DB2981E000EACEA /* Notification.swift in Sources */,
+				154B7D222DF3824B00854E61 /* AddReview.swift in Sources */,
 				1548CF432D56DFA900F7CEEA /* CategoriesModel.swift in Sources */,
 				15E33A2B2DD4AC500004D408 /* ForgetPasswordViewController.swift in Sources */,
 				1599B89C2DB86A6C00A48510 /* Generated-Images.swift in Sources */,
@@ -1538,6 +1560,7 @@
 				15A3C3CF2D788C0600AE6CFA /* NameViewModel.swift in Sources */,
 				15FB21CA2D7531740002B576 /* ReviewersViewController.swift in Sources */,
 				154112122D56983400F248F7 /* HeaderView.swift in Sources */,
+				154B7D242DF3835900854E61 /* AddReviewViewModel.swift in Sources */,
 				159B578A2DCBD65400CDD958 /* LoginViewModel.swift in Sources */,
 				1532F3592D5EB297003223A1 /* HerfetyNavigationController.swift in Sources */,
 				1567200E2DCE70E400D8AFCA /* RegisterRemote.swift in Sources */,
@@ -1582,6 +1605,7 @@
 				151631282D5D55DB00BA088E /* UIButton+Style.swift in Sources */,
 				15F420672DB1278B00FCDF71 /* CollectionViewSectionProtocols.swift in Sources */,
 				1532F3532D5E8EC1003223A1 /* InfoModel.swift in Sources */,
+				1513DD462DF3811D001EB3B3 /* AddReviewViewController.swift in Sources */,
 				15A4F5E12DB28D18000EACEA /* UserDefaults.swift in Sources */,
 				15A5EC922D77E125003E49AB /* ProfileListCollectionViewCell.swift in Sources */,
 				1555876D2DC12EDE00342236 /* WishlistRemote.swift in Sources */,

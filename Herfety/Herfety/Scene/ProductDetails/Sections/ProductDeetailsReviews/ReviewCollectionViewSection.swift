@@ -10,7 +10,7 @@ import Combine
 class ReviewCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
-    let reviewItems: [Reviewrr]
+    var reviewItems: [Reviewrr]
     let product: Wishlist
     let reviewrsButton = PassthroughSubject<[Reviewrr], Never>()
 
@@ -88,10 +88,14 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
             ofKind: TitleReviewsCollectionReusableView.identifier,
             withReuseIdentifier: TitleReviewsCollectionReusableView.identifier,
             for: indexPath) as? TitleReviewsCollectionReusableView {
-            // TODO: change the defualt rating here
-            header.configure(numberOfReviews: reviewItems.count, rating: 3.5)
-            header.onShowReviewrsTapped = { [weak self] in
-                self?.reviewrsButton.send(self?.reviewItems ?? [])
+            
+            let validRatings = reviewItems.compactMap { Double($0.rating) }
+            let rate = validRatings.isEmpty ? 0.0 : validRatings.reduce(0.0, +) / Double(validRatings.count)
+            
+            header.configure(numberOfReviews: reviewItems.count, rating: rate)
+            header.onShowAllReviewrsTapped = { [weak self] in
+                guard let self = self else { return }
+                self.reviewrsButton.send(self.reviewItems)
             }
             return header
         } else if kind == ButtonCollectionReusableView.identifier,
@@ -106,7 +110,7 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
         }
         return UICollectionReusableView()
     }
-    ///
+    // TODO: refactor this
     @objc private func addToCart() {
         // add to cart pressed
     }
