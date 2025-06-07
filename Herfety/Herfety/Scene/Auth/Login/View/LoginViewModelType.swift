@@ -5,7 +5,7 @@
 //  Created by Mahmoud Alaa on 07/05/2025.
 //
 
-import Foundation
+import UIKit
 
 /// Login Input & Output
 ///
@@ -17,6 +17,8 @@ protocol LoginViewModelInput {
     func updateEmail(_ text: String)
     func updatePassword(_ text: String)
     func loginTapped()
+    func loginWithFacebook(from viewController: UIViewController)
+    func loginWithGoogle(from viewController: UIViewController) 
 }
 
 /// Login ViewModel Output
