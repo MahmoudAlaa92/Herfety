@@ -62,11 +62,9 @@ class SignupViewModel {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let value):
-                    print(value)
                     self?.onSuccess?(value)
                 case .failure(let error):
                     print("❌ Server Error Details: \(error)")
-                    self?.onError?("Registration failed: \(error.localizedDescription)")
                     self?.onError?("Registration failed: \(error.localizedDescription)")
                 }
             }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 /// Login Input & Output
 ///
@@ -18,7 +19,8 @@ protocol LoginViewModelInput {
     func updatePassword(_ text: String)
     func loginTapped()
     func loginWithFacebook(from viewController: UIViewController)
-    func loginWithGoogle(from viewController: UIViewController) 
+    func loginWithGoogle(from viewController: UIViewController)
+    func loginWithApple(credential: ASAuthorizationAppleIDCredential)
 }
 
 /// Login ViewModel Output

@@ -9,6 +9,7 @@ import Firebase
 import FirebaseAuth
 import FacebookLogin
 import GoogleSignIn
+import AuthenticationServices
 
 class LoginViewModel {
     // MARK: - Properties
@@ -65,66 +66,92 @@ extension LoginViewModel: LoginViewModelInput {
     }
     
     // MARK: - Facebook Login
-       func loginWithFacebook(from viewController: UIViewController) {
-           let fbLoginManager = LoginManager()
-           fbLoginManager.logIn(permissions: ["public_profile", "email"], from: viewController) { [weak self] result, error in
-               if let error = error {
-                   self?.onError?(error.localizedDescription)
-                   return
-               }
-
-               guard let token = AccessToken.current?.tokenString else {
-                   self?.onError?("Failed to retrieve Facebook access token.")
-                   return
-               }
-
-               let credential = FacebookAuthProvider.credential(withAccessToken: token)
-
-               Auth.auth().signIn(with: credential) { authResult, error in
-                   if let error = error {
-                       self?.onError?(error.localizedDescription)
-                       return
-                   }
-                   self?.onLoginTapped?()
-               }
-           }
-       }
-
-       // MARK: - Google Login
-       func loginWithGoogle(from viewController: UIViewController) {
-           guard let clientID = FirebaseApp.app()?.options.clientID else {
-               onError?("Client ID not found")
-               return
-           }
-
-           let configuration = GIDConfiguration(clientID: clientID)
-           GIDSignIn.sharedInstance.configuration = configuration
-
-           GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { [weak self] result, error in
-               if let error = error {
-                   self?.onError?(error.localizedDescription)
-                   return
-               }
-
-               guard let user = result?.user,
-                     let idToken = user.idToken?.tokenString else {
-                   self?.onError?("Failed to retrieve Google ID token.")
-                   return
-               }
-
-               let accessToken = user.accessToken.tokenString
-               let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-
-               Auth.auth().signIn(with: credential) { authResult, error in
-                   if let error = error {
-                       self?.onError?(error.localizedDescription)
-                       return
-                   }
-
-                   self?.onLoginTapped?()
-               }
-           }
-       }
+    func loginWithFacebook(from viewController: UIViewController) {
+        let fbLoginManager = LoginManager()
+        fbLoginManager.logIn(permissions: ["public_profile", "email"], from: viewController) { [weak self] result, error in
+            if let error = error {
+                self?.onError?(error.localizedDescription)
+                return
+            }
+            
+            guard let token = AccessToken.current?.tokenString else {
+                self?.onError?("Failed to retrieve Facebook access token.")
+                return
+            }
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: token)
+            
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    self?.onError?(error.localizedDescription)
+                    return
+                }
+                self?.onLoginTapped?()
+            }
+        }
+    }
+    // MARK: - Google Login
+    func loginWithGoogle(from viewController: UIViewController) {
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            onError?("Client ID not found")
+            return
+        }
+        
+        let configuration = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = configuration
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { [weak self] result, error in
+            if let error = error {
+                self?.onError?(error.localizedDescription)
+                return
+            }
+            
+            guard let user = result?.user,
+                  let idToken = user.idToken?.tokenString else {
+                self?.onError?("Failed to retrieve Google ID token.")
+                return
+            }
+            
+            let accessToken = user.accessToken.tokenString
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+            
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    self?.onError?(error.localizedDescription)
+                    return
+                }
+                
+                self?.onLoginTapped?()
+            }
+        }
+    }
+    // MARK: - Apple Login
+    func loginWithApple(credential: ASAuthorizationAppleIDCredential) {
+        let userId = credential.user
+        let email = credential.email ?? ""
+        
+        let fullName: String
+        if let nameComponents = credential.fullName {
+            let formatter = PersonNameComponentsFormatter()
+            fullName = formatter.string(from: nameComponents)
+        } else {
+            fullName = ""
+        }
+        
+        // Example usage (Firebase, custom backend, etc.)
+        print("Apple Sign-In Info:")
+        print("User ID: \(userId)")
+        print("Email: \(email)")
+        print("Full Name: \(fullName)")
+        
+        // Simulate success or error
+        if !userId.isEmpty {
+            onLoginTapped?()
+        } else {
+            onError?("Apple login failed.")
+        }
+    }
+    
 }
 // MARK: LoginViewModelOutput
 //

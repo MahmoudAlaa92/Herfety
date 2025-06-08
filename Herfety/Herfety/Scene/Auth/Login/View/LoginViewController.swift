@@ -5,7 +5,7 @@
 //  Created by Mahmoud Alaa on 20/04/2024.
 //
 import UIKit
-
+import AuthenticationServices
 
 class LoginViewController: UIViewController {
     
@@ -133,7 +133,7 @@ extension LoginViewController {
           
           viewModel.configureOnButtonEnabled { [weak self] isEnabled in
               self?.loginButton.isEnabled = isEnabled
-              self?.loginButton.alpha = isEnabled ? 1.0 : 0.5
+              self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
           }
       }
     
@@ -171,5 +171,27 @@ extension LoginViewController {
     }
     
     @IBAction func appleTapped(_ sender: Any) {
+        let appleProvider = ASAuthorizationAppleIDProvider()
+               let request = appleProvider.createRequest()
+               request.requestedScopes = [.email, .fullName]
+               let controller = ASAuthorizationController(authorizationRequests: [request])
+               controller.delegate = self
+               controller.presentationContextProvider = self
+               controller.performRequests()
+    }
+}
+extension LoginViewController : ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        view.window!
+    }
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let details = authorization.credential as? ASAuthorizationAppleIDCredential {
+              viewModel.loginWithApple(credential: details)
+          }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print(error.localizedDescription)
     }
 }
