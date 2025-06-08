@@ -16,7 +16,7 @@ class LoginViewModel {
     private var email: String = ""
     private var password: String = ""
     private let loginService: LoginRemoteProtocol
-    
+
     /// Outputs
     var onLoginTapped: (() -> Void)?
     private var onLoginButtonEnabled: ((Bool) -> Void)?
@@ -120,11 +120,38 @@ extension LoginViewModel: LoginViewModelInput {
                     self?.onError?(error.localizedDescription)
                     return
                 }
+                guard let firebaseUser = authResult?.user else {
+                    self?.onError?("Failed to get user info.")
+                    return
+                }
+
+                let displayName = firebaseUser.displayName ?? ""
+                let nameComponents = displayName.split(separator: " ")
+                let firstName = nameComponents.first.map(String.init) ?? ""
+                let lastName = nameComponents.dropFirst().joined(separator: " ")
+
+                let email = firebaseUser.email ?? ""
+                let phone = firebaseUser.phoneNumber ?? "01142128919"
+                let imageUrl = firebaseUser.photoURL?.absoluteString ?? ""
                 
+                let userInfo = RegisterUser(
+                    FName: firstName,
+                    LName: lastName,
+                    UserName: firstName + " " + lastName,
+                    Password: "",
+                    ConfirmPassword: "",
+                    Email: email,
+                    Phone: phone,
+                    image: imageUrl
+                )
+                CustomeTabBarViewModel.shared.userInfo = userInfo
+                print(user)
+
                 self?.onLoginTapped?()
             }
         }
     }
+
     // MARK: - Apple Login
     func loginWithApple(credential: ASAuthorizationAppleIDCredential) {
         let userId = credential.user

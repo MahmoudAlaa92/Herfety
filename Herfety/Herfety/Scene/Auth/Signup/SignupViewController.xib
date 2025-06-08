@@ -19,6 +19,7 @@
                 <outlet property="logoImage" destination="eYo-es-09g" id="bWp-nJ-a8w"/>
                 <outlet property="passwordTextField" destination="M9W-vW-rtH" id="ROG-vP-IU0"/>
                 <outlet property="phoneNumber" destination="hEc-dT-vaV" id="JoF-kU-m0i"/>
+                <outlet property="scrollView" destination="m9N-gl-Y4l" id="4yv-HK-Shr"/>
                 <outlet property="subtitleLabel" destination="fdl-HD-qDE" id="fIe-Xl-vbR"/>
                 <outlet property="titleLabel" destination="Udo-Me-EA2" id="gQ5-Ag-V08"/>
                 <outlet property="usernameTextField" destination="PuQ-4E-eRE" id="KDM-Ns-rD6"/>

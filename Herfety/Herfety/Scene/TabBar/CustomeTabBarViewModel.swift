@@ -20,6 +20,8 @@ class CustomeTabBarViewModel: ObservableObject {
     ///
     @UserDefault<Bool>(key: \.login) var login
     @UserDefault<Int>(key: \.userId) var userId
+    @UserDefault<RegisterUser>(key: \.userInfo) var userInfo
+    
     var isWishlistItemDeleted = false
     ///
     @Published var selectedTab: TabBarItems = .home

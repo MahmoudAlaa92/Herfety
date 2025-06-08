@@ -11,4 +11,5 @@ extension UserDefaultsKeys {
     var login: String { "Login" }
     var userName: String { "Mahmoud Alaa" }
     var userId: String { "userId" }
+    var userInfo: String { "userInfo" }
 }

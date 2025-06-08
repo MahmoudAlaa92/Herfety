@@ -10,6 +10,8 @@ import UIKit
 class SignupViewController: UIViewController {
     
     // MARK: - Outlets
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var firstNameTextField: HRTextField!
     @IBOutlet weak var lastNameTextField: HRTextField!
     @IBOutlet weak var usernameTextField: HRTextField!
@@ -61,8 +63,18 @@ class SignupViewController: UIViewController {
         configurePasswordTextField()
         configurePhoneTextField()
         configureLabelsUI()
+        
+        dismissKeyboardWhenTapped()
     }
-    
+    private func dismissKeyboardWhenTapped() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+          tapGesture.cancelsTouchesInView = false // Allows other taps (e.g. buttons) to still work
+          view.addGestureRecognizer(tapGesture)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
     /// Configures username text field with title and placeholder
     private func configureUsernameTextField() {
         firstNameTextField.title = "First name"
@@ -73,6 +85,14 @@ class SignupViewController: UIViewController {
         
         usernameTextField.title = "User Name"
         usernameTextField.placeholder = "Enter your name here"
+        
+        firstNameTextField.textfield.delegate = self
+        lastNameTextField.textfield.delegate = self
+        usernameTextField.textfield.delegate = self
+        emailTextField.textfield.delegate = self
+        passwordTextField.textfield.delegate = self
+        confirmPasswordTextField.textfield.delegate = self
+        phoneNumber.textfield.delegate = self
     }
     
     /// Configures email text field with title and placeholder
@@ -164,4 +184,39 @@ extension SignupViewController {
         }
         self.present(alertVC, animated: true)
     }
+}
+
+extension SignupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextField: UITextField?
+        
+        switch textField {
+        case firstNameTextField.textfield:
+            nextField = lastNameTextField.textfield
+        case lastNameTextField.textfield:
+            nextField = usernameTextField.textfield
+        case usernameTextField.textfield:
+            nextField = emailTextField.textfield
+        case emailTextField.textfield:
+            nextField = passwordTextField.textfield
+        case passwordTextField.textfield:
+            nextField = confirmPasswordTextField.textfield
+        case confirmPasswordTextField.textfield:
+            nextField = phoneNumber.textfield
+        case phoneNumber.textfield:
+            nextField = nil
+        default:
+            nextField = nil
+        }
+
+        if let next = nextField {
+            scrollView.scrollRectToVisible(next.frame, animated: true)
+            next.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+
 }

@@ -35,8 +35,10 @@ class HomeViewController: UIViewController {
         configureSections()
         setUpCollectionView()
         cofigureCompositianalLayout()
-        configureNavBar()
         bindViewModel()
+        Task {
+           await configureNavBar()
+        }
     }
     
     private func setUpCollectionView() {
@@ -82,15 +84,28 @@ extension HomeViewController {
         ]
     }
     /// NavBar
-    func configureNavBar() {
+    func configureNavBar() async {
         navigationItem.backButtonTitle = ""
-        navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
-        navigationBarBehavior?.configure(onNotification: {
-            print("searchBtn is tapped")
-        }, onSearch: {
-            print("NotificationBtn is tapped")
-        },userName: "Mahmoud Alaa", userImage: Images.profilePhoto)
+           navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
+           
+           let userName = CustomeTabBarViewModel.shared.userInfo?.UserName ?? ""
+           let userImageURL = CustomeTabBarViewModel.shared.userInfo?.image
+           
+           let loadedImage = await UIImage.load(from: userImageURL ?? "")
+           let finalImage = loadedImage ?? Images.iconPersonalDetails
+
+           navigationBarBehavior?.configure(
+               onNotification: {
+                   print("searchBtn is tapped")
+               },
+               onSearch: {
+                   print("NotificationBtn is tapped")
+               },
+               userName: userName,
+               userImage: finalImage
+           )
     }
+    
     /// CompositianalLayout
     private func cofigureCompositianalLayout() {
         
