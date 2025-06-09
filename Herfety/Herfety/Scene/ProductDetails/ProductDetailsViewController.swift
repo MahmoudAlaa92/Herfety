@@ -38,6 +38,10 @@ class ProductDetailsViewController: UIViewController {
         configureLayoutSections()
         bindViewModel()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
 }
 // MARK: - Configuration
 //
@@ -169,8 +173,9 @@ extension ProductDetailsViewController {
     private func bindReviewrs() {
         reviewDetailsSection?.reviewrsButton.sink { [weak self] reviewrs in
             guard let self = self else { return }
-            let vc = ReviewersViewController(viewModel: ReviewerViewModel())
-            vc.viewModel.reviersItems = reviewrs
+            
+            let vc = ReviewersViewController(viewModel: ReviewersViewModel(productId: viewModel.currentProductId))
+            vc.viewModel.reviewersItems = reviewrs
             self.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &subscriptions)
     }

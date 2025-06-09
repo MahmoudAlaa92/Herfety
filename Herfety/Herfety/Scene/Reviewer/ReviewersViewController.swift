@@ -6,19 +6,21 @@
 //
 
 import UIKit
+import Combine
 
 class ReviewersViewController: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak var collectionView: UICollectionView!
     ///
-    var viewModel: ReviewerViewModel
+    var viewModel: ReviewersViewModel
     private var sections: [CollectionViewDataSource] = []
     private var sectionsLayout: [LayoutSectionProvider] = []
     private var navBarBehavior: HerfetyNavigationController?
-    
+    private var subscriptions = Set<AnyCancellable>()
+
     // MARK: - Init
-    init(viewModel: ReviewerViewModel) {
+    init(viewModel: ReviewersViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,16 +36,28 @@ class ReviewersViewController: UIViewController {
         configureSections()
         configureLayoutSections()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        Task {
+            await viewModel.fetchReviews()
+            reloadData()
+        }
+    }
 }
 // MARK: - Configuration
 //
 extension ReviewersViewController {
+    
+    private func reloadData() {
+        sections = [ReviewerCollectionViewSection(reviewers: viewModel.reviewersItems)]
+        collectionView.reloadData()
+    }
+
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     private func configureSections() {
-        let reviewrs = ReviewerCollectionViewSection(reviewers: viewModel.reviersItems)
+        let reviewrs = ReviewerCollectionViewSection(reviewers: viewModel.reviewersItems)
         sections = [reviewrs]
         sections.forEach({ $0.registerCells(in: collectionView)})
     }
@@ -95,4 +109,3 @@ extension ReviewersViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 //
 extension ReviewersViewController: UICollectionViewDelegate {}
-    

@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="AddReviewTextField" destination="Rf3-WI-icP" id="Qh4-I8-QIz"/>
                 <outlet property="addButton" destination="KSr-V7-f59" id="ao4-N5-Mrq"/>
+                <outlet property="ratingTextField" destination="4zg-Q1-Nlg" id="YWi-me-lks"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,17 +26,21 @@
                     <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLH-5d-odi" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="500"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="755"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="F27-d6-937">
-                                    <rect key="frame" x="20" y="10" width="353" height="490"/>
+                                    <rect key="frame" x="20" y="10" width="353" height="745"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rf3-WI-icP" customClass="AddressTextField" customModule="Herfety" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="235"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSr-V7-f59" customClass="PrimaryButton" customModule="Herfety" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4zg-Q1-Nlg" customClass="AddressTextField" customModule="Herfety" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="255" width="353" height="235"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSr-V7-f59" customClass="PrimaryButton" customModule="Herfety" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="510" width="353" height="235"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                             <connections>

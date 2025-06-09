@@ -205,6 +205,7 @@ extension HomeViewController {
         cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
             #warning("")
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: value.productID ?? 93))
+
             vc.viewModel.productItem = value
             vc.viewModel.fetchProductItems()
             self?.navigationController?.pushViewController(vc, animated: true)
