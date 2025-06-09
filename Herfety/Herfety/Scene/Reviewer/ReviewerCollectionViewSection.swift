@@ -10,7 +10,8 @@ import UIKit
 class ReviewerCollectionViewSection: CollectionViewDataSource {
     
     let reviewers: [Reviewrr]
-    
+    var onDelete: ((Int) -> Void)?
+
     init(reviewers: [Reviewrr]) {
         self.reviewers = reviewers
     }
@@ -43,6 +44,21 @@ class ReviewerCollectionViewSection: CollectionViewDataSource {
         return cell
     }
     
+}
+// MARK: - Delegate
+//
+extension ReviewerCollectionViewSection: ContextMenuProvider {
+    func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
+                self.onDelete?(indexPath.row)
+            }
+            let update = UIAction(title: "Edit", image: UIImage(systemName: "pencil"), attributes: .destructive) {  _ in
+                
+            }
+            return UIMenu(title: "", children: [delete, update])
+        }
+    }
 }
 // MARK: - Layout
 //

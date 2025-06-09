@@ -34,4 +34,28 @@ class ReviewersViewModel {
             print("Error fetching reviews: \(error)")
         }
     }
+    
+    func deleteReview(at index: Int, completion: @escaping (Bool) -> Void) {
+        let review = reviewersItems[index]
+        let remote: ReviewRemoteProtocol = ReviewRemote(network: AlamofireNetwork())
+        
+        guard let reviewId = review.id else {
+            completion(false)
+            return
+        }
+
+        remote.deleteReview(id: reviewId) { [weak self] result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.reviewersItems.remove(at: index)
+                    completion(true)
+                }
+            case .failure(let error):
+                print("Failed to delete review: \(error)")
+                completion(false)
+            }
+        }
+    }
+
 }

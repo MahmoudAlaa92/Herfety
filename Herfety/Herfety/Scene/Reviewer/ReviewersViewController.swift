@@ -48,8 +48,24 @@ class ReviewersViewController: UIViewController {
 extension ReviewersViewController {
     
     private func reloadData() {
-        sections = [ReviewerCollectionViewSection(reviewers: viewModel.reviewersItems)]
-        collectionView.reloadData()
+        let section = ReviewerCollectionViewSection(reviewers: viewModel.reviewersItems)
+         section.onDelete = { [weak self] index in
+             guard let self = self else { return }
+
+             self.viewModel.deleteReview(at: index) { success in
+                 if success {
+                     DispatchQueue.main.async {
+                         self.reloadData()
+                     }
+                 } else {
+                     // Show an error message
+                     print("Failed to delete review")
+                 }
+             }
+         }
+
+         sections = [section]
+         collectionView.reloadData()
     }
 
     private func setUpCollectionView() {
@@ -78,6 +94,7 @@ extension ReviewersViewController {
     }
 }
 // MARK: - UICollectionViewDataSource
+//
 extension ReviewersViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         sections.count
@@ -108,4 +125,13 @@ extension ReviewersViewController: UICollectionViewDataSource {
 }
 // MARK: - UICollectionViewDelegate
 //
-extension ReviewersViewController: UICollectionViewDelegate {}
+extension ReviewersViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        contextMenuConfigurationForItemAt indexPath: IndexPath,
+                        point: CGPoint) -> UIContextMenuConfiguration? {
+        if let providers = sections[indexPath.section] as? ContextMenuProvider {
+            return providers.contextMenuConfiguration(for: collectionView, at: indexPath, point: point)
+        }
+        return nil
+    }
+}

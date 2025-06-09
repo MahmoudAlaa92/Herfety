@@ -1344,9 +1344,9 @@
 				15FB21D32D7542B40002B576 /* ReviewerModel.swift */,
 				15FB21D52D7543080002B576 /* ReviewersViewModel.swift */,
 				15FB21C82D7531740002B576 /* ReviewersViewController.swift */,
+				15FB21D72D7544580002B576 /* ReviewerCollectionViewSection.swift */,
 				15FB21C92D7531740002B576 /* ReviewersViewController.xib */,
 				15FB21CC2D75354C0002B576 /* Sections */,
-				15FB21D72D7544580002B576 /* ReviewerCollectionViewSection.swift */,
 			);
 			path = Reviewer;
 			sourceTree = "<group>";

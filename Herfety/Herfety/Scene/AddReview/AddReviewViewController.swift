@@ -50,7 +50,6 @@ extension AddReviewViewController {
         AddReviewTextField.placeholder = "Enter your Comment"
         ratingTextField.placeholder = "Rating (1-5)"
         ratingTextField.textField.keyboardType = .numberPad
-
     }
 }
 // MARK: - Actions
