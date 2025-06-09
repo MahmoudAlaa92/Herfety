@@ -38,6 +38,7 @@ class ProductDetailsViewModel {
             switch result {
             case .success(let reviews):
                 self?.reviews = reviews
+                self?.onReviewsUpdated?()
             case .failure(let error):
                 self?.onError?(error.localizedDescription)
             }

@@ -8,11 +8,13 @@
 import UIKit
 
 class ReviewersViewModel {
+    // MARK: - Properties
     var reviewersItems: [Reviewrr] = [ ]
     let productId: Int
     
     var didTapPlusButton: (() -> Void)?
     
+    // MARK: - Init
     init(productId: Int, reviews: [Reviewrr] = []) {
         self.productId = productId
         self.reviewersItems = reviews

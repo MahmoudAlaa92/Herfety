@@ -40,7 +40,7 @@ class ProductDetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        viewModel.loadReviews()
     }
 }
 // MARK: - Configuration
