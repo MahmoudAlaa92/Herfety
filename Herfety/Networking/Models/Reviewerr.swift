@@ -14,6 +14,9 @@ struct Reviewrr: Codable {
     let review: String
     let rating: String
     let status: Int
+    var userName: String?
+    var email: String?
+    var image: String?
     let createdAt: String
     let updatedAt: String?
     let product: Products?

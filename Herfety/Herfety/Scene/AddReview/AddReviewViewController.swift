@@ -110,7 +110,8 @@ extension AddReviewViewController {
                 switch result {
                 case .success:
                     self?.showSuccessAndPop()
-                case .failure:
+                case .failure (let error):
+                    print(error.localizedDescription)
                     self?.showErrorAlert()
                 }
             }

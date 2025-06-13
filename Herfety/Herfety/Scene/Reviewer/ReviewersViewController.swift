@@ -64,31 +64,12 @@ extension ReviewersViewController {
          }
         section.onUpdate = { [weak self] index, newText in
             guard let self = self else { return }
-            let review = self.viewModel.reviewersItems[index]
-         
-            guard let reviewId = review.id, CustomeTabBarViewModel.shared.userId == review.userId else { return }
-            // TODO: change the product id here
-            let request = UpdateReviewRequest(
-                productId: review.product?.id ?? 92,
-                userId: review.userId,
-                review: newText,
-                rating: review.rating,
-                status: review.status,
-                createdAt: review.createdAt
-            )
-
-            let remote: ReviewRemoteProtocol = ReviewRemote(network: AlamofireNetwork())
-            remote.updateReview(id: reviewId, request: request) { result in
-                switch result {
-                case .success(let updatedReview):
-                    DispatchQueue.main.async {
-                        self.viewModel.reviewersItems[index] = updatedReview
-                        self.reloadData()
-                    }
-                case .failure(let error):
-                    print("Failed to update review: \(error)")
-                }
-            }
+           
+            self.viewModel.updateReview(at: index, with: newText) { success in
+                 DispatchQueue.main.async {
+                     self.reloadData()
+                 }
+             }
         }
 
          sections = [section]

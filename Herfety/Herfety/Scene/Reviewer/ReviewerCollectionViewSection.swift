@@ -33,7 +33,7 @@ class ReviewerCollectionViewSection: CollectionViewDataSource {
             return UICollectionViewCell()
         }
         let item = reviewers[indexPath.row]
-        cell.nameReviewer.text = item.user?.userName ?? CustomeTabBarViewModel.shared.userInfo?.UserName
+        cell.nameReviewer.text = item.userName
         if let imageUrl = item.user?.image, !imageUrl.isEmpty {
             cell.imageView.setImage(with: imageUrl, placeholderImage: Images.iconPersonalDetails)
         } else {
