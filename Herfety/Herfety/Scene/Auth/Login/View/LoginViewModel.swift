@@ -52,6 +52,20 @@ extension LoginViewModel: LoginViewModelInput {
     }
     
     private func handleLoginSuccess(response: Registration) {
+        let userInfo = RegisterUser(
+            FName: "",
+            LName: "",
+            UserName: response.userName ?? "",
+            Password: self.password,
+            ConfirmPassword: self.password,
+            Email: response.email ?? "",
+            Phone: "",
+            image: ""
+        )
+        CustomeTabBarViewModel.shared.userInfo = userInfo
+//        print("response id is \(response.id)")
+        CustomeTabBarViewModel.shared.userId = response.id ?? 1
+        
         onLoginTapped?()
     }
     
@@ -145,7 +159,6 @@ extension LoginViewModel: LoginViewModelInput {
                     image: imageUrl
                 )
                 CustomeTabBarViewModel.shared.userInfo = userInfo
-                print(user)
 
                 self?.onLoginTapped?()
             }

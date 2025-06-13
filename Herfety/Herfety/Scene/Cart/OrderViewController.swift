@@ -74,7 +74,6 @@ extension OrderViewController: UICollectionViewDelegate {
         return nil
     }
 }
-
 // MARK: - Configurations
 //
 private extension OrderViewController {

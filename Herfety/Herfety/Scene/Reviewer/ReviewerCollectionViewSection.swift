@@ -8,10 +8,12 @@
 import UIKit
 
 class ReviewerCollectionViewSection: CollectionViewDataSource {
-    
+    // MARK: - Properties
     let reviewers: [Reviewrr]
     var onDelete: ((Int) -> Void)?
-
+    var onUpdate: ((Int, String) -> Void)?
+    
+    // MARK: - Init
     init(reviewers: [Reviewrr]) {
         self.reviewers = reviewers
     }
@@ -31,8 +33,7 @@ class ReviewerCollectionViewSection: CollectionViewDataSource {
             return UICollectionViewCell()
         }
         let item = reviewers[indexPath.row]
-
-        cell.nameReviewer.text = item.user?.userName ?? "No Name"
+        cell.nameReviewer.text = item.user?.userName ?? CustomeTabBarViewModel.shared.userInfo?.UserName
         if let imageUrl = item.user?.image, !imageUrl.isEmpty {
             cell.imageView.setImage(with: imageUrl, placeholderImage: Images.iconPersonalDetails)
         } else {
@@ -43,7 +44,6 @@ class ReviewerCollectionViewSection: CollectionViewDataSource {
         cell.cosmosView.rating = Double(item.rating) ?? 0.0
         return cell
     }
-    
 }
 // MARK: - Delegate
 //
@@ -54,7 +54,22 @@ extension ReviewerCollectionViewSection: ContextMenuProvider {
                 self.onDelete?(indexPath.row)
             }
             let update = UIAction(title: "Edit", image: UIImage(systemName: "pencil"), attributes: .destructive) {  _ in
-                
+                let currentReview = self.reviewers[indexPath.row]
+                   
+                   let alert = UIAlertController(title: "Edit Review", message: "Update your comment below.", preferredStyle: .alert)
+                   alert.addTextField { textField in
+                       textField.text = currentReview.review
+                   }
+                   alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                   alert.addAction(UIAlertAction(title: "Update", style: .default) { _ in
+                       if let updatedText = alert.textFields?.first?.text, !updatedText.isEmpty {
+                           self.onUpdate?(indexPath.row, updatedText)
+                       }
+                   })
+
+                   if let topVC = UIApplication.shared.windows.first?.rootViewController {
+                       topVC.present(alert, animated: true, completion: nil)
+                   }
             }
             return UIMenu(title: "", children: [delete, update])
         }

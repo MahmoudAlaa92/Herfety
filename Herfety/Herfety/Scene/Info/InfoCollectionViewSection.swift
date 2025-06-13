@@ -35,8 +35,23 @@ class InfoCollectionViewSection: CollectionViewDataSource {
         return cell
     }
 }
-
-
+// MARK: - Delegate
+//
+extension InfoCollectionViewSection: ContextMenuProvider {
+    func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
+                /*
+                let items = CustomeTabBarViewModel.shared
+                let wishlist = items.orders[indexPath.row]
+                let userId = items.userId ?? 1
+                 */
+                
+            }
+            return UIMenu(title: "", children: [delete])
+        }
+    }
+}
 // MARK: - Layout
 //
 struct InfoSectionLayoutProvider: LayoutSectionProvider {

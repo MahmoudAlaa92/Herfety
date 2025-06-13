@@ -36,6 +36,7 @@ extension InfoViewController {
     
     private func setUpCollectionView() {
         collectionView.dataSource = self
+        collectionView.delegate = self
         sections.forEach { $0.registerCells(in: collectionView) }
     }
     /// Configure Section
@@ -93,6 +94,18 @@ extension InfoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
+    }
+}
+ // MARK: - UICollectionViewDelegate
+//
+extension InfoViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        contextMenuConfigurationForItemAt indexPath: IndexPath,
+                        point: CGPoint) -> UIContextMenuConfiguration? {
+        if let providers = sections[indexPath.section] as? ContextMenuProvider {
+            return providers.contextMenuConfiguration(for: collectionView, at: indexPath, point: point)
+        }
+        return nil
     }
 }
 // MARK: - Binding

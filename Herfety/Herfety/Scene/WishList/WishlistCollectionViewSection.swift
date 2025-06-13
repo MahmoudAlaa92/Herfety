@@ -69,7 +69,7 @@ extension WishlistCollectionViewSection: ContextMenuProvider {
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
                 let items = CustomeTabBarViewModel.shared
                 let wishlist = items.Wishlist[indexPath.row]
-                let userId = items.userId ?? 1
+                let userId = items.userId
                 CustomeTabBarViewModel.shared.deleteWishlistItem(userId: userId, productId: (wishlist.productID ?? 1), indexPath: indexPath)
                 
             }

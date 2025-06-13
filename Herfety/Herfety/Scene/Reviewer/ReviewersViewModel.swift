@@ -30,6 +30,7 @@ class ReviewersViewModel {
         do {
             let reviews = try await remote.getReviewsAsync(productId: productId)
             self.reviewersItems = reviews
+            
         } catch {
             print("Error fetching reviews: \(error)")
         }

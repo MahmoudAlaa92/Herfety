@@ -19,7 +19,8 @@ class CustomeTabBarViewModel: ObservableObject {
     static let shared = CustomeTabBarViewModel()
     ///
     @UserDefault<Bool>(key: \.login) var login
-    @UserDefault<Int>(key: \.userId) var userId
+//    @UserDefault<Int>(key: \.userId) var userId
+    var userId: Int = 1
     @UserDefault<RegisterUser>(key: \.userInfo) var userInfo
     
     var isWishlistItemDeleted = false
@@ -44,8 +45,8 @@ class CustomeTabBarViewModel: ObservableObject {
     }
     
     init(){
-        userId = 1
-        fetchWishlistItems(id: userId ?? 1)
+//        userId = 1
+        fetchWishlistItems(id: userId)
     }
 }
 // MARK: - Fetching

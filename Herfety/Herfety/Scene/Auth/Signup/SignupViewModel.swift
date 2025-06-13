@@ -62,6 +62,8 @@ class SignupViewModel {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let value):
+                    CustomeTabBarViewModel.shared.userInfo = user
+                    CustomeTabBarViewModel.shared.userId = value.id ?? 1
                     self?.onSuccess?(value)
                 case .failure(let error):
                     print("❌ Server Error Details: \(error)")
