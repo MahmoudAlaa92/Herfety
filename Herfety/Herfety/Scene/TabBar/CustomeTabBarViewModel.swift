@@ -24,6 +24,7 @@ class CustomeTabBarViewModel: ObservableObject {
     @UserDefault<RegisterUser>(key: \.userInfo) var userInfo
     
     var isWishlistItemDeleted = false
+    var isOrdersItemDeleted = false
     ///
     @Published var selectedTab: TabBarItems = .home
     @Published var isLogin: Bool = false

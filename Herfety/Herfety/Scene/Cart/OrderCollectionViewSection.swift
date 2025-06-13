@@ -12,6 +12,8 @@ class OrderCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
     let orderItems: [Wishlist]
     let countUpdateSubject = PassthroughSubject<(Int, Int), Never>()
+    let deleteItemSubject = PassthroughSubject<Int, Never>()
+
     // MARK: - Init
     init(orderItems: [Wishlist]) {
         self.orderItems = orderItems
@@ -52,12 +54,8 @@ extension OrderCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
-                /*
-                let items = CustomeTabBarViewModel.shared
-                let wishlist = items.orders[indexPath.row]
-                let userId = items.userId ?? 1
-                 */
-                
+              
+                self.deleteItemSubject.send(indexPath.item)
             }
             return UIMenu(title: "", children: [delete])
         }

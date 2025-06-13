@@ -66,4 +66,16 @@ extension OrderViewModel {
             .receive(on: DispatchQueue.main)
             .assign(to: &$paymentInfo)
     }
+    
+    func deleteItem(at index: Int) {
+        guard orderItems.indices.contains(index) else { return }
+        var updatedItems = orderItems
+        updatedItems.remove(at: index)
+        orderItems = updatedItems
+        
+        CustomeTabBarViewModel.shared.isOrdersItemDeleted = true
+         CustomeTabBarViewModel.shared.cartItems = updatedItems
+         CustomeTabBarViewModel.shared.isOrdersItemDeleted = false
+    }
+
 }

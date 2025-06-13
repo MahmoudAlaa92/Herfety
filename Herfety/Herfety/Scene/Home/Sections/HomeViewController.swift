@@ -270,8 +270,10 @@ extension HomeViewController {
             .sink { [weak self] Order in
                 guard let self = self else { return }
                 /// Trigger alert presentation
+                /// Trigger alert presentation
+                let trigger = CustomeTabBarViewModel.shared.isOrdersItemDeleted
                 let alertItem = AlertModel(
-                    message: "Added To Order",
+                    message: trigger == true ? "Deleted From Order": "Added To Order",
                     buttonTitle: "Ok",
                     image: .success,
                     status: .success

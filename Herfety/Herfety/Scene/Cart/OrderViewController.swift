@@ -96,6 +96,13 @@ private extension OrderViewController {
             self.sections = [orderProvider]
             self.collectionView.reloadData()
             
+            orderProvider.deleteItemSubject
+                .sink { [weak self] index in
+                    guard let self = self else { return }
+                    self.viewModel.deleteItem(at: index)
+                }
+                .store(in: &self.subscriptions)
+            
             /// Combine subscription to count updates
             orderProvider.countUpdateSubject
                 .sink { [weak self] index, newCount in
@@ -104,6 +111,7 @@ private extension OrderViewController {
                 }
                 .store(in: &self.subscriptions)
         }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
+        
 
         layoutProviders.append(OrderSectionLayoutProvider())
     }
