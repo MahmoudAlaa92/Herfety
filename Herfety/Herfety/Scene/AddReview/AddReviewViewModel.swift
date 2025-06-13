@@ -20,7 +20,7 @@ class AddReviewViewModel {
     
     init(reviersItems: [Reviewrr],
          productId: Int,
-         userId: Int = CustomeTabBarViewModel.shared.userId ?? 1,
+         userId: Int = CustomeTabBarViewModel.shared.userId,
          reviewRemote: ReviewRemoteProtocol = ReviewRemote(network: AlamofireNetwork())) {
         self.productId = productId
         self.userId = userId

@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
         cofigureCompositianalLayout()
         bindViewModel()
         Task {
-           await configureNavBar()
+            await configureNavBar()
         }
     }
     
@@ -60,21 +60,21 @@ extension HomeViewController {
         
         let categoryProvider = CategoryCollectionViewSection(categoryItems: viewModel.categoryItems)
         self.categoryItem = categoryProvider
-
+        
         let cardProvider = CardItemCollectionViewSection(productItems: viewModel.productItems)
         self.cardItem = cardProvider
         cardProvider.headerConfigurator = { header in
             header.configure(title: "the best deal on", description: "Jewelry & Accessories", shouldShowButton: true)
         }
-
+        
         let topBrands = TopBrandsCollectionViewSection(topBrandsItems: viewModel.topBrandsItems)
         self.topBrandItem = topBrands
-
+        
         let dailyEssentials = DailyEssentailCollectionViewSection(dailyEssentail: viewModel.dailyEssentailItems)
         self.dailyEssentialItem = dailyEssentials
-
+        
         sections = [sliderProvider, categoryProvider, cardProvider, topBrands, dailyEssentials]
-
+        
         layoutSections = [
             SliderSectionLayoutProvider(),
             CategoriesSectionLayoutSection(),
@@ -86,24 +86,25 @@ extension HomeViewController {
     /// NavBar
     func configureNavBar() async {
         navigationItem.backButtonTitle = ""
-           navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
-           
-           let userName = CustomeTabBarViewModel.shared.userInfo?.UserName ?? ""
-           let userImageURL = CustomeTabBarViewModel.shared.userInfo?.image
-           
-           let loadedImage = await UIImage.load(from: userImageURL ?? "")
-           let finalImage = loadedImage ?? Images.iconPersonalDetails
-
-           navigationBarBehavior?.configure(
-               onNotification: {
-                   print("searchBtn is tapped")
-               },
-               onSearch: {
-                   print("NotificationBtn is tapped")
-               },
-               userName: userName,
-               userImage: finalImage
-           )
+        navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
+        
+        let userName = CustomeTabBarViewModel.shared.userInfo?.UserName ?? ""
+        let userImageURL = CustomeTabBarViewModel.shared.userInfo?.image
+        
+        let loadedImage = await UIImage.load(from: userImageURL ?? "")
+        
+        let finalImage = loadedImage ?? Images.iconPersonalDetails
+        CustomeTabBarViewModel.shared.userProfileImage = finalImage
+        navigationBarBehavior?.configure(
+            onNotification: {
+                print("searchBtn is tapped")
+            },
+            onSearch: {
+                print("NotificationBtn is tapped")
+            },
+            userName: userName,
+            userImage: finalImage
+        )
     }
     
     /// CompositianalLayout
@@ -197,15 +198,15 @@ extension HomeViewController {
         viewModel.$productItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newItems in
-                    self?.cardItem?.productItems = newItems
-                    self?.collectionView.reloadData()
+                self?.cardItem?.productItems = newItems
+                self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
         ///
         cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
-            #warning("")
+#warning("")
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: value.productID ?? 93))
-
+            
             vc.viewModel.productItem = value
             vc.viewModel.fetchProductItems()
             self?.navigationController?.pushViewController(vc, animated: true)
@@ -291,9 +292,9 @@ extension HomeViewController {
         alertVC.modalPresentationStyle = .overFullScreen
         alertVC.modalTransitionStyle = .crossDissolve
         alertVC.loadViewIfNeeded() /// Ensure outlets are connected
-
+        
         alertVC.show(alertItem: alertItem)
-
+        
         /// Optional: dismiss on button press
         alertVC.actionHandler = { [weak alertVC] in
             alertVC?.dismiss(animated: true)

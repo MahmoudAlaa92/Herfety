@@ -8,7 +8,7 @@
 import UIKit
 
 struct Name {
-    let name: String
-    let email: String
-    let image: UIImage
+    var name: String
+    var email: String
+    var image: UIImage
 }

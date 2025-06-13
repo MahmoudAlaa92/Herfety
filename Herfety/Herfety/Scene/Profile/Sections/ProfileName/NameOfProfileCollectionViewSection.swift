@@ -9,7 +9,7 @@ import UIKit
 
 class NameOfProfileCollectionViewSection: CollectionViewDataSource {
     
-    let sectionName: Name
+    var sectionName: Name
     init(sectionName: Name) {
         self.sectionName = sectionName
     }

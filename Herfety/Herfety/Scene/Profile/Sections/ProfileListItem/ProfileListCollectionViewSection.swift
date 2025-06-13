@@ -62,10 +62,25 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             case "My Card":
                 
                 break
-            case "Settings":
-                let vc = SettingViewController(settingViewModel: SettingViewModel())
-                self.navController?.pushViewController(vc, animated: true)
+            case "Logout":
+                  if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                     let sceneDelegate = scene.delegate as? SceneDelegate,
+                     let window = sceneDelegate.window {
+
+                      let splashVC = SplashViewController(viewModel: SplashViewModel())
+                      let navController = UINavigationController(rootViewController: splashVC)
+                      
+                      // Optional: transition animation
+                      UIView.transition(with: window, duration: 0.5) {
+                          window.rootViewController = navController
+                      }
+                  }
                 break
+//            case "Settings":
+                // TODO: change this after finle project
+//                let vc = SettingViewController(settingViewModel: SettingViewModel())
+//                self.navController?.pushViewController(vc, animated: true)
+//                break
             default:
                 break
             }

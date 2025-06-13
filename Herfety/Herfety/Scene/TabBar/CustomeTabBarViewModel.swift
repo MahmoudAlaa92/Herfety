@@ -5,7 +5,7 @@
 //  Created by Mahmoud Alaa on 18/04/2025.
 //
 
-import Foundation
+import UIKit
 import Combine
 
 enum TabBarItems: Int {
@@ -19,13 +19,14 @@ class CustomeTabBarViewModel: ObservableObject {
     static let shared = CustomeTabBarViewModel()
     ///
     @UserDefault<Bool>(key: \.login) var login
-//    @UserDefault<Int>(key: \.userId) var userId
+    //    @UserDefault<Int>(key: \.userId) var userId
     var userId: Int = 1
     @UserDefault<RegisterUser>(key: \.userInfo) var userInfo
     
     var isWishlistItemDeleted = false
     var isOrdersItemDeleted = false
     ///
+    @Published var userProfileImage: UIImage = Images.iconPersonalDetails
     @Published var selectedTab: TabBarItems = .home
     @Published var isLogin: Bool = false
     @Published var orders: [WishlistItem] = []
@@ -46,8 +47,9 @@ class CustomeTabBarViewModel: ObservableObject {
     }
     
     init(){
-//        userId = 1
+        //        userId = 1
         fetchWishlistItems(id: userId)
+        loadUserProfileImage()
     }
 }
 // MARK: - Fetching
@@ -87,4 +89,24 @@ extension CustomeTabBarViewModel {
             }
         }
     }
+}
+// MARK: - Private Handlers
+//
+extension CustomeTabBarViewModel {
+    func loadUserProfileImage() {
+        guard let imageUrl = userInfo?.image else {
+            userProfileImage = Images.iconPersonalDetails
+            return
+        }
+        
+        Task {
+            if let loadedImage = await UIImage.load(from: imageUrl) {
+                userProfileImage = loadedImage
+            } else {
+                userProfileImage = Images.iconPersonalDetails
+            }
+        }
+    }
+    
+    
 }

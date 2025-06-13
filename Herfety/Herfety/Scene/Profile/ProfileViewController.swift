@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ProfileViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class ProfileViewController: UIViewController {
     private var profileListViewModel: ProfileListViewModel
     private var sections: [CollectionViewDataSource] = []
     private var layoutSections: [LayoutSectionProvider] = []
+    private var subscription =  Set<AnyCancellable>()
     // MARK: - Init
     init(nameViewModel: NameViewModel, profileListViewModel: ProfileListViewModel){
         self.nameViewModel = nameViewModel
@@ -32,6 +34,7 @@ class ProfileViewController: UIViewController {
         configureSections()
         configureLayoutSections()
         setUpCollectionView()
+        bindViewModel()
     }
 }
 // MARK: - Configuration
@@ -91,5 +94,24 @@ extension ProfileViewController: UICollectionViewDelegate {
         if let selectable = sections[indexPath.section] as? CollectionViewDelegate {
             selectable.collectionView(collectionView, didSelectItemAt: indexPath)
         }
+    }
+}
+// MARK: - Binding
+//
+extension ProfileViewController {
+    func bindViewModel() {
+        nameViewModel.$nameItem
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] updatedName in
+                guard let self else { return }
+                // Update the header section
+                if let nameSection = self.sections.first as? NameOfProfileCollectionViewSection {
+                    nameSection.sectionName.image = updatedName.image
+                    nameSection.sectionName.name = updatedName.name
+                    nameSection.sectionName.email = updatedName.email
+                }
+                self.collectionView.reloadSections(IndexSet(integer: 0)) 
+            }
+            .store(in: &subscription)
     }
 }

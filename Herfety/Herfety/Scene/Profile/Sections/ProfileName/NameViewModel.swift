@@ -6,10 +6,30 @@
 //
 
 import UIKit
+import Combine
 
 class NameViewModel {
-    var nameItem: Name = Name(
-        name: "Mahmoud Alaa",
-        email: "MahmoudAlaa.Wr@gmail.com",
-        image: Images.profilePhoto)
+    @Published var nameItem: Name
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+        let shared = CustomeTabBarViewModel.shared
+        self.nameItem = Name(
+            name: shared.userInfo?.UserName ?? "No Name",
+            email: shared.userInfo?.Email ?? "MahmoudAlaa.Wr@gmail.com",
+            image: shared.userProfileImage
+        )
+
+        shared.$userProfileImage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newImage in
+                guard let self else { return }
+                self.nameItem = Name(
+                    name: shared.userInfo?.UserName ?? "No Name",
+                    email: shared.userInfo?.Email ?? "MahmoudAlaa.Wr@gmail.com",
+                    image: newImage
+                )
+            }
+            .store(in: &cancellables)
+    }
 }

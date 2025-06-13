@@ -32,15 +32,26 @@ extension UIImage {
 }
 
 extension UIImage {
+    
+    private static let imageCache = NSCache<NSString, UIImage>()
+    
     static func load(from urlString: String) async -> UIImage? {
+        // Check cache first
+        if let cachedImage = imageCache.object(forKey: urlString as NSString) {
+            return cachedImage
+        }
+        
         guard let url = URL(string: urlString) else { return nil }
 
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            return UIImage(data: data)
+            guard let image = UIImage(data: data) else { return nil }
+            
+            // Cache the image
+            imageCache.setObject(image, forKey: urlString as NSString)
+            return image
         } catch {
             print("Image loading failed:", error)
             return nil
         }
-    }
-}
+    }}
