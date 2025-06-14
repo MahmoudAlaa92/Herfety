@@ -13,6 +13,7 @@ class ProductsViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var searchTextField: SearchTextField!
     // MARK: - Properties
     private(set) var viewModel: ProductsViewModel
     private var sections = [CollectionViewDataSource]()
@@ -37,6 +38,7 @@ class ProductsViewController: UIViewController {
         configureLayout()
         setUpCollectionView()
         bindViewModel()
+        searchTextField.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
     }
 }
 // MARK: - Configuraion
@@ -109,4 +111,13 @@ extension ProductsViewController {
             }.store(in: &subscriptions)
     }
 }
-
+// MARK: - Actions
+//
+extension ProductsViewController {
+    @objc private func searchTextChanged(_ textField: UITextField) {
+        guard let searchText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !searchText.isEmpty else {
+            return
+        }
+        viewModel.searchProducts(with: searchText)
+    }
+}

@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductsViewController" customModule="Herfety" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="b63-ug-Hzd" id="cdB-1z-c6O"/>
+                <outlet property="searchTextField" destination="Zrr-8d-8QG" id="Uww-3o-la3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -10,6 +10,13 @@ import Combine
 class ProductsViewModel {
     // MARK: - Properties
     @Published var productItems: [Products] = []
+    private let categoryRemote: GetProductsOfCatergoryRemoteProtocol
+    
+    init(
+        categoryRemote: GetProductsOfCatergoryRemoteProtocol = GetProductsOfCategoryRemote(network: AlamofireNetwork())
+    ) {
+        self.categoryRemote = categoryRemote
+    }
 }
 // MARK: - Handlers
 //
@@ -38,6 +45,19 @@ extension ProductsViewModel {
                 }
             case .failure(let error):
                 print(error)
+            }
+        }
+    }
+    // MARK: Serch about Products of Categories
+    func searchProducts(with keyword: String) {
+        categoryRemote.loadAllProducts(name: keyword) { [weak self] result in
+            switch result {
+            case .success(let filteredProducts):
+                DispatchQueue.main.async {
+                    self?.productItems = filteredProducts
+                }
+            case .failure(let error):
+                print("Search Error:", error)
             }
         }
     }

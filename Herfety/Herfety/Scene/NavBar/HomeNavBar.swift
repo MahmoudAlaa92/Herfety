@@ -54,12 +54,13 @@ extension HomeNavBar {
                                            style: .done,
                                            target: self,
                                            action: #selector(searchWasTapped))
-        let notificationButton = UIBarButtonItem(image: Images.notification.withRenderingMode(.alwaysOriginal),
-                                                 style: .done,
-                                                 target: self,
-                                                 action: #selector(notificationWasTapped))
+        // TODO: Change after discuss the finale project
+//        let notificationButton = UIBarButtonItem(image: Images.notification.withRenderingMode(.alwaysOriginal),
+//                                                 style: .done,
+//                                                 target: self,
+//                                                 action: #selector(notificationWasTapped))
         
-        navigationBarButtonItems = [notificationButton, searchButton]
+        navigationBarButtonItems = [searchButton]
         navigationItem.rightBarButtonItems = navigationBarButtonItems
     }
 }

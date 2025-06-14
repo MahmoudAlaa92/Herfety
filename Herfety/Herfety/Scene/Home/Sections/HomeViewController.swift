@@ -97,7 +97,9 @@ extension HomeViewController {
         CustomeTabBarViewModel.shared.userProfileImage = finalImage
         navigationBarBehavior?.configure(
             onNotification: {
-                print("searchBtn is tapped")
+                let vc = ProductsViewController(viewModel: ProductsViewModel())
+                vc.viewModel.fetchProductItems(discount: 80)
+                self.navigationController?.pushViewController(vc, animated: true)
             },
             onSearch: {
                 print("NotificationBtn is tapped")

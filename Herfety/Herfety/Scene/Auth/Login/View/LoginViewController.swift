@@ -83,14 +83,14 @@ extension LoginViewController {
     /// Configures email text field with title and placeholder
     private func configureEmailTextField() {
         emailTextField.title = "User Name"
-        emailTextField.placeholder = "MahmoudAlaa"
+        emailTextField.placeholder = "Enter your user name"
         emailTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
     }
     /// Configures password text field with title and placeholder
     private func configurePasswordTextField() {
         passwordTextField.title = "Password"
-        passwordTextField.placeholder = "*******"
+        passwordTextField.placeholder = "***********"
         passwordTextField.textfield.isSecureTextEntry = true
         passwordTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
