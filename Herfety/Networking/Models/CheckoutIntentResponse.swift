@@ -8,5 +8,5 @@
 import Foundation
 
 struct CheckoutIntentResponse: Decodable {
-    let clientSecret: String
+    let clientSecret: String?
 }

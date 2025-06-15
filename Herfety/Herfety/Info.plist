@@ -20,6 +20,16 @@
 				<string>fb1417913682737319</string>
 			</array>
 		</dict>
+        
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>herfety</string>
+            </array>
+        </dict>
+
 	</array>
 	<key>FacebookAppID</key>
 	<string>1417913682737319</string>

@@ -7,6 +7,7 @@
 
 import UIKit
 import FacebookCore
+import Stripe
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
  
-        window.rootViewController = UINavigationController(rootViewController: SplashViewController(viewModel: SplashViewModel()))
+        window.rootViewController = MyCheckoutViewController()
+        // UINavigationController(rootViewController: SplashViewController(viewModel: SplashViewModel()))
         // CustomeTabBarViewController()
         // SettingViewController(settingViewModel: SettingViewModel())
         self.window = window
@@ -30,6 +32,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
 
+        
+        let stripeHandled = StripeAPI.handleURLCallback(with: url)
+          if (!stripeHandled) {
+              // This was not a Stripe url – handle the URL normally as you would
+          }
+        
         ApplicationDelegate.shared.application(
             UIApplication.shared,
             open: url,

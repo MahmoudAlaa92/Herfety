@@ -11,14 +11,19 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 import FacebookCore
+import Stripe
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        /// Stripe PublicKey
+        if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
+           let secrets = NSDictionary(contentsOfFile: path),
+           let stripeKey = secrets["StripePublicKey"] as? String {
+            STPAPIClient.shared.publishableKey = stripeKey
+        }
+
         ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions

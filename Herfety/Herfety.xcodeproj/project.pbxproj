@@ -103,6 +103,10 @@
 		156CD8442D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD8432D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift */; };
 		1570F71F2DFF0B4500AE9F6D /* PaymentIntentRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570F71E2DFF0B4500AE9F6D /* PaymentIntentRemote.swift */; };
 		1570F7212DFF0BA900AE9F6D /* CheckoutIntentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570F7202DFF0BA900AE9F6D /* CheckoutIntentResponse.swift */; };
+		1570F7242DFF213900AE9F6D /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 1570F7232DFF213900AE9F6D /* Stripe */; };
+		1570F7262DFF213900AE9F6D /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 1570F7252DFF213900AE9F6D /* StripePaymentSheet */; };
+		1570F7282DFF213900AE9F6D /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = 1570F7272DFF213900AE9F6D /* StripePayments */; };
+		1570F72F2DFF61EC00AE9F6D /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1570F72E2DFF61EC00AE9F6D /* Secrets.plist */; };
 		15760D812D68A6640033BC0D /* CreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15760D802D68A6640033BC0D /* CreditCardViewModel.swift */; };
 		15760D852D692DFC0033BC0D /* AddAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */; };
 		157E046F2D553F6E000170FC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 157E046E2D553F6E000170FC /* Colors.xcassets */; };
@@ -318,6 +322,7 @@
 		156CD8432D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewSection.swift; sourceTree = "<group>"; };
 		1570F71E2DFF0B4500AE9F6D /* PaymentIntentRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentIntentRemote.swift; sourceTree = "<group>"; };
 		1570F7202DFF0BA900AE9F6D /* CheckoutIntentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutIntentResponse.swift; sourceTree = "<group>"; };
+		1570F72E2DFF61EC00AE9F6D /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		15760D802D68A6640033BC0D /* CreditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewModel.swift; sourceTree = "<group>"; };
 		15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewModel.swift; sourceTree = "<group>"; };
 		157E046E2D553F6E000170FC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -440,21 +445,32 @@
 		15FE4B3E2DC4563100B9474F /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1570F72D2DFF4BA000AE9F6D /* Test */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Test;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		1589FBEF2D51781D00240754 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				151D5E672DF46B060019F1D9 /* GoogleSignIn in Frameworks */,
+				1570F7262DFF213900AE9F6D /* StripePaymentSheet in Frameworks */,
 				151D5E762DF487500019F1D9 /* FacebookCore in Frameworks */,
 				1599B8962DB85E8C00A48510 /* Kingfisher in Frameworks */,
 				157F428C2DB6DB38000305D6 /* Alamofire in Frameworks */,
 				151D5E692DF46B060019F1D9 /* GoogleSignInSwift in Frameworks */,
+				1570F7242DFF213900AE9F6D /* Stripe in Frameworks */,
 				151D5E782DF487500019F1D9 /* FacebookLogin in Frameworks */,
 				15FB21C32D75209C0002B576 /* Cosmos in Frameworks */,
 				151D5E732DF481770019F1D9 /* FirebaseFirestore in Frameworks */,
 				151D5E6E2DF46EB30019F1D9 /* FirebaseAuth in Frameworks */,
 				151D5E702DF46EE80019F1D9 /* FirebaseCore in Frameworks */,
+				1570F7282DFF213900AE9F6D /* StripePayments in Frameworks */,
 				158A7E832DB52DE500B89684 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -892,6 +908,7 @@
 		1589FBE92D51781D00240754 = {
 			isa = PBXGroup;
 			children = (
+				1570F72E2DFF61EC00AE9F6D /* Secrets.plist */,
 				1589FC132D51785700240754 /* Herfety */,
 				1589FC1B2D51801900240754 /* Resources */,
 				15840BD22D5D7C26006F8B67 /* Utilities */,
@@ -1116,6 +1133,7 @@
 				15760D802D68A6640033BC0D /* CreditCardViewModel.swift */,
 				15955C192D67797500673BE7 /* CreditCardViewController.swift */,
 				15955C1A2D67797500673BE7 /* CreditCardViewController.xib */,
+				1570F72D2DFF4BA000AE9F6D /* Test */,
 			);
 			path = CreditCard;
 			sourceTree = "<group>";
@@ -1389,6 +1407,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				1570F72D2DFF4BA000AE9F6D /* Test */,
+			);
 			name = Herfety;
 			packageProductDependencies = (
 				15FB21C22D75209C0002B576 /* Cosmos */,
@@ -1402,6 +1423,9 @@
 				151D5E722DF481770019F1D9 /* FirebaseFirestore */,
 				151D5E752DF487500019F1D9 /* FacebookCore */,
 				151D5E772DF487500019F1D9 /* FacebookLogin */,
+				1570F7232DFF213900AE9F6D /* Stripe */,
+				1570F7252DFF213900AE9F6D /* StripePaymentSheet */,
+				1570F7272DFF213900AE9F6D /* StripePayments */,
 			);
 			productName = Herfety;
 			productReference = 1589FBF22D51781D00240754 /* Herfety.app */;
@@ -1439,6 +1463,7 @@
 				151D5E652DF46B060019F1D9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				151D5E6C2DF46EB30019F1D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				151D5E742DF487500019F1D9 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1589FBF32D51781D00240754 /* Products */;
@@ -1488,6 +1513,7 @@
 				157E04732D554242000170FC /* colors.stencil in Resources */,
 				1589FC162D51785700240754 /* LaunchScreen.storyboard in Resources */,
 				15CD44B32D52716D00E58C6F /* CategoriesCollectionViewCell.xib in Resources */,
+				1570F72F2DFF61EC00AE9F6D /* Secrets.plist in Resources */,
 				153B7FD92D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib in Resources */,
 				154167952D9D33E8007E4CAA /* LabelAndTextFieldCollectionViewCell.xib in Resources */,
 				15CE60F12D73B3CB0032617B /* ReviewCollectionViewCell.xib in Resources */,
@@ -1916,6 +1942,14 @@
 				minimumVersion = 14.1.0;
 			};
 		};
+		1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 24.15.0;
+			};
+		};
 		157F428A2DB6DB38000305D6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1985,6 +2019,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 151D5E742DF487500019F1D9 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
+		};
+		1570F7232DFF213900AE9F6D /* Stripe */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = Stripe;
+		};
+		1570F7252DFF213900AE9F6D /* StripePaymentSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePaymentSheet;
+		};
+		1570F7272DFF213900AE9F6D /* StripePayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePayments;
 		};
 		157F428B2DB6DB38000305D6 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

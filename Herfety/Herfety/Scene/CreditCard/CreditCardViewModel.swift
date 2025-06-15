@@ -6,7 +6,6 @@
 //
 //  Created by Mahmoud Alaa on 21/02/2025.
 //
-
 import UIKit
 
 class CreditCardViewModel {
@@ -43,7 +42,7 @@ class CreditCardViewModel {
             amount: CustomeTabBarViewModel
             .shared
             .totalPriceOfOrders) { clientSecret in
-                // handel the logic here with strip
+                
         }
     }
     
