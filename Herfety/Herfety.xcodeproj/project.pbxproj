@@ -107,6 +107,8 @@
 		1570F7262DFF213900AE9F6D /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 1570F7252DFF213900AE9F6D /* StripePaymentSheet */; };
 		1570F7282DFF213900AE9F6D /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = 1570F7272DFF213900AE9F6D /* StripePayments */; };
 		1570F72F2DFF61EC00AE9F6D /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1570F72E2DFF61EC00AE9F6D /* Secrets.plist */; };
+		1570F74B2DFF7F0100AE9F6D /* MyCheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1570F7492DFF7F0100AE9F6D /* MyCheckoutViewController.xib */; };
+		1570F74C2DFF7F0100AE9F6D /* MyCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570F7482DFF7F0100AE9F6D /* MyCheckoutViewController.swift */; };
 		15760D812D68A6640033BC0D /* CreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15760D802D68A6640033BC0D /* CreditCardViewModel.swift */; };
 		15760D852D692DFC0033BC0D /* AddAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */; };
 		157E046F2D553F6E000170FC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 157E046E2D553F6E000170FC /* Colors.xcassets */; };
@@ -323,6 +325,8 @@
 		1570F71E2DFF0B4500AE9F6D /* PaymentIntentRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentIntentRemote.swift; sourceTree = "<group>"; };
 		1570F7202DFF0BA900AE9F6D /* CheckoutIntentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutIntentResponse.swift; sourceTree = "<group>"; };
 		1570F72E2DFF61EC00AE9F6D /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		1570F7482DFF7F0100AE9F6D /* MyCheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCheckoutViewController.swift; sourceTree = "<group>"; };
+		1570F7492DFF7F0100AE9F6D /* MyCheckoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCheckoutViewController.xib; sourceTree = "<group>"; };
 		15760D802D68A6640033BC0D /* CreditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewModel.swift; sourceTree = "<group>"; };
 		15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewModel.swift; sourceTree = "<group>"; };
 		157E046E2D553F6E000170FC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -444,14 +448,6 @@
 		15FB21D72D7544580002B576 /* ReviewerCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewerCollectionViewSection.swift; sourceTree = "<group>"; };
 		15FE4B3E2DC4563100B9474F /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		1570F72D2DFF4BA000AE9F6D /* Test */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Test;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1589FBEF2D51781D00240754 /* Frameworks */ = {
@@ -738,6 +734,15 @@
 			path = Products;
 			sourceTree = "<group>";
 		};
+		1570F74A2DFF7F0100AE9F6D /* MyCheckout */ = {
+			isa = PBXGroup;
+			children = (
+				1570F7482DFF7F0100AE9F6D /* MyCheckoutViewController.swift */,
+				1570F7492DFF7F0100AE9F6D /* MyCheckoutViewController.xib */,
+			);
+			path = MyCheckout;
+			sourceTree = "<group>";
+		};
 		157E04702D554200000170FC /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
@@ -966,6 +971,7 @@
 				1532F3442D5E7DA7003223A1 /* Info */,
 				157F91052D62B780005381FB /* AddAdress */,
 				153F6AA42D59561600317F49 /* Profile */,
+				1570F74A2DFF7F0100AE9F6D /* MyCheckout */,
 				15955C142D67701E00673BE7 /* CreditCard */,
 				156CD83C2D6A461E00D6DA77 /* Products */,
 				158B39D82D7A848500D58B07 /* Settings */,
@@ -1133,7 +1139,6 @@
 				15760D802D68A6640033BC0D /* CreditCardViewModel.swift */,
 				15955C192D67797500673BE7 /* CreditCardViewController.swift */,
 				15955C1A2D67797500673BE7 /* CreditCardViewController.xib */,
-				1570F72D2DFF4BA000AE9F6D /* Test */,
 			);
 			path = CreditCard;
 			sourceTree = "<group>";
@@ -1407,9 +1412,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				1570F72D2DFF4BA000AE9F6D /* Test */,
-			);
 			name = Herfety;
 			packageProductDependencies = (
 				15FB21C22D75209C0002B576 /* Cosmos */,
@@ -1509,6 +1511,7 @@
 				158A7EB52DB56EF400B89684 /* HRTextField.xib in Resources */,
 				15E33A2A2DD4AC500004D408 /* ForgetPasswordViewController.xib in Resources */,
 				1511F3CD2D5554D100D986CF /* DMSans-Medium.ttf in Resources */,
+				1570F74B2DFF7F0100AE9F6D /* MyCheckoutViewController.xib in Resources */,
 				1511F3CE2D5554D100D986CF /* DMSans.ttf in Resources */,
 				157E04732D554242000170FC /* colors.stencil in Resources */,
 				1589FC162D51785700240754 /* LaunchScreen.storyboard in Resources */,
@@ -1566,6 +1569,7 @@
 				153944E62DCF7BB1008465BB /* MultipartFormDataRequest.swift in Sources */,
 				151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */,
 				151631262D5D556D00BA088E /* Fonts+Style.swift in Sources */,
+				1570F74C2DFF7F0100AE9F6D /* MyCheckoutViewController.swift in Sources */,
 				15840BD52D5D7CAA006F8B67 /* HerfetyButton.swift in Sources */,
 				151DF42C2D5BAC6000A3AD98 /* PaymentView.swift in Sources */,
 				15955C1B2D67797500673BE7 /* CreditCardViewController.swift in Sources */,

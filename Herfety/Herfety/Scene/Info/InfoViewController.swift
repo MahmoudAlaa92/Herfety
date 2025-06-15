@@ -114,7 +114,9 @@ extension InfoViewController {
     /// Navigate to Credit Card
     private func bindViewModel() {
         viewModel.navigationToPayment = { [weak self] in
-            let creditCardVC = CreditCardViewController(viewModel: CreditCardViewModel())
+            // replace with stripe implemntation
+//            let creditCardVC = CreditCardViewController(viewModel: CreditCardViewModel())
+            let creditCardVC = MyCheckoutViewController()
             self?.navigationController?.pushViewController(creditCardVC, animated: true)
         }
     }

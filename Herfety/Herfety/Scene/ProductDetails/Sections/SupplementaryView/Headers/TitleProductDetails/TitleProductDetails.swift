@@ -55,7 +55,7 @@ extension TitleProductDetails {
         if !CustomeTabBarViewModel.shared.Wishlist.contains(where: { $0 == self.product }) {
             let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
             
-            let userId = CustomeTabBarViewModel.shared.userId ?? 1
+            let userId = CustomeTabBarViewModel.shared.userId
             productItems.addNewProduct(userId: userId, productId: (product.productID ?? 1)) { result in
                 CustomeTabBarViewModel.shared.fetchWishlistItems(id: userId)
             }

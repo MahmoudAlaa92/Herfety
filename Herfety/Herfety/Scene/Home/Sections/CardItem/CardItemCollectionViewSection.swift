@@ -53,7 +53,7 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
         cell.savePrice.text = "Save $" + String(format: "%.2f", savedAmount)
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         
-        let userId = CustomeTabBarViewModel.shared.userId ?? 1
+        let userId = CustomeTabBarViewModel.shared.userId
         let itemToAdded = Wishlist(userID: userId, productID: item.id, name: item.name, qty: item.qty, price: item.price, offerPrice: item.offerPrice, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, categoryID: item.categoryID, createdAt: item.createdAt, updatedAt: item.updatedAt, isApproved: item.isApproved, longDescription: item.longDescription, shortDescription: item.shortDescription, seoDescription: item.seoDescription, thumbImage: item.thumbImage, productType: item.productType)
         
         cell.configureProduct(with: itemToAdded)
@@ -65,7 +65,7 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
 extension CardItemCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = productItems[indexPath.item]
-        let userId = CustomeTabBarViewModel.shared.userId ?? 1
+        let userId = CustomeTabBarViewModel.shared.userId
         let wishListItem = Wishlist(userID: userId, productID: item.id, name: item.name, qty: item.qty, price: item.price, offerPrice: item.offerPrice, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, categoryID: item.categoryID, createdAt: item.createdAt, updatedAt: item.updatedAt, isApproved: item.isApproved, longDescription: item.longDescription, shortDescription: item.shortDescription, seoDescription: item.seoDescription, thumbImage: item.thumbImage, productType: item.productType)
         selectedItem.send(wishListItem)
     }

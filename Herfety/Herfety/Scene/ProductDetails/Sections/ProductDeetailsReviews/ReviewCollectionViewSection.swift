@@ -40,7 +40,7 @@ class ReviewCollectionViewSection: CollectionViewDataSource {
         let item = reviewItems[indexPath.row]
         cell.commentReviewer.text = item.review
         cell.imageReviewer.setImage(with: item.product?.thumbImage ?? "", placeholderImage: Images.profilePhoto) 
-        #warning("")
+        // TODO: 
         return cell
     }
 }

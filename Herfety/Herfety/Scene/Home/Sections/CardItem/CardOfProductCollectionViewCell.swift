@@ -109,8 +109,8 @@ extension CardOfProductCollectionViewCell {
         if !CustomeTabBarViewModel.shared.Wishlist.contains(where: { $0 == self.productOfWishlist }) {
             let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
             
-            productItems.addNewProduct(userId: CustomeTabBarViewModel.shared.userId ?? 1, productId: (productOfWishlist.productID ?? 1)) { result in
-                CustomeTabBarViewModel.shared.fetchWishlistItems(id: CustomeTabBarViewModel.shared.userId ?? 1)
+            productItems.addNewProduct(userId: CustomeTabBarViewModel.shared.userId, productId: (productOfWishlist.productID ?? 1)) { result in
+                CustomeTabBarViewModel.shared.fetchWishlistItems(id: CustomeTabBarViewModel.shared.userId)
             }
         }
     }
