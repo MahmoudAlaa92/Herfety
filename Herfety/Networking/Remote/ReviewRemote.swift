@@ -30,8 +30,8 @@ class ReviewRemote: Remote, ReviewRemoteProtocol {
         let request = HerfetyRequest(
             method: .post,
             path: "api/ProductReviews",
-            parameters: parameters
-        )
+            parameters: parameters,
+            destination: .body)
         
         enqueue(request, completion: completion)
     }
@@ -58,8 +58,8 @@ class ReviewRemote: Remote, ReviewRemoteProtocol {
         let request = HerfetyRequest(
             method: .put,
             path: "api/ProductReviews?id=\(id)",
-            parameters: parameters
-        )
+            parameters: parameters,
+            destination: .body)
         
         enqueue(request, completion: completion)
     }

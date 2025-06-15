@@ -101,6 +101,8 @@
 		156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD83D2D6A463D00D6DA77 /* ProductsViewController.swift */; };
 		156CD8422D6A4A6000D6DA77 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD8412D6A4A6000D6DA77 /* ProductsViewModel.swift */; };
 		156CD8442D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD8432D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift */; };
+		1570F71F2DFF0B4500AE9F6D /* PaymentIntentRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570F71E2DFF0B4500AE9F6D /* PaymentIntentRemote.swift */; };
+		1570F7212DFF0BA900AE9F6D /* CheckoutIntentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570F7202DFF0BA900AE9F6D /* CheckoutIntentResponse.swift */; };
 		15760D812D68A6640033BC0D /* CreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15760D802D68A6640033BC0D /* CreditCardViewModel.swift */; };
 		15760D852D692DFC0033BC0D /* AddAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */; };
 		157E046F2D553F6E000170FC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 157E046E2D553F6E000170FC /* Colors.xcassets */; };
@@ -314,6 +316,8 @@
 		156CD83E2D6A463D00D6DA77 /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
 		156CD8412D6A4A6000D6DA77 /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
 		156CD8432D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewSection.swift; sourceTree = "<group>"; };
+		1570F71E2DFF0B4500AE9F6D /* PaymentIntentRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentIntentRemote.swift; sourceTree = "<group>"; };
+		1570F7202DFF0BA900AE9F6D /* CheckoutIntentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutIntentResponse.swift; sourceTree = "<group>"; };
 		15760D802D68A6640033BC0D /* CreditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewModel.swift; sourceTree = "<group>"; };
 		15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewModel.swift; sourceTree = "<group>"; };
 		157E046E2D553F6E000170FC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -773,6 +777,7 @@
 				153944EB2DCFA9C1008465BB /* Login.swift */,
 				151563552DD4B7420001CCEE /* ResetPassword.swift */,
 				151563592DD4DF980001CCEE /* Reviewerr.swift */,
+				1570F7202DFF0BA900AE9F6D /* CheckoutIntentResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -800,6 +805,7 @@
 				153944E92DCFA9A3008465BB /* LoginRemote.swift */,
 				151563532DD4B6FE0001CCEE /* ResetPasswordRemote.swift */,
 				1515635B2DD4E0090001CCEE /* ReviewRemote.swift */,
+				1570F71E2DFF0B4500AE9F6D /* PaymentIntentRemote.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -1565,6 +1571,7 @@
 				151DF4322D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift in Sources */,
 				154167A62D9E8212007E4CAA /* Ext+Images.swift in Sources */,
 				1532F3482D5E7DF2003223A1 /* InfoViewController.swift in Sources */,
+				1570F71F2DFF0B4500AE9F6D /* PaymentIntentRemote.swift in Sources */,
 				15CD44C12D529B0300E58C6F /* SliderCollectionViewSection.swift in Sources */,
 				15F927C62D5A55BC0038CEB8 /* WishlistCollectionViewSection.swift in Sources */,
 				1532F34D2D5E876F003223A1 /* InfoShippingCollectionViewCell.swift in Sources */,
@@ -1599,6 +1606,7 @@
 				1517FFC22DC822A200F1D7BD /* Order.swift in Sources */,
 				1562A44B2DAAD10F00459EB5 /* LogoutButtonCollectionViewSection.swift in Sources */,
 				153944E82DCF857E008465BB /* SignupViewModel.swift in Sources */,
+				1570F7212DFF0BA900AE9F6D /* CheckoutIntentResponse.swift in Sources */,
 				154167A02D9DFA5F007E4CAA /* SettingCollectionViewSection.swift in Sources */,
 				153F6AA82D59562B00317F49 /* OrderViewController.swift in Sources */,
 				15A5EC8B2D77DD10003E49AB /* NameCollectionViewCell.swift in Sources */,

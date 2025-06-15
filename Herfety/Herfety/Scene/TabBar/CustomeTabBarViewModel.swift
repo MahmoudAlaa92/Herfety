@@ -34,6 +34,7 @@ class CustomeTabBarViewModel: ObservableObject {
     @Published var Wishlist: [Wishlist] = []
     @Published var infos: [InfoModel] = []
     @Published var countProductDetails: Int = 1
+    @Published var totalPriceOfOrders: Int = 0
     ///
     var subscriptions = Set<AnyCancellable>()
     ///
@@ -107,6 +108,4 @@ extension CustomeTabBarViewModel {
             }
         }
     }
-    
-    
 }

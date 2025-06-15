@@ -21,8 +21,9 @@ class LoginRemote: Remote, LoginRemoteProtocol {
         let request = HerfetyRequest(
             method: .post,
             path: "api/RegisterUser/LogIn",
-            parameters: parameters
-        )
+            parameters: parameters,
+            destination: .body)
+        
         enqueue(request, completion: completion)
     }
 }

@@ -22,8 +22,9 @@ class ResetPasswordRemote: Remote, ResetPasswordRemoteProtocol {
         let request = HerfetyRequest(
             method: .put,
             path: "api/Users/ChangeUserPassword",
-            parameters: parameter
-        )
+            parameters: parameter,
+            destination: .body)
+        
         enqueue(request, completion: completion)
     }
 }

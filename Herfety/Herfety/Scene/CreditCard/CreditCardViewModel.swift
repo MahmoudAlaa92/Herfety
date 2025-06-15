@@ -1,3 +1,5 @@
+
+
 //
 //  CreditCardViewModel.swift
 //  Herfety
@@ -8,7 +10,12 @@
 import UIKit
 
 class CreditCardViewModel {
+    private let paymentIntentRemote: PaymentIntentRemoteProtocol
     
+    init(paymentIntentRemote: PaymentIntentRemoteProtocol = PaymentIntentRemote(network: AlamofireNetwork())) {
+        self.paymentIntentRemote = paymentIntentRemote
+    }
+
     var onCardNumberChange: ((String) -> Void)?
     var onCardHolderChange: ((String) -> Void)?
     var onCVVChange: ((String) -> Void)?
@@ -32,11 +39,31 @@ class CreditCardViewModel {
     }
     
     func didTapAddCard() {
-       
+        self.startCheckout(
+            amount: CustomeTabBarViewModel
+            .shared
+            .totalPriceOfOrders) { clientSecret in
+                // handel the logic here with strip
+        }
     }
     
     func didTapCancel() {
         onDismiss?()
     }
-    
+}
+// MARK: - Private Handlers
+//
+extension CreditCardViewModel {
+    private func startCheckout(amount: Int ,completion: @escaping (String?) -> Void) {
+        
+        paymentIntentRemote.createPaymentIntent(amount: amount) { result in
+            switch result {
+            case .success(let response):
+                completion(response.clientSecret)
+            case .failure(let error):
+                print("Payment Intent Error: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
 }

@@ -149,6 +149,7 @@ extension OrderViewController {
         viewModel.$paymentInfo
             .receive(on: RunLoop.main)
             .sink { [weak self] paymentModel in
+                
                 self?.paymentView.configure(with: paymentModel)
             }
             .store(in: &subscriptions)

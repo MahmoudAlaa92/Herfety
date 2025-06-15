@@ -34,7 +34,8 @@ class GetAllOrdersRemote: Remote, OrderRemoteProtocol {
         let request = HerfetyRequest(
             method: .post,
             path: "api/Orders",
-            parameters: parameter)
+            parameters: parameter,
+            destination: .body)
         
         enqueue(request, completion: completion)
     }

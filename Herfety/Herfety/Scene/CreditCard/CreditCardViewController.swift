@@ -71,7 +71,7 @@ class CreditCardViewController: UIViewController {
         }
         
     }
-
+    
 }
 
 // MARK: - Configuration
@@ -137,13 +137,15 @@ extension CreditCardViewController: AddressTextFieldDelegate {
 // MARK: - Actions
 //
 extension CreditCardViewController {
-  
+    
     
     @IBAction func cancelPressed(_ sender: Any) {
         viewModel.didTapCancel()
     }
     
     @IBAction func confirmPressed(_ sender: Any) {
-     
+        print("Confirm pressed")
+        viewModel.didTapAddCard()
+        
     }
 }

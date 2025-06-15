@@ -32,7 +32,8 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol {
         let request = HerfetyRequest(
             method: .post,
             path: "api/WishLists",
-            parameters: parameters)
+            parameters: parameters,
+            destination: .body)
         
         enqueue(request, completion: completion)
     }
