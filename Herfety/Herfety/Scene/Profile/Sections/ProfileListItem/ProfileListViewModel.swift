@@ -21,6 +21,5 @@ class ProfileListViewModel {
     var secondList: [ProfileListItem] = [
         ProfileListItem(title: "FAQs", icon: Images.iconFAQs),
         ProfileListItem(title: "Privacy Policy", icon: Images.iconPrivacyPolicy),
-        ProfileListItem(title: "Privacy Policy", icon: Images.iconPrivacyPolicy),
     ]
 }

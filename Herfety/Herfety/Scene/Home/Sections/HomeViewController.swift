@@ -206,7 +206,7 @@ extension HomeViewController {
             .store(in: &subscriptions)
         ///
         cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
-#warning("")
+            // TODO: change the product id here
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: value.productID ?? 93))
             
             vc.viewModel.productItem = value

@@ -57,7 +57,7 @@ extension ProductsViewController {
         self.productsItems = products
         sections = [products]
         products.selectedItem.sink { [weak self] products in
-            #warning("UserId here")
+            // TODO: change product id here
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: products.productID ?? 93))
             vc.viewModel.productItem = products
             vc.viewModel.fetchProductItems()

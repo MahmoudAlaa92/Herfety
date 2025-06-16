@@ -139,7 +139,7 @@ extension ProductDetailsViewController {
             }.store(in: &subscriptions)
         /// selected her
         recommendedProductsSection?.selectedItem.sink(receiveValue: { [weak self] value in
-            #warning("user id here")
+            // TODO: change product id here
             let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: value.productID ?? 93))
             vc.viewModel.productItem = value
             vc.viewModel.fetchProductItems()
