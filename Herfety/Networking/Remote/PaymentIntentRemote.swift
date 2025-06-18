@@ -8,19 +8,30 @@
 import Foundation
 
 protocol PaymentIntentRemoteProtocol {
-    func createPaymentIntent(amount: Int, completion: @escaping (Result<CheckoutIntentResponse, Error>) -> Void)
+    func createPaymentIntent(PaymentIntent: PaymentIntent, completion: @escaping (Result<CheckoutIntentResponse, Error>) -> Void)
 }
 
 class PaymentIntentRemote: Remote, PaymentIntentRemoteProtocol {
-    func createPaymentIntent(amount: Int, completion: @escaping (Result<CheckoutIntentResponse, Error>) -> Void) {
+    func createPaymentIntent(PaymentIntent: PaymentIntent, completion: @escaping (Result<CheckoutIntentResponse, Error>) -> Void) {
         
-        let parameters = ["amount": amount]
+        let parameters: [String: Any] = [
+            "amount": PaymentIntent.amount,
+            "companyDelivery": PaymentIntent.companyDelivery,
+            "products": PaymentIntent.products.map { product in
+                [
+                    "vendorId": product.vendorID,
+                    "productId": product.productID,
+                    "quantity": product.quantity
+                ]
+            }
+        ]
         
         let request = HerfetyRequest(
             method: .post,
             path: "api/Orders/Payment",
-            parameters: parameters)
-
+            parameters: parameters,
+            destination: .body)
+        
         enqueue(request, completion: completion)
     }
 }

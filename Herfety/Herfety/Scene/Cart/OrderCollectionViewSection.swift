@@ -45,6 +45,7 @@ class OrderCollectionViewSection: CollectionViewDataSource {
         cell.onChangeCountOrder = { [weak self] newCount in
             self?.countUpdateSubject.send((indexPath.item, newCount))
         }
+        
         return cell
     }
 }

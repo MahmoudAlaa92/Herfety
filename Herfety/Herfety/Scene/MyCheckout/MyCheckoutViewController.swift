@@ -130,8 +130,19 @@ class MyCheckoutViewController: UIViewController {
         let paymentIntentRemote = PaymentIntentRemote(network: AlamofireNetwork())
         let amount = Int(ceil(Double(CustomeTabBarViewModel.shared.totalPriceOfOrders) * 100.0))
         print("CustomeTabBarViewModel.shared.totalPriceOfOrders\(CustomeTabBarViewModel.shared.totalPriceOfOrders)")
-
-        paymentIntentRemote.createPaymentIntent(amount: amount) { result in
+        // Prepare products array from cart items
+             let products = CustomeTabBarViewModel.shared.cartItems.map { item in
+                 ProductIntent(
+                    vendorID: item.vendorId ?? 12,
+                    productID: item.productID ?? 93,
+                    quantity: item.qty ?? 3
+                 )
+             }
+        
+        paymentIntentRemote.createPaymentIntent(
+            PaymentIntent: .init(amount: amount,
+                                 companyDelivery: 1,
+                                 products: products)){ result in
             switch result {
             case .success(let response):
                 if let clientSecret = response.clientSecret {

@@ -55,14 +55,14 @@ class CreditCardViewModel {
 extension CreditCardViewModel {
     private func startCheckout(amount: Int ,completion: @escaping (String?) -> Void) {
         
-        paymentIntentRemote.createPaymentIntent(amount: amount) { result in
-            switch result {
-            case .success(let response):
-                completion(response.clientSecret)
-            case .failure(let error):
-                print("Payment Intent Error: \(error.localizedDescription)")
-                completion(nil)
-            }
-        }
+//        paymentIntentRemote.createPaymentIntent(amount: amount) { result in
+//            switch result {
+//            case .success(let response):
+//                completion(response.clientSecret)
+//            case .failure(let error):
+//                print("Payment Intent Error: \(error.localizedDescription)")
+//                completion(nil)
+//            }
+//        }
     }
 }

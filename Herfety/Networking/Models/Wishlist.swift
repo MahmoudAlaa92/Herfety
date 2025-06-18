@@ -9,6 +9,7 @@ import Foundation
 
 struct Wishlist: Codable, Equatable {
     let userID, productID: Int?
+    let vendorId: Int?
     let name: String?
     var qty: Int?
     let price: Double?
@@ -24,6 +25,7 @@ struct Wishlist: Codable, Equatable {
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
         case productID = "productId"
+        case vendorId
         case name, qty, price, offerPrice, offerStartDate, offerEndDate
         case categoryID = "categoryId"
         case createdAt, updatedAt, isApproved, longDescription, shortDescription, seoDescription, thumbImage, productType
@@ -32,6 +34,7 @@ struct Wishlist: Codable, Equatable {
     init(
            userID: Int? = nil,
            productID: Int? = nil,
+           vendorId: Int? = nil,
            name: String? = nil,
            qty: Int? = nil,
            price: Double? = nil,
@@ -50,6 +53,7 @@ struct Wishlist: Codable, Equatable {
        ) {
            self.userID = userID
            self.productID = productID
+           self.vendorId = vendorId
            self.name = name
            self.qty = qty
            self.price = price

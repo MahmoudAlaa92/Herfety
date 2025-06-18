@@ -36,6 +36,7 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
         }
         
         let item = productItems[indexPath.item]
+        
         cell.nameProduct.text = item.name
         cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))
         
@@ -54,7 +55,7 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         
         let userId = CustomeTabBarViewModel.shared.userId
-        let itemToAdded = Wishlist(userID: userId, productID: item.id, name: item.name, qty: item.qty, price: item.price, offerPrice: item.offerPrice, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, categoryID: item.categoryID, createdAt: item.createdAt, updatedAt: item.updatedAt, isApproved: item.isApproved, longDescription: item.longDescription, shortDescription: item.shortDescription, seoDescription: item.seoDescription, thumbImage: item.thumbImage, productType: item.productType)
+        let itemToAdded = Wishlist(userID: userId, productID: item.id,vendorId: item.vendorID ,name: item.name, qty: item.qty, price: item.price, offerPrice: item.offerPrice, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, categoryID: item.categoryID, createdAt: item.createdAt, updatedAt: item.updatedAt, isApproved: item.isApproved, longDescription: item.longDescription, shortDescription: item.shortDescription, seoDescription: item.seoDescription, thumbImage: item.thumbImage, productType: item.productType)
         
         cell.configureProduct(with: itemToAdded)
         return cell

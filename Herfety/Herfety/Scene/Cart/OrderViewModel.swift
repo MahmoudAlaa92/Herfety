@@ -55,6 +55,7 @@ extension OrderViewModel {
                 let shipping: Double = subTotal > 0 ? 10.0 : 0.0
                 let total = subTotal + shipping
                 let numberOfItems = orderItems.reduce(0) { $0 + ($1.qty ?? 0) }
+                
                 // TODO: change this logic
                 let roundedTotal = total == floor(total) ? total : ceil(total)
                          CustomeTabBarViewModel.shared.totalPriceOfOrders = Int(roundedTotal)
