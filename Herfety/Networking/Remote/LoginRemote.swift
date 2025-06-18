@@ -22,7 +22,8 @@ class LoginRemote: Remote, LoginRemoteProtocol {
             method: .post,
             path: "api/RegisterUser/LogIn",
             parameters: parameters,
-            destination: .body)
+            destination: .body
+        )
         
         enqueue(request, completion: completion)
     }

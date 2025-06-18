@@ -23,3 +23,4 @@ struct ProductIntent: Codable {
         case quantity
     }
 }
+

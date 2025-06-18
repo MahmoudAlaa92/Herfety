@@ -43,8 +43,10 @@ extension LoginViewModel: LoginViewModelInput {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
+                    print("YEs")
                     self?.handleLoginSuccess(response: response)
                 case .failure(let error):
+                    
                     self?.handleLoginError(error)
                 }
             }
@@ -63,9 +65,8 @@ extension LoginViewModel: LoginViewModelInput {
             image: ""
         )
         CustomeTabBarViewModel.shared.userInfo = userInfo
-//        print("response id is \(response.id)")
+        print("response id is \(response)")
         CustomeTabBarViewModel.shared.userId = response.id ?? 1
-        
         onLoginTapped?()
     }
     

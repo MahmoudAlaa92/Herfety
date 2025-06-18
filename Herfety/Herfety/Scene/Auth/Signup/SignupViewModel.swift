@@ -57,7 +57,7 @@ class SignupViewModel {
             Phone: phone,
             image: ""
         )
-
+        print("user \(user)")
         registerService.registerUser(user: user) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

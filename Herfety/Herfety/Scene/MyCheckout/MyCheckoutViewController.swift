@@ -109,7 +109,42 @@ class MyCheckoutViewController: UIViewController {
             switch result {
             case .completed:
                 alertItem.message = "Payment Completed"
+                
+                let products = CustomeTabBarViewModel.shared.cartItems.map { item in
+                    ProductIntent(
+                       vendorID: item.vendorId ?? 12,
+                       productID: item.productID ?? 93,
+                       quantity: item.qty ?? 3
+                    )
+                }
+                
                 self.presentCustomAlert(with: alertItem)
+                
+                let order = Orderr(
+                    companyDeliveryId: 1,
+                    userId: CustomeTabBarViewModel.shared.userId,
+                    currencyName: 0,
+                    paymentMethod: 0,
+                    orderAddress: CustomeTabBarViewModel.shared.infos[0].address ?? "Egypt Aswan",
+                    subTotal: Double(CustomeTabBarViewModel.shared.totalPriceOfOrders),
+                    orderStatus: 1,
+                    productsOrder: products,
+                      createdAt: "2025-06-16T21:19:45.504Z",
+                      updatedAt: "2025-06-16T21:19:45.504Z"
+                  )
+                
+                let orderRemote = GetAllOrdersRemote(network: AlamofireNetwork())
+                    orderRemote.addOrder(order: order) { result in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let response):
+                                print("✅ Order placed successfully: \(response)")
+                            case .failure(let error):
+                                print("❌ Failed to place order: \(error)")
+                                
+                            }
+                        }
+                    }
             case .failed(_):
                 alertItem.message = "Payment Failed:"
                 alertItem.status = .error

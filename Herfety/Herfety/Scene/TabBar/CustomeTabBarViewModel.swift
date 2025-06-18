@@ -33,9 +33,11 @@ class CustomeTabBarViewModel: ObservableObject {
     @Published var cartItems: [Wishlist] = []
     @Published var Wishlist: [Wishlist] = []
     @Published var infos: [InfoModel] = []
+    
     @Published var countProductDetails: Int = 1
     @Published var totalPriceOfOrders: Int = 0
     ///
+    @Published var orderAddress: String = "Egypt, Aswan"
     var subscriptions = Set<AnyCancellable>()
     ///
     func logout() {

@@ -6,6 +6,7 @@
 //
 import UIKit
 import Combine
+import SafariServices
 
 class HomeViewController: UIViewController {
     
@@ -102,7 +103,10 @@ extension HomeViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             },
             onSearch: {
-                print("NotificationBtn is tapped")
+                print("Ml Model is tapped")
+                let safariVC = SFSafariViewController(url: URL(string: "https://04c0-35-245-178-109.ngrok-free.app/")!)
+                safariVC.modalPresentationStyle = .pageSheet
+                self.navigationController?.present(safariVC, animated: true)
             },
             userName: userName,
             userImage: finalImage

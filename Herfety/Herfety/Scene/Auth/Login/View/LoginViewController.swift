@@ -84,6 +84,8 @@ extension LoginViewController {
     private func configureEmailTextField() {
         emailTextField.title = "User Name"
         emailTextField.placeholder = "Enter your user name"
+        emailTextField.textfield.delegate = self
+           emailTextField.textfield.returnKeyType = .next
         emailTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
     }
@@ -92,6 +94,8 @@ extension LoginViewController {
         passwordTextField.title = "Password"
         passwordTextField.placeholder = "***********"
         passwordTextField.textfield.isSecureTextEntry = true
+        passwordTextField.textfield.delegate = self
+        passwordTextField.textfield.returnKeyType = .done
         passwordTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     /// Configures appearance of labels
@@ -194,4 +198,16 @@ extension LoginViewController : ASAuthorizationControllerDelegate, ASAuthorizati
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error.localizedDescription)
     }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField.textfield {
+            passwordTextField.textfield.becomeFirstResponder() // Move to password field
+        } else if textField == passwordTextField.textfield {
+            textField.resignFirstResponder() // Dismiss keyboard
+        }
+        return true
+    }
+
 }

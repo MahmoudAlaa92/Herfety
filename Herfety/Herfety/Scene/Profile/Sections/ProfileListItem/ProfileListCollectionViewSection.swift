@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ProfileListCollectionViewSection: CollectionViewDataSource {
     
@@ -51,63 +52,86 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             
             switch item.title {
             case "My Order":
+                let vc = OrderViewController()
+                self.navController?.pushViewController(vc, animated: true)
                 break
             case "My Favourites":
                 let vc = WishListViewController()
                 self.navController?.pushViewController(vc, animated: true)
                 break
             case "Shipping Address":
-                
+                let vc = InfoViewController()
+                self.navController?.pushViewController(vc, animated: true)
                 break
             case "My Card":
-                
+                let vc = MyCheckoutViewController()
+                self.navController?.pushViewController(vc, animated: true)
                 break
             case "Logout":
-                  if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                     let sceneDelegate = scene.delegate as? SceneDelegate,
-                     let window = sceneDelegate.window {
-
-                      let splashVC = SplashViewController(viewModel: SplashViewModel())
-                      let navController = UINavigationController(rootViewController: splashVC)
-                      
-                      // Optional: transition animation
-                      UIView.transition(with: window, duration: 0.5) {
-                          window.rootViewController = navController
-                      }
-                  }
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let sceneDelegate = scene.delegate as? SceneDelegate,
+                   let window = sceneDelegate.window {
+                    
+                    let splashVC = SplashViewController(viewModel: SplashViewModel())
+                    let navController = UINavigationController(rootViewController: splashVC)
+                    
+                    // Optional: transition animation
+                    UIView.transition(with: window, duration: 0.5) {
+                        window.rootViewController = navController
+                    }
+                }
                 break
-//            case "Settings":
+            case "Hefety Model":
+                let safariVC = SFSafariViewController(url: URL(string: "https://www.appcoda.com/privacy-policy/")!)
+                safariVC.modalPresentationStyle = .pageSheet
+                navController?.present(safariVC, animated: true)
+                //            case "Settings":
                 // TODO: change this after finle project
-//                let vc = SettingViewController(settingViewModel: SettingViewModel())
-//                self.navController?.pushViewController(vc, animated: true)
-//                break
+                //                let vc = SettingViewController(settingViewModel: SettingViewModel())
+                //                self.navController?.pushViewController(vc, animated: true)
+                //                break
             default:
                 break
             }
+        } else if indexPath.section == 2 {
+            let item = items[indexPath.item]
+            switch item.title {
+            case "FAQs":
+                let safariVC = SFSafariViewController(url: URL(string: "http://www.appcoda.com/contact")!)
+                safariVC.modalPresentationStyle = .pageSheet
+                navController?.present(safariVC, animated: true)
+            case "Privacy Policy":
+                let safariVC = SFSafariViewController(url: URL(string: "https://www.appcoda.com/privacy-policy/")!)
+                safariVC.modalPresentationStyle = .pageSheet
+                navController?.present(safariVC, animated: true)
+                break
+            default:
+                break
+            }
+            
         }
-        
     }
 }
-// MARK: - Layout
-//
-struct ProfileListLayoutSection: LayoutSectionProvider {
-    
-    func layoutSection() -> NSCollectionLayoutSection {
-        /// Item
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .absolute(50))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        /// Group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(50)) // or .absolute if fixed
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                     subitems: [item])
-        /// Section
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 50, trailing: 15)
+    // MARK: - Layout
+    //
+    struct ProfileListLayoutSection: LayoutSectionProvider {
         
-        section.decorationItems = [.background(elementKind: SectionDecorationView.identifier) ]
-        
-        return section
+        func layoutSection() -> NSCollectionLayoutSection {
+            /// Item
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                  heightDimension: .absolute(50))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            /// Group
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: .estimated(50)) // or .absolute if fixed
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
+                                                         subitems: [item])
+            /// Section
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 50, trailing: 15)
+            
+            section.decorationItems = [.background(elementKind: SectionDecorationView.identifier) ]
+            
+            return section
+        }
     }
-}

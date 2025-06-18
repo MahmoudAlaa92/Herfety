@@ -76,6 +76,9 @@ public enum Images {
     public static var rectangleBeige: UIImage {
         UIImage(named: "Rectangle Beige")!
     }
+    public static var rectangleBlack: UIImage {
+        UIImage(named: "Rectangle Black")!
+    }
     public static var search: UIImage {
         UIImage(named: "Search")!
     }

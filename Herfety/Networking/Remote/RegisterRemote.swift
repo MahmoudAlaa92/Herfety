@@ -27,7 +27,7 @@ class RegisterRemote: Remote, RegisterRemoteProtocol {
         let request = MultipartFormDataRequest(
             method: .post,
             path: "api/RegisterUser/Register",
-            parameters: parameters
+            parameters: parameters,
         )
         
         enqueue(request, completion: completion)

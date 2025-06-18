@@ -4,7 +4,6 @@
 //
 //  Created by Mahmoud Alaa on 09/02/2025.
 //
-
 import UIKit
 
 class HomeNavBar {
@@ -18,7 +17,6 @@ class HomeNavBar {
         self.navigationItem = navigationItem
     }
 }
-
 // MARK: - Configure
 //
 extension HomeNavBar {
@@ -55,16 +53,15 @@ extension HomeNavBar {
                                            target: self,
                                            action: #selector(searchWasTapped))
         // TODO: Change after discuss the finale project
-//        let notificationButton = UIBarButtonItem(image: Images.notification.withRenderingMode(.alwaysOriginal),
-//                                                 style: .done,
-//                                                 target: self,
-//                                                 action: #selector(notificationWasTapped))
+        let notificationButton = UIBarButtonItem(image: Images.notification.withRenderingMode(.alwaysOriginal),
+                                                 style: .done,
+                                                 target: self,
+                                                 action: #selector(notificationWasTapped))
         
-        navigationBarButtonItems = [searchButton]
+        navigationBarButtonItems = [notificationButton, searchButton]
         navigationItem.rightBarButtonItems = navigationBarButtonItems
     }
 }
-
 // MARK: - Actions
 //
 extension HomeNavBar {

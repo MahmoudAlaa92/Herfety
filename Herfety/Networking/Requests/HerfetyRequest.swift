@@ -8,14 +8,15 @@
 import Alamofire
 import Foundation
 
+enum ParameterDestination {
+    case query
+    case body
+}
 /// Represents Fakestore.com Endpoint
 ///
 struct HerfetyRequest: URLRequestConvertible {
     
-    enum ParameterDestination {
-        case query
-        case body
-    }
+ 
     
     /// HTTP Request Method
     ///

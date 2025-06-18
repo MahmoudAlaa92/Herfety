@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "Jewelry.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -10,6 +9,7 @@
       "scale" : "2x"
     },
     {
+      "filename" : "unsplash_uAXlmO2g8GM.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
