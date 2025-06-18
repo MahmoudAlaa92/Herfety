@@ -10,9 +10,9 @@ import UIKit
 typealias ActionHandler = () -> Void
 
 public struct AlertModel {
-    let message: String
+    var message: String
     let buttonTitle: String
-    let image: AlertStatus
-    let status: AlertStatus
+    var image: AlertStatus
+    var status: AlertStatus
     var buttonAction: ActionHandler?
 }

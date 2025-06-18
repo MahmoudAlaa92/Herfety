@@ -98,15 +98,28 @@ class MyCheckoutViewController: UIViewController {
         Task { @MainActor in
             let result = await embeddedPaymentElement.confirm()
             view.isUserInteractionEnabled = true
-
+            
+            var alertItem = AlertModel(
+                message: "",
+                buttonTitle: "Ok",
+                image: .success,
+                status: .success
+            )
+         
             switch result {
             case .completed:
-                print("✅ Payment Complete")
-            case .failed(let error):
-                print("❌ Payment Failed: \(error.localizedDescription)")
+                alertItem.message = "Payment Completed"
+                self.presentCustomAlert(with: alertItem)
+            case .failed(_):
+                alertItem.message = "Payment Failed:"
+                alertItem.status = .error
+                alertItem.image = .error
             case .canceled:
-                print("⚠️ Payment Canceled")
+                alertItem.status = .warning
+                alertItem.image = .warning
+                alertItem.message = "Payment Canceled"
             }
+            self.presentCustomAlert(with: alertItem)
         }
     }
 
@@ -169,5 +182,22 @@ extension MyCheckoutViewController: EmbeddedPaymentElementDelegate {
 
     func embeddedPaymentElementDidUpdatePaymentOption(embeddedPaymentElement: EmbeddedPaymentElement) {
         checkoutButton.isEnabled = embeddedPaymentElement.paymentOption != nil
+    }
+}
+
+extension MyCheckoutViewController {
+    func presentCustomAlert(with alertItem: AlertModel) {
+        let alertVC = AlertViewController(nibName: "AlertViewController", bundle: nil)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        alertVC.loadViewIfNeeded() /// Ensure outlets are connected
+        
+        alertVC.show(alertItem: alertItem)
+        
+        /// Optional: dismiss on button press
+        alertVC.actionHandler = { [weak alertVC] in
+            alertVC?.dismiss(animated: true)
+        }
+        self.present(alertVC, animated: true)
     }
 }
