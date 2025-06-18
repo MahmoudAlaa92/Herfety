@@ -175,7 +175,7 @@ This project blends solid architecture (MVVM), modern UI with UIKit, and powerfu
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 36 57 PM" src="https://github.com/user-attachments/assets/1f6c3df7-88d0-4b6a-8b03-a8f97fd7afc5" />
 
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 37 15 PM" src="https://github.com/user-attachments/assets/fe57e570-308f-46e5-8c0d-0b678e84ec41" />
-<img width="488" alt="Screenshot 2025-06-16 at 6 39 24 PM" src="https://github.com/user-attachments/assets/be4bbee4-f084-42a2-845d-d02613fd04d4" />
+<img width="410" height="800" alt="Screenshot 2025-06-16 at 6 39 24 PM" src="https://github.com/user-attachments/assets/be4bbee4-f084-42a2-845d-d02613fd04d4" />
 
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 42 08 PM" src="https://github.com/user-attachments/assets/a9479e8d-3bc3-4748-9013-80638907af95" />
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 42 58 PM" src="https://github.com/user-attachments/assets/a7040048-4fc1-4f8a-bf24-f79594e09d4d" />
