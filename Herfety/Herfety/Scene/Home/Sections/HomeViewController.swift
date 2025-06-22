@@ -104,7 +104,7 @@ extension HomeViewController {
             },
             onSearch: {
                 print("Ml Model is tapped")
-                let safariVC = SFSafariViewController(url: URL(string: "https://04c0-35-245-178-109.ngrok-free.app/")!)
+                let safariVC = SFSafariViewController(url: URL(string: "https://9ec0-34-74-104-29.ngrok-free.app/")!)
                 safariVC.modalPresentationStyle = .pageSheet
                 self.navigationController?.present(safariVC, animated: true)
             },

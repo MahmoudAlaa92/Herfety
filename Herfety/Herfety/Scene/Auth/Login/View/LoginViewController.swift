@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
         configureViews()
         setUpNavigationBar()
         bindViewModel()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +73,16 @@ extension LoginViewController {
         configurePasswordTextField()
         configureLabelsUI()
         configureButtonUI()
+        dismissKeyboardWhenTapped()
+    }
+    ///
+    private func dismissKeyboardWhenTapped() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+          tapGesture.cancelsTouchesInView = false // Allows other taps (e.g. buttons) to still work
+          view.addGestureRecognizer(tapGesture)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     /// NavBar
     private func setUpNavigationBar() {
@@ -211,3 +222,6 @@ extension LoginViewController: UITextFieldDelegate {
     }
 
 }
+
+
+

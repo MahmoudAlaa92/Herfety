@@ -32,6 +32,20 @@ class ForgetPasswordViewController: UIViewController {
         configureViews()
         setUpNavigationBar()
         bindViewModel()
+        usernameTextField.textfield.delegate = self
+        currentPasswordTextField.textfield.delegate = self
+        newPasswordTextField.textfield.delegate = self
+        confirmPasswordTextField.textfield.delegate = self
+        dismissKeyboardWhenTapped()
+
+    }
+    private func dismissKeyboardWhenTapped() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+          tapGesture.cancelsTouchesInView = false // Allows other taps (e.g. buttons) to still work
+          view.addGestureRecognizer(tapGesture)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     // MARK: - UI Setup
     /// NavBar
@@ -157,5 +171,24 @@ extension ForgetPasswordViewController {
 extension ForgetPasswordViewController {
     @IBAction func resetPassword(_ sender: Any) {
         viewModel.resetTapped()
+    }
+}
+
+
+extension ForgetPasswordViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case usernameTextField.textfield:
+            currentPasswordTextField.textfield.becomeFirstResponder()
+        case currentPasswordTextField.textfield:
+            newPasswordTextField.textfield.becomeFirstResponder()
+        case newPasswordTextField.textfield:
+            confirmPasswordTextField.textfield.becomeFirstResponder()
+        case confirmPasswordTextField.textfield:
+            confirmPasswordTextField.textfield.resignFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }

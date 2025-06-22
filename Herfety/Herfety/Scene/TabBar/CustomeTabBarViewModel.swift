@@ -20,7 +20,7 @@ class CustomeTabBarViewModel: ObservableObject {
     ///
     @UserDefault<Bool>(key: \.login) var login
     //    @UserDefault<Int>(key: \.userId) var userId
-    var userId: Int = 1
+    var userId: Int = 22
     @UserDefault<RegisterUser>(key: \.userInfo) var userInfo
     
     var isWishlistItemDeleted = false
@@ -59,7 +59,7 @@ class CustomeTabBarViewModel: ObservableObject {
 //
 extension CustomeTabBarViewModel {
     // MARK: Wishlist
-    func fetchWishlistItems(id: Int = 1) {
+    func fetchWishlistItems(id: Int = 22) {
         let productItems: ProductsOfWishlistRemoteProtocol = ProductsOfWishlistRemote(network: AlamofireNetwork())
         productItems.loadAllProducts(userId: id) { [weak self] result in
             switch result {

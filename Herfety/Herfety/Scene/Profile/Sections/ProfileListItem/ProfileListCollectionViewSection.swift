@@ -82,7 +82,7 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
                 }
                 break
             case "Hefety Model":
-                let safariVC = SFSafariViewController(url: URL(string: "https://www.appcoda.com/privacy-policy/")!)
+                let safariVC = SFSafariViewController(url: URL(string: "https://9ec0-34-74-104-29.ngrok-free.app/")!)
                 safariVC.modalPresentationStyle = .pageSheet
                 navController?.present(safariVC, animated: true)
                 //            case "Settings":

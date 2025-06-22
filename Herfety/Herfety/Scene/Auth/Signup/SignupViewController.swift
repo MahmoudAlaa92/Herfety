@@ -36,6 +36,8 @@ class SignupViewController: UIViewController {
         configureViews()
         setUpNavigationBar()
         bindViewModel()
+        dismissKeyboardWhenTapped()
+
     }
     
     // MARK: - UI Setup
@@ -63,8 +65,6 @@ class SignupViewController: UIViewController {
         configurePasswordTextField()
         configurePhoneTextField()
         configureLabelsUI()
-        
-        dismissKeyboardWhenTapped()
     }
     private func dismissKeyboardWhenTapped() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

@@ -5,11 +5,12 @@
 //  Created by Mahmoud Alaa on 13/02/2025.
 //
 import UIKit
+import Combine
 
 class InfoCollectionViewSection: CollectionViewDataSource {
     
     let infoItems: [InfoModel]
-    
+    let deleteItemSubject = PassthroughSubject<Int, Never>()
     init(infoItems: [InfoModel]) {
         self.infoItems = infoItems
     }
@@ -40,18 +41,14 @@ class InfoCollectionViewSection: CollectionViewDataSource {
 extension InfoCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
-                /*
-                let items = CustomeTabBarViewModel.shared
-                let wishlist = items.orders[indexPath.row]
-                let userId = items.userId ?? 1
-                 */
-                
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+                self.deleteItemSubject.send(indexPath.item)
             }
             return UIMenu(title: "", children: [delete])
         }
     }
 }
+
 // MARK: - Layout
 //
 struct InfoSectionLayoutProvider: LayoutSectionProvider {

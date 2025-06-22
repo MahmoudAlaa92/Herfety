@@ -41,18 +41,42 @@ extension InfoViewController {
     }
     /// Configure Section
     private func configureSections() {
-        CustomeTabBarViewModel.shared.$infos.sink { [weak self] infoItems in
-            let infoSection = InfoCollectionViewSection(infoItems: infoItems)
-            self?.sections = [infoSection]
-            self?.layoutProviders = [InfoSectionLayoutProvider()]
-            self?.collectionView.reloadData()
-        }.store(in: &subscriptions)
+        CustomeTabBarViewModel.shared.$infos
+            .receive(on: RunLoop.main)
+            .sink { [weak self] infoItems in
+                guard let self = self else { return }
+                
+                let infoSection = InfoCollectionViewSection(infoItems: infoItems)
+                self.sections = [infoSection]
+                self.layoutProviders = [InfoSectionLayoutProvider()]
+                
+                infoSection.registerCells(in: self.collectionView) // ✅ FIX HERE
+                self.updateCollectionViewLayout() // 👈 Fixes the layout error
+                self.collectionView.reloadData()
+
+                infoSection.deleteItemSubject
+                    .sink { [weak self] index in
+                        guard let self = self else { return }
+                        var items = CustomeTabBarViewModel.shared.infos
+                        guard index < items.count else { return }
+                        items.remove(at: index)
+                        CustomeTabBarViewModel.shared.infos = items
+                    }
+                    .store(in: &self.subscriptions)
+            }
+            .store(in: &subscriptions)
     }
+    
     /// Configure Layout
     private func configureCompositianalLayout() {
         let layoutFactory = SectionsLayout(providers: layoutProviders)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
+    private func updateCollectionViewLayout() {
+        let layoutFactory = SectionsLayout(providers: layoutProviders)
+        collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: false)
+    }
+
     /// Configure UI
     private func configureUI() {
         paymentButton.title = "Proceed to payment"
