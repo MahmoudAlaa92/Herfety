@@ -168,6 +168,10 @@
 		158F8D492D72444E00D8E768 /* TitleProductDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158F8D472D72444E00D8E768 /* TitleProductDetails.xib */; };
 		158F8D512D7252DC00D8E768 /* DescriptionProductDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F8D4F2D7252DC00D8E768 /* DescriptionProductDetails.swift */; };
 		158F8D522D7252DC00D8E768 /* DescriptionProductDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158F8D502D7252DC00D8E768 /* DescriptionProductDetails.xib */; };
+		1592D5F42E13E34F001792F7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5F32E13E34F001792F7 /* Coordinator.swift */; };
+		1592D5F62E13E46A001792F7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5F52E13E469001792F7 /* AppCoordinator.swift */; };
+		1592D5F82E13F19D001792F7 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5F72E13F19D001792F7 /* SplashCoordinator.swift */; };
+		1592D5FA2E13F9FF001792F7 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */; };
 		15955C112D6759C400673BE7 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15955C102D6759C400673BE7 /* CardView.swift */; };
 		15955C132D6759D500673BE7 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15955C122D6759D500673BE7 /* CardView.xib */; };
 		15955C1B2D67797500673BE7 /* CreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15955C192D67797500673BE7 /* CreditCardViewController.swift */; };
@@ -388,6 +392,10 @@
 		158F8D472D72444E00D8E768 /* TitleProductDetails.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleProductDetails.xib; sourceTree = "<group>"; };
 		158F8D4F2D7252DC00D8E768 /* DescriptionProductDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionProductDetails.swift; sourceTree = "<group>"; };
 		158F8D502D7252DC00D8E768 /* DescriptionProductDetails.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionProductDetails.xib; sourceTree = "<group>"; };
+		1592D5F32E13E34F001792F7 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		1592D5F52E13E469001792F7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		1592D5F72E13F19D001792F7 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		15955C102D6759C400673BE7 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		15955C122D6759D500673BE7 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		15955C192D67797500673BE7 /* CreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewController.swift; sourceTree = "<group>"; };
@@ -920,6 +928,7 @@
 			isa = PBXGroup;
 			children = (
 				1570F72E2DFF61EC00AE9F6D /* Secrets.plist */,
+				1592D5F22E13E0BD001792F7 /* Coordinators */,
 				1589FC132D51785700240754 /* Herfety */,
 				1589FC1B2D51801900240754 /* Resources */,
 				15840BD22D5D7C26006F8B67 /* Utilities */,
@@ -1010,6 +1019,7 @@
 				158A7E762DB52A7500B89684 /* SplashViewController.swift */,
 				158A7E772DB52A7500B89684 /* SplashViewController.xib */,
 				159B57872DCBD2E000CDD958 /* SplashViewModel.swift */,
+				1592D5F72E13F19D001792F7 /* SplashCoordinator.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -1021,6 +1031,7 @@
 				159B57892DCBD65400CDD958 /* LoginViewModel.swift */,
 				158A7E8E2DB5401800B89684 /* LoginViewController.swift */,
 				158A7E8F2DB5401800B89684 /* LoginViewController.xib */,
+				1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1128,6 +1139,15 @@
 				158F8D4E2D72524100D8E768 /* Footer */,
 			);
 			path = SupplementaryView;
+			sourceTree = "<group>";
+		};
+		1592D5F22E13E0BD001792F7 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				1592D5F32E13E34F001792F7 /* Coordinator.swift */,
+				1592D5F52E13E469001792F7 /* AppCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		15955C0F2D67588F00673BE7 /* CardView */ = {
@@ -1588,6 +1608,7 @@
 				1548CF432D56DFA900F7CEEA /* CategoriesModel.swift in Sources */,
 				15E33A2B2DD4AC500004D408 /* ForgetPasswordViewController.swift in Sources */,
 				157F910E2D62CA26005381FB /* AddressTextField.swift in Sources */,
+				1592D5FA2E13F9FF001792F7 /* LoginCoordinator.swift in Sources */,
 				157F91192D62E804005381FB /* AlertViewController.swift in Sources */,
 				1589FC192D51785700240754 /* SceneDelegate.swift in Sources */,
 				15166A712D581B6500F8F35C /* TopBrandsModel.swift in Sources */,
@@ -1600,6 +1621,7 @@
 				156CD8422D6A4A6000D6DA77 /* ProductsViewModel.swift in Sources */,
 				1517FFC42DC8237B00F1D7BD /* OrdersRemote.swift in Sources */,
 				157F42902DB6DD4E000305D6 /* HerfetyRequest.swift in Sources */,
+				1592D5F62E13E46A001792F7 /* AppCoordinator.swift in Sources */,
 				157F911B2D62EFFD005381FB /* AlertStatus.swift in Sources */,
 				157F42942DB6DDEF000305D6 /* RemoteErrorValidator.swift in Sources */,
 				156CD8442D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift in Sources */,
@@ -1635,6 +1657,7 @@
 				15A3C3CF2D788C0600AE6CFA /* NameViewModel.swift in Sources */,
 				15FB21CA2D7531740002B576 /* ReviewersViewController.swift in Sources */,
 				154112122D56983400F248F7 /* HeaderView.swift in Sources */,
+				1592D5F42E13E34F001792F7 /* Coordinator.swift in Sources */,
 				154B7D242DF3835900854E61 /* AddReviewViewModel.swift in Sources */,
 				159B578A2DCBD65400CDD958 /* LoginViewModel.swift in Sources */,
 				1532F3592D5EB297003223A1 /* HerfetyNavigationController.swift in Sources */,
@@ -1662,6 +1685,7 @@
 				15CD44C32D52A10200E58C6F /* HomeModel.swift in Sources */,
 				158A7E7A2DB52A7500B89684 /* SplashViewController.swift in Sources */,
 				157F42962DB6DE11000305D6 /* Setting.swift in Sources */,
+				1592D5F82E13F19D001792F7 /* SplashCoordinator.swift in Sources */,
 				154112152D56B23A00F248F7 /* CategoryCollectionViewSection.swift in Sources */,
 				1599B89E2DB86D4800A48510 /* Products.swift in Sources */,
 				15D0F5892DB67D4C00967C7F /* SuccessViewController.swift in Sources */,

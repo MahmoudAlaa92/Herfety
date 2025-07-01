@@ -16,7 +16,7 @@ class SplashViewController: UIViewController {
     // MARK: - Properties
     private var navigationBarBehavior: HerfetyNavigationController?
     private let viewModel: SplashViewModel
-
+    weak var coordinator: SplashCoordinator?
     // MARK: - Init
     init(viewModel:SplashViewModel) {
         self.viewModel = viewModel
@@ -75,7 +75,7 @@ extension SplashViewController {
 extension SplashViewController {
     
     @IBAction func loginPressed(_ sender: Any) {
-        viewModel.loginTapped()
+        coordinator?.goLoginVC()
     }
     
     @IBAction func signUpPressed(_ sender: Any) {

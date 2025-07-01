@@ -12,13 +12,15 @@ import Stripe
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
- 
-        window.rootViewController =  UINavigationController(rootViewController: SplashViewController(viewModel: SplashViewModel()))
+        coordinator = AppCoordinator(window: window)
+        coordinator?.start()
+//        window.rootViewController =  UINavigationController(rootViewController: SplashViewController(viewModel: SplashViewModel()))
         // CustomeTabBarViewController()
         // MyCheckoutViewController()
         // SettingViewController(settingViewModel: SettingViewModel())

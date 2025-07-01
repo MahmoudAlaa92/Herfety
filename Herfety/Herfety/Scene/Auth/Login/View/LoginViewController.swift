@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
     // MARK: - Properties
     var viewModel: LoginViewModelType
     private var navBarBehavior: HerfetyNavigationController?
+//    weak var coordinator: LoginTransitionDelegate?
     // MARK: - Init
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -52,6 +53,7 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+
 }
 // MARK: - Configuration
 //
