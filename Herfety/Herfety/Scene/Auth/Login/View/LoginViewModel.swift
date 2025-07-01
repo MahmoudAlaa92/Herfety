@@ -16,6 +16,7 @@ class LoginViewModel {
     private var email: String = ""
     private var password: String = ""
     private let loginService: LoginRemoteProtocol
+    var onLoginSuccess: (() -> Void)?
 
     /// Outputs
     var onLoginTapped: (() -> Void)?
@@ -68,6 +69,7 @@ extension LoginViewModel: LoginViewModelInput {
         print("response id is \(response)")
         CustomeTabBarViewModel.shared.userId = response.id ?? 1
         onLoginTapped?()
+        self.onLoginSuccess?()
     }
     
     private func handleLoginError(_ error: Error) {

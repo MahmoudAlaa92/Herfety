@@ -172,6 +172,12 @@
 		1592D5F62E13E46A001792F7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5F52E13E469001792F7 /* AppCoordinator.swift */; };
 		1592D5F82E13F19D001792F7 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5F72E13F19D001792F7 /* SplashCoordinator.swift */; };
 		1592D5FA2E13F9FF001792F7 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */; };
+		1592D5FC2E141E52001792F7 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5FB2E141E52001792F7 /* TabBarCoordinator.swift */; };
+		1592D5FE2E142C73001792F7 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5FD2E142C73001792F7 /* HomeCoordinator.swift */; };
+		1592D6002E142C9C001792F7 /* WishlistCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5FF2E142C9C001792F7 /* WishlistCoordinator.swift */; };
+		1592D6022E142D04001792F7 /* CartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D6012E142D04001792F7 /* CartCoordinator.swift */; };
+		1592D6042E142D25001792F7 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D6032E142D24001792F7 /* ProfileCoordinator.swift */; };
+		1592D6062E142E57001792F7 /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D6052E142E57001792F7 /* SignUpCoordinator.swift */; };
 		15955C112D6759C400673BE7 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15955C102D6759C400673BE7 /* CardView.swift */; };
 		15955C132D6759D500673BE7 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15955C122D6759D500673BE7 /* CardView.xib */; };
 		15955C1B2D67797500673BE7 /* CreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15955C192D67797500673BE7 /* CreditCardViewController.swift */; };
@@ -396,6 +402,12 @@
 		1592D5F52E13E469001792F7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		1592D5F72E13F19D001792F7 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		1592D5FB2E141E52001792F7 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		1592D5FD2E142C73001792F7 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		1592D5FF2E142C9C001792F7 /* WishlistCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistCoordinator.swift; sourceTree = "<group>"; };
+		1592D6012E142D04001792F7 /* CartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCoordinator.swift; sourceTree = "<group>"; };
+		1592D6032E142D24001792F7 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		1592D6052E142E57001792F7 /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		15955C102D6759C400673BE7 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		15955C122D6759D500673BE7 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		15955C192D67797500673BE7 /* CreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewController.swift; sourceTree = "<group>"; };
@@ -1019,7 +1031,6 @@
 				158A7E762DB52A7500B89684 /* SplashViewController.swift */,
 				158A7E772DB52A7500B89684 /* SplashViewController.xib */,
 				159B57872DCBD2E000CDD958 /* SplashViewModel.swift */,
-				1592D5F72E13F19D001792F7 /* SplashCoordinator.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -1031,7 +1042,6 @@
 				159B57892DCBD65400CDD958 /* LoginViewModel.swift */,
 				158A7E8E2DB5401800B89684 /* LoginViewController.swift */,
 				158A7E8F2DB5401800B89684 /* LoginViewController.xib */,
-				1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1146,6 +1156,14 @@
 			children = (
 				1592D5F32E13E34F001792F7 /* Coordinator.swift */,
 				1592D5F52E13E469001792F7 /* AppCoordinator.swift */,
+				1592D5F72E13F19D001792F7 /* SplashCoordinator.swift */,
+				1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */,
+				1592D5FB2E141E52001792F7 /* TabBarCoordinator.swift */,
+				1592D5FD2E142C73001792F7 /* HomeCoordinator.swift */,
+				1592D5FF2E142C9C001792F7 /* WishlistCoordinator.swift */,
+				1592D6012E142D04001792F7 /* CartCoordinator.swift */,
+				1592D6032E142D24001792F7 /* ProfileCoordinator.swift */,
+				1592D6052E142E57001792F7 /* SignUpCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1583,6 +1601,7 @@
 				15A4F5E32DB28DDB000EACEA /* UserDefaultsKeys.swift in Sources */,
 				15FB21D82D7544580002B576 /* ReviewerCollectionViewSection.swift in Sources */,
 				15FB21D12D7535A70002B576 /* ReviewersCollectionViewCell.swift in Sources */,
+				1592D6042E142D25001792F7 /* ProfileCoordinator.swift in Sources */,
 				1589FC182D51785700240754 /* AppDelegate.swift in Sources */,
 				15A4F5E52DB28FD6000EACEA /* CustomeTabBarViewModel.swift in Sources */,
 				15CD44C52D52A3BC00E58C6F /* HomeViewModel.swift in Sources */,
@@ -1630,6 +1649,7 @@
 				151DF4322D5BDBDF00A3AD98 /* OrderCollectionViewSection.swift in Sources */,
 				154167A62D9E8212007E4CAA /* Ext+Images.swift in Sources */,
 				1532F3482D5E7DF2003223A1 /* InfoViewController.swift in Sources */,
+				1592D6022E142D04001792F7 /* CartCoordinator.swift in Sources */,
 				1570F71F2DFF0B4500AE9F6D /* PaymentIntentRemote.swift in Sources */,
 				15CD44C12D529B0300E58C6F /* SliderCollectionViewSection.swift in Sources */,
 				15F927C62D5A55BC0038CEB8 /* WishlistCollectionViewSection.swift in Sources */,
@@ -1673,6 +1693,8 @@
 				15A5EC8B2D77DD10003E49AB /* NameCollectionViewCell.swift in Sources */,
 				151631322D5D56CF00BA088E /* Generated-Colors.swift in Sources */,
 				153F6AA22D5955E800317F49 /* WishListViewController.swift in Sources */,
+				1592D5FC2E141E52001792F7 /* TabBarCoordinator.swift in Sources */,
+				1592D6002E142C9C001792F7 /* WishlistCoordinator.swift in Sources */,
 				1548CF412D56DF4F00F7CEEA /* SliderModel.swift in Sources */,
 				15F927C82D5A56660038CEB8 /* WishlistModel.swift in Sources */,
 				15CD44BE2D5293AE00E58C6F /* DailyEssentailCollectionViewCell.swift in Sources */,
@@ -1705,6 +1727,7 @@
 				151631282D5D55DB00BA088E /* UIButton+Style.swift in Sources */,
 				15F420672DB1278B00FCDF71 /* CollectionViewSectionProtocols.swift in Sources */,
 				1532F3532D5E8EC1003223A1 /* InfoModel.swift in Sources */,
+				1592D5FE2E142C73001792F7 /* HomeCoordinator.swift in Sources */,
 				1513DD462DF3811D001EB3B3 /* AddReviewViewController.swift in Sources */,
 				15A4F5E12DB28D18000EACEA /* UserDefaults.swift in Sources */,
 				15A5EC922D77E125003E49AB /* ProfileListCollectionViewCell.swift in Sources */,
@@ -1731,6 +1754,7 @@
 				15CD44AF2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift in Sources */,
 				152E8EB82D6662AF005766FB /* AlertModel.swift in Sources */,
 				157F91042D62B774005381FB /* AddAddressViewController.swift in Sources */,
+				1592D6062E142E57001792F7 /* SignUpCoordinator.swift in Sources */,
 				151563562DD4B7420001CCEE /* ResetPassword.swift in Sources */,
 				157F429C2DB6EFBD000305D6 /* OfferRemote.swift in Sources */,
 				158B39D12D7A399E00D58B07 /* SectionDecorationView.swift in Sources */,

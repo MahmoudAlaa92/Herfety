@@ -20,10 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         coordinator = AppCoordinator(window: window)
         coordinator?.start()
-//        window.rootViewController =  UINavigationController(rootViewController: SplashViewController(viewModel: SplashViewModel()))
-        // CustomeTabBarViewController()
-        // MyCheckoutViewController()
-        // SettingViewController(settingViewModel: SettingViewModel())
+
         self.window = window
         
         window.makeKeyAndVisible()

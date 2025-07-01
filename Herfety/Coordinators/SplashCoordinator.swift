@@ -18,6 +18,7 @@ protocol SplashChildDelegate: AnyObject {
 class SplashCoordinator: NSObject, Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    var onLoginSuccess: (() -> Void)? // Add callback
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -33,7 +34,6 @@ class SplashCoordinator: NSObject, Coordinator {
         navigationController.delegate = self
         navigationController.pushViewController(splashVC, animated: true)
     }
-    
 }
 // MARK: - Transition Delegate
 //
@@ -41,6 +41,9 @@ extension SplashCoordinator: SplashTransitionDelegate {
     func goLoginVC() {
         let coordinator = LoginCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
+        coordinator.onLoginSuccess = { [weak self] in
+            self?.onLoginSuccess?() // Notify AppCoordinator
+        }
         childCoordinators.append(coordinator)
         coordinator.start()
     }

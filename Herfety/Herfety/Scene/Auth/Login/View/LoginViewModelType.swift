@@ -28,6 +28,6 @@ protocol LoginViewModelInput {
 protocol LoginViewModelOutput {
     func configureOnButtonEnabled(onEnabled: @escaping (Bool) -> Void)
     var onLoginTapped: (() -> Void)? { get set }
+    var onLoginSuccess: (() -> Void)? { get set }
     var onError: ((String) -> Void)? { get set }
-
 }

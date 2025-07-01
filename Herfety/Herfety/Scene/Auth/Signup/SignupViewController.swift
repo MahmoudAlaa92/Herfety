@@ -25,7 +25,16 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var loginButton: PrimaryButton!
     // MARK: - Properties
-    private let viewModel = SignupViewModel()
+    private let viewModel: SignupViewModel
+    
+    init(viewModel: SignupViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     private var navBarBehavior: HerfetyNavigationController?
     
     // MARK: - Life Cycle Methods

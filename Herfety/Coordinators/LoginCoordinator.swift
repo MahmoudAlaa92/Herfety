@@ -16,20 +16,24 @@ class LoginCoordinator: Coordinator {
     weak var parentCoordinator: SplashChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    var onLoginSuccess: (() -> Void)? // Add callback
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+    }
+    
+    func start() {
+        let loginVC = LoginViewController(viewModel: LoginViewModel())
+        loginVC.onLoginSuccess = { [weak self] in
+            self?.onLoginSuccess?() // Trigger success callback
+        }
+        navigationController.pushViewController(loginVC, animated: true)
     }
     
     deinit {
         print("deinit \(Self.self)")
     }
     
-    func start() {
-        let loginVC = LoginViewController(viewModel: LoginViewModel())
-//        loginVC.coordinator = self
-        navigationController.pushViewController(loginVC, animated: true)
-    }
 }
 // MARK: - Transition Delegate
 //

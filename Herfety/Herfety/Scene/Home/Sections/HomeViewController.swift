@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     private var topBrandItem: TopBrandsCollectionViewSection?
     private var dailyEssentialItem: DailyEssentailCollectionViewSection?
     ///
+    weak var coordinator: HomeCoordinator?
     private var hasInitialWishlistLoaded = false
     ///
     private var subscriptions = Set<AnyCancellable>()

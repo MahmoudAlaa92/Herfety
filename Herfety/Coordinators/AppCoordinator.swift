@@ -8,13 +8,15 @@
 import UIKit
 
 class AppCoordinator: Coordinator {
-    var childCoordinators  = [Coordinator]()
-    var navigationController = UINavigationController()
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
     
     private var window: UIWindow?
     
     init(window: UIWindow) {
         self.window = window
+        self.navigationController = UINavigationController()
+        self.navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     deinit {
@@ -22,11 +24,49 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
+        // Check if user is logged in
+        if UserSessionManager.isLoggedIn {
+            showMainTabFlow()
+        } else {
+            showAuthFlow()
+        }
+    }
+    
+    private func showAuthFlow() {
         let splashCoordinator = SplashCoordinator(navigationController: navigationController)
+        splashCoordinator.onLoginSuccess = { [weak self] in
+            self?.showMainTabFlow()
+            self?.removeAuthCoordinators()
+        }
+        
         childCoordinators.append(splashCoordinator)
         splashCoordinator.start()
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+    }
+    
+    private func showMainTabFlow() {
+        let tabCoordinator = TabBarCoordinator(navigationController: navigationController)
+        childCoordinators.append(tabCoordinator)
+        tabCoordinator.start()
+        
+        // Update window root without animation
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+    }
+    
+    private func removeAuthCoordinators() {
+        childCoordinators.removeAll { coordinator in
+            coordinator is SplashCoordinator || coordinator is LoginCoordinator
+        }
+    }
+}
+
+// UserSessionManager.swift
+class UserSessionManager {
+    static var isLoggedIn: Bool {
+        get { UserDefaults.standard.bool(forKey: "isLoggedIn") }
+        set { UserDefaults.standard.set(newValue, forKey: "isLoggedIn") }
     }
 }

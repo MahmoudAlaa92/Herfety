@@ -65,7 +65,7 @@ extension SplashViewController {
         
         viewModel.onSignUpTapped = { [weak self] in
             guard let self else { return }
-            let signUpVC = SignupViewController()
+            let signUpVC = SignupViewController(viewModel: SignupViewModel())
             self.navigationController?.pushViewController(signUpVC, animated: true)
         }
     }

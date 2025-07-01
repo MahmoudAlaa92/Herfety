@@ -26,7 +26,9 @@ class LoginViewController: UIViewController {
     // MARK: - Properties
     var viewModel: LoginViewModelType
     private var navBarBehavior: HerfetyNavigationController?
-//    weak var coordinator: LoginTransitionDelegate?
+    var onLoginSuccess: (() -> Void)?
+    
+    //    weak var coordinator: LoginTransitionDelegate?
     // MARK: - Init
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -53,7 +55,7 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
 }
 // MARK: - Configuration
 //
@@ -80,8 +82,8 @@ extension LoginViewController {
     ///
     private func dismissKeyboardWhenTapped() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-          tapGesture.cancelsTouchesInView = false // Allows other taps (e.g. buttons) to still work
-          view.addGestureRecognizer(tapGesture)
+        tapGesture.cancelsTouchesInView = false // Allows other taps (e.g. buttons) to still work
+        view.addGestureRecognizer(tapGesture)
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -98,7 +100,7 @@ extension LoginViewController {
         emailTextField.title = "User Name"
         emailTextField.placeholder = "Enter your user name"
         emailTextField.textfield.delegate = self
-           emailTextField.textfield.returnKeyType = .next
+        emailTextField.textfield.returnKeyType = .next
         emailTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
     }
@@ -132,27 +134,34 @@ extension LoginViewController {
 extension LoginViewController {
     
     private func bindViewModel() {
-          viewModel.onLoginTapped = { [weak self] in
-              let vc = SuccessViewController()
-              vc.modalPresentationStyle = .fullScreen
-              self?.present(vc, animated: true)
-          }
-          
-          viewModel.onError = { [weak self] errorMessage in
-              let alert = UIAlertController(
-                  title: "Login Failed",
-                  message: errorMessage,
-                  preferredStyle: .alert
-              )
-              alert.addAction(UIAlertAction(title: "OK", style: .default))
-              self?.present(alert, animated: true)
-          }
-          
-          viewModel.configureOnButtonEnabled { [weak self] isEnabled in
-              self?.loginButton.isEnabled = isEnabled
-              self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
-          }
-      }
+        
+        viewModel.onLoginTapped = { [weak self] in
+            let vc = SuccessViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self?.present(vc, animated: true)
+        }
+        
+        viewModel.onLoginSuccess = { [weak self] in
+            // Notify coordinator about successful login
+            self?.onLoginSuccess?()
+        }
+        
+        viewModel.onError = { [weak self] errorMessage in
+            let alert = UIAlertController(
+                title: "Login Failed",
+                message: errorMessage,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(alert, animated: true)
+        }
+        
+        viewModel.configureOnButtonEnabled { [weak self] isEnabled in
+            self?.loginButton.isEnabled = isEnabled
+            self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
+        }
+        
+    }
     
 }
 // MARK: - Private Handlers
@@ -189,12 +198,12 @@ extension LoginViewController {
     
     @IBAction func appleTapped(_ sender: Any) {
         let appleProvider = ASAuthorizationAppleIDProvider()
-               let request = appleProvider.createRequest()
-               request.requestedScopes = [.email, .fullName]
-               let controller = ASAuthorizationController(authorizationRequests: [request])
-               controller.delegate = self
-               controller.presentationContextProvider = self
-               controller.performRequests()
+        let request = appleProvider.createRequest()
+        request.requestedScopes = [.email, .fullName]
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
     }
 }
 extension LoginViewController : ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
@@ -204,8 +213,8 @@ extension LoginViewController : ASAuthorizationControllerDelegate, ASAuthorizati
     }
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let details = authorization.credential as? ASAuthorizationAppleIDCredential {
-              viewModel.loginWithApple(credential: details)
-          }
+            viewModel.loginWithApple(credential: details)
+        }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -222,7 +231,7 @@ extension LoginViewController: UITextFieldDelegate {
         }
         return true
     }
-
+    
 }
 
 
