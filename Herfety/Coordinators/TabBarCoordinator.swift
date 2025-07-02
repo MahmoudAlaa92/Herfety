@@ -31,7 +31,6 @@ class TabBarCoordinator: Coordinator {
         
         childCoordinators.forEach { $0.start() }
         
-        // Configure tab bar controller
         tabBarController.viewControllers = childCoordinators.map {
             $0.navigationController
         }

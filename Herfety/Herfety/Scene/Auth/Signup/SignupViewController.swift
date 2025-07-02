@@ -10,7 +10,6 @@ import UIKit
 class SignupViewController: UIViewController {
     
     // MARK: - Outlets
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var firstNameTextField: HRTextField!
     @IBOutlet weak var lastNameTextField: HRTextField!
@@ -25,18 +24,9 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var loginButton: PrimaryButton!
     // MARK: - Properties
-    private let viewModel: SignupViewModel
-    
-    init(viewModel: SignupViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private let viewModel = SignupViewModel()
     private var navBarBehavior: HerfetyNavigationController?
-    
+    weak var coordinator: SignUpTransitionDelegate?
     // MARK: - Life Cycle Methods
     //
     override func viewDidLoad() {
@@ -46,9 +36,7 @@ class SignupViewController: UIViewController {
         setUpNavigationBar()
         bindViewModel()
         dismissKeyboardWhenTapped()
-
     }
-    
     // MARK: - UI Setup
     
     /// NavBar

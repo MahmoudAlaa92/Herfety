@@ -14,7 +14,8 @@ enum TabBarItems: Int {
     case order
     case profile
 }
-
+// MARK: - change this class to Actor (Safe threading)
+//
 class CustomeTabBarViewModel: ObservableObject {
     static let shared = CustomeTabBarViewModel()
     ///
@@ -50,7 +51,6 @@ class CustomeTabBarViewModel: ObservableObject {
     }
     
     init(){
-        //        userId = 1
         fetchWishlistItems(id: userId)
         loadUserProfileImage()
     }

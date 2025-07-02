@@ -10,68 +10,79 @@ import FirebaseAuth
 import FacebookLogin
 import GoogleSignIn
 import AuthenticationServices
+import Combine
 
-class LoginViewModel {
+class LoginViewModel: LoginViewModelType {
     // MARK: - Properties
-    private var email: String = ""
-    private var password: String = ""
     private let loginService: LoginRemoteProtocol
-    var onLoginSuccess: (() -> Void)?
-
+    private var cancellables = Set<AnyCancellable>()
+    
+    /// Input handling
+    private let emailSubject = CurrentValueSubject<String, Never>("")
+    private let passwordSubject = CurrentValueSubject<String, Never>("")
+    private let loginTappedSubject = PassthroughSubject<Void, Never>()
+    
     /// Outputs
-    var onLoginTapped: (() -> Void)?
-    private var onLoginButtonEnabled: ((Bool) -> Void)?
-    var onError: ((String) -> Void)?
+    private let isLoginButtonEnabled = CurrentValueSubject<Bool, Never>(false)
+    let loginSuccess = PassthroughSubject<Void, Never>()
+    let loginError = PassthroughSubject<String, Never>()
+    
     /// Init
     init(loginService: LoginRemoteProtocol = LoginRemote(network: AlamofireNetwork())) {
         self.loginService = loginService
-    }
-}
-// MARK: - LoginViewModelInput
-extension LoginViewModel: LoginViewModelInput {
-    func updateEmail(_ text: String) {
-        email = text
-        updateEnabledStateButton()
+        setupBindings()
     }
     
-    func updatePassword(_ text: String) {
-        password = text
-        updateEnabledStateButton()
-    }
-    
-    func loginTapped() {
-        loginService.login(email: email, password: password) { [weak self] result in
-            DispatchQueue.main.async {
+    private func setupBindings() {
+        /// Combine email and password for button state
+        Publishers.CombineLatest(emailSubject, passwordSubject)
+            .map { !$0.isEmpty && !$1.isEmpty }
+            .subscribe(isLoginButtonEnabled)
+            .store(in: &cancellables)
+        
+        /// Handle login requests
+        loginTappedSubject
+            .map { [weak self] _ -> (String, String)? in
+                guard let self = self else { return nil }
+                return (self.emailSubject.value, self.passwordSubject.value)
+            }
+            .compactMap { $0 } /// remove nil
+            .flatMap { [weak self] email, password -> AnyPublisher<Result<Registration, Error>, Never> in
+                guard let self = self else { return Empty().eraseToAnyPublisher() }
+                
+                return Future<Result<Registration, Error>, Never> { promise in
+                    self.loginService.login(email: email, password: password) { result in
+                        promise(.success(result))
+                    }
+                }
+                .eraseToAnyPublisher()
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
                 switch result {
                 case .success(let response):
-                    print("YEs")
                     self?.handleLoginSuccess(response: response)
                 case .failure(let error):
-                    
                     self?.handleLoginError(error)
                 }
             }
-        }
+            .store(in: &cancellables)
     }
-    
     private func handleLoginSuccess(response: Registration) {
         let userInfo = RegisterUser(
             FName: "",
             LName: "",
             UserName: response.userName ?? "",
-            Password: self.password,
-            ConfirmPassword: self.password,
+            Password: passwordSubject.value,
+            ConfirmPassword: passwordSubject.value,
             Email: response.email ?? "",
             Phone: "",
             image: ""
         )
         CustomeTabBarViewModel.shared.userInfo = userInfo
-        print("response id is \(response)")
         CustomeTabBarViewModel.shared.userId = response.id ?? 1
-        onLoginTapped?()
-        self.onLoginSuccess?()
+        loginSuccess.send()
     }
-    
     private func handleLoginError(_ error: Error) {
         let errorMessage: String
         if let afError = error.asAFError, afError.isResponseValidationError {
@@ -79,20 +90,34 @@ extension LoginViewModel: LoginViewModelInput {
         } else {
             errorMessage = error.localizedDescription
         }
-        onError?(errorMessage)
+        loginError.send(errorMessage)
+    }
+}
+// MARK: - LoginViewModelInput
+//
+extension LoginViewModel {
+    func updateEmail(_ text: String) {
+        emailSubject.send(text)
     }
     
-    // MARK: - Facebook Login
+    func updatePassword(_ text: String) {
+        passwordSubject.send(text)
+    }
+    
+    func loginTapped() {
+        loginTappedSubject.send()
+    }
+    
     func loginWithFacebook(from viewController: UIViewController) {
         let fbLoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["public_profile", "email"], from: viewController) { [weak self] result, error in
             if let error = error {
-                self?.onError?(error.localizedDescription)
+                self?.loginError.send(error.localizedDescription)
                 return
             }
             
             guard let token = AccessToken.current?.tokenString else {
-                self?.onError?("Failed to retrieve Facebook access token.")
+                self?.loginError.send("Failed to retrieve Facebook access token.")
                 return
             }
             
@@ -100,17 +125,17 @@ extension LoginViewModel: LoginViewModelInput {
             
             Auth.auth().signIn(with: credential) { authResult, error in
                 if let error = error {
-                    self?.onError?(error.localizedDescription)
+                    self?.loginError.send(error.localizedDescription)
                     return
                 }
-                self?.onLoginTapped?()
+                // Handle successful Facebook login
             }
         }
     }
-    // MARK: - Google Login
+    
     func loginWithGoogle(from viewController: UIViewController) {
         guard let clientID = FirebaseApp.app()?.options.clientID else {
-            onError?("Client ID not found")
+            self.loginError.send("Client ID not found")
             return
         }
         
@@ -119,13 +144,13 @@ extension LoginViewModel: LoginViewModelInput {
         
         GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { [weak self] result, error in
             if let error = error {
-                self?.onError?(error.localizedDescription)
+                self?.loginError.send(error.localizedDescription)
                 return
             }
             
             guard let user = result?.user,
                   let idToken = user.idToken?.tokenString else {
-                self?.onError?("Failed to retrieve Google ID token.")
+                self?.loginError.send("Failed to retrieve Google ID token.")
                 return
             }
             
@@ -134,19 +159,19 @@ extension LoginViewModel: LoginViewModelInput {
             
             Auth.auth().signIn(with: credential) { authResult, error in
                 if let error = error {
-                    self?.onError?(error.localizedDescription)
+                    self?.loginError.send(error.localizedDescription)
                     return
                 }
                 guard let firebaseUser = authResult?.user else {
-                    self?.onError?("Failed to get user info.")
+                    self?.loginError.send("Failed to get user info.")
                     return
                 }
-
+                
                 let displayName = firebaseUser.displayName ?? ""
                 let nameComponents = displayName.split(separator: " ")
                 let firstName = nameComponents.first.map(String.init) ?? ""
                 let lastName = nameComponents.dropFirst().joined(separator: " ")
-
+                
                 let email = firebaseUser.email ?? ""
                 let phone = firebaseUser.phoneNumber ?? "01142128919"
                 let imageUrl = firebaseUser.photoURL?.absoluteString ?? ""
@@ -162,13 +187,9 @@ extension LoginViewModel: LoginViewModelInput {
                     image: imageUrl
                 )
                 CustomeTabBarViewModel.shared.userInfo = userInfo
-
-                self?.onLoginTapped?()
             }
         }
     }
-
-    // MARK: - Apple Login
     func loginWithApple(credential: ASAuthorizationAppleIDCredential) {
         let userId = credential.user
         let email = credential.email ?? ""
@@ -187,29 +208,18 @@ extension LoginViewModel: LoginViewModelInput {
         print("Email: \(email)")
         print("Full Name: \(fullName)")
         
-        // Simulate success or error
-        if !userId.isEmpty {
-            onLoginTapped?()
-        } else {
-            onError?("Apple login failed.")
+        if userId.isEmpty {
+            loginError.send("Apple login failed.")
         }
     }
-    
 }
-// MARK: LoginViewModelOutput
-//
-extension LoginViewModel: LoginViewModelOutput {
-    
-    func configureOnButtonEnabled(onEnabled: @escaping (Bool) -> Void) {
-        onLoginButtonEnabled = onEnabled
-        updateEnabledStateButton()
-    }
-}
-// MARK: Private Handlers
+// MARK: - LoginViewModelOutput
 //
 extension LoginViewModel {
-    private func updateEnabledStateButton() {
-        let isValid = !email.isEmpty && !password.isEmpty
-        onLoginButtonEnabled?(isValid)
+    func configureOnButtonEnabled(onEnabled: @escaping (Bool) -> Void) {
+        isLoginButtonEnabled
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: onEnabled)
+            .store(in: &cancellables)
     }
 }

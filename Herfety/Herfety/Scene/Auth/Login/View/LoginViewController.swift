@@ -6,6 +6,7 @@
 //
 import UIKit
 import AuthenticationServices
+import Combine
 
 class LoginViewController: UIViewController {
     
@@ -27,7 +28,8 @@ class LoginViewController: UIViewController {
     var viewModel: LoginViewModelType
     private var navBarBehavior: HerfetyNavigationController?
     var onLoginSuccess: (() -> Void)?
-    
+    private var cancellables = Set<AnyCancellable>()
+
     //    weak var coordinator: LoginTransitionDelegate?
     // MARK: - Init
     init(viewModel: LoginViewModelType) {
@@ -135,26 +137,26 @@ extension LoginViewController {
     
     private func bindViewModel() {
         
-        viewModel.onLoginTapped = { [weak self] in
-            let vc = SuccessViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self?.present(vc, animated: true)
-        }
+        viewModel.loginSuccess
+            .sink { [weak self] in
+                let vc = SuccessViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: true)
+                self?.onLoginSuccess?()
+            }
+            .store(in: &cancellables)
         
-        viewModel.onLoginSuccess = { [weak self] in
-            // Notify coordinator about successful login
-            self?.onLoginSuccess?()
-        }
-        
-        viewModel.onError = { [weak self] errorMessage in
-            let alert = UIAlertController(
-                title: "Login Failed",
-                message: errorMessage,
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self?.present(alert, animated: true)
-        }
+        viewModel.loginError
+            .sink { [weak self] errorMessage in
+                let alert = UIAlertController(
+                    title: "Login Failed",
+                    message: errorMessage,
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(alert, animated: true)
+            }
+            .store(in: &cancellables)
         
         viewModel.configureOnButtonEnabled { [weak self] isEnabled in
             self?.loginButton.isEnabled = isEnabled

@@ -9,6 +9,7 @@ import UIKit
 
 protocol SplashTransitionDelegate: AnyObject {
     func goLoginVC()
+    func goSignUpVC()
 }
 
 protocol SplashChildDelegate: AnyObject {
@@ -38,12 +39,20 @@ class SplashCoordinator: NSObject, Coordinator {
 // MARK: - Transition Delegate
 //
 extension SplashCoordinator: SplashTransitionDelegate {
+ 
     func goLoginVC() {
         let coordinator = LoginCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
         coordinator.onLoginSuccess = { [weak self] in
             self?.onLoginSuccess?() // Notify AppCoordinator
         }
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+    
+    func goSignUpVC() {
+        let coordinator = SignUpCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
     }
@@ -60,6 +69,10 @@ extension SplashCoordinator: SplashChildDelegate, UINavigationControllerDelegate
         if fromVC is LoginViewController {
             if let loginCoordinator = childCoordinators.first(where: { $0 is LoginCoordinator }) {
                 pop(loginCoordinator)
+            }
+        } else if fromVC is SignupViewController {
+            if let signUpCoordinator = childCoordinators.first(where: { $0 is SignUpCoordinator }) {
+                pop(signUpCoordinator)
             }
         }
     }

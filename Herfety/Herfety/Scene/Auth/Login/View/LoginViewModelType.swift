@@ -6,28 +6,43 @@
 //
 
 import UIKit
+import Combine
 import AuthenticationServices
 
-/// Login Input & Output
-///
+/// Combines both input & output responsibilities
 typealias LoginViewModelType = LoginViewModelInput & LoginViewModelOutput
 
-/// Login ViewModel Input
-///
+// MARK: - ViewModel Input
+//
 protocol LoginViewModelInput {
+    /// Called when the email field updates
     func updateEmail(_ text: String)
+    
+    /// Called when the password field updates
     func updatePassword(_ text: String)
+    
+    /// Called when login button is tapped
     func loginTapped()
+    
+    /// Initiates login via Facebook
     func loginWithFacebook(from viewController: UIViewController)
+    
+    /// Initiates login via Google
     func loginWithGoogle(from viewController: UIViewController)
+    
+    /// Initiates login via Apple
     func loginWithApple(credential: ASAuthorizationAppleIDCredential)
 }
 
-/// Login ViewModel Output
-///
+// MARK: - ViewModel Output
+//
 protocol LoginViewModelOutput {
+    /// Enables or disables the login button based on input validity
     func configureOnButtonEnabled(onEnabled: @escaping (Bool) -> Void)
-    var onLoginTapped: (() -> Void)? { get set }
-    var onLoginSuccess: (() -> Void)? { get set }
-    var onError: ((String) -> Void)? { get set }
+    
+    /// Emits login success events
+    var loginSuccess: PassthroughSubject<Void, Never> { get }
+    
+    /// Emits login error messages
+    var loginError: PassthroughSubject<String, Never> { get }
 }

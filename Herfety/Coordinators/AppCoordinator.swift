@@ -16,7 +16,6 @@ class AppCoordinator: Coordinator {
     init(window: UIWindow) {
         self.window = window
         self.navigationController = UINavigationController()
-        self.navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     deinit {
@@ -58,7 +57,9 @@ class AppCoordinator: Coordinator {
     
     private func removeAuthCoordinators() {
         childCoordinators.removeAll { coordinator in
-            coordinator is SplashCoordinator || coordinator is LoginCoordinator
+            coordinator is SplashCoordinator ||
+            coordinator is LoginCoordinator  ||
+            coordinator is SignUpCoordinator
         }
     }
 }
