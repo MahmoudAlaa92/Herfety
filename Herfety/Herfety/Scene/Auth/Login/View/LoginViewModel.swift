@@ -69,6 +69,7 @@ class LoginViewModel: LoginViewModelType {
             .store(in: &cancellables)
     }
     private func handleLoginSuccess(response: Registration) {
+        UserSessionManager.isLoggedIn = true
         let userInfo = RegisterUser(
             FName: "",
             LName: "",

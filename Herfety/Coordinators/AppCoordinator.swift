@@ -23,7 +23,7 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        // Check if user is logged in
+        /// Check if user is logged in
         if UserSessionManager.isLoggedIn {
             showMainTabFlow()
         } else {

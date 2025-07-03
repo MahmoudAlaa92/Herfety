@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class SignupViewController: UIViewController {
     
@@ -24,9 +25,18 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var loginButton: PrimaryButton!
     // MARK: - Properties
-    private let viewModel = SignupViewModel()
+    private let viewModel: SignupViewModelType
+    private var cancellables = Set<AnyCancellable>()
     private var navBarBehavior: HerfetyNavigationController?
     weak var coordinator: SignUpTransitionDelegate?
+    // MARK: - Init
+    init(viewModel: SignupViewModelType = SignupViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - Life Cycle Methods
     //
     override func viewDidLoad() {
@@ -35,6 +45,7 @@ class SignupViewController: UIViewController {
         configureViews()
         setUpNavigationBar()
         bindViewModel()
+        setupTextFields()
         dismissKeyboardWhenTapped()
     }
     // MARK: - UI Setup
@@ -45,6 +56,15 @@ class SignupViewController: UIViewController {
         navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
             /// don't add plus button in loginVC
         }, showRighBtn: false)
+    }
+    private func setupTextFields() {
+        firstNameTextField.textfield.addTarget(self, action: #selector(firstNameChanged), for: .editingChanged)
+        lastNameTextField.textfield.addTarget(self, action: #selector(lastNameChanged), for: .editingChanged)
+        usernameTextField.textfield.addTarget(self, action: #selector(usernameChanged), for: .editingChanged)
+        emailTextField.textfield.addTarget(self, action: #selector(emailChanged), for: .editingChanged)
+        passwordTextField.textfield.addTarget(self, action: #selector(passwordChanged), for: .editingChanged)
+        confirmPasswordTextField.textfield.addTarget(self, action: #selector(confirmPasswordChanged), for: .editingChanged)
+        phoneNumber.textfield.addTarget(self, action: #selector(phoneChanged), for: .editingChanged)
     }
     
     /// Configures the initial appearance of UI elements
@@ -65,13 +85,13 @@ class SignupViewController: UIViewController {
     }
     private func dismissKeyboardWhenTapped() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-          tapGesture.cancelsTouchesInView = false // Allows other taps (e.g. buttons) to still work
-          view.addGestureRecognizer(tapGesture)
+        tapGesture.cancelsTouchesInView = false // Allows other taps (e.g. buttons) to still work
+        view.addGestureRecognizer(tapGesture)
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-
+    
     /// Configures username text field with title and placeholder
     private func configureUsernameTextField() {
         firstNameTextField.title = "First name"
@@ -128,36 +148,65 @@ class SignupViewController: UIViewController {
 //
 extension SignupViewController {
     @IBAction func loginTapped(_ sender: Any) {
-        viewModel.firstName = firstNameTextField.textfield.text ?? ""
-        viewModel.lastName = lastNameTextField.textfield.text ?? ""
-        viewModel.username = usernameTextField.textfield.text ?? ""
-        viewModel.email = emailTextField.textfield.text ?? ""
-        viewModel.password = passwordTextField.textfield.text ?? ""
-        viewModel.confirmPassword = confirmPasswordTextField.textfield.text ?? ""
-        viewModel.phone = phoneNumber.textfield.text ?? ""
-        
         viewModel.registerUser()
+    }
+    
+    @objc private func firstNameChanged() {
+        viewModel.updateFirstName(firstNameTextField.textfield.text ?? "")
+    }
+    
+    @objc private func lastNameChanged() {
+        viewModel.updateLastName(lastNameTextField.textfield.text ?? "")
+    }
+    
+    @objc private func usernameChanged() {
+        viewModel.updateUsername(usernameTextField.textfield.text ?? "")
+    }
+    
+    @objc private func emailChanged() {
+        viewModel.updateEmail(emailTextField.textfield.text ?? "")
+    }
+    
+    @objc private func passwordChanged() {
+        viewModel.updatePassword(passwordTextField.textfield.text ?? "")
+    }
+    
+    @objc private func confirmPasswordChanged() {
+        viewModel.updateConfirmPassword(confirmPasswordTextField.textfield.text ?? "")
+    }
+    
+    @objc private func phoneChanged() {
+        viewModel.updatePhone(phoneNumber.textfield.text ?? "")
     }
 }
 // MARK: - Binding
 //
 extension SignupViewController {
     private func bindViewModel() {
-        viewModel.onSuccess = { [weak self] value in
-            let successVC = SuccessViewController()
-            successVC.modalPresentationStyle = .fullScreen
-            self?.present(successVC, animated: true)
+        viewModel.configureOnButtonEnabled { [weak self] isEnabled in
+            self?.loginButton.isEnabled = isEnabled
+            self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
         }
         
-        viewModel.onError = { [weak self] errorMessage in
-            let alertItem = AlertModel(
-                message: errorMessage,
-                buttonTitle: "Ok",
-                image: .warning,
-                status: .error
-            )
-            self?.presentCustomAlert(with: alertItem)
-        }
+        viewModel.registrationSuccess
+            .sink { [weak self] _ in
+                let successVC = SuccessViewController()
+                successVC.modalPresentationStyle = .fullScreen
+                self?.present(successVC, animated: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.registrationError
+            .sink { [weak self] errorMessage in
+                let alertItem = AlertModel(
+                    message: errorMessage,
+                    buttonTitle: "Ok",
+                    image: .warning,
+                    status: .error
+                )
+                self?.presentCustomAlert(with: alertItem)
+            }
+            .store(in: &cancellables)
     }
 }
 // MARK: - Alert Presentation
@@ -182,7 +231,8 @@ extension SignupViewController {
         self.present(alertVC, animated: true)
     }
 }
-
+// MARK: - Textfield
+//
 extension SignupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextField: UITextField?
@@ -205,7 +255,7 @@ extension SignupViewController: UITextFieldDelegate {
         default:
             nextField = nil
         }
-
+        
         if let next = nextField {
             scrollView.scrollRectToVisible(next.frame, animated: true)
             next.becomeFirstResponder()
@@ -215,5 +265,5 @@ extension SignupViewController: UITextFieldDelegate {
         
         return true
     }
-
+    
 }

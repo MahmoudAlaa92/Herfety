@@ -68,6 +68,7 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
                 self.navController?.pushViewController(vc, animated: true)
                 break
             case "Logout":
+                UserSessionManager.isLoggedIn = false
                 if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                    let sceneDelegate = scene.delegate as? SceneDelegate,
                    let window = sceneDelegate.window {
