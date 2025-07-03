@@ -139,9 +139,9 @@ extension LoginViewController {
         
         viewModel.loginSuccess
             .sink { [weak self] in
-                let vc = SuccessViewController()
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: true)
+//                let vc = SuccessViewController()
+//                vc.modalPresentationStyle = .fullScreen
+//                self?.present(vc, animated: true)
                 self?.onLoginSuccess?()
             }
             .store(in: &cancellables)

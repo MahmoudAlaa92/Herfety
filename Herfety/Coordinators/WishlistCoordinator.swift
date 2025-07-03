@@ -15,6 +15,10 @@ class WishlistCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
+    deinit {
+        print("deinit \(Self.self)")
+    }
+    
     func start() {
         let wishlistVC = WishListViewController()
         navigationController.pushViewController(wishlistVC, animated: false)

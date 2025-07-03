@@ -19,22 +19,22 @@ class CustomeTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let vc1 = UINavigationController(rootViewController: HomeViewController())
-        homeViewController = vc1
-        
-        let vc2 =  WishListViewController()
-        wishListViewController = vc2
-        
-        let vc3 = UINavigationController(rootViewController: OrderViewController())
-        cartViewController = vc3
-        
-        let vc4 = UINavigationController(rootViewController: ProfileViewController(nameViewModel: NameViewModel(), profileListViewModel: ProfileListViewModel()))
-        profileViewController = vc4
-        
-        viewControllers = [homeViewController, wishListViewController, cartViewController, profileViewController]
+//        let vc1 = UINavigationController(rootViewController: HomeViewController())
+//        homeViewController = vc1
+//        
+//        let vc2 =  WishListViewController()
+//        wishListViewController = vc2
+//        
+//        let vc3 = UINavigationController(rootViewController: OrderViewController())
+//        cartViewController = vc3
+//        
+//        let vc4 = UINavigationController(rootViewController: ProfileViewController(nameViewModel: NameViewModel(), profileListViewModel: ProfileListViewModel()))
+//        profileViewController = vc4
+//        
+//        viewControllers = [homeViewController, wishListViewController, cartViewController, profileViewController]
         
         setUpViews()
-        createCustomTabBar()
+//        createCustomTabBar()
     }
 }
 // MARK: - Configurations

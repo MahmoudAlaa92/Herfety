@@ -10,10 +10,10 @@ import UIKit
 class TabBarCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    private let tabBarController = CustomeTabBarViewController()
+    let tabBarController = CustomeTabBarViewController()
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init() {
+        self.navigationController = UINavigationController()
     }
     
     deinit {
@@ -34,8 +34,28 @@ class TabBarCoordinator: Coordinator {
         tabBarController.viewControllers = childCoordinators.map {
             $0.navigationController
         }
-        // Present tab bar
-        navigationController.setViewControllers([tabBarController], animated: true)
-        navigationController.setNavigationBarHidden(true, animated: false)
+        // Set tab bar items
+        configureTabBarItems()
+    }
+}
+// MARK: - Private Handlers
+//
+extension TabBarCoordinator {
+    private func configureTabBarItems() {
+        guard let items = tabBarController.tabBar.items else { return }
+        
+        let images = [
+            (selected: Images.homeSelected, deselected: Images.homeIcon),
+            (selected: Images.wishlistSelected, deselected: Images.heartIcon),
+            (selected: Images.cartSelected, deselected: Images.cartIcon),
+            (selected: Images.profileSelected, deselected: Images.profileIcon)
+        ]
+        
+        for (index, item) in items.enumerated() {
+            item.image = images[index].deselected.withRenderingMode(.alwaysOriginal)
+            item.selectedImage = images[index].selected.withRenderingMode(.alwaysOriginal)
+            item.title = nil
+            item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -20, right: 0)
+        }
     }
 }

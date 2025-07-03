@@ -45,11 +45,6 @@ class SuccessViewController: UIViewController {
         startButton.title = "Start Shopping"
     }
     @IBAction func startShoppingButtonTapped(_ sender: UIButton) {
-        let customTabBar =  CustomeTabBarViewController()
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            window.rootViewController = customTabBar
-            window.makeKeyAndVisible()
-        }
+        
     }
 }

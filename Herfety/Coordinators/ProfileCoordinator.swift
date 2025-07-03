@@ -15,6 +15,10 @@ class ProfileCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
+    deinit {
+        print("deinit \(Self.self)")
+    }
+    
     func start() {
         let profileVC = ProfileViewController(
             nameViewModel: NameViewModel(),

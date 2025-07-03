@@ -32,7 +32,9 @@ class AppCoordinator: Coordinator {
     }
     
     private func showAuthFlow() {
-        let splashCoordinator = SplashCoordinator(navigationController: navigationController)
+        let authNav = UINavigationController()
+
+        let splashCoordinator = SplashCoordinator(navigationController: authNav)
         splashCoordinator.onLoginSuccess = { [weak self] in
             self?.showMainTabFlow()
             self?.removeAuthCoordinators()
@@ -41,26 +43,29 @@ class AppCoordinator: Coordinator {
         childCoordinators.append(splashCoordinator)
         splashCoordinator.start()
         
-        window?.rootViewController = navigationController
+        window?.rootViewController = authNav
         window?.makeKeyAndVisible()
     }
     
     private func showMainTabFlow() {
-        let tabCoordinator = TabBarCoordinator(navigationController: navigationController)
+        let tabCoordinator = TabBarCoordinator()
         childCoordinators.append(tabCoordinator)
         tabCoordinator.start()
         
         // Update window root without animation
-        window?.rootViewController = navigationController
+        window?.rootViewController = tabCoordinator.tabBarController
         window?.makeKeyAndVisible()
     }
     
     private func removeAuthCoordinators() {
+        print("Removing auth coordinators...")
+        print("Before removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
         childCoordinators.removeAll { coordinator in
             coordinator is SplashCoordinator ||
             coordinator is LoginCoordinator  ||
             coordinator is SignUpCoordinator
         }
+        print("After removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
     }
 }
 
