@@ -7,7 +7,18 @@
 
 import UIKit
 
-class HomeCoordinator: Coordinator {
+protocol HomeTranisitionDelegate: AnyObject {
+    func goToSliderItem(discount: Int)
+    func gotToCategoryItem()
+    func gotToTopBrandItem()
+    func gotToDailyEssentialItem()
+}
+
+protocol HomeChildDelegate: AnyObject {
+    func backToHome(_ coordinator: Coordinator)
+}
+
+class HomeCoordinator: NSObject, Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
@@ -22,6 +33,57 @@ class HomeCoordinator: Coordinator {
     func start() {
         let homeVC = HomeViewController()
         homeVC.coordinator = self
+        
+        navigationController.delegate = self
         navigationController.pushViewController(homeVC, animated: false)
+    }
+}
+// MARK: - Home Transition Delegate
+//
+extension HomeCoordinator: HomeTranisitionDelegate {
+    
+    func goToSliderItem(discount: Int) {
+        let coordinator = ProductsCoordinator(
+            navigationController: navigationController,
+            discount: discount)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+    
+    func gotToCategoryItem() {
+        
+    }
+    
+    func gotToTopBrandItem() {
+        
+    }
+    
+    func gotToDailyEssentialItem() {
+        
+    }
+}
+// MARK: - ChildDelegate
+//
+extension HomeCoordinator: HomeChildDelegate, UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        guard let fromVC = navigationController.transitionCoordinator?.viewController(forKey: .from),
+              !navigationController.contains(fromVC) else {
+            return
+        }
+        
+        if fromVC is ProductsViewController {
+            if let coordinator = childCoordinators.first(where: { $0 is ProductsCoordinator} ) {
+                backToHome(coordinator)
+            }
+        }
+    }
+    
+    func backToHome(_ coordinator: Coordinator) {
+        if let index = childCoordinators.firstIndex(where: { $0 === coordinator } ){
+            childCoordinators.remove(at: index)
+            navigationController.popViewController(animated: true)
+        }
     }
 }

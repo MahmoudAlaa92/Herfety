@@ -22,6 +22,7 @@ class ProductsViewController: UIViewController {
     private var productsItems: ProductsCollectionViewSection?
     ///
     var subscriptions = Set<AnyCancellable>()
+    weak var coordinator: ProductsTransitionDelegate?
     // MARK: Init
     init(viewModel: ProductsViewModel){
         self.viewModel = viewModel

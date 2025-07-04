@@ -171,14 +171,14 @@ extension HomeViewController {
         viewModel
             .$sliderItems
             .sink { [weak self] _ in
-                
                 self?.collectionView.reloadData()
             }.store(in: &subscriptions)
         ///
         sliderItem?.selectedItem.sink { [weak self] sliderItems in
-            let vc = ProductsViewController(viewModel: ProductsViewModel())
-            vc.viewModel.fetchProductItems(discount: (sliderItems.1+1)*10)
-            self?.navigationController?.pushViewController(vc, animated: true)
+//            let vc = ProductsViewController(viewModel: ProductsViewModel())
+//            vc.viewModel.fetchProductItems(discount: (sliderItems.1+1)*10)
+//            self?.navigationController?.pushViewController(vc, animated: true)
+            self?.coordinator?.goToSliderItem(discount: (sliderItems.1+1)*10)
         }.store(in: &subscriptions)
     }
     // MARK: - Category Items

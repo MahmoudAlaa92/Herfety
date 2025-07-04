@@ -67,11 +67,3 @@ class AppCoordinator: Coordinator {
         print("After removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
     }
 }
-
-// UserSessionManager.swift
-class UserSessionManager {
-    static var isLoggedIn: Bool {
-        get { UserDefaults.standard.bool(forKey: "isLoggedIn") }
-        set { UserDefaults.standard.set(newValue, forKey: "isLoggedIn") }
-    }
-}
