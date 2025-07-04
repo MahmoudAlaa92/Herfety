@@ -9,6 +9,7 @@ import UIKit
 
 protocol LoginTransitionDelegate: AnyObject {
     func backToSplash()
+    func goToSuccessVC()
 }
 
 class LoginCoordinator: Coordinator {
@@ -24,9 +25,8 @@ class LoginCoordinator: Coordinator {
     
     func start() {
         let loginVC = LoginViewController(viewModel: LoginViewModel())
-        loginVC.onLoginSuccess = { [weak self] in
-            self?.onLoginSuccess?() // Trigger success callback
-        }
+
+        loginVC.coordinator = self
         navigationController.pushViewController(loginVC, animated: true)
     }
     
@@ -38,6 +38,14 @@ class LoginCoordinator: Coordinator {
 // MARK: - Transition Delegate
 //
 extension LoginCoordinator: LoginTransitionDelegate {
+    func goToSuccessVC() {
+        let coordinator = SuccessCoordinator(navigationController: navigationController)
+        coordinator.onStartShoping = { [weak self] in
+            self?.onLoginSuccess?()
+        }
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
     func backToSplash() {
         parentCoordinator?.pop(self)
     }

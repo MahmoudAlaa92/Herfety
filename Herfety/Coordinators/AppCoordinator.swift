@@ -32,9 +32,8 @@ class AppCoordinator: Coordinator {
     }
     
     private func showAuthFlow() {
-        let authNav = UINavigationController()
-
-        let splashCoordinator = SplashCoordinator(navigationController: authNav)
+        /// let authNav = UINavigationController()
+        let splashCoordinator = SplashCoordinator(navigationController: navigationController)
         splashCoordinator.onLoginSuccess = { [weak self] in
             self?.showMainTabFlow()
             self?.removeAuthCoordinators()
@@ -43,7 +42,7 @@ class AppCoordinator: Coordinator {
         childCoordinators.append(splashCoordinator)
         splashCoordinator.start()
         
-        window?.rootViewController = authNav
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     

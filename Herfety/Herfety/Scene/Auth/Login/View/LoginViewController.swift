@@ -27,10 +27,9 @@ class LoginViewController: UIViewController {
     // MARK: - Properties
     var viewModel: LoginViewModelType
     private var navBarBehavior: HerfetyNavigationController?
-    var onLoginSuccess: (() -> Void)?
     private var cancellables = Set<AnyCancellable>()
+    weak var coordinator: LoginTransitionDelegate?
 
-    //    weak var coordinator: LoginTransitionDelegate?
     // MARK: - Init
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -139,10 +138,7 @@ extension LoginViewController {
         
         viewModel.loginSuccess
             .sink { [weak self] in
-//                let vc = SuccessViewController()
-//                vc.modalPresentationStyle = .fullScreen
-//                self?.present(vc, animated: true)
-                self?.onLoginSuccess?()
+                self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
         

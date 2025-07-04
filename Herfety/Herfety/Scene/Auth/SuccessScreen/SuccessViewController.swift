@@ -13,6 +13,10 @@ class SuccessViewController: UIViewController {
     @IBOutlet private(set) weak var successMessage: UILabel!
     @IBOutlet private(set) weak var imageView: UIImageView!
     @IBOutlet weak var startButton: PrimaryButton!
+    // MARK: - Properties
+    weak var coordinator: SuccessTransitionDelegate?
+    var onStartShoping: (() -> Void)?
+
     // MARK: - Init
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -45,6 +49,8 @@ class SuccessViewController: UIViewController {
         startButton.title = "Start Shopping"
     }
     @IBAction func startShoppingButtonTapped(_ sender: UIButton) {
-        
+        dismiss(animated: true) { [weak self] in
+            self?.onStartShoping?()
+        }
     }
 }

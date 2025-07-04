@@ -44,7 +44,7 @@ extension SplashCoordinator: SplashTransitionDelegate {
         let coordinator = LoginCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
         coordinator.onLoginSuccess = { [weak self] in
-            self?.onLoginSuccess?() // Notify AppCoordinator
+            self?.onLoginSuccess?() /// Notify AppCoordinator
         }
         childCoordinators.append(coordinator)
         coordinator.start()
