@@ -9,6 +9,7 @@ import UIKit
 
 protocol SignUpTransitionDelegate: AnyObject {
     func backToSplashVC()
+    func goToSuccessVC()
 }
 
 class SignUpCoordinator: Coordinator {
@@ -16,6 +17,7 @@ class SignUpCoordinator: Coordinator {
     weak var parentCoordinator: SplashChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    var onSignUpSuccess: (() -> Void)?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -34,6 +36,15 @@ class SignUpCoordinator: Coordinator {
 // MARK: - Transition Delegate
 //
 extension SignUpCoordinator: SignUpTransitionDelegate {
+    func goToSuccessVC() {
+        let coordinator = SuccessCoordinator(navigationController: navigationController)
+        coordinator.onStartShoping = { [weak self] in
+            self?.onSignUpSuccess?()
+        }
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+    
     func backToSplashVC() {
         parentCoordinator?.pop(self)
     }

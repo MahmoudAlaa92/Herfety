@@ -53,6 +53,9 @@ extension SplashCoordinator: SplashTransitionDelegate {
     func goSignUpVC() {
         let coordinator = SignUpCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
+        coordinator.onSignUpSuccess = { [weak self] in
+            self?.onLoginSuccess?() /// Notify AppCoordinator
+        }
         childCoordinators.append(coordinator)
         coordinator.start()
     }

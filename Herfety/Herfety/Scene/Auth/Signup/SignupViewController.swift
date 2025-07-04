@@ -190,9 +190,7 @@ extension SignupViewController {
         
         viewModel.registrationSuccess
             .sink { [weak self] _ in
-                let successVC = SuccessViewController()
-                successVC.modalPresentationStyle = .fullScreen
-                self?.present(successVC, animated: true)
+                self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
         

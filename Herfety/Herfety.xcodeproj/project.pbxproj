@@ -1162,13 +1162,13 @@
 				1592D5F52E13E469001792F7 /* AppCoordinator.swift */,
 				1592D5F72E13F19D001792F7 /* SplashCoordinator.swift */,
 				1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */,
+				1592D6052E142E57001792F7 /* SignUpCoordinator.swift */,
 				15AA58F12E1822A80050D01D /* SuccessCoordinator.swift */,
 				1592D5FB2E141E52001792F7 /* TabBarCoordinator.swift */,
 				1592D5FD2E142C73001792F7 /* HomeCoordinator.swift */,
 				1592D5FF2E142C9C001792F7 /* WishlistCoordinator.swift */,
 				1592D6012E142D04001792F7 /* CartCoordinator.swift */,
 				1592D6032E142D24001792F7 /* ProfileCoordinator.swift */,
-				1592D6052E142E57001792F7 /* SignUpCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";

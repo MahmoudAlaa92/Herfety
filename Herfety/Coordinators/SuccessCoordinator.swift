@@ -13,7 +13,6 @@ protocol SuccessTransitionDelegate: AnyObject {
 
 class SuccessCoordinator: Coordinator {
     
-    weak var parentCoordinator: LoginTransitionDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     var onStartShoping: (() -> Void)?
