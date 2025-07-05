@@ -225,6 +225,8 @@
 		15CE60FB2D73C3A60032617B /* TitleReviewsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CE60F82D73C3A60032617B /* TitleReviewsCollectionReusableView.swift */; };
 		15D0F5892DB67D4C00967C7F /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D0F5862DB67D4C00967C7F /* SuccessViewController.swift */; };
 		15D0F58A2DB67D4C00967C7F /* SuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D0F5872DB67D4C00967C7F /* SuccessViewController.xib */; };
+		15D2E1B22E19BC9300B9C579 /* ReviewersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2E1B12E19BC9300B9C579 /* ReviewersCoordinator.swift */; };
+		15D2E1B42E19DC5E00B9C579 /* AddReviewsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2E1B32E19DC5E00B9C579 /* AddReviewsCoordinator.swift */; };
 		15E33A2A2DD4AC500004D408 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E33A292DD4AC500004D408 /* ForgetPasswordViewController.xib */; };
 		15E33A2B2DD4AC500004D408 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E33A282DD4AC500004D408 /* ForgetPasswordViewController.swift */; };
 		15E33A2D2DD4AEFD0004D408 /* ForgetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E33A2C2DD4AEFC0004D408 /* ForgetPasswordViewModel.swift */; };
@@ -458,6 +460,8 @@
 		15CE60F92D73C3A60032617B /* TitleReviewsCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleReviewsCollectionReusableView.xib; sourceTree = "<group>"; };
 		15D0F5862DB67D4C00967C7F /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		15D0F5872DB67D4C00967C7F /* SuccessViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessViewController.xib; sourceTree = "<group>"; };
+		15D2E1B12E19BC9300B9C579 /* ReviewersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewersCoordinator.swift; sourceTree = "<group>"; };
+		15D2E1B32E19DC5E00B9C579 /* AddReviewsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewsCoordinator.swift; sourceTree = "<group>"; };
 		15E33A282DD4AC500004D408 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		15E33A292DD4AC500004D408 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		15E33A2C2DD4AEFC0004D408 /* ForgetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -1175,6 +1179,8 @@
 				1592D6032E142D24001792F7 /* ProfileCoordinator.swift */,
 				15AA58F32E183BB50050D01D /* ProductsCoordinator.swift */,
 				15AA58F52E185C450050D01D /* ProductDetailsCoordinator.swift */,
+				15D2E1B12E19BC9300B9C579 /* ReviewersCoordinator.swift */,
+				15D2E1B32E19DC5E00B9C579 /* AddReviewsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1624,6 +1630,7 @@
 				156720102DCE718C00D8AFCA /* Registration.swift in Sources */,
 				15CD44B42D52716D00E58C6F /* CategoriesCollectionViewCell.swift in Sources */,
 				159B57882DCBD2E000CDD958 /* SplashViewModel.swift in Sources */,
+				15D2E1B22E19BC9300B9C579 /* ReviewersCoordinator.swift in Sources */,
 				153944E62DCF7BB1008465BB /* MultipartFormDataRequest.swift in Sources */,
 				151DF42E2D5BD03B00A3AD98 /* OrderViewModel.swift in Sources */,
 				151631262D5D556D00BA088E /* Fonts+Style.swift in Sources */,
@@ -1743,6 +1750,7 @@
 				15F420672DB1278B00FCDF71 /* CollectionViewSectionProtocols.swift in Sources */,
 				1532F3532D5E8EC1003223A1 /* InfoModel.swift in Sources */,
 				1592D5FE2E142C73001792F7 /* HomeCoordinator.swift in Sources */,
+				15D2E1B42E19DC5E00B9C579 /* AddReviewsCoordinator.swift in Sources */,
 				1513DD462DF3811D001EB3B3 /* AddReviewViewController.swift in Sources */,
 				15A4F5E12DB28D18000EACEA /* UserDefaults.swift in Sources */,
 				15A5EC922D77E125003E49AB /* ProfileListCollectionViewCell.swift in Sources */,

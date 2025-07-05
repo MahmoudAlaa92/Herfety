@@ -20,11 +20,6 @@ class ReviewersViewModel {
         self.reviewersItems = reviews
     }
     
-    func didTapPlusButton(navigationController: UINavigationController?) {
-        let AddReviewVC = AddReviewViewController(viewModel: AddReviewViewModel(reviersItems: self.reviewersItems, productId: productId))
-        navigationController?.pushViewController(AddReviewVC, animated: true)
-    }
-    
     func fetchReviews() async {
         let remote: ReviewRemoteProtocol = ReviewRemote(network: AlamofireNetwork())
         do {

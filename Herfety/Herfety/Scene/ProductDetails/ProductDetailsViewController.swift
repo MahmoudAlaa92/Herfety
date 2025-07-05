@@ -21,7 +21,7 @@ class ProductDetailsViewController: UIViewController {
     private var recommendedProductsSection: CardItemCollectionViewSection?
     ///
     private var subscriptions = Set<AnyCancellable>()
-    weak var coordinator: PoroductsDetailsChildDelegate?
+    weak var coordinator: PoroductsDetailsTransitionDelegate?
     // MARK: - Init
     init(viewModel: ProductDetailsViewModel) {
         self.viewModel = viewModel
@@ -194,16 +194,7 @@ extension ProductDetailsViewController {
         /// selected her
         recommendedProductsSection?.selectedItem.sink(receiveValue: {
             [weak self] value in
-            // TODO: change product id here
-            let vc = ProductDetailsViewController(
-                viewModel: ProductDetailsViewModel(
-                    productId: value.productID ?? 93
-                )
-            )
-            vc.viewModel.productItem = value
-            vc.viewModel.fetchProductItems()
-
-            self?.navigationController?.pushViewController(vc, animated: true)
+            self?.coordinator?.goToProductDetailsVC(productDetails: value)
         }).store(in: &subscriptions)
 
         bindWishlist()
@@ -231,15 +222,10 @@ extension ProductDetailsViewController {
     // MARK: - Reviewrs
     private func bindReviewrs() {
         reviewDetailsSection?.reviewrsButton.sink { [weak self] reviewrs in
+            
             guard let self = self else { return }
-
-            let vc = ReviewersViewController(
-                viewModel: ReviewersViewModel(
-                    productId: viewModel.currentProductId
-                )
-            )
-            vc.viewModel.reviewersItems = reviewrs
-            self.navigationController?.pushViewController(vc, animated: true)
+            
+            self.coordinator?.goToReviewersVC(productId: viewModel.currentProductId, reviewers: reviewrs)
         }.store(in: &subscriptions)
     }
     /// Reviews Updated

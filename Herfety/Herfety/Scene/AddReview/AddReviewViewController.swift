@@ -15,7 +15,9 @@ class AddReviewViewController: UIViewController {
     
     // MARK: - Properties
     var viewModel: AddReviewViewModel
+    private var navBarBehavior: HerfetyNavigationController?
     private var cancellables = Set<AnyCancellable>()
+    weak var coordinator: AddReviewsChildDelegate?
     
     // MARK: - Init
     init(viewModel: AddReviewViewModel) {
@@ -28,6 +30,7 @@ class AddReviewViewController: UIViewController {
     // MARK: - Lifcycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavigationBar()
         configureUI()
         setUpuNavigationBar()
         configureTextFieldsPlaceholder()
@@ -37,6 +40,25 @@ class AddReviewViewController: UIViewController {
 // MARK: - Configuration
 //
 extension AddReviewViewController {
+    /// NavBar
+    private func setUpNavigationBar() {
+        navBarBehavior = HerfetyNavigationController(
+            navigationItem: navigationItem,
+            navigationController: navigationController
+        )
+        navBarBehavior?.configure(
+            title: "",
+            titleColor: Colors.primaryBlue,
+            onPlus: {
+                /// don't add plus button in VC
+            },
+            showRighBtn: false,
+            showBackButton: true,  /// Enable back button
+            onBack: { [weak self] in
+                self?.coordinator?.backToReviewersVC()
+            }
+        )
+    }
     /// UI
     private func configureUI() {
         addButton.title = "Add"

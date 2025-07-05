@@ -7,8 +7,16 @@
 
 import UIKit
 
-protocol PoroductsDetailsChildDelegate: AnyObject  {
+protocol PoroductsDetailsTransitionDelegate: AnyObject  {
     func backToProductsVC()
+    func goToProductDetailsVC(productDetails: Wishlist)
+    func goToReviewersVC(productId: Int, reviewers: [Reviewrr])
+    
+}
+
+protocol PoroductsDetailsChildDelegate: AnyObject  {
+    func backToProductDetails(_ coordinator: Coordinator)
+ 
 }
 
 class PoroductDetailsCoordinator: Coordinator {
@@ -38,9 +46,33 @@ class PoroductDetailsCoordinator: Coordinator {
 }
 // MARK: - Transition Delegate
 //
-extension PoroductDetailsCoordinator: PoroductsDetailsChildDelegate {
+extension PoroductDetailsCoordinator: PoroductsDetailsTransitionDelegate {
+    
     func backToProductsVC() {
         parentCoordinator?.backToProductsVC(self)
         navigationController.popViewController(animated: true)
+    }
+   // TODO: 'Change' the same coordinator
+    func goToProductDetailsVC(productDetails: Wishlist) {
+        let coordinator = PoroductDetailsCoordinator(navigationController: navigationController, productDetails: productDetails)
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+    
+    func goToReviewersVC(productId: Int, reviewers: [Reviewrr]) {
+        let coordinator = ReviewersCoordinator(navigationController: navigationController, productId: productId, reviewers: reviewers)
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
+}
+// MARK: - Child Delegate
+//
+extension PoroductDetailsCoordinator: PoroductsDetailsChildDelegate {
+    
+    func backToProductDetails(_ coordinator: Coordinator) {
+        if let index = childCoordinators.firstIndex(where: { $0 === coordinator }) {
+            childCoordinators.remove(at: index)
+        }
     }
 }
