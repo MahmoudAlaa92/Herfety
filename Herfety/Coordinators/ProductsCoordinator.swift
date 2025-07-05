@@ -8,11 +8,15 @@
 import UIKit
 
 protocol ProductsTransitionDelegate: AnyObject {
-    func goToProductDetails()
+    func goToProductDetails(productDetails: Wishlist)
     func backToHomeVC()
 }
 
-class ProductsCoordinator: Coordinator {
+protocol ProductsChildDelegate: AnyObject {
+    func backToProductsVC(_ coordinator: Coordinator)
+}
+
+class ProductsCoordinator: NSObject, Coordinator {
     weak var parentCoordinator: HomeChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -36,14 +40,29 @@ class ProductsCoordinator: Coordinator {
         print("deinit \(Self.self)")
     }
 }
+// MARK: - Child Delegate
+//
+extension ProductsCoordinator: ProductsChildDelegate {
+    func backToProductsVC(_ coordinator: any Coordinator) {
+        
+        if let index = childCoordinators.firstIndex(where: { $0 === coordinator }) {
+            childCoordinators.remove(at: index)
+        }
+    }
+}
 // MARK: - Transition Delegate
+//
 extension ProductsCoordinator: ProductsTransitionDelegate {
     
     func backToHomeVC() {
         parentCoordinator?.backToHome(self)
+        navigationController.popViewController(animated: true)
     }
     
-    func goToProductDetails() {
-        
+    func goToProductDetails(productDetails: Wishlist) {
+        let coordinator = PoroductDetailsCoordinator(navigationController: navigationController, productDetails: productDetails)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 }

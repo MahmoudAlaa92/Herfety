@@ -34,7 +34,6 @@ class HomeCoordinator: NSObject, Coordinator {
         let homeVC = HomeViewController()
         homeVC.coordinator = self
         
-        navigationController.delegate = self
         navigationController.pushViewController(homeVC, animated: false)
     }
 }
@@ -65,25 +64,11 @@ extension HomeCoordinator: HomeTranisitionDelegate {
 }
 // MARK: - ChildDelegate
 //
-extension HomeCoordinator: HomeChildDelegate, UINavigationControllerDelegate {
-    
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        guard let fromVC = navigationController.transitionCoordinator?.viewController(forKey: .from),
-              !navigationController.contains(fromVC) else {
-            return
-        }
-        
-        if fromVC is ProductsViewController {
-            if let coordinator = childCoordinators.first(where: { $0 is ProductsCoordinator} ) {
-                backToHome(coordinator)
-            }
-        }
-    }
+extension HomeCoordinator: HomeChildDelegate {
     
     func backToHome(_ coordinator: Coordinator) {
         if let index = childCoordinators.firstIndex(where: { $0 === coordinator } ){
             childCoordinators.remove(at: index)
-            navigationController.popViewController(animated: true)
         }
     }
 }
