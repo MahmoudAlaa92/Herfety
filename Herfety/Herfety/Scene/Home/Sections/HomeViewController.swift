@@ -98,16 +98,14 @@ extension HomeViewController {
         let finalImage = loadedImage ?? Images.iconPersonalDetails
         CustomeTabBarViewModel.shared.userProfileImage = finalImage
         navigationBarBehavior?.configure(
-            onNotification: {
-                let vc = ProductsViewController(viewModel: ProductsViewModel())
-                vc.viewModel.fetchProductItems(discount: 80)
-                self.navigationController?.pushViewController(vc, animated: true)
-            },
-            onSearch: {
+            onNotification: { [weak self] in
                 print("Ml Model is tapped")
                 let safariVC = SFSafariViewController(url: URL(string: "https://9ec0-34-74-104-29.ngrok-free.app/")!)
                 safariVC.modalPresentationStyle = .pageSheet
-                self.navigationController?.present(safariVC, animated: true)
+                self?.navigationController?.present(safariVC, animated: true)
+            },
+            onSearch: { [weak self] in
+                self?.coordinator?.goToSearchVC(discount: 80)
             },
             userName: userName,
             userImage: finalImage

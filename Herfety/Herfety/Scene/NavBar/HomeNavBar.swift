@@ -67,10 +67,10 @@ extension HomeNavBar {
 extension HomeNavBar {
     
     @objc private func searchWasTapped() {
-        noticationBtn()
+        searchBtn()
     }
     
     @objc private func notificationWasTapped() {
-        searchBtn()
+        noticationBtn()
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 protocol HomeTranisitionDelegate: AnyObject {
+    func goToSearchVC(discount: Int)
     func goToSliderItem(discount: Int)
     func goToCategoryItem(category Name: String)
     func gotToBestDealItem(productDetails: Wishlist)
@@ -42,6 +43,15 @@ class HomeCoordinator: NSObject, Coordinator {
 // MARK: - Home Transition Delegate
 //
 extension HomeCoordinator: HomeTranisitionDelegate {
+    
+    func goToSearchVC(discount: Int) {
+        let coordinator = ProductsCoordinator(
+            navigationController: navigationController)
+        coordinator.discount = discount
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
     
     func goToSliderItem(discount: Int) {
         let coordinator = ProductsCoordinator(
