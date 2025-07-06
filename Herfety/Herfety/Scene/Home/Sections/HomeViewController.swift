@@ -223,9 +223,10 @@ extension HomeViewController {
             .store(in: &subscriptions)
         ///
         topBrandItem?.selectedBrand.sink(receiveValue: { [weak self] items in
-            let vc = ProductsViewController(viewModel: ProductsViewModel())
-            vc.viewModel.fetchProductItems(discount: (items.1+5)*10)
-            self?.navigationController?.pushViewController(vc, animated: true)
+//            let vc = ProductsViewController(viewModel: ProductsViewModel())
+//            vc.viewModel.fetchProductItems(discount: (items.1+5)*10)
+//            self?.navigationController?.pushViewController(vc, animated: true)
+            self?.coordinator?.gotToTopBrandItem(discount: (items.1+5)*10)
         }).store(in: &subscriptions)
     }
     // MARK: - Daily Essentials
