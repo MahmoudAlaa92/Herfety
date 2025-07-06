@@ -12,7 +12,7 @@ protocol HomeTranisitionDelegate: AnyObject {
     func goToCategoryItem(category Name: String)
     func gotToBestDealItem(productDetails: Wishlist)
     func gotToTopBrandItem(discount: Int)
-    func gotToDailyEssentialItem()
+    func gotToDailyEssentialItem(discount: Int)
 }
 
 protocol HomeChildDelegate: AnyObject {
@@ -74,8 +74,13 @@ extension HomeCoordinator: HomeTranisitionDelegate {
         coordinator.start()
     }
     
-    func gotToDailyEssentialItem() {
-        
+    func gotToDailyEssentialItem(discount: Int) {
+        let coordinator = ProductsCoordinator(
+            navigationController: navigationController)
+        coordinator.discount = discount
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 }
 // MARK: - ChildDelegate
