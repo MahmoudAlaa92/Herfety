@@ -175,9 +175,6 @@ extension HomeViewController {
             }.store(in: &subscriptions)
         ///
         sliderItem?.selectedItem.sink { [weak self] sliderItems in
-//            let vc = ProductsViewController(viewModel: ProductsViewModel())
-//            vc.viewModel.fetchProductItems(discount: (sliderItems.1+1)*10)
-//            self?.navigationController?.pushViewController(vc, animated: true)
             self?.coordinator?.goToSliderItem(discount: (sliderItems.1+1)*10)
         }.store(in: &subscriptions)
     }
@@ -194,9 +191,7 @@ extension HomeViewController {
             .store(in: &subscriptions)
         ///
         categoryItem?.categorySelection.sink { [weak self] item in
-            let vc = ProductsViewController(viewModel: ProductsViewModel())
-            vc.viewModel.fetchProductItems(nameOfCategory: item.name ?? "")
-            self?.navigationController?.pushViewController(vc, animated: true)
+            self?.coordinator?.goToCategoryItem(category: item.name ?? "")
         }.store(in: &subscriptions)
     }
     // MARK: - Product Items

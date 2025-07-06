@@ -9,7 +9,8 @@ import UIKit
 
 protocol HomeTranisitionDelegate: AnyObject {
     func goToSliderItem(discount: Int)
-    func gotToCategoryItem()
+    func goToCategoryItem(category Name: String)
+    func gotToBestDealItem(productDetails: Wishlist)
     func gotToTopBrandItem()
     func gotToDailyEssentialItem()
 }
@@ -19,6 +20,7 @@ protocol HomeChildDelegate: AnyObject {
 }
 
 class HomeCoordinator: NSObject, Coordinator {
+    
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
@@ -43,17 +45,26 @@ extension HomeCoordinator: HomeTranisitionDelegate {
     
     func goToSliderItem(discount: Int) {
         let coordinator = ProductsCoordinator(
-            navigationController: navigationController,
-            discount: discount)
+            navigationController: navigationController)
+        coordinator.discount = discount
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
     }
     
-    func gotToCategoryItem() {
-        
+    func goToCategoryItem(category Name: String) {
+        let coordinator = ProductsCoordinator(
+            navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        coordinator.categoryName = Name
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
     
+    func gotToBestDealItem(productDetails: Wishlist) {
+     
+    }
+
     func gotToTopBrandItem() {
         
     }

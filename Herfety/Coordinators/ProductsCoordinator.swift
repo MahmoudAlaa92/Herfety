@@ -17,21 +17,23 @@ protocol ProductsChildDelegate: AnyObject {
 }
 
 class ProductsCoordinator: NSObject, Coordinator {
+
     weak var parentCoordinator: HomeChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    private var discount: Int
+    var discount: Int = 0
+    var categoryName: String = ""
     
-    init(navigationController: UINavigationController, discount: Int) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.discount = discount
     }
     
     func start() {
         let viewModel = ProductsViewModel()
-        viewModel.fetchProductItems(discount: discount)
-        let ProductsVC = ProductsViewController(viewModel: viewModel)
+        if discount != 0 { viewModel.fetchProductItems(discount: discount) }
+        if !categoryName.isEmpty{ viewModel.fetchProductItems(nameOfCategory: categoryName) }
         
+        let ProductsVC = ProductsViewController(viewModel: viewModel)
         ProductsVC.coordinator = self
         navigationController.pushViewController(ProductsVC, animated: true)
     }
@@ -66,3 +68,4 @@ extension ProductsCoordinator: ProductsTransitionDelegate {
         coordinator.start()
     }
 }
+
