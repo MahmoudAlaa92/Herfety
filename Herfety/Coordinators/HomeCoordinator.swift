@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol HomeTranisitionDelegate: AnyObject {
     func goToSearchVC(discount: Int)
+    func gotToSafari(url: String)
     func goToSliderItem(discount: Int)
     func goToCategoryItem(category Name: String)
     func gotToBestDealItem(productDetails: Wishlist)
@@ -44,22 +46,20 @@ class HomeCoordinator: NSObject, Coordinator {
 //
 extension HomeCoordinator: HomeTranisitionDelegate {
     
+    func gotToSafari(url: String) {
+        if let urlString = URL(string: url) {
+            let safariVC = SFSafariViewController(url: urlString)
+            safariVC.modalPresentationStyle = .pageSheet
+            self.navigationController.present(safariVC, animated: true)
+        }
+    }
+    
     func goToSearchVC(discount: Int) {
-        let coordinator = ProductsCoordinator(
-            navigationController: navigationController)
-        coordinator.discount = discount
-        coordinator.parentCoordinator = self
-        childCoordinators.append(coordinator)
-        coordinator.start()
+        self.showDiscountProducts(discount: discount)
     }
     
     func goToSliderItem(discount: Int) {
-        let coordinator = ProductsCoordinator(
-            navigationController: navigationController)
-        coordinator.discount = discount
-        coordinator.parentCoordinator = self
-        childCoordinators.append(coordinator)
-        coordinator.start()
+        self.showDiscountProducts(discount: discount)
     }
     
     func goToCategoryItem(category Name: String) {
@@ -72,25 +72,18 @@ extension HomeCoordinator: HomeTranisitionDelegate {
     }
     
     func gotToBestDealItem(productDetails: Wishlist) {
-     
+        let coordinator = PoroductDetailsCoordinator(navigationController: navigationController, productDetails: productDetails)
+        coordinator.homeParentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 
     func gotToTopBrandItem(discount: Int) {
-        let coordinator = ProductsCoordinator(
-            navigationController: navigationController)
-        coordinator.discount = discount
-        coordinator.parentCoordinator = self
-        childCoordinators.append(coordinator)
-        coordinator.start()
+        self.showDiscountProducts(discount: discount)
     }
     
     func gotToDailyEssentialItem(discount: Int) {
-        let coordinator = ProductsCoordinator(
-            navigationController: navigationController)
-        coordinator.discount = discount
-        coordinator.parentCoordinator = self
-        childCoordinators.append(coordinator)
-        coordinator.start()
+        self.showDiscountProducts(discount: discount)
     }
 }
 // MARK: - ChildDelegate
@@ -101,5 +94,17 @@ extension HomeCoordinator: HomeChildDelegate {
         if let index = childCoordinators.firstIndex(where: { $0 === coordinator } ){
             childCoordinators.remove(at: index)
         }
+    }
+}
+// MARK: - private Handler
+//
+extension HomeCoordinator {
+    func showDiscountProducts(discount: Int) {
+        let coordinator = ProductsCoordinator(
+            navigationController: navigationController)
+        coordinator.discount = discount
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 }

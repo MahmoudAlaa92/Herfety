@@ -39,7 +39,6 @@ extension ProductsViewModel {
         productItems.loadAllProducts(name: nameOfCategory) { result in
             switch result {
             case.success(let products):
-                print(products)
                 DispatchQueue.main.async {
                     self.productItems = products
                 }

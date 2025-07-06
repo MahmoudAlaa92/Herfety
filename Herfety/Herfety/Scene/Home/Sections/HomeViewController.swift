@@ -6,7 +6,6 @@
 //
 import UIKit
 import Combine
-import SafariServices
 
 class HomeViewController: UIViewController {
     
@@ -99,10 +98,7 @@ extension HomeViewController {
         CustomeTabBarViewModel.shared.userProfileImage = finalImage
         navigationBarBehavior?.configure(
             onNotification: { [weak self] in
-                print("Ml Model is tapped")
-                let safariVC = SFSafariViewController(url: URL(string: "https://9ec0-34-74-104-29.ngrok-free.app/")!)
-                safariVC.modalPresentationStyle = .pageSheet
-                self?.navigationController?.present(safariVC, animated: true)
+                self?.coordinator?.gotToSafari(url: "https://9ec0-34-74-104-29.ngrok-free.app/")
             },
             onSearch: { [weak self] in
                 self?.coordinator?.goToSearchVC(discount: 80)
@@ -204,12 +200,7 @@ extension HomeViewController {
             .store(in: &subscriptions)
         ///
         cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
-            // TODO: change the product id here
-            let vc = ProductDetailsViewController(viewModel: ProductDetailsViewModel(productId: value.productID ?? 93))
-            
-            vc.viewModel.productItem = value
-            vc.viewModel.fetchProductItems()
-            self?.navigationController?.pushViewController(vc, animated: true)
+            self?.coordinator?.gotToBestDealItem(productDetails: value)
         }).store(in: &subscriptions)
     }
     // MARK: - Top Brands

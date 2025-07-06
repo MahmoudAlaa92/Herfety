@@ -7,20 +7,20 @@
 
 import UIKit
 
-protocol PoroductsDetailsTransitionDelegate: AnyObject  {
+protocol PoroductsDetailsTransitionDelegate: AnyObject {
+    func backToHomeVC()
     func backToProductsVC()
     func goToProductDetailsVC(productDetails: Wishlist)
     func goToReviewersVC(productId: Int, reviewers: [Reviewrr])
-    
 }
 
-protocol PoroductsDetailsChildDelegate: AnyObject  {
+protocol PoroductsDetailsChildDelegate: AnyObject {
     func backToProductDetails(_ coordinator: Coordinator)
- 
 }
 
 class PoroductDetailsCoordinator: Coordinator {
-    weak var parentCoordinator: ProductsChildDelegate?
+    weak var productsParentCoordinator: ProductsChildDelegate?
+    weak var homeParentCoordinator: HomeChildDelegate?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var productDetails: Wishlist
@@ -47,9 +47,13 @@ class PoroductDetailsCoordinator: Coordinator {
 // MARK: - Transition Delegate
 //
 extension PoroductDetailsCoordinator: PoroductsDetailsTransitionDelegate {
+
+    func backToHomeVC() {
+        homeParentCoordinator?.backToHome(self)
+    }
     
     func backToProductsVC() {
-        parentCoordinator?.backToProductsVC(self)
+        productsParentCoordinator?.backToProductsVC(self)
         navigationController.popViewController(animated: true)
     }
    // TODO: 'Change' the same coordinator

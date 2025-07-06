@@ -63,6 +63,7 @@ extension ProductDetailsViewController {
             showBackButton: true,  // Enable back button
             onBack: { [weak self] in
                 self?.coordinator?.backToProductsVC()
+                self?.coordinator?.backToHomeVC()
             }
         )
     }

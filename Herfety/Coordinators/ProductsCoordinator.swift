@@ -63,7 +63,7 @@ extension ProductsCoordinator: ProductsTransitionDelegate {
     
     func goToProductDetails(productDetails: Wishlist) {
         let coordinator = PoroductDetailsCoordinator(navigationController: navigationController, productDetails: productDetails)
-        coordinator.parentCoordinator = self
+        coordinator.productsParentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
     }
