@@ -22,6 +22,7 @@ class ProductDetailsViewController: UIViewController {
     ///
     private var subscriptions = Set<AnyCancellable>()
     weak var coordinator: PoroductsDetailsTransitionDelegate?
+    weak var alertPresenter: AlertPresenter?
     // MARK: - Init
     init(viewModel: ProductDetailsViewModel) {
         self.viewModel = viewModel
@@ -216,7 +217,7 @@ extension ProductDetailsViewController {
                     image: .success,
                     status: .success
                 )
-                self.presentCustomAlert(with: alertItem)
+                self.alertPresenter?.showAlert(alertItem)
             }
             .store(in: &subscriptions)
     }
@@ -241,27 +242,5 @@ extension ProductDetailsViewController {
                 self.collectionView.reloadData()
             }
         }
-    }
-}
-// MARK: - Private Hanlder
-//
-extension ProductDetailsViewController {
-    func presentCustomAlert(with alertItem: AlertModel) {
-        let alertVC = AlertViewController(
-            nibName: "AlertViewController",
-            bundle: nil
-        )
-        alertVC.modalPresentationStyle = .overFullScreen
-        alertVC.modalTransitionStyle = .crossDissolve
-        alertVC.loadViewIfNeeded()
-        /// Ensure outlets are connected
-
-        alertVC.show(alertItem: alertItem)
-
-        /// Optional: dismiss on button press
-        alertVC.actionHandler = { [weak alertVC] in
-            alertVC?.dismiss(animated: true)
-        }
-        self.present(alertVC, animated: true)
     }
 }

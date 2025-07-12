@@ -11,11 +11,13 @@ class AppCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
+    private var alertPresenter: AlertPresenter
     private var window: UIWindow?
     
     init(window: UIWindow) {
         self.window = window
         self.navigationController = UINavigationController()
+        self.alertPresenter = AlertCoordinator(presentingViewController: navigationController)
     }
     
     deinit {
@@ -47,7 +49,7 @@ class AppCoordinator: Coordinator {
     }
     
     private func showMainTabFlow() {
-        let tabCoordinator = TabBarCoordinator()
+        let tabCoordinator = TabBarCoordinator(alertPresenter: alertPresenter)
         childCoordinators.append(tabCoordinator)
         tabCoordinator.start()
         

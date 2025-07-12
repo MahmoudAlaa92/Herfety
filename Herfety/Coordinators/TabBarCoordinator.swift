@@ -11,9 +11,11 @@ class TabBarCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let tabBarController = CustomeTabBarViewController()
-    
-    init() {
+    private var alertPresenter: AlertPresenter
+
+    init(alertPresenter: AlertPresenter) {
         self.navigationController = UINavigationController()
+        self.alertPresenter = alertPresenter
     }
     
     deinit {
@@ -21,11 +23,16 @@ class TabBarCoordinator: Coordinator {
     }
     
     func start() {
+        let homeNav = UINavigationController()
+        let wishlistNav = UINavigationController()
+        let cartNav = UINavigationController()
+        let profileNav = UINavigationController()
         
-        let homeCoordinator = HomeCoordinator(navigationController: UINavigationController())
-        let wishlistCoordinator = WishlistCoordinator(navigationController: UINavigationController())
-        let cartCoordinator = CartCoordinator(navigationController: UINavigationController())
-        let profileCoordinator = ProfileCoordinator(navigationController: UINavigationController())
+        let homeCoordinator = HomeCoordinator(navigationController: homeNav,
+                                              alertPresenter: AlertCoordinator(presentingViewController: homeNav))
+        let wishlistCoordinator = WishlistCoordinator(navigationController: wishlistNav)
+        let cartCoordinator = CartCoordinator(navigationController: cartNav)
+        let profileCoordinator = ProfileCoordinator(navigationController: profileNav)
         
         childCoordinators = [homeCoordinator, wishlistCoordinator, cartCoordinator, profileCoordinator]
         

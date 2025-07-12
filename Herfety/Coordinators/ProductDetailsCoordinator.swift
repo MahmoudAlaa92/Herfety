@@ -24,10 +24,12 @@ class PoroductDetailsCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var productDetails: Wishlist
-
+    let alertCoordinator: AlertPresenter
+    
     init(navigationController: UINavigationController, productDetails: Wishlist) {
         self.navigationController = navigationController
         self.productDetails = productDetails
+        self.alertCoordinator = AlertCoordinator(presentingViewController: navigationController)
     }
     
     func start() {
@@ -35,9 +37,11 @@ class PoroductDetailsCoordinator: Coordinator {
         viewModel.productItem = productDetails
         viewModel.fetchProductItems()
 
-        let productsDetialsVC = ProductDetailsViewController(viewModel: viewModel)
-        productsDetialsVC.coordinator = self
-        navigationController.pushViewController(productsDetialsVC, animated: true)
+        let productsDetailsVC = ProductDetailsViewController(viewModel: viewModel)
+        productsDetailsVC.coordinator = self
+        productsDetailsVC.alertPresenter = alertCoordinator
+        
+        navigationController.pushViewController(productsDetailsVC, animated: true)
     }
     
     deinit {

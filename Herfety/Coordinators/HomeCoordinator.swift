@@ -26,9 +26,11 @@ class HomeCoordinator: NSObject, Coordinator {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
+    let alertPresenter: AlertPresenter
+
+    init(navigationController: UINavigationController, alertPresenter: AlertPresenter) {
         self.navigationController = navigationController
+        self.alertPresenter = alertPresenter
     }
     
     deinit {
@@ -38,6 +40,7 @@ class HomeCoordinator: NSObject, Coordinator {
     func start() {
         let homeVC = HomeViewController()
         homeVC.coordinator = self
+        homeVC.alertPresenter = alertPresenter
         
         navigationController.pushViewController(homeVC, animated: false)
     }

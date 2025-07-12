@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     private var dailyEssentialItem: DailyEssentailCollectionViewSection?
     ///
     weak var coordinator: HomeCoordinator?
+    weak var alertPresenter: AlertPresenter?
     private var hasInitialWishlistLoaded = false
     ///
     private var subscriptions = Set<AnyCancellable>()
@@ -247,7 +248,7 @@ extension HomeViewController {
                     status: .success
                 )
                 CustomeTabBarViewModel.shared.isWishlistItemDeleted = false
-                self.presentCustomAlert(with: alertItem)
+                self.alertPresenter?.showAlert(alertItem)
             }
             .store(in: &subscriptions)
     }
@@ -266,26 +267,8 @@ extension HomeViewController {
                     image: .success,
                     status: .success
                 )
-                self.presentCustomAlert(with: alertItem)
+                self.alertPresenter?.showAlert(alertItem)
             }
             .store(in: &subscriptions)
-    }
-}
-// MARK: - Private Handler
-//
-extension HomeViewController {
-    func presentCustomAlert(with alertItem: AlertModel) {
-        let alertVC = AlertViewController(nibName: "AlertViewController", bundle: nil)
-        alertVC.modalPresentationStyle = .overFullScreen
-        alertVC.modalTransitionStyle = .crossDissolve
-        alertVC.loadViewIfNeeded() /// Ensure outlets are connected
-        
-        alertVC.show(alertItem: alertItem)
-        
-        /// Optional: dismiss on button press
-        alertVC.actionHandler = { [weak alertVC] in
-            alertVC?.dismiss(animated: true)
-        }
-        self.present(alertVC, animated: true)
     }
 }

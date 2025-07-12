@@ -10,14 +10,13 @@ import UIKit
 class WishListViewController: UIViewController {
 
     // MARK: - Properties
-    //
     private var sections = [CollectionViewDataSource]()
     private var layoutProviders = [LayoutSectionProvider]()
     
     // MARK: - Outlets
-    //
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureProvider()

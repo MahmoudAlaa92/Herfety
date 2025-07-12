@@ -12,7 +12,6 @@ class ProductsViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
-
     @IBOutlet weak var searchTextField: SearchTextField!
     // MARK: - Properties
     private(set) var viewModel: ProductsViewModel
