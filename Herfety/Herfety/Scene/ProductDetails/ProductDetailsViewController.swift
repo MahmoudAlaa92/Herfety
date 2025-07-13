@@ -205,10 +205,10 @@ extension ProductDetailsViewController {
     }
     // MARK: - Wishlist
     private func bindWishlist() {
-        CustomeTabBarViewModel.shared.$Wishlist
+        CustomeTabBarViewModel.shared.isWishlistItemDeleted
             .dropFirst()
-            .sink { [weak self] wishlist in
-                guard let self = self else { return }
+            .sink { [weak self] current in
+                guard let self = self, !current else { return }
 
                 /// Trigger alert presentation
                 let alertItem = AlertModel(

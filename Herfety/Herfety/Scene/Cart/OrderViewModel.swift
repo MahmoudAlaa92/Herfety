@@ -76,9 +76,8 @@ extension OrderViewModel {
         updatedItems.remove(at: index)
         orderItems = updatedItems
         
-        CustomeTabBarViewModel.shared.isOrdersItemDeleted = true
-         CustomeTabBarViewModel.shared.cartItems = updatedItems
-         CustomeTabBarViewModel.shared.isOrdersItemDeleted = false
+        CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(true)
+        CustomeTabBarViewModel.shared.cartItems = updatedItems
     }
 
 }

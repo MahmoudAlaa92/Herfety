@@ -59,8 +59,7 @@ extension TitleProductDetails {
             productItems.addNewProduct(userId: userId, productId: (product.productID ?? 1)) { result in
                 CustomeTabBarViewModel.shared.fetchWishlistItems(id: userId)
             }
-        } else {
-            //TODO: show warning the item Added before
         }
+        CustomeTabBarViewModel.shared.isWishlistItemDeleted.send(false)
     }
 }

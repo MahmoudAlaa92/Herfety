@@ -24,8 +24,8 @@ class CustomeTabBarViewModel: ObservableObject {
     var userId: Int = 22
     @UserDefault<RegisterUser>(key: \.userInfo) var userInfo
     
-    var isWishlistItemDeleted = false
-    var isOrdersItemDeleted = false
+     var isWishlistItemDeleted = CurrentValueSubject<Bool, Never>(false)
+     var isOrdersItemDeleted = CurrentValueSubject<Bool, Never>(false)
     ///
     @Published var userProfileImage: UIImage = Images.iconPersonalDetails
     @Published var selectedTab: TabBarItems = .home
@@ -83,9 +83,7 @@ extension CustomeTabBarViewModel {
             DispatchQueue.main.async {
                 switch result {
                 case.success(let message):
-                    self?.isWishlistItemDeleted = true
                     self?.Wishlist.remove(at: indexPath.row)
-                    print(message)
                 case .failure(let error):
                     print("error \(error)")
                 }

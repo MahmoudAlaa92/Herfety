@@ -22,7 +22,7 @@ class HomeViewModel {
     
     @Published var topBrandsItems: [TopBrandsItem] = [
         .init(name: "Leath", image: Images.artLogo, logo: Images.sliderImage1, offer: "UP to 50% OFF"),
-       .init(name: "Rhine", image: Images.tradeLogo, logo: Images.imageOfArt, offer: "UP to 60% OFF"),
+        .init(name: "Rhine", image: Images.tradeLogo, logo: Images.imageOfArt, offer: "UP to 60% OFF"),
         .init(name: "Handmade", image: Images.logo, logo: Images.chain, offer: "UP to 70% OFF"),
         .init(name: "Organ", image: Images.artLogo, logo: Images.imageOfArt2, offer: "UP to 80% OFF"),
     ]
@@ -33,6 +33,50 @@ class HomeViewModel {
         .init(image: Images.craft, name: "Handmade Materials: crepe", offer: "UP to 70% OFF"),
         .init(image: Images.fashion, name: "Kids’ Crafts & Toys ", offer: "UP to 80% OFF"),
     ]
+    
+    @Published var wishlistAlert: AlertModel?
+    @Published var orderAlert: AlertModel?
+    ///
+    private var subscriptions = Set<AnyCancellable>()
+    
+    init() {
+        observeWishlist()
+        observeOrders()
+    }
+    
+    private func observeWishlist() {
+        CustomeTabBarViewModel
+            .shared
+            .isWishlistItemDeleted
+            .dropFirst()
+            .sink { [weak self] current in
+                guard let self = self else { return }
+                
+                self.wishlistAlert = AlertModel(
+                    message: current ? "Deleted From Wishlist" : "Added To Wishlist",
+                    buttonTitle: "Ok",
+                    image: .success,
+                    status: .success
+                )
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func observeOrders() {
+        CustomeTabBarViewModel.shared.isOrdersItemDeleted
+            .dropFirst()
+            .sink { [weak self] current in
+                guard let self = self else { return }
+                
+                self.orderAlert = AlertModel(
+                    message: current ? "Deleted From Order" : "Added To Order",
+                    buttonTitle: "Ok",
+                    image: .success,
+                    status: .success
+                )
+            }
+            .store(in: &subscriptions)
+    }
     
     func numberOfSections() -> Int {
         return HomeSection.allCases.count

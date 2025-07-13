@@ -24,7 +24,6 @@ class HomeViewController: UIViewController {
     ///
     weak var coordinator: HomeCoordinator?
     weak var alertPresenter: AlertPresenter?
-    private var hasInitialWishlistLoaded = false
     ///
     private var subscriptions = Set<AnyCancellable>()
     // MARK: - Outlets
@@ -230,44 +229,19 @@ extension HomeViewController {
     }
     // MARK: - Wishlist
     private func bindWishlist() {
-        CustomeTabBarViewModel.shared.$Wishlist
-            .dropFirst()
-            .sink { [weak self] wishlist in
-                guard let self = self else { return }
-                /// Skip the first assignment (initial data load)
-                if !self.hasInitialWishlistLoaded {
-                    self.hasInitialWishlistLoaded = true
-                    return
-                }
-                /// Trigger alert presentation
-                let trigger = CustomeTabBarViewModel.shared.isWishlistItemDeleted
-                let alertItem = AlertModel(
-                    message: trigger == true ?  "Deleted From Wishlist": "Added To Wishlist",
-                    buttonTitle: "Ok",
-                    image: .success,
-                    status: .success
-                )
-                CustomeTabBarViewModel.shared.isWishlistItemDeleted = false
-                self.alertPresenter?.showAlert(alertItem)
+        viewModel.$wishlistAlert
+            .compactMap { $0 }
+            .sink { [weak self] alert in
+                self?.alertPresenter?.showAlert(alert)
             }
             .store(in: &subscriptions)
     }
     // MARK: - Orders
     private func bindOrders() {
-        CustomeTabBarViewModel.shared.$cartItems
-            .dropFirst()
-            .sink { [weak self] Order in
-                guard let self = self else { return }
-                /// Trigger alert presentation
-                /// Trigger alert presentation
-                let trigger = CustomeTabBarViewModel.shared.isOrdersItemDeleted
-                let alertItem = AlertModel(
-                    message: trigger == true ? "Deleted From Order": "Added To Order",
-                    buttonTitle: "Ok",
-                    image: .success,
-                    status: .success
-                )
-                self.alertPresenter?.showAlert(alertItem)
+        viewModel.$orderAlert
+            .compactMap { $0 }
+            .sink { [weak self] alert in
+                self?.alertPresenter?.showAlert(alert)
             }
             .store(in: &subscriptions)
     }

@@ -113,6 +113,7 @@ extension CardOfProductCollectionViewCell {
                 CustomeTabBarViewModel.shared.fetchWishlistItems(id: CustomeTabBarViewModel.shared.userId)
             }
         }
+        CustomeTabBarViewModel.shared.isWishlistItemDeleted.send(false)
     }
     
     private func updataCartItems() {
@@ -120,6 +121,7 @@ extension CardOfProductCollectionViewCell {
            !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.productOfWishlist })  {
             itemToAdd.qty = 1
             CustomeTabBarViewModel.shared.cartItems.append(itemToAdd)
+            CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(false)
         }
     }
 }
