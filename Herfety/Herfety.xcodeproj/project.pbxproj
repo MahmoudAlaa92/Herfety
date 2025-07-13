@@ -230,6 +230,8 @@
 		15DF25122E23587100C17B53 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF25112E23587000C17B53 /* InfoCoordinator.swift */; };
 		15DF25142E23914700C17B53 /* CheckoutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF25132E23914700C17B53 /* CheckoutCoordinator.swift */; };
 		15DF25162E2396C900C17B53 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF25152E2396C900C17B53 /* CheckoutViewModel.swift */; };
+		15DF25182E23BFB400C17B53 /* AddAddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF25172E23BFB400C17B53 /* AddAddressCoordinator.swift */; };
+		15DF251A2E24026100C17B53 /* AddAddressViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF25192E24026100C17B53 /* AddAddressViewModelType.swift */; };
 		15E33A2A2DD4AC500004D408 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E33A292DD4AC500004D408 /* ForgetPasswordViewController.xib */; };
 		15E33A2B2DD4AC500004D408 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E33A282DD4AC500004D408 /* ForgetPasswordViewController.swift */; };
 		15E33A2D2DD4AEFD0004D408 /* ForgetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E33A2C2DD4AEFC0004D408 /* ForgetPasswordViewModel.swift */; };
@@ -469,6 +471,8 @@
 		15DF25112E23587000C17B53 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		15DF25132E23914700C17B53 /* CheckoutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCoordinator.swift; sourceTree = "<group>"; };
 		15DF25152E2396C900C17B53 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
+		15DF25172E23BFB400C17B53 /* AddAddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressCoordinator.swift; sourceTree = "<group>"; };
+		15DF25192E24026100C17B53 /* AddAddressViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewModelType.swift; sourceTree = "<group>"; };
 		15E33A282DD4AC500004D408 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		15E33A292DD4AC500004D408 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		15E33A2C2DD4AEFC0004D408 /* ForgetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -906,6 +910,7 @@
 		157F91052D62B780005381FB /* AddAdress */ = {
 			isa = PBXGroup;
 			children = (
+				15DF25192E24026100C17B53 /* AddAddressViewModelType.swift */,
 				157F91132D62CF5F005381FB /* AddAddressModel.swift */,
 				15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */,
 				157F91012D62B774005381FB /* AddAddressViewController.swift */,
@@ -1193,6 +1198,7 @@
 				15F01EF02E224EF60064A20B /* AlertCoordinator.swift */,
 				15DF25112E23587000C17B53 /* InfoCoordinator.swift */,
 				15DF25132E23914700C17B53 /* CheckoutCoordinator.swift */,
+				15DF25172E23BFB400C17B53 /* AddAddressCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1652,6 +1658,7 @@
 				15955C1B2D67797500673BE7 /* CreditCardViewController.swift in Sources */,
 				158A7EA92DB557A700B89684 /* FacebookButton.swift in Sources */,
 				15760D852D692DFC0033BC0D /* AddAddressViewModel.swift in Sources */,
+				15DF251A2E24026100C17B53 /* AddAddressViewModelType.swift in Sources */,
 				1541679C2D9D373B007E4CAA /* SettingViewModel.swift in Sources */,
 				15A4F5E82DB2981E000EACEA /* Notification.swift in Sources */,
 				154B7D222DF3824B00854E61 /* AddReview.swift in Sources */,
@@ -1776,6 +1783,7 @@
 				158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */,
 				157F42872DB6DAAC000305D6 /* AlamofireNetwork.swift in Sources */,
 				153944EA2DCFA9A3008465BB /* LoginRemote.swift in Sources */,
+				15DF25182E23BFB400C17B53 /* AddAddressCoordinator.swift in Sources */,
 				15CE60FB2D73C3A60032617B /* TitleReviewsCollectionReusableView.swift in Sources */,
 				153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */,
 				1548CF472D56E07E00F7CEEA /* DailyEssentialyModel.swift in Sources */,

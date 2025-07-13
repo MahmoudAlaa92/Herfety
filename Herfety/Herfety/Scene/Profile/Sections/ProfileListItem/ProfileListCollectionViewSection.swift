@@ -64,7 +64,7 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
                 self.navController?.pushViewController(vc, animated: true)
                 break
             case "My Card":
-                let vc = MyCheckoutViewController()
+                let vc = MyCheckoutViewController(viewModel: CheckoutViewModel())
                 self.navController?.pushViewController(vc, animated: true)
                 break
             case "Logout":

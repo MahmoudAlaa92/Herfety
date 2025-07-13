@@ -1,5 +1,5 @@
 //
-//  CheckoutCoordinator.swift
+//  AddAddressCoordinator.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 13/07/2025.
@@ -7,12 +7,11 @@
 
 import UIKit
 
-protocol CheckoutTransionDelegate: AnyObject {
+protocol AddAddressChildDelegate: AnyObject {
     func backToInfoVC()
 }
 
-class CheckoutCoordinator: Coordinator {
-    
+class AddAddressCoordinator: Coordinator {
     weak var parentCoordinator: InfoChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -24,20 +23,19 @@ class CheckoutCoordinator: Coordinator {
     }
     
     func start() {
-        let checkoutVC = MyCheckoutViewController(viewModel: CheckoutViewModel())
-        checkoutVC.alertPresenter = alertPresenter
-        checkoutVC.coordinator = self
-        navigationController.pushViewController(checkoutVC, animated: true)
+        let addressVC = AddAddressViewController(viewModel: AddAddressViewModel())
+        addressVC.coordinator = self
+        addressVC.alertPresenter = alertPresenter
+        navigationController.pushViewController(addressVC, animated: true)
     }
 
     deinit {
         print("deninit \(Self.self)")
     }
-    
 }
-// MARK: - Transtion Delegate
+// MARK: - Child Delegate
 //
-extension CheckoutCoordinator: CheckoutTransionDelegate {
+extension AddAddressCoordinator: AddAddressChildDelegate {
     func backToInfoVC() {
         parentCoordinator?.backToInfoVC(self)
         navigationController.popViewController(animated: true)

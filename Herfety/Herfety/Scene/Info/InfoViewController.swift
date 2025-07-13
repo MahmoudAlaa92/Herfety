@@ -107,9 +107,10 @@ extension InfoViewController {
             onPlus: { [weak self] in
                 guard let self = self else { return }
                 /// plus button is tapped
-                self.viewModel.didTapPlusButton(
-                    navigationController: navigationController
-                )
+//                self.viewModel.didTapPlusButton(
+//                    navigationController: navigationController
+//                )
+                self.coordinator?.goToAddAddressVC()
             },
             showBackButton: true) { [weak self] in
                 self?.coordinator?.backToCartVC()
@@ -179,10 +180,7 @@ extension InfoViewController {
     /// Navigate to Credit Card
     private func bindViewModel() {
         viewModel.navigationToPayment = { [weak self] in
-            let creditCardVC = MyCheckoutViewController()
-            self?.navigationController?.pushViewController(
-                creditCardVC,
-                animated: true)
+            self?.coordinator?.goToCheckoutVC()
         }
 
         /// Not navigatte

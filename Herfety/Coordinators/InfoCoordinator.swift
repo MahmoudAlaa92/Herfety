@@ -9,6 +9,7 @@ import UIKit
 
 protocol InfoTransitionDelegate: AnyObject {
     func goToCheckoutVC()
+    func goToAddAddressVC()
     func backToCartVC()
 }
 
@@ -20,9 +21,11 @@ class InfoCoordinator: Coordinator {
     weak var parentCoordinator: CartChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    let alertPresenter: AlertPresenter
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, alertPresenter: AlertPresenter) {
         self.navigationController = navigationController
+        self.alertPresenter = alertPresenter
     }
     
     func start() {
@@ -40,7 +43,17 @@ class InfoCoordinator: Coordinator {
 extension InfoCoordinator: InfoTransitionDelegate {
     
     func goToCheckoutVC() {
-        
+        let coordinator = CheckoutCoordinator(navigationController: navigationController, alertPresenter: alertPresenter)
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
+    }
+    
+    func goToAddAddressVC() {
+        let coordinator = AddAddressCoordinator(navigationController: navigationController, alertPresenter: alertPresenter)
+        childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        coordinator.start()
     }
     
     func backToCartVC() {

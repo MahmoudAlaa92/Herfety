@@ -40,7 +40,7 @@ class CartCoordinator: Coordinator {
 //
 extension CartCoordinator: CartTransitionDelegate {
     func goToInfoVC() {
-        let coordinator = InfoCoordinator(navigationController: navigationController)
+        let coordinator = InfoCoordinator(navigationController: navigationController, alertPresenter: alertPresenter)
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
