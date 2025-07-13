@@ -16,6 +16,9 @@ class InfoViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var paymentButton: PrimaryButton!
+    // MARK: - Properties
+    weak var coordinator: InfoTransitionDelegate?
+    weak var alertPresenter: AlertPresenter?
     ///
     var subscriptions = Set<AnyCancellable>()
     // MARK: - Lifcycle
@@ -55,14 +58,13 @@ extension InfoViewController {
                 self.collectionView.reloadData()
 
                 infoSection.deleteItemSubject
-                    .sink { [weak self] index in
-                        guard let self = self else { return }
+                    .sink { index in
                         var items = CustomeTabBarViewModel.shared.infos
                         guard index < items.count else { return }
                         items.remove(at: index)
                         CustomeTabBarViewModel.shared.infos = items
                     }
-                    .store(in: &self.subscriptions)
+                    .store(in: &subscriptions)
             }
             .store(in: &subscriptions)
     }
@@ -138,11 +140,16 @@ extension InfoViewController {
     /// Navigate to Credit Card
     private func bindViewModel() {
         viewModel.navigationToPayment = { [weak self] in
-            // replace with stripe implemntation
-//            let creditCardVC = CreditCardViewController(viewModel: CreditCardViewModel())
             let creditCardVC = MyCheckoutViewController()
             self?.navigationController?.pushViewController(creditCardVC, animated: true)
         }
+        
+        /// Not navigatte
+        viewModel.$infoState
+            .compactMap({ $0 })
+            .sink { [weak self] alert in
+            self?.alertPresenter?.showAlert(alert)
+        }.store(in: &subscriptions)
     }
 }
 // MARK: - Actions

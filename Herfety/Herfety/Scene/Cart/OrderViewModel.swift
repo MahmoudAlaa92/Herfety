@@ -11,6 +11,8 @@ class OrderViewModel: ObservableObject {
     // MARK: - Properties
     @Published var orderItems: [Wishlist] = []
     @Published private(set) var paymentInfo: PaymentView.Model = PaymentView.Model(subTotal: 0, shipping: 0, total: 0, numberOfItems: 0)
+    @Published var orderAlert: AlertModel?
+    
     var navigationToShipping: (() -> Void)?
     ///
     private var subscriptions = Set<AnyCancellable>()
@@ -21,7 +23,11 @@ class OrderViewModel: ObservableObject {
     }
     func didTapPayment() {
         if orderItems.isEmpty {
-            print("Order is empty show Alert here")
+            self.orderAlert = AlertModel(
+                message: "Order is empty, please add some products",
+                buttonTitle: "Ok",
+                image: .warning,
+                status: .warning)
         } else {
             navigationToShipping?()
         }

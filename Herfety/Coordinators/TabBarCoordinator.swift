@@ -31,7 +31,7 @@ class TabBarCoordinator: Coordinator {
         let homeCoordinator = HomeCoordinator(navigationController: homeNav,
                                               alertPresenter: AlertCoordinator(presentingViewController: homeNav))
         let wishlistCoordinator = WishlistCoordinator(navigationController: wishlistNav)
-        let cartCoordinator = CartCoordinator(navigationController: cartNav)
+        let cartCoordinator = CartCoordinator(navigationController: cartNav, alertPresenter: AlertCoordinator(presentingViewController: cartNav))
         let profileCoordinator = ProfileCoordinator(navigationController: profileNav)
         
         childCoordinators = [homeCoordinator, wishlistCoordinator, cartCoordinator, profileCoordinator]

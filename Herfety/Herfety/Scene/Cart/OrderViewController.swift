@@ -24,6 +24,9 @@ class OrderViewController: UIViewController {
     private var sections: [CollectionViewDataSource] = []
     private var layoutProviders: [LayoutSectionProvider] = []
     ///
+    weak var coordinator: CartTransitionDelegate?
+    weak var alertPresenter: AlertPresenter?
+    ///
     var subscriptions = Set<AnyCancellable>()
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -116,18 +119,18 @@ private extension OrderViewController {
         layoutProviders.append(OrderSectionLayoutProvider())
     }
     
-    // Configure Layout
+    /// Configure Layout
     private func cofigureCompositianalLayout() {
         let layoutFactory = SectionsLayout(providers: layoutProviders)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
     
-    // Configure UI
+    /// Configure UI
     private func configureUI() {
         proccedToPayment.title = "Procced to Payment"
     }
     
-    // Navigation Bar
+    /// Navigation Bar
     private func setUpNavigationBar() {
         navigationItem.backButtonTitle = ""
     }
@@ -137,22 +140,27 @@ private extension OrderViewController {
 extension OrderViewController {
     
     private func bindViewModel() {
-        // Navigate to Shipping VC
+        /// Navigate to Shipping VC
         bindOrderItems()
         viewModel.navigationToShipping = { [weak self] in
-            let shippingVC = InfoViewController()
-            self?.navigationController?.pushViewController(shippingVC, animated: true)
+            self?.coordinator?.goToInfoVC()
         }
     }
     private func bindOrderItems() {
-        // Bind payment info
+        /// Bind payment info
         viewModel.$paymentInfo
             .receive(on: RunLoop.main)
             .sink { [weak self] paymentModel in
-                
                 self?.paymentView.configure(with: paymentModel)
             }
             .store(in: &subscriptions)
+        
+        /// Procced to Payment
+        viewModel.$orderAlert
+            .compactMap({ $0 })
+            .sink { [weak self] alert in
+                self?.alertPresenter?.showAlert(alert)
+        }.store(in: &subscriptions)
     }
 }
 // MARK: - Actions
@@ -160,7 +168,7 @@ extension OrderViewController {
 extension OrderViewController {
  
     @IBAction func paymentPressed(_ sender: Any) {
-       // payment Pressed in order
+       /// payment Pressed in order
         viewModel.didTapPayment()
     }
 }
