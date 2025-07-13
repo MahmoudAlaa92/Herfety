@@ -9,10 +9,15 @@ import UIKit
 
 protocol InfoTransitionDelegate: AnyObject {
     func goToCheckoutVC()
+    func backToCartVC()
+}
+
+protocol InfoChildDelegate: AnyObject {
+    func backToInfoVC(_ coordinator: Coordinator)
 }
 
 class InfoCoordinator: Coordinator {
-    
+    weak var parentCoordinator: CartChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
@@ -33,7 +38,22 @@ class InfoCoordinator: Coordinator {
 // MARK: - Transition Delegate
 //
 extension InfoCoordinator: InfoTransitionDelegate {
+    
     func goToCheckoutVC() {
         
+    }
+    
+    func backToCartVC() {
+        parentCoordinator?.backToCartVC(self)
+        navigationController.popViewController(animated: true)
+    }
+}
+// MARK: - Child Delegate
+//
+extension InfoCoordinator: InfoChildDelegate {
+    func backToInfoVC(_ coordinator:  Coordinator) {
+        if let index = childCoordinators.firstIndex(where: { $0 === coordinator }) {
+            childCoordinators.remove(at: index)
+        }
     }
 }

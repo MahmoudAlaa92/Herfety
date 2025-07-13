@@ -172,6 +172,3 @@ extension OrderViewController {
         viewModel.didTapPayment()
     }
 }
-// MARK: - Private Handlers ???
-//
-extension OrderViewController {}

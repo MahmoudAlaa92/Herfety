@@ -228,6 +228,8 @@
 		15D2E1B22E19BC9300B9C579 /* ReviewersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2E1B12E19BC9300B9C579 /* ReviewersCoordinator.swift */; };
 		15D2E1B42E19DC5E00B9C579 /* AddReviewsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D2E1B32E19DC5E00B9C579 /* AddReviewsCoordinator.swift */; };
 		15DF25122E23587100C17B53 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF25112E23587000C17B53 /* InfoCoordinator.swift */; };
+		15DF25142E23914700C17B53 /* CheckoutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF25132E23914700C17B53 /* CheckoutCoordinator.swift */; };
+		15DF25162E2396C900C17B53 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF25152E2396C900C17B53 /* CheckoutViewModel.swift */; };
 		15E33A2A2DD4AC500004D408 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E33A292DD4AC500004D408 /* ForgetPasswordViewController.xib */; };
 		15E33A2B2DD4AC500004D408 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E33A282DD4AC500004D408 /* ForgetPasswordViewController.swift */; };
 		15E33A2D2DD4AEFD0004D408 /* ForgetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E33A2C2DD4AEFC0004D408 /* ForgetPasswordViewModel.swift */; };
@@ -465,6 +467,8 @@
 		15D2E1B12E19BC9300B9C579 /* ReviewersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewersCoordinator.swift; sourceTree = "<group>"; };
 		15D2E1B32E19DC5E00B9C579 /* AddReviewsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewsCoordinator.swift; sourceTree = "<group>"; };
 		15DF25112E23587000C17B53 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
+		15DF25132E23914700C17B53 /* CheckoutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCoordinator.swift; sourceTree = "<group>"; };
+		15DF25152E2396C900C17B53 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		15E33A282DD4AC500004D408 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		15E33A292DD4AC500004D408 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		15E33A2C2DD4AEFC0004D408 /* ForgetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -778,6 +782,7 @@
 			isa = PBXGroup;
 			children = (
 				1570F7482DFF7F0100AE9F6D /* MyCheckoutViewController.swift */,
+				15DF25152E2396C900C17B53 /* CheckoutViewModel.swift */,
 				1570F7492DFF7F0100AE9F6D /* MyCheckoutViewController.xib */,
 			);
 			path = MyCheckout;
@@ -1187,6 +1192,7 @@
 				15D2E1B32E19DC5E00B9C579 /* AddReviewsCoordinator.swift */,
 				15F01EF02E224EF60064A20B /* AlertCoordinator.swift */,
 				15DF25112E23587000C17B53 /* InfoCoordinator.swift */,
+				15DF25132E23914700C17B53 /* CheckoutCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1722,6 +1728,7 @@
 				153F6AA22D5955E800317F49 /* WishListViewController.swift in Sources */,
 				1592D5FC2E141E52001792F7 /* TabBarCoordinator.swift in Sources */,
 				1592D6002E142C9C001792F7 /* WishlistCoordinator.swift in Sources */,
+				15DF25162E2396C900C17B53 /* CheckoutViewModel.swift in Sources */,
 				1548CF412D56DF4F00F7CEEA /* SliderModel.swift in Sources */,
 				15F927C82D5A56660038CEB8 /* WishlistModel.swift in Sources */,
 				15CD44BE2D5293AE00E58C6F /* DailyEssentailCollectionViewCell.swift in Sources */,
@@ -1745,6 +1752,7 @@
 				1543FBE32E17069E00109BB7 /* SignupViewModelType.swift in Sources */,
 				158F8D482D72444E00D8E768 /* TitleProductDetails.swift in Sources */,
 				150ABBDC2DC2E0D700C1A7AD /* Wishlist.swift in Sources */,
+				15DF25142E23914700C17B53 /* CheckoutCoordinator.swift in Sources */,
 				15CD44C72D52A73000E58C6F /* SectionsLayout.swift in Sources */,
 				153B7FD82D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift in Sources */,
 				158B39DC2D7A85E100D58B07 /* SettingViewController.swift in Sources */,

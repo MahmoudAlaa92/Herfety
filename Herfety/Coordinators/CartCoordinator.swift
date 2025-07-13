@@ -11,6 +11,10 @@ protocol CartTransitionDelegate: AnyObject {
     func goToInfoVC()
 }
 
+protocol CartChildDelegate: AnyObject {
+    func backToCartVC(_ coordinator: Coordinator)
+}
+
 class CartCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -32,11 +36,22 @@ class CartCoordinator: Coordinator {
         navigationController.pushViewController(cartVC, animated: false)
     }
 }
-
+// MARK: - Transition Delegate
+//
 extension CartCoordinator: CartTransitionDelegate {
     func goToInfoVC() {
         let coordinator = InfoCoordinator(navigationController: navigationController)
-        coordinator.childCoordinators.append(coordinator)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
         coordinator.start()
+    }
+}
+// MARK: - Transition Delegate
+//
+extension CartCoordinator: CartChildDelegate {
+    func backToCartVC(_ coordinator: Coordinator) {
+        if let index = childCoordinators.firstIndex(where: { $0 === coordinator}) {
+            childCoordinators.remove(at: index)
+        }
     }
 }

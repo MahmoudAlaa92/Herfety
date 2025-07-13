@@ -1,3 +1,4 @@
+import Combine
 //
 //  InfoViewController.swift
 //  Herfety
@@ -5,7 +6,6 @@
 //  Created by Mahmoud Alaa on 13/02/2025.
 //
 import UIKit
-import Combine
 
 class InfoViewController: UIViewController {
     // MARK: - Properties
@@ -36,7 +36,7 @@ class InfoViewController: UIViewController {
 // MARK: - Configuration
 //
 extension InfoViewController {
-    
+
     private func setUpCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -48,13 +48,15 @@ extension InfoViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] infoItems in
                 guard let self = self else { return }
-                
-                let infoSection = InfoCollectionViewSection(infoItems: infoItems)
+
+                let infoSection = InfoCollectionViewSection(
+                    infoItems: infoItems
+                )
                 self.sections = [infoSection]
                 self.layoutProviders = [InfoSectionLayoutProvider()]
-                
-                infoSection.registerCells(in: self.collectionView) // ✅ FIX HERE
-                self.updateCollectionViewLayout() // 👈 Fixes the layout error
+
+                infoSection.registerCells(in: self.collectionView)  // ✅ FIX HERE
+                self.updateCollectionViewLayout()  // 👈 Fixes the layout error
                 self.collectionView.reloadData()
 
                 infoSection.deleteItemSubject
@@ -68,15 +70,21 @@ extension InfoViewController {
             }
             .store(in: &subscriptions)
     }
-    
+
     /// Configure Layout
     private func configureCompositianalLayout() {
         let layoutFactory = SectionsLayout(providers: layoutProviders)
-        self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
+        self.collectionView.setCollectionViewLayout(
+            layoutFactory.createLayout(),
+            animated: true
+        )
     }
     private func updateCollectionViewLayout() {
         let layoutFactory = SectionsLayout(providers: layoutProviders)
-        collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: false)
+        collectionView.setCollectionViewLayout(
+            layoutFactory.createLayout(),
+            animated: false
+        )
     }
 
     /// Configure UI
@@ -85,27 +93,43 @@ extension InfoViewController {
     }
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
-        
+
         navigationItem.backButtonTitle = ""
-        
-        navigationBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
-        
-        navigationBarBehavior?.configure(title: "Info", titleColor: .primaryBlue, onPlus: { [weak self] in
-            guard let self = self else { return }
-            /// plus button is tapped
-            self.viewModel.didTapPlusButton(navigationController: navigationController)
-        })
+
+        navigationBarBehavior = HerfetyNavigationController(
+            navigationItem: navigationItem,
+            navigationController: navigationController
+        )
+
+        navigationBarBehavior?.configure(
+            title: "Info",
+            titleColor: .primaryBlue,
+            onPlus: { [weak self] in
+                guard let self = self else { return }
+                /// plus button is tapped
+                self.viewModel.didTapPlusButton(
+                    navigationController: navigationController
+                )
+            },
+            showBackButton: true) { [weak self] in
+                self?.coordinator?.backToCartVC()
+            }
     }
     /// Notification Center
     private func configureNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: Notification.Name("infoItemsUpdated"), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadCollectionView),
+            name: Notification.Name("infoItemsUpdated"),
+            object: nil
+        )
     }
     /// Reloud collectionView
-   @objc private func reloadCollectionView() {
-       configureSections()
-       DispatchQueue.main.async { [weak self] in
-           self?.collectionView.reloadData()
-       }
+    @objc private func reloadCollectionView() {
+        configureSections()
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
 }
 // MARK: - UICollectionViewDataSource
@@ -114,22 +138,37 @@ extension InfoViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         sections.count
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         sections[section].numberOfItems
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        sections[indexPath.section].cellForItems(
+            collectionView,
+            cellForItemAt: indexPath
+        )
     }
 }
- // MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate
 //
 extension InfoViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView,
-                        contextMenuConfigurationForItemAt indexPath: IndexPath,
-                        point: CGPoint) -> UIContextMenuConfiguration? {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        contextMenuConfigurationForItemAt indexPath: IndexPath,
+        point: CGPoint
+    ) -> UIContextMenuConfiguration? {
         if let providers = sections[indexPath.section] as? ContextMenuProvider {
-            return providers.contextMenuConfiguration(for: collectionView, at: indexPath, point: point)
+            return providers.contextMenuConfiguration(
+                for: collectionView,
+                at: indexPath,
+                point: point
+            )
         }
         return nil
     }
@@ -141,21 +180,23 @@ extension InfoViewController {
     private func bindViewModel() {
         viewModel.navigationToPayment = { [weak self] in
             let creditCardVC = MyCheckoutViewController()
-            self?.navigationController?.pushViewController(creditCardVC, animated: true)
+            self?.navigationController?.pushViewController(
+                creditCardVC,
+                animated: true)
         }
-        
+
         /// Not navigatte
         viewModel.$infoState
             .compactMap({ $0 })
             .sink { [weak self] alert in
-            self?.alertPresenter?.showAlert(alert)
-        }.store(in: &subscriptions)
+                self?.alertPresenter?.showAlert(alert)
+            }.store(in: &subscriptions)
     }
 }
 // MARK: - Actions
 //
 extension InfoViewController {
-    
+
     @IBAction func paymentPressed(_ sender: Any) {
         viewModel.didTapPaymentButton()
     }
