@@ -11,11 +11,11 @@ import SafariServices
 class ProfileListCollectionViewSection: CollectionViewDataSource {
     
     private let items: [ProfileListItem]
-    weak var navController: UINavigationController?
+    weak var coordinator: PorfileTransionDelegate?
     
-    init(items: [ProfileListItem], navContoller: UINavigationController?) {
+    init(items: [ProfileListItem], coordinator: PorfileTransionDelegate?) {
         self.items = items
-        self.navController = navContoller
+        self.coordinator = coordinator
     }
     
     func registerCells(in collectionView: UICollectionView) {
@@ -52,20 +52,21 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             
             switch item.title {
             case "My Order":
-                let vc = OrderViewController()
-                self.navController?.pushViewController(vc, animated: true)
+//                let vc = OrderViewController()
+//                self.navController?.pushViewController(vc, animated: true)
+                self.coordinator?.gotToCartVC()
                 break
             case "My Favourites":
-                let vc = WishListViewController()
-                self.navController?.pushViewController(vc, animated: true)
+//                let vc = WishListViewController()
+//                self.navController?.pushViewController(vc, animated: true)
                 break
             case "Shipping Address":
-                let vc = InfoViewController()
-                self.navController?.pushViewController(vc, animated: true)
+//                let vc = InfoViewController()
+//                self.navController?.pushViewController(vc, animated: true)
                 break
             case "My Card":
-                let vc = MyCheckoutViewController(viewModel: CheckoutViewModel())
-                self.navController?.pushViewController(vc, animated: true)
+//                let vc = MyCheckoutViewController(viewModel: CheckoutViewModel())
+//                self.navController?.pushViewController(vc, animated: true)
                 break
             case "Logout":
                 UserSessionManager.isLoggedIn = false
@@ -85,7 +86,7 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             case "Hefety Model":
                 let safariVC = SFSafariViewController(url: URL(string: "https://9ec0-34-74-104-29.ngrok-free.app/")!)
                 safariVC.modalPresentationStyle = .pageSheet
-                navController?.present(safariVC, animated: true)
+////                navController?.present(safariVC, animated: true)
                 //            case "Settings":
                 // TODO: change this after finle project
                 //                let vc = SettingViewController(settingViewModel: SettingViewModel())
@@ -100,11 +101,11 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             case "FAQs":
                 let safariVC = SFSafariViewController(url: URL(string: "http://www.appcoda.com/contact")!)
                 safariVC.modalPresentationStyle = .pageSheet
-                navController?.present(safariVC, animated: true)
+ ////               navController?.present(safariVC, animated: true)
             case "Privacy Policy":
                 let safariVC = SFSafariViewController(url: URL(string: "https://www.appcoda.com/privacy-policy/")!)
                 safariVC.modalPresentationStyle = .pageSheet
-                navController?.present(safariVC, animated: true)
+////                navController?.present(safariVC, animated: true)
                 break
             default:
                 break

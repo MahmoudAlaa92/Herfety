@@ -23,6 +23,7 @@ class OrderViewController: UIViewController {
     private var viewModel = OrderViewModel()
     private var sections: [CollectionViewDataSource] = []
     private var layoutProviders: [LayoutSectionProvider] = []
+    private var navigationBarBehavior: HerfetyNavigationController?
     ///
     weak var coordinator: CartTransitionDelegate?
     weak var alertPresenter: AlertPresenter?
@@ -80,7 +81,25 @@ extension OrderViewController: UICollectionViewDelegate {
 // MARK: - Configurations
 //
 private extension OrderViewController {
-    
+    /// Set up Navigation Bar
+    private func setUpNavigationBar() {
+
+        navigationItem.backButtonTitle = ""
+
+        navigationBarBehavior = HerfetyNavigationController(
+            navigationItem: navigationItem,
+            navigationController: navigationController
+        )
+
+        navigationBarBehavior?.configure(
+            title: "",
+            titleColor: .primaryBlue,
+            onPlus: { },
+            showRighBtn: false,
+            showBackButton: true) { [weak self] in
+                self?.coordinator?.backToProfileVC()
+            }
+    }
     /// Binds the payment view with the computed PaymentView.Model.
     private func configureViews() {
         paymentView.configure(with: paymentViewModel)
@@ -128,11 +147,6 @@ private extension OrderViewController {
     /// Configure UI
     private func configureUI() {
         proccedToPayment.title = "Procced to Payment"
-    }
-    
-    /// Navigation Bar
-    private func setUpNavigationBar() {
-        navigationItem.backButtonTitle = ""
     }
 }
 // MARK: - Binding

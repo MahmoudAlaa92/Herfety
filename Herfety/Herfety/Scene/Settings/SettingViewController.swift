@@ -15,6 +15,8 @@ class SettingViewController: UIViewController {
     private(set) var settingViewModel: SettingViewModel
     private(set) var sections: [CollectionViewDataSource] = []
     private(set) var layoutSections: [LayoutSectionProvider] = []
+    ///
+    weak var coordinator: PorfileTransionDelegate?
     // MARK: - Init
     init(settingViewModel: SettingViewModel) {
         self.settingViewModel = settingViewModel
@@ -45,7 +47,7 @@ extension SettingViewController {
         /// 1) First list
         let firstList = SettingCollectionViewSection(items: settingViewModel.firstList)
         /// 2) Second list
-        let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList, navContoller: navigationController)
+        let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList, coordinator: coordinator)
         /// 3) Logout button
         let logoutButton = LogoutButtonCollectionViewSection()
         

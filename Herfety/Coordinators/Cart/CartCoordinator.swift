@@ -9,6 +9,7 @@ import UIKit
 
 protocol CartTransitionDelegate: AnyObject {
     func goToInfoVC()
+    func backToProfileVC()
 }
 
 protocol CartChildDelegate: AnyObject {
@@ -16,6 +17,8 @@ protocol CartChildDelegate: AnyObject {
 }
 
 class CartCoordinator: Coordinator {
+    
+    weak var parentCoordinator: ProfileChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alertPresenter: AlertPresenter
@@ -30,10 +33,11 @@ class CartCoordinator: Coordinator {
     }
     
     func start() {
+        
         let cartVC = OrderViewController()
         cartVC.coordinator = self
         cartVC.alertPresenter = alertPresenter
-        navigationController.pushViewController(cartVC, animated: false)
+        navigationController.transition(to: cartVC, with: .push)
     }
 }
 // MARK: - Transition Delegate
@@ -45,8 +49,13 @@ extension CartCoordinator: CartTransitionDelegate {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+    
+    func backToProfileVC() {
+        parentCoordinator?.backToProfile(self)
+        navigationController.popViewController(animated: true)
+    }
 }
-// MARK: - Transition Delegate
+// MARK: - Child Delegate
 //
 extension CartCoordinator: CartChildDelegate {
     func backToCartVC(_ coordinator: Coordinator) {

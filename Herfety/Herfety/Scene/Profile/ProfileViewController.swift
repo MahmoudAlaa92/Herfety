@@ -17,6 +17,8 @@ class ProfileViewController: UIViewController {
     private var profileListViewModel: ProfileListViewModel
     private var sections: [CollectionViewDataSource] = []
     private var layoutSections: [LayoutSectionProvider] = []
+    ///
+    weak var coordinator: PorfileTransionDelegate?
     private var subscription =  Set<AnyCancellable>()
     // MARK: - Init
     init(nameViewModel: NameViewModel, profileListViewModel: ProfileListViewModel){
@@ -40,6 +42,7 @@ class ProfileViewController: UIViewController {
 // MARK: - Configuration
 //
 extension ProfileViewController {
+
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -48,9 +51,9 @@ extension ProfileViewController {
         // 1) Header
         let name = NameOfProfileCollectionViewSection(sectionName: nameViewModel.nameItem)
         // 2) First list
-        let firstList = ProfileListCollectionViewSection(items: profileListViewModel.firstList, navContoller: navigationController)
+        let firstList = ProfileListCollectionViewSection(items: profileListViewModel.firstList, coordinator: coordinator)
         // 3) Second list
-        let secondList = ProfileListCollectionViewSection(items: profileListViewModel.secondList, navContoller: navigationController)
+        let secondList = ProfileListCollectionViewSection(items: profileListViewModel.secondList, coordinator: coordinator)
         
         sections = [name, firstList, secondList]
         sections.forEach( { $0.registerCells(in: collectionView) })

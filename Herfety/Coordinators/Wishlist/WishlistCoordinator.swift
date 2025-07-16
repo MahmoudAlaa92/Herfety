@@ -8,11 +8,15 @@
 import UIKit
 
 class WishlistCoordinator: Coordinator {
+    
+    weak var parentCoordinator: PorfileTransionDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    let alertPresenter: AlertPresenter
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, alertPresenter: AlertPresenter) {
         self.navigationController = navigationController
+        self.alertPresenter = alertPresenter
     }
     
     deinit {

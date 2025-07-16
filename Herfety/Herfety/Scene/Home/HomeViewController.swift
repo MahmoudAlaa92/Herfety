@@ -9,8 +9,9 @@ import Combine
 
 class HomeViewController: UIViewController {
     
+    // MARK: - Outlets
+    private var subscriptions = Set<AnyCancellable>()
     // MARK: - Properties
-    //
     private var navigationBarBehavior: HomeNavBar?
     private var viewModel = HomeViewModel()
     private var sections: [CollectionViewDataSource] = []
@@ -24,9 +25,6 @@ class HomeViewController: UIViewController {
     ///
     weak var coordinator: HomeCoordinator?
     weak var alertPresenter: AlertPresenter?
-    ///
-    private var subscriptions = Set<AnyCancellable>()
-    // MARK: - Outlets
     //
     @IBOutlet weak var collectionView: UICollectionView!
     // MARK: - Lifecycle
