@@ -56,7 +56,7 @@ extension ProfileCoordinator: PorfileTransionDelegate {
         coordinator.start()
     }
 }
-// MARK: - Transtion Delegate
+// MARK: - Child Delegate
 //
 extension ProfileCoordinator: ProfileChildDelegate {
     

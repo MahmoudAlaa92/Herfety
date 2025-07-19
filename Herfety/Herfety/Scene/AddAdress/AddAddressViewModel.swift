@@ -21,7 +21,7 @@ class AddAddressViewModel:AddAddressViewModelType {
     // MARK: - Outputs
     let isAddButtonEnabled: AnyPublisher<Bool, Never>
     let success = PassthroughSubject<Void, Never>()
-    let showAlert = PassthroughSubject<String, Never>()
+    let showAlert = PassthroughSubject<AlertModel, Never>()
     
     weak var coordinator: AddAddressChildDelegate?
     // MARK: - Init
@@ -69,7 +69,13 @@ extension AddAddressViewModel {
         let phone = phoneSubject.value
         
         if name.isEmpty || address.isEmpty || phone.isEmpty {
-            showAlert.send("One of the text fields is empty")
+            let alertItem = AlertModel(
+                message: "One of the text fields is empty",
+                buttonTitle: "OK",
+                image: .warning,
+                status: .warning
+            )
+            showAlert.send(alertItem)
             return
         }
         

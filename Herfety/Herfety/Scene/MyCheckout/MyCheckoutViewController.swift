@@ -41,12 +41,13 @@ class MyCheckoutViewController: UIViewController {
         )
 
         navigationBarBehavior?.configure(
-            title: "",
+            title: "Payment Method",
             titleColor: .primaryBlue,
             onPlus: { 
                 /// plus button not appear in this VC
             },
-            showBackButton: true
+            showRighBtn: false,
+            showBackButton: true,
         ) { [weak self] in
             self?.coordinator?.backToInfoVC()
         }

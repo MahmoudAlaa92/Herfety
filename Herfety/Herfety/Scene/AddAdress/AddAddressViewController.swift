@@ -52,11 +52,12 @@ extension AddAddressViewController {
         )
 
         navigationBarBehavior?.configure(
-            title: "",
+            title: "Add Address",
             titleColor: .primaryBlue,
             onPlus: {
                 /// plus button not appear in this VC
             },
+            showRighBtn: false,
             showBackButton: true
         ) { [weak self] in
             self?.coordinator?.backToInfoVC()
@@ -114,14 +115,8 @@ extension AddAddressViewController {
             .store(in: &cancellables)
 
         viewModel.showAlert
-            .sink { [weak self] message in
-                let alertItem = AlertModel(
-                    message: message,
-                    buttonTitle: "OK",
-                    image: .warning,
-                    status: .warning
-                )
-                self?.alertPresenter?.showAlert(alertItem)
+            .sink { [weak self] alert in
+                self?.alertPresenter?.showAlert(alert)
             }
             .store(in: &cancellables)
     }

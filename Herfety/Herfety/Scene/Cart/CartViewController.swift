@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class OrderViewController: UIViewController {
+class CartViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak private(set) var paymentView: PaymentView!
@@ -16,11 +16,11 @@ class OrderViewController: UIViewController {
     
     @IBOutlet weak var proccedToPayment: PrimaryButton!
     // MARK: - Properties
-    private let orderViewModel = OrderViewModel()
+    private let orderViewModel = CartViewModel()
     private lazy var paymentViewModel: PaymentView.Model = {
         return orderViewModel.paymentInfo
     }()
-    private var viewModel = OrderViewModel()
+    private var viewModel = CartViewModel()
     private var sections: [CollectionViewDataSource] = []
     private var layoutProviders: [LayoutSectionProvider] = []
     private var navigationBarBehavior: HerfetyNavigationController?
@@ -43,7 +43,7 @@ class OrderViewController: UIViewController {
 }
 // MARK: - UICollectionViewDataSource
 //
-extension OrderViewController: UICollectionViewDataSource {
+extension CartViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         sections.count
@@ -68,7 +68,7 @@ extension OrderViewController: UICollectionViewDataSource {
 }
 // MARK: - Delegate
 //
-extension OrderViewController: UICollectionViewDelegate {
+extension CartViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         contextMenuConfigurationForItemAt indexPath: IndexPath,
                         point: CGPoint) -> UIContextMenuConfiguration? {
@@ -80,7 +80,7 @@ extension OrderViewController: UICollectionViewDelegate {
 }
 // MARK: - Configurations
 //
-private extension OrderViewController {
+private extension CartViewController {
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
 
@@ -113,7 +113,7 @@ private extension OrderViewController {
     
     private func configureProvider() {
         CustomeTabBarViewModel.shared.$cartItems.sink { [weak self] value in
-            let orderProvider = OrderCollectionViewSection(orderItems: value)
+            let orderProvider = CartCollectionViewSection(orderItems: value)
             guard let self = self else { return }
             self.sections = [orderProvider]
             self.collectionView.reloadData()
@@ -151,7 +151,7 @@ private extension OrderViewController {
 }
 // MARK: - Binding
 //
-extension OrderViewController {
+extension CartViewController {
     
     private func bindViewModel() {
         /// Navigate to Shipping VC
@@ -179,7 +179,7 @@ extension OrderViewController {
 }
 // MARK: - Actions
 //
-extension OrderViewController {
+extension CartViewController {
  
     @IBAction func paymentPressed(_ sender: Any) {
        /// payment Pressed in order

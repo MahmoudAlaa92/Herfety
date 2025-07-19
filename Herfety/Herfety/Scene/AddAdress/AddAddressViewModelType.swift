@@ -20,5 +20,5 @@ protocol AddAddressViewModelInput {
 protocol AddAddressViewModelOutput {
     var isAddButtonEnabled: AnyPublisher<Bool, Never> { get }
     var success: PassthroughSubject<Void, Never> { get }
-    var showAlert: PassthroughSubject<String, Never> { get }
+    var showAlert: PassthroughSubject<AlertModel, Never> { get }
 }

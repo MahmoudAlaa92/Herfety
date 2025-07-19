@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class OrderCollectionViewSection: CollectionViewDataSource {
+class CartCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
     let orderItems: [Wishlist]
     let countUpdateSubject = PassthroughSubject<(Int, Int), Never>()
@@ -51,7 +51,7 @@ class OrderCollectionViewSection: CollectionViewDataSource {
 }
 // MARK: - Delegate
 //
-extension OrderCollectionViewSection: ContextMenuProvider {
+extension CartCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
@@ -64,7 +64,7 @@ extension OrderCollectionViewSection: ContextMenuProvider {
 }
 // MARK: - Header And Foter for category
 //
-extension OrderCollectionViewSection: HeaderAndFooterProvider {
+extension CartCollectionViewSection: HeaderAndFooterProvider {
     func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == "Header" {

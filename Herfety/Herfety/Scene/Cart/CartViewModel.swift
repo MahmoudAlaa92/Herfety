@@ -7,7 +7,7 @@
 import UIKit
 import Combine
 
-class OrderViewModel: ObservableObject {
+class CartViewModel: ObservableObject {
     // MARK: - Properties
     @Published var orderItems: [Wishlist] = []
     @Published private(set) var paymentInfo: PaymentView.Model = PaymentView.Model(subTotal: 0, shipping: 0, total: 0, numberOfItems: 0)
@@ -41,7 +41,7 @@ class OrderViewModel: ObservableObject {
 }
 // MARK: - Private Handlers
 //
-extension OrderViewModel {
+extension CartViewModel {
     private func observeOrderUpdates() {
         CustomeTabBarViewModel
             .shared

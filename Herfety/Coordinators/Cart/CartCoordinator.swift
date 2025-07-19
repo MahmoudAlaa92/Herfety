@@ -34,7 +34,7 @@ class CartCoordinator: Coordinator {
     
     func start() {
         
-        let cartVC = OrderViewController()
+        let cartVC = CartViewController()
         cartVC.coordinator = self
         cartVC.alertPresenter = alertPresenter
         navigationController.transition(to: cartVC, with: .push)

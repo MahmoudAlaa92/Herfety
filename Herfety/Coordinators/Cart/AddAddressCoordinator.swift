@@ -30,7 +30,7 @@ class AddAddressCoordinator: Coordinator {
     }
 
     deinit {
-        print("deninit \(Self.self)")
+        print("deinit \(Self.self)")
     }
 }
 // MARK: - Child Delegate
