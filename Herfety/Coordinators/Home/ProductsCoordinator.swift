@@ -35,7 +35,7 @@ class ProductsCoordinator: NSObject, Coordinator {
         
         let ProductsVC = ProductsViewController(viewModel: viewModel)
         ProductsVC.coordinator = self
-        navigationController.pushViewController(ProductsVC, animated: true)
+        navigationController.transition(to: ProductsVC, with: .push)
     }
     
     deinit {
@@ -58,7 +58,7 @@ extension ProductsCoordinator: ProductsTransitionDelegate {
     
     func backToHomeVC() {
         parentCoordinator?.backToHome(self)
-        navigationController.popViewController(animated: true)
+        navigationController.pop(with: .push)
     }
     
     func goToProductDetails(productDetails: Wishlist) {

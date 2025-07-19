@@ -27,7 +27,7 @@ class LoginCoordinator: Coordinator {
         let loginVC = LoginViewController(viewModel: LoginViewModel())
 
         loginVC.coordinator = self
-        navigationController.pushViewController(loginVC, animated: true)
+        navigationController.transition(to: loginVC, with: .push)
     }
     
     deinit {

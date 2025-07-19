@@ -40,13 +40,11 @@ extension ButtonCollectionReusableView {
 extension ButtonCollectionReusableView {
     @IBAction func addToCart(_ sender: Any) {
         
-        if var orderItem =  order,
+        if var orderItem = order,
            !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order }) {
             orderItem.qty = CustomeTabBarViewModel.shared.countProductDetails
             CustomeTabBarViewModel.shared.cartItems.append(orderItem)
-        } else {
-            // TODO: show alert, the item added before
-            print("Added")
+            CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(false)
         }
     }
 }

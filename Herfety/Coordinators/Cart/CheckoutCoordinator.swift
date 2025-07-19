@@ -27,7 +27,7 @@ class CheckoutCoordinator: Coordinator {
         let checkoutVC = MyCheckoutViewController(viewModel: CheckoutViewModel())
         checkoutVC.alertPresenter = alertPresenter
         checkoutVC.coordinator = self
-        navigationController.pushViewController(checkoutVC, animated: true)
+        navigationController.transition(to: checkoutVC, with: .push)
     }
 
     deinit {
@@ -40,6 +40,6 @@ class CheckoutCoordinator: Coordinator {
 extension CheckoutCoordinator: CheckoutTransionDelegate {
     func backToInfoVC() {
         parentCoordinator?.backToInfoVC(self)
-        navigationController.popViewController(animated: true)
+        navigationController.pop(with: .push)
     }
 }

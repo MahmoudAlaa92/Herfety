@@ -30,7 +30,7 @@ class SignUpCoordinator: Coordinator {
     func start() {
         let signVC = SignupViewController()
         signVC.coordinator = self
-        navigationController.pushViewController(signVC, animated: true)
+        navigationController.transition(to: signVC, with: .push)
     }
 }
 // MARK: - Transition Delegate

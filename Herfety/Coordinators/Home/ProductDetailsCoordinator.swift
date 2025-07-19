@@ -40,8 +40,7 @@ class PoroductDetailsCoordinator: Coordinator {
         let productsDetailsVC = ProductDetailsViewController(viewModel: viewModel)
         productsDetailsVC.coordinator = self
         productsDetailsVC.alertPresenter = alertCoordinator
-        
-        navigationController.pushViewController(productsDetailsVC, animated: true)
+        navigationController.transition(to: productsDetailsVC, with: .push)
     }
     
     deinit {
@@ -58,7 +57,8 @@ extension PoroductDetailsCoordinator: PoroductsDetailsTransitionDelegate {
     
     func backToProductsVC() {
         productsParentCoordinator?.backToProductsVC(self)
-        navigationController.popViewController(animated: true)
+        navigationController.pop(with: .push)
+
     }
    // TODO: 'Change' the same coordinator
     func goToProductDetailsVC(productDetails: Wishlist) {

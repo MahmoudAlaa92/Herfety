@@ -96,7 +96,7 @@ private extension OrderViewController {
             titleColor: .primaryBlue,
             onPlus: { },
             showRighBtn: false,
-            showBackButton: true) { [weak self] in
+            showBackButton: false) { [weak self] in
                 self?.coordinator?.backToProfileVC()
             }
     }

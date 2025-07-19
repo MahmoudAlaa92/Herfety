@@ -26,7 +26,7 @@ class AddAddressCoordinator: Coordinator {
         let addressVC = AddAddressViewController(viewModel: AddAddressViewModel())
         addressVC.coordinator = self
         addressVC.alertPresenter = alertPresenter
-        navigationController.pushViewController(addressVC, animated: true)
+        navigationController.transition(to: addressVC, with: .push)
     }
 
     deinit {
@@ -38,6 +38,6 @@ class AddAddressCoordinator: Coordinator {
 extension AddAddressCoordinator: AddAddressChildDelegate {
     func backToInfoVC() {
         parentCoordinator?.backToInfoVC(self)
-        navigationController.popViewController(animated: true)
+        navigationController.pop(with: .push)
     }
 }

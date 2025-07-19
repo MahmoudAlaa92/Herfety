@@ -28,7 +28,7 @@ class SuccessCoordinator: Coordinator {
         }
         SuccessVC.coordinator = self
         SuccessVC.modalPresentationStyle = .fullScreen
-        navigationController.present(SuccessVC, animated: true)
+        navigationController.present(SuccessVC ,with: .push)
     }
     
     deinit {

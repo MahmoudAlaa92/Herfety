@@ -25,6 +25,6 @@ class WishlistCoordinator: Coordinator {
     
     func start() {
         let wishlistVC = WishListViewController()
-        navigationController.pushViewController(wishlistVC, animated: false)
+        navigationController.transition(to: wishlistVC, with: .push)
     }
 }

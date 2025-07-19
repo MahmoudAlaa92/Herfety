@@ -36,7 +36,7 @@ class ProfileCoordinator: Coordinator {
             profileListViewModel: ProfileListViewModel()
         )
         profileVC.coordinator = self
-        navigationController.pushViewController(profileVC, animated: true)
+        navigationController.transition(to: profileVC, with: .push)
     }
 }
 // MARK: - Transtion Delegate

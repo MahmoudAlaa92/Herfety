@@ -52,7 +52,7 @@ extension CartCoordinator: CartTransitionDelegate {
     
     func backToProfileVC() {
         parentCoordinator?.backToProfile(self)
-        navigationController.popViewController(animated: true)
+        navigationController.pop(with: .push)
     }
 }
 // MARK: - Child Delegate

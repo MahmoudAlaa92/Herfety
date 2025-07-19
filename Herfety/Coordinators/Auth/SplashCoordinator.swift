@@ -33,7 +33,7 @@ class SplashCoordinator: NSObject, Coordinator {
         let splashVC = SplashViewController(viewModel: SplashViewModel())
         splashVC.coordinator = self
         navigationController.delegate = self
-        navigationController.pushViewController(splashVC, animated: true)
+        navigationController.transition(to: splashVC, with: .push)
     }
 }
 // MARK: - Transition Delegate
@@ -82,7 +82,8 @@ extension SplashCoordinator: SplashChildDelegate, UINavigationControllerDelegate
     func pop(_ coordinator: Coordinator) {
         if let index = childCoordinators.firstIndex(where: { $0 === coordinator}) {
             childCoordinators.remove(at: index)
-            navigationController.popViewController(animated: true)
+            navigationController.pop(with: .push)
+
         }
     }
 }

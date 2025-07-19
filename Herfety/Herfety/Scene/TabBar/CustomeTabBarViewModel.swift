@@ -82,7 +82,7 @@ extension CustomeTabBarViewModel {
         productItem.removeProduct(userId: userId, productId: productId) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case.success(let message):
+                case.success(_):
                     self?.Wishlist.remove(at: indexPath.row)
                 case .failure(let error):
                     print("error \(error)")

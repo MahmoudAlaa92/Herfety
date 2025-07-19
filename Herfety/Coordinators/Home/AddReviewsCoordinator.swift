@@ -28,7 +28,7 @@ class AddReviewsCoordinator: Coordinator {
         let addReviewsVC = AddReviewViewController(viewModel: viewModel)
         
         addReviewsVC.coordinator = self
-        navigationController.pushViewController(addReviewsVC, animated: true)
+        navigationController.transition(to: addReviewsVC, with: .push)
     }
     
     deinit {
@@ -41,6 +41,6 @@ extension AddReviewsCoordinator: AddReviewsChildDelegate {
     
     func backToReviewersVC() {
         parentCoordinator?.backToReviewersVC(self)
-        navigationController.popViewController(animated: true)
+        navigationController.pop(with: .push)
     }
 }

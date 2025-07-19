@@ -31,7 +31,7 @@ class InfoCoordinator: Coordinator {
     func start() {
         let shippingVC = InfoViewController()
         shippingVC.coordinator = self
-        self.navigationController.pushViewController(shippingVC, animated: true)
+        navigationController.transition(to: shippingVC, with: .push)
     }
     
     deinit {
@@ -58,7 +58,7 @@ extension InfoCoordinator: InfoTransitionDelegate {
     
     func backToCartVC() {
         parentCoordinator?.backToCartVC(self)
-        navigationController.popViewController(animated: true)
+        navigationController.pop(with: .push)
     }
 }
 // MARK: - Child Delegate

@@ -35,7 +35,7 @@ class ReviewersCoordinator: Coordinator {
         
         let reviewrsVC = ReviewersViewController(viewModel: viewModel)
         reviewrsVC.coordinator = self
-        navigationController.pushViewController(reviewrsVC, animated: true)
+        navigationController.transition(to: reviewrsVC, with: .push)
     }
     
     deinit {
@@ -48,7 +48,7 @@ extension ReviewersCoordinator: ReviewersTransitionDelegate {
     
     func backToProductDetialsVC() {
         parentCoordinator?.backToProductDetails(self)
-        navigationController.popViewController(animated: true)
+        navigationController.pop(with: .push)
     }
     
     func goToAddReviewersVC(viewModel: AddReviewViewModel) {

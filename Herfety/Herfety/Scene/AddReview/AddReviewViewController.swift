@@ -102,7 +102,8 @@ extension AddReviewViewController {
         )
         
         alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.pop(with: .push)
+            self?.coordinator?.backToReviewersVC()
         })
         
         present(alert, animated: true)

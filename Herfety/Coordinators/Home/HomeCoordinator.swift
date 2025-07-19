@@ -41,8 +41,7 @@ class HomeCoordinator: NSObject, Coordinator {
         let homeVC = HomeViewController()
         homeVC.coordinator = self
         homeVC.alertPresenter = alertPresenter
-        
-        navigationController.pushViewController(homeVC, animated: false)
+        navigationController.transition(to: homeVC, with: .push)
     }
 }
 // MARK: - Home Transition Delegate

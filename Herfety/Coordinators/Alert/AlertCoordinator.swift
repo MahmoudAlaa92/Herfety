@@ -30,6 +30,6 @@ final class AlertCoordinator: AlertPresenter {
             alertVC?.dismiss(animated: true)
         }
         
-        rootViewController?.present(alertVC, animated: true)
+        rootViewController?.presentAlertWithTransition(alertVC, type: .fade)
     }
 }

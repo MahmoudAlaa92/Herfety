@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backButtonTitle = ""
         configureSections()
         configureLayoutSections()
         setUpCollectionView()
