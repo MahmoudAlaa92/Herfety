@@ -77,6 +77,14 @@ extension AddAddressViewController {
         addressTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         phoneTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
     }
+}
+// MARK: - Actions
+//
+extension AddAddressViewController {
+    @IBAction func addPressed(_ sender: Any) {
+        viewModel.addButtonTapped()
+    }
+    
     @objc private func textDidChange(_ sender: UITextField) {
         if sender == nameTextField.textField {
             viewModel.updateName(sender.text ?? "")
@@ -86,7 +94,10 @@ extension AddAddressViewController {
             viewModel.updatePhone(sender.text ?? "")
         }
     }
-
+}
+// MARK: - Binding
+//
+extension AddAddressViewController {
     private func bindViewModel() {
         viewModel.isAddButtonEnabled
             .receive(on: DispatchQueue.main)
@@ -104,7 +115,6 @@ extension AddAddressViewController {
 
         viewModel.showAlert
             .sink { [weak self] message in
-                print("YES")
                 let alertItem = AlertModel(
                     message: message,
                     buttonTitle: "OK",
@@ -114,12 +124,5 @@ extension AddAddressViewController {
                 self?.alertPresenter?.showAlert(alertItem)
             }
             .store(in: &cancellables)
-    }
-}
-// MARK: - Actions
-//
-extension AddAddressViewController {
-    @IBAction func addPressed(_ sender: Any) {
-        viewModel.addButtonTapped()
     }
 }

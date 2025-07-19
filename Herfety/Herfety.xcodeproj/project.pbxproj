@@ -54,6 +54,7 @@
 		1532F3512D5E8EB5003223A1 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3502D5E8EB5003223A1 /* InfoViewModel.swift */; };
 		1532F3532D5E8EC1003223A1 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3522D5E8EC1003223A1 /* InfoModel.swift */; };
 		1532F3592D5EB297003223A1 /* HerfetyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532F3582D5EB297003223A1 /* HerfetyNavigationController.swift */; };
+		153427B22E2B7E2B007E2140 /* AddReviewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153427B12E2B7E2B007E2140 /* AddReviewViewModelType.swift */; };
 		153944E62DCF7BB1008465BB /* MultipartFormDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944E52DCF7BB1008465BB /* MultipartFormDataRequest.swift */; };
 		153944E82DCF857E008465BB /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944E72DCF857E008465BB /* SignupViewModel.swift */; };
 		153944EA2DCFA9A3008465BB /* LoginRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153944E92DCFA9A3008465BB /* LoginRemote.swift */; };
@@ -300,6 +301,7 @@
 		1532F3502D5E8EB5003223A1 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		1532F3522D5E8EC1003223A1 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		1532F3582D5EB297003223A1 /* HerfetyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerfetyNavigationController.swift; sourceTree = "<group>"; };
+		153427B12E2B7E2B007E2140 /* AddReviewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewViewModelType.swift; sourceTree = "<group>"; };
 		153944E52DCF7BB1008465BB /* MultipartFormDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataRequest.swift; sourceTree = "<group>"; };
 		153944E72DCF857E008465BB /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		153944E92DCFA9A3008465BB /* LoginRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRemote.swift; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 		1513DD3F2DF37B3D001EB3B3 /* AddReview */ = {
 			isa = PBXGroup;
 			children = (
+				153427B12E2B7E2B007E2140 /* AddReviewViewModelType.swift */,
 				154B7D212DF3824B00854E61 /* AddReview.swift */,
 				154B7D232DF3835900854E61 /* AddReviewViewModel.swift */,
 				1513DD442DF3811D001EB3B3 /* AddReviewViewController.swift */,
@@ -1764,6 +1767,7 @@
 				15E33A2D2DD4AEFD0004D408 /* ForgetPasswordViewModel.swift in Sources */,
 				158B39D32D7A41F800D58B07 /* ProfileListCollectionViewSection.swift in Sources */,
 				158B39CE2D7A380B00D58B07 /* ProfileListModel.swift in Sources */,
+				153427B22E2B7E2B007E2140 /* AddReviewViewModelType.swift in Sources */,
 				154167942D9D33E8007E4CAA /* LabelAndTextFieldCollectionViewCell.swift in Sources */,
 				159B57852DCBCA5300CDD958 /* SignupViewController.swift in Sources */,
 				158A7EAD2DB5663100B89684 /* GoogleButton.swift in Sources */,

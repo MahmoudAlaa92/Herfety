@@ -24,12 +24,12 @@ final class AlertCoordinator: AlertPresenter {
         alertVC.modalPresentationStyle = .overFullScreen
         alertVC.modalTransitionStyle = .crossDissolve
         alertVC.loadViewIfNeeded()
+        
         alertVC.show(alertItem: alert)
         
         alertVC.actionHandler = { [weak alertVC] in
             alertVC?.dismiss(animated: true)
         }
-        
         rootViewController?.presentAlertWithTransition(alertVC, type: .fade)
     }
 }

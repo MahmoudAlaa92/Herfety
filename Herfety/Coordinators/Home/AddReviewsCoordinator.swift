@@ -17,10 +17,12 @@ class AddReviewsCoordinator: Coordinator {
     var childCoordinators = [ Coordinator]()
     var navigationController: UINavigationController
     var viewModel: AddReviewViewModel
+    let alertPresneter: AlertPresenter
     
     init(navigationController: UINavigationController, viewModel: AddReviewViewModel) {
         self.navigationController = navigationController
         self.viewModel = viewModel
+        self.alertPresneter = AlertCoordinator(presentingViewController: navigationController)
     }
     
     func start() {
@@ -28,6 +30,7 @@ class AddReviewsCoordinator: Coordinator {
         let addReviewsVC = AddReviewViewController(viewModel: viewModel)
         
         addReviewsVC.coordinator = self
+        addReviewsVC.alertPresenter = alertPresneter
         navigationController.transition(to: addReviewsVC, with: .push)
     }
     

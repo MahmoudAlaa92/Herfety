@@ -51,13 +51,12 @@ extension AddAddressViewModel {
     func updateAddress(_ text: String) {
         addressSubject.send(text)
     }
-    
+
     func updatePhone(_ text: String) {
         phoneSubject.send(text)
     }
     
     func addButtonTapped() {
-        print("d")
         addTappedSubject.send()
     }
 }
@@ -70,7 +69,6 @@ extension AddAddressViewModel {
         let phone = phoneSubject.value
         
         if name.isEmpty || address.isEmpty || phone.isEmpty {
-            print(":A")
             showAlert.send("One of the text fields is empty")
             return
         }

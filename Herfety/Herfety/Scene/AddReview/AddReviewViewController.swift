@@ -18,6 +18,7 @@ class AddReviewViewController: UIViewController {
     private var navBarBehavior: HerfetyNavigationController?
     private var cancellables = Set<AnyCancellable>()
     weak var coordinator: AddReviewsChildDelegate?
+    weak var alertPresenter: AlertPresenter?
     
     // MARK: - Init
     init(viewModel: AddReviewViewModel) {
@@ -33,7 +34,7 @@ class AddReviewViewController: UIViewController {
         setUpNavigationBar()
         configureUI()
         setUpuNavigationBar()
-        configureTextFieldsPlaceholder()
+        configureTextFields()
         bindViewModel()
     }
 }
@@ -68,8 +69,11 @@ extension AddReviewViewController {
         navigationItem.title = "Add Review"
     }
     /// Text Feild
-    private func configureTextFieldsPlaceholder() {
+    private func configureTextFields() {
         AddReviewTextField.placeholder = "Enter your Comment"
+        AddReviewTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        
+        ratingTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         ratingTextField.placeholder = "Rating (1-5)"
         ratingTextField.textField.keyboardType = .numberPad
     }
@@ -77,67 +81,38 @@ extension AddReviewViewController {
 // MARK: - Actions
 //
 extension AddReviewViewController {
+    @objc private func textDidChange(_ sender: UITextField) {
+        if sender == AddReviewTextField.textField {
+            viewModel.updateReviewText(sender.text ?? "")
+        }else if sender == ratingTextField.textField {
+            viewModel.updateRating(sender.text ?? "")
+        }
+    }
     @IBAction func addPressed(_ sender: Any) {
-        let reviewText = AddReviewTextField.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-         let ratingText = ratingTextField.textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-         
-         // Validate inputs
-         guard
-             !reviewText.isEmpty,
-             !ratingText.isEmpty,
-             let ratingValue = Int(ratingText),
-             (1...5).contains(ratingValue)
-         else {
-             showAlert(title: "Invalid Input", message: "Please enter:\n- Review text\n- Rating between 1-5")
-             return
-         }
-        viewModel.submitReview(review: reviewText, rating: ratingText)
+        viewModel.addButtontapped()
     }
-    
-    private func showSuccessAndPop() {
-        let alert = UIAlertController(
-            title: "Success",
-            message: "Your review has been added",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-            self?.navigationController?.pop(with: .push)
-            self?.coordinator?.backToReviewersVC()
-        })
-        
-        present(alert, animated: true)
-    }
-    
-    private func showErrorAlert() {
-        showAlert(
-            title: "Error",
-            message: "Failed to add review. Please try again."
-        )
-    }
-    
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
 }
 // MARK: - Binding
 //
 extension AddReviewViewController {
     private func bindViewModel() {
-        viewModel.reviewSubmissionResult
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] result in
-                switch result {
-                case .success:
-                    self?.showSuccessAndPop()
-                case .failure (let error):
-                    print(error.localizedDescription)
-                    self?.showErrorAlert()
-                }
+        
+        viewModel.isAddButtonEnabled
+            .sink { [weak self] isEnabled in
+                self?.addButton.isEnabled = isEnabled
+                self?.addButton.alpha = isEnabled ? 1.0 : 0.6
             }
             .store(in: &cancellables)
+        
+        viewModel.showAlert
+            .sink { [weak self] alert in
+                self?.alertPresenter?.showAlert(alert)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.isSuccess.sink { [weak self] in
+            self?.coordinator?.backToReviewersVC()
+        }.store(in: &cancellables)
+        
     }
 }
