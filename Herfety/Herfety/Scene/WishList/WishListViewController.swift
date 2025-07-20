@@ -9,16 +9,21 @@ import UIKit
 
 class WishListViewController: UIViewController {
 
-    // MARK: - Properties
-    private var sections = [CollectionViewDataSource]()
-    private var layoutProviders = [LayoutSectionProvider]()
-    
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    // MARK: - Properties
+    private var navigationBarBehavior: HerfetyNavigationController?
+    private var sections = [CollectionViewDataSource]()
+    private var layoutProviders = [LayoutSectionProvider]()
+    var isShowBackButton = false
+    ///
+    weak var coordinator: WishlistTransitionDelegate?
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavigationBar()
         configureProvider()
         cofigureCompositianalLayout()
         setUpCollectionView()
@@ -28,7 +33,25 @@ class WishListViewController: UIViewController {
 // MARK: - Configure
 //
 extension WishListViewController {
-    
+    /// Set up Navigation Bar
+    private func setUpNavigationBar() {
+
+        navigationItem.backButtonTitle = ""
+
+        navigationBarBehavior = HerfetyNavigationController(
+            navigationItem: navigationItem,
+            navigationController: navigationController
+        )
+
+        navigationBarBehavior?.configure(
+            title: "",
+            titleColor: .primaryBlue,
+            onPlus: { },
+            showRighBtn: false,
+            showBackButton: isShowBackButton) { [weak self] in
+                 self?.coordinator?.backToProfileVC()
+            }
+    }
     /// Configure Provider
     private func configureProvider() {
         CustomeTabBarViewModel

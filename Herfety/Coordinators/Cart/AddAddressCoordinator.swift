@@ -12,7 +12,7 @@ protocol AddAddressChildDelegate: AnyObject {
 }
 
 class AddAddressCoordinator: Coordinator {
-    weak var parentCoordinator: InfoChildDelegate?
+    weak var parentCoordinator: ParentCheckoutDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alertPresenter: AlertPresenter
@@ -37,7 +37,7 @@ class AddAddressCoordinator: Coordinator {
 //
 extension AddAddressCoordinator: AddAddressChildDelegate {
     func backToInfoVC() {
-        parentCoordinator?.backToInfoVC(self)
+        parentCoordinator?.removeCheckoutChild(self)
         navigationController.pop(with: .push)
     }
 }

@@ -46,27 +46,24 @@ class ProfileListCollectionViewSection: CollectionViewDataSource {
 //
 extension ProfileListCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: Change navigation with coordinator
         if indexPath.section == 1 {
             let item = items[indexPath.item]
             
             switch item.title {
             case "My Order":
-//                let vc = OrderViewController()
-//                self.navController?.pushViewController(vc, animated: true)
                 self.coordinator?.gotToCartVC()
                 break
             case "My Favourites":
-//                let vc = WishListViewController()
-//                self.navController?.pushViewController(vc, animated: true)
+                self.coordinator?.gotToWishlistVC()
                 break
             case "Shipping Address":
-//                let vc = InfoViewController()
-//                self.navController?.pushViewController(vc, animated: true)
+                self.coordinator?.gotToShippingVC()
                 break
             case "My Card":
-//                let vc = MyCheckoutViewController(viewModel: CheckoutViewModel())
-//                self.navController?.pushViewController(vc, animated: true)
+                self.coordinator?.gotToMyCardVC()
+                break
+            case "Setting":
+                self.coordinator?.gotToSettingVC()
                 break
             case "Logout":
                 UserSessionManager.isLoggedIn = false
@@ -83,15 +80,7 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
                     }
                 }
                 break
-            case "Hefety Model":
-                let safariVC = SFSafariViewController(url: URL(string: "https://9ec0-34-74-104-29.ngrok-free.app/")!)
-                safariVC.modalPresentationStyle = .pageSheet
-////                navController?.present(safariVC, animated: true)
-                //            case "Settings":
-                // TODO: change this after finle project
-                //                let vc = SettingViewController(settingViewModel: SettingViewModel())
-                //                self.navController?.pushViewController(vc, animated: true)
-                //                break
+
             default:
                 break
             }
@@ -99,13 +88,10 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             let item = items[indexPath.item]
             switch item.title {
             case "FAQs":
-                let safariVC = SFSafariViewController(url: URL(string: "http://www.appcoda.com/contact")!)
-                safariVC.modalPresentationStyle = .pageSheet
- ////               navController?.present(safariVC, animated: true)
+                self.coordinator?.gotToSafari(url: "http://www.appcoda.com/contact")
+                break
             case "Privacy Policy":
-                let safariVC = SFSafariViewController(url: URL(string: "https://www.appcoda.com/privacy-policy/")!)
-                safariVC.modalPresentationStyle = .pageSheet
-////                navController?.present(safariVC, animated: true)
+                self.coordinator?.gotToSafari(url: "https://www.appcoda.com/privacy-policy/")
                 break
             default:
                 break

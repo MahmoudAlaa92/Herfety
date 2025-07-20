@@ -13,7 +13,7 @@ protocol CheckoutTransionDelegate: AnyObject {
 
 class CheckoutCoordinator: Coordinator {
     
-    weak var parentCoordinator: InfoChildDelegate?
+    weak var parentCoordinator: ParentCheckoutDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alertPresenter: AlertPresenter
@@ -39,7 +39,7 @@ class CheckoutCoordinator: Coordinator {
 //
 extension CheckoutCoordinator: CheckoutTransionDelegate {
     func backToInfoVC() {
-        parentCoordinator?.backToInfoVC(self)
+        parentCoordinator?.removeCheckoutChild(self)
         navigationController.pop(with: .push)
     }
 }

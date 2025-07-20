@@ -15,8 +15,10 @@ class SettingViewController: UIViewController {
     private(set) var settingViewModel: SettingViewModel
     private(set) var sections: [CollectionViewDataSource] = []
     private(set) var layoutSections: [LayoutSectionProvider] = []
+    private var navigationBarBehavior: HerfetyNavigationController?
     ///
     weak var coordinator: PorfileTransionDelegate?
+    weak var coordinatorTwo: SettingTransitionDelegate?
     // MARK: - Init
     init(settingViewModel: SettingViewModel) {
         self.settingViewModel = settingViewModel
@@ -33,6 +35,7 @@ class SettingViewController: UIViewController {
         configureSections()
         configureLayoutSections()
         setUpCollectionView()
+        setUpNavigationBar()
     }
 }
 // MARK: - Configuration
@@ -69,6 +72,26 @@ extension SettingViewController {
         layoutFactory.register(SectionDecorationView.self, forDecorationViewOfKind: SectionDecorationView.identifier)
         
         collectionView.setCollectionViewLayout(layoutFactory, animated: true)
+    }
+    
+    /// Set up Navigation Bar
+    private func setUpNavigationBar() {
+        
+        navigationItem.backButtonTitle = ""
+        
+        navigationBarBehavior = HerfetyNavigationController(
+            navigationItem: navigationItem,
+            navigationController: navigationController
+        )
+        
+        navigationBarBehavior?.configure(
+            title: "",
+            titleColor: .primaryBlue,
+            onPlus: { },
+            showRighBtn: false,
+            showBackButton: true) { [weak self] in
+                self?.coordinatorTwo?.backToProfileVC()
+            }
     }
 }
 // MARK: - DataSource

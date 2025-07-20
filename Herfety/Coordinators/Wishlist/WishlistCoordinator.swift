@@ -7,13 +7,18 @@
 
 import UIKit
 
+protocol WishlistTransitionDelegate: AnyObject {
+    func backToProfileVC()
+}
+
 class WishlistCoordinator: Coordinator {
     
-    weak var parentCoordinator: PorfileTransionDelegate?
+    weak var parentCoordinator: ProfileChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alertPresenter: AlertPresenter
-    
+    var isShowBackButton: Bool = false
+
     init(navigationController: UINavigationController, alertPresenter: AlertPresenter) {
         self.navigationController = navigationController
         self.alertPresenter = alertPresenter
@@ -25,6 +30,16 @@ class WishlistCoordinator: Coordinator {
     
     func start() {
         let wishlistVC = WishListViewController()
+        wishlistVC.isShowBackButton = isShowBackButton
+        wishlistVC.coordinator = self
         navigationController.transition(to: wishlistVC, with: .push)
+    }
+}
+// MARK: - Transition Delegate
+//
+extension WishlistCoordinator: WishlistTransitionDelegate {
+    func backToProfileVC() {
+        parentCoordinator?.backToProfile(self)
+        navigationController.pop(with: .push)
     }
 }

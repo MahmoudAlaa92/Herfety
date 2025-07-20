@@ -13,12 +13,12 @@ protocol InfoTransitionDelegate: AnyObject {
     func backToCartVC()
 }
 
-protocol InfoChildDelegate: AnyObject {
-    func backToInfoVC(_ coordinator: Coordinator)
+protocol ParentCheckoutDelegate: AnyObject {
+    func removeCheckoutChild(_ coordinator: Coordinator)
 }
 
 class InfoCoordinator: Coordinator {
-    weak var parentCoordinator: CartChildDelegate?
+    weak var parentCoordinator: ParentCartDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alertPresenter: AlertPresenter
@@ -57,14 +57,14 @@ extension InfoCoordinator: InfoTransitionDelegate {
     }
     
     func backToCartVC() {
-        parentCoordinator?.backToCartVC(self)
+        parentCoordinator?.removeCartChild(self)
         navigationController.pop(with: .push)
     }
 }
 // MARK: - Child Delegate
 //
-extension InfoCoordinator: InfoChildDelegate {
-    func backToInfoVC(_ coordinator:  Coordinator) {
+extension InfoCoordinator: ParentCheckoutDelegate {
+    func removeCheckoutChild(_ coordinator:  Coordinator) {
         if let index = childCoordinators.firstIndex(where: { $0 === coordinator }) {
             childCoordinators.remove(at: index)
         }

@@ -14,7 +14,7 @@ class ProfileListViewModel {
         ProfileListItem(title: "My Favourites", icon: Images.iconMyFavourites),
         ProfileListItem(title: "Shipping Address", icon: Images.iconShippingAddress),
         ProfileListItem(title: "My Card", icon: Images.iconCart),
-        ProfileListItem(title: "Hefety Model", icon: Images.iconSettings),
+        ProfileListItem(title: "Setting", icon: Images.iconSettings),
         // TODO: change this
         ProfileListItem(title: "Logout", icon: Images.iconPersonalDetails),
     ]

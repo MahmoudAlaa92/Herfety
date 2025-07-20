@@ -27,6 +27,7 @@ class CartViewController: UIViewController {
     ///
     weak var coordinator: CartTransitionDelegate?
     weak var alertPresenter: AlertPresenter?
+    var isShowBackButton: Bool = false
     ///
     var subscriptions = Set<AnyCancellable>()
     // MARK: - Lifecycle
@@ -96,7 +97,7 @@ private extension CartViewController {
             titleColor: .primaryBlue,
             onPlus: { },
             showRighBtn: false,
-            showBackButton: false) { [weak self] in
+            showBackButton: isShowBackButton) { [weak self] in
                 self?.coordinator?.backToProfileVC()
             }
     }

@@ -12,8 +12,8 @@ protocol CartTransitionDelegate: AnyObject {
     func backToProfileVC()
 }
 
-protocol CartChildDelegate: AnyObject {
-    func backToCartVC(_ coordinator: Coordinator)
+protocol ParentCartDelegate: AnyObject {
+    func removeCartChild(_ coordinator: Coordinator)
 }
 
 class CartCoordinator: Coordinator {
@@ -22,7 +22,8 @@ class CartCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alertPresenter: AlertPresenter
-
+    var isShowBackButton: Bool = false
+    
     init(navigationController: UINavigationController, alertPresenter: AlertPresenter) {
         self.navigationController = navigationController
         self.alertPresenter = alertPresenter
@@ -37,6 +38,7 @@ class CartCoordinator: Coordinator {
         let cartVC = CartViewController()
         cartVC.coordinator = self
         cartVC.alertPresenter = alertPresenter
+        cartVC.isShowBackButton = isShowBackButton
         navigationController.transition(to: cartVC, with: .push)
     }
 }
@@ -57,8 +59,8 @@ extension CartCoordinator: CartTransitionDelegate {
 }
 // MARK: - Child Delegate
 //
-extension CartCoordinator: CartChildDelegate {
-    func backToCartVC(_ coordinator: Coordinator) {
+extension CartCoordinator: ParentCartDelegate {
+    func removeCartChild(_ coordinator: Coordinator) {
         if let index = childCoordinators.firstIndex(where: { $0 === coordinator}) {
             childCoordinators.remove(at: index)
         }
