@@ -31,7 +31,6 @@ class SplashViewController: UIViewController {
         setup()
         setUpNavigationBar()
         makeAnimation()
-        bindViewModel()
     }
     /// lottie Animation
     private func makeAnimation() {
@@ -48,26 +47,21 @@ class SplashViewController: UIViewController {
 // MARK: - Configuration
 //
 extension SplashViewController {
-    /// Set up Navigation Bar
+    /// NavBar
     private func setUpNavigationBar() {
         navigationItem.backButtonTitle = ""
-    }
-}
-// MARK: - Binding
-//
-extension SplashViewController {
-    private func bindViewModel() {
-        viewModel.onLoginTapped = { [weak self] in
-            guard let self else { return }
-            let loginVC = LoginViewController(viewModel: LoginViewModel())
-            self.navigationController?.pushViewController(loginVC, animated: true)
-        }
-        
-        viewModel.onSignUpTapped = { [weak self] in
-            guard let self else { return }
-            let signUpVC = SignupViewController()
-            self.navigationController?.pushViewController(signUpVC, animated: true)
-        }
+        navigationBarBehavior = HerfetyNavigationController(
+            navigationItem: navigationItem,
+            navigationController: navigationController
+        )
+        navigationBarBehavior?.configure(
+            title: "",
+            titleColor: Colors.primaryBlue,
+            onPlus: {
+                /// don't add plus button in loginVC
+            },
+            showRighBtn: false,
+            showBackButton: false)
     }
 }
 // MARK: - Actions

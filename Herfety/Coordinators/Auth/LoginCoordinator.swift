@@ -48,5 +48,6 @@ extension LoginCoordinator: LoginTransitionDelegate {
     }
     func backToSplash() {
         parentCoordinator?.pop(self)
+        navigationController.pop(with: .push)
     }
 }

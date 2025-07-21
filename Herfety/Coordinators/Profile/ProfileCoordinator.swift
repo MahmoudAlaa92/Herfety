@@ -93,7 +93,7 @@ extension ProfileCoordinator: PorfileTransionDelegate {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
-
+    
     func goToAuthVC() {
         parentCoordinator?.goToAuthVC()
     }

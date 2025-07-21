@@ -47,5 +47,6 @@ extension SignUpCoordinator: SignUpTransitionDelegate {
     
     func backToSplashVC() {
         parentCoordinator?.pop(self)
+        navigationController.pop(with: .push)
     }
 }

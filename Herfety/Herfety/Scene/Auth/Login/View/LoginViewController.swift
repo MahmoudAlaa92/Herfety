@@ -1,3 +1,5 @@
+import AuthenticationServices
+import Combine
 //
 //  LoginViewController.swift
 //  Herfety
@@ -5,18 +7,16 @@
 //  Created by Mahmoud Alaa on 20/04/2024.
 //
 import UIKit
-import AuthenticationServices
-import Combine
 
 class LoginViewController: UIViewController {
-    
+
     // MARK: - Outlets
     @IBOutlet weak var emailTextField: HRTextField!
     @IBOutlet weak var passwordTextField: HRTextField!
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-    
+
     @IBOutlet weak var forgetPassword: UIButton!
     @IBOutlet weak var loginButton: PrimaryButton!
     @IBOutlet weak var facebookButton: FacebookButton!
@@ -44,9 +44,8 @@ class LoginViewController: UIViewController {
         configureViews()
         setUpNavigationBar()
         bindViewModel()
-        
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         /// Keep nav bar visible
@@ -56,7 +55,7 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
+
 }
 // MARK: - Configuration
 //
@@ -65,10 +64,10 @@ extension LoginViewController {
     private func configureViews() {
         view.backgroundColor = Colors.hPrimaryBackground
         lineView.backgroundColor = Colors.hTextFieldUnderLine
-        
+
         // Images UI
         logoImage.image = Images.logo
-        
+
         // Buttons UI
         loginButton.title = "Login"
         facebookButton.title = "Continue with Facebook"
@@ -82,8 +81,11 @@ extension LoginViewController {
     }
     ///
     private func dismissKeyboardWhenTapped() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false // Allows other taps (e.g. buttons) to still work
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard)
+        )
+        tapGesture.cancelsTouchesInView = false  // Allows other taps (e.g. buttons) to still work
         view.addGestureRecognizer(tapGesture)
     }
     @objc func dismissKeyboard() {
@@ -91,10 +93,20 @@ extension LoginViewController {
     }
     /// NavBar
     private func setUpNavigationBar() {
-        navBarBehavior = HerfetyNavigationController(navigationItem: navigationItem, navigationController: navigationController)
-        navBarBehavior?.configure(title: "", titleColor: Colors.primaryBlue, onPlus: {
-            /// don't add plus button in loginVC
-        }, showRighBtn: false)
+        navBarBehavior = HerfetyNavigationController(
+            navigationItem: navigationItem,
+            navigationController: navigationController
+        )
+        navBarBehavior?.configure(
+            title: "",
+            titleColor: Colors.primaryBlue,
+            onPlus: {
+                /// don't add plus button in loginVC
+            },
+            showRighBtn: false,
+            showBackButton: true) { [weak self] in
+                self?.coordinator?.backToSplash()
+            }
     }
     /// Configures email text field with title and placeholder
     private func configureEmailTextField() {
@@ -102,8 +114,12 @@ extension LoginViewController {
         emailTextField.placeholder = "Enter your user name"
         emailTextField.textfield.delegate = self
         emailTextField.textfield.returnKeyType = .next
-        emailTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-        
+        emailTextField.textfield.addTarget(
+            self,
+            action: #selector(textDidChange),
+            for: .editingChanged
+        )
+
     }
     /// Configures password text field with title and placeholder
     private func configurePasswordTextField() {
@@ -112,7 +128,11 @@ extension LoginViewController {
         passwordTextField.textfield.isSecureTextEntry = true
         passwordTextField.textfield.delegate = self
         passwordTextField.textfield.returnKeyType = .done
-        passwordTextField.textfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.textfield.addTarget(
+            self,
+            action: #selector(textDidChange),
+            for: .editingChanged
+        )
     }
     /// Configures appearance of labels
     private func configureLabelsUI() {
@@ -133,15 +153,15 @@ extension LoginViewController {
 // MARK: - Binding
 //
 extension LoginViewController {
-    
+
     private func bindViewModel() {
-        
+
         viewModel.loginSuccess
             .sink { [weak self] in
                 self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
-        
+
         viewModel.loginError
             .sink { [weak self] errorMessage in
                 let alert = UIAlertController(
@@ -153,21 +173,21 @@ extension LoginViewController {
                 self?.present(alert, animated: true)
             }
             .store(in: &cancellables)
-        
+
         viewModel.configureOnButtonEnabled { [weak self] isEnabled in
             self?.loginButton.isEnabled = isEnabled
             self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
         }
-        
+
     }
-    
+
 }
 // MARK: - Private Handlers
 //
 extension LoginViewController {
     @objc func textDidChange(_ sender: UITextField) {
         guard let text = sender.text else { return }
-        
+
         if sender == emailTextField.textfield {
             viewModel.updateEmail(text)
         } else if sender == passwordTextField.textfield {
@@ -181,7 +201,7 @@ extension LoginViewController {
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         viewModel.loginTapped()
     }
-    
+
     @IBAction func forgetThePassword(_ sender: Any) {
         let vc = ForgetPasswordViewController()
         self.navigationController?.pushViewController(vc, animated: true)
@@ -189,33 +209,47 @@ extension LoginViewController {
     @IBAction func facebookTapped(_ sender: Any) {
         viewModel.loginWithFacebook(from: self)
     }
-    
+
     @IBAction func googleTapped(_ sender: Any) {
         viewModel.loginWithGoogle(from: self)
     }
-    
+
     @IBAction func appleTapped(_ sender: Any) {
         let appleProvider = ASAuthorizationAppleIDProvider()
         let request = appleProvider.createRequest()
         request.requestedScopes = [.email, .fullName]
-        let controller = ASAuthorizationController(authorizationRequests: [request])
+        let controller = ASAuthorizationController(authorizationRequests: [
+            request
+        ])
         controller.delegate = self
         controller.presentationContextProvider = self
         controller.performRequests()
     }
 }
-extension LoginViewController : ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-    
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+extension LoginViewController: ASAuthorizationControllerDelegate,
+    ASAuthorizationControllerPresentationContextProviding
+{
+
+    func presentationAnchor(for controller: ASAuthorizationController)
+        -> ASPresentationAnchor
+    {
         view.window!
     }
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        if let details = authorization.credential as? ASAuthorizationAppleIDCredential {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        if let details = authorization.credential
+            as? ASAuthorizationAppleIDCredential
+        {
             viewModel.loginWithApple(credential: details)
         }
     }
-    
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithError error: Error
+    ) {
         print(error.localizedDescription)
     }
 }
@@ -223,14 +257,11 @@ extension LoginViewController : ASAuthorizationControllerDelegate, ASAuthorizati
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField.textfield {
-            passwordTextField.textfield.becomeFirstResponder() // Move to password field
+            passwordTextField.textfield.becomeFirstResponder()  // Move to password field
         } else if textField == passwordTextField.textfield {
-            textField.resignFirstResponder() // Dismiss keyboard
+            textField.resignFirstResponder()  // Dismiss keyboard
         }
         return true
     }
-    
+
 }
-
-
-

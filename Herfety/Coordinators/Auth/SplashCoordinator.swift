@@ -32,7 +32,6 @@ class SplashCoordinator: NSObject, Coordinator {
     func start() {
         let splashVC = SplashViewController(viewModel: SplashViewModel())
         splashVC.coordinator = self
-        navigationController.delegate = self
         navigationController.transition(to: splashVC, with: .push)
     }
 }
@@ -62,28 +61,10 @@ extension SplashCoordinator: SplashTransitionDelegate {
 }
 // MARK: - Child Delegate
 //
-extension SplashCoordinator: SplashChildDelegate, UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        guard let fromVC = navigationController.transitionCoordinator?.viewController(forKey: .from),
-              !navigationController.contains(fromVC) else {
-            return
-        }
-        
-        if fromVC is LoginViewController {
-            if let loginCoordinator = childCoordinators.first(where: { $0 is LoginCoordinator }) {
-                pop(loginCoordinator)
-            }
-        } else if fromVC is SignupViewController {
-            if let signUpCoordinator = childCoordinators.first(where: { $0 is SignUpCoordinator }) {
-                pop(signUpCoordinator)
-            }
-        }
-    }
-    func pop(_ coordinator: Coordinator) {
+extension SplashCoordinator: SplashChildDelegate {
+    func pop(_ coordinator: any Coordinator) {
         if let index = childCoordinators.firstIndex(where: { $0 === coordinator}) {
             childCoordinators.remove(at: index)
-            navigationController.pop(with: .push)
-
         }
     }
 }

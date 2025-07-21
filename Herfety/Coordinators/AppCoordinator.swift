@@ -35,7 +35,10 @@ class AppCoordinator: Coordinator {
             showAuthFlow()
         }
     }
-    
+}
+// MARK: - Private Handler
+//
+extension AppCoordinator {
     private func showAuthFlow() {
         let splashCoordinator = SplashCoordinator(navigationController: navigationController)
         splashCoordinator.onLoginSuccess = { [weak self] in
@@ -45,7 +48,6 @@ class AppCoordinator: Coordinator {
         
         childCoordinators.append(splashCoordinator)
         splashCoordinator.start()
-        
         window?.setRootViewController(navigationController)
     }
     
@@ -70,9 +72,7 @@ class AppCoordinator: Coordinator {
     
     private func removeTabBarCoordinators() {
         print("Before removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
-        childCoordinators.removeAll() { coordinator in
-            coordinator is TabBarCoordinator
-        }
+        childCoordinators.removeAll()
         print("After removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
     }
 }
@@ -80,6 +80,8 @@ class AppCoordinator: Coordinator {
 //
 extension AppCoordinator: AppTransitionDelegate {
     func didRequestLogout() {
+        UserSessionManager.isLoggedIn = false
+        navigationController.viewControllers = []
         removeTabBarCoordinators()
         showAuthFlow()
     }

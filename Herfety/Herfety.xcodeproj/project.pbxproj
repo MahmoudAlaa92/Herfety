@@ -1308,8 +1308,8 @@
 			isa = PBXGroup;
 			children = (
 				1543FBE22E17069E00109BB7 /* SignupViewModelType.swift */,
-				159B57822DCBCA5300CDD958 /* SignupViewController.swift */,
 				153944E72DCF857E008465BB /* SignupViewModel.swift */,
+				159B57822DCBCA5300CDD958 /* SignupViewController.swift */,
 				159B57832DCBCA5300CDD958 /* SignupViewController.xib */,
 			);
 			path = Signup;

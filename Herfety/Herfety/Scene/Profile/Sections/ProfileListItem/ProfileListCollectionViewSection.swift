@@ -66,7 +66,6 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
                 self.coordinator?.gotToSettingVC()
                 break
             case "Logout":
-                UserSessionManager.isLoggedIn = false
                 self.coordinator?.goToAuthVC()
                 break
 
