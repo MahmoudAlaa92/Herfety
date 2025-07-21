@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol TabBarTransitionDelegate: AnyObject {
+    func goToAuthVC()
+}
+
 class TabBarCoordinator: Coordinator {
+    
+    weak var parentCoordinator: AppTransitionDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let tabBarController = CustomeTabBarViewController()
@@ -30,10 +36,14 @@ class TabBarCoordinator: Coordinator {
         
         let homeCoordinator = HomeCoordinator(navigationController: homeNav,
                                               alertPresenter: AlertCoordinator(presentingViewController: homeNav))
-        let wishlistCoordinator = WishlistCoordinator(navigationController: wishlistNav,   alertPresenter: AlertCoordinator(presentingViewController: wishlistNav))
-        let cartCoordinator = CartCoordinator(navigationController: cartNav, alertPresenter: AlertCoordinator(presentingViewController: cartNav))
-        let profileCoordinator = ProfileCoordinator(navigationController: profileNav,  alertPresenter: AlertCoordinator(presentingViewController: profileNav))
+        let wishlistCoordinator = WishlistCoordinator(navigationController: wishlistNav,
+                                                      alertPresenter: AlertCoordinator(presentingViewController: wishlistNav))
+        let cartCoordinator = CartCoordinator(navigationController: cartNav,
+                                              alertPresenter: AlertCoordinator(presentingViewController: cartNav))
+        let profileCoordinator = ProfileCoordinator(navigationController: profileNav,
+                                                    alertPresenter: AlertCoordinator(presentingViewController: profileNav))
         
+        profileCoordinator.parentCoordinator = self
         childCoordinators = [homeCoordinator, wishlistCoordinator, cartCoordinator, profileCoordinator]
         
         childCoordinators.forEach { $0.start() }
@@ -64,5 +74,12 @@ extension TabBarCoordinator {
             item.title = nil
             item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -20, right: 0)
         }
+    }
+}
+// MARK: - Transition Delegate
+//
+extension TabBarCoordinator: TabBarTransitionDelegate {
+    func goToAuthVC() {
+        parentCoordinator?.didRequestLogout()
     }
 }

@@ -14,6 +14,7 @@ protocol PorfileTransionDelegate: AnyObject {
     func gotToShippingVC()
     func gotToMyCardVC()
     func gotToSettingVC()
+    func goToAuthVC()
     func gotToSafari(url: String)
 }
 
@@ -23,6 +24,7 @@ protocol ProfileChildDelegate: AnyObject {
 
 class ProfileCoordinator: Coordinator, ParentCartDelegate, ParentCheckoutDelegate {
     
+    weak var parentCoordinator: TabBarTransitionDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alertPresenter: AlertPresenter
@@ -92,6 +94,10 @@ extension ProfileCoordinator: PorfileTransionDelegate {
         coordinator.start()
     }
 
+    func goToAuthVC() {
+        parentCoordinator?.goToAuthVC()
+    }
+    
     func gotToSafari(url: String) {
         if let urlString = URL(string: url) {
             let safariVC = SFSafariViewController(url: urlString)

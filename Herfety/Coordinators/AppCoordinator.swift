@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AppTransitionDelegate: AnyObject {
+    func didRequestLogout()
+}
+
 class AppCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -25,7 +29,6 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        /// Check if user is logged in
         if UserSessionManager.isLoggedIn {
             showMainTabFlow()
         } else {
@@ -34,7 +37,6 @@ class AppCoordinator: Coordinator {
     }
     
     private func showAuthFlow() {
-        /// let authNav = UINavigationController()
         let splashCoordinator = SplashCoordinator(navigationController: navigationController)
         splashCoordinator.onLoginSuccess = { [weak self] in
             self?.showMainTabFlow()
@@ -44,22 +46,19 @@ class AppCoordinator: Coordinator {
         childCoordinators.append(splashCoordinator)
         splashCoordinator.start()
         
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+        window?.setRootViewController(navigationController)
     }
     
     private func showMainTabFlow() {
         let tabCoordinator = TabBarCoordinator(alertPresenter: alertPresenter)
+        tabCoordinator.parentCoordinator = self
         childCoordinators.append(tabCoordinator)
         tabCoordinator.start()
         
-        // Update window root without animation
-        window?.rootViewController = tabCoordinator.tabBarController
-        window?.makeKeyAndVisible()
+        window?.setRootViewController(tabCoordinator.tabBarController)
     }
     
     private func removeAuthCoordinators() {
-        print("Removing auth coordinators...")
         print("Before removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
         childCoordinators.removeAll { coordinator in
             coordinator is SplashCoordinator ||
@@ -67,5 +66,21 @@ class AppCoordinator: Coordinator {
             coordinator is SignUpCoordinator
         }
         print("After removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
+    }
+    
+    private func removeTabBarCoordinators() {
+        print("Before removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
+        childCoordinators.removeAll() { coordinator in
+            coordinator is TabBarCoordinator
+        }
+        print("After removal: \(childCoordinators.map { String(describing: type(of: $0)) })")
+    }
+}
+// MARK: - Transitino Delegate
+//
+extension AppCoordinator: AppTransitionDelegate {
+    func didRequestLogout() {
+        removeTabBarCoordinators()
+        showAuthFlow()
     }
 }
