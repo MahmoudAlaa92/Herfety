@@ -48,7 +48,8 @@ extension AppCoordinator {
         
         childCoordinators.append(splashCoordinator)
         splashCoordinator.start()
-        window?.setRootViewController(navigationController)
+        
+        window?.setRootViewController(navigationController,with: .fade)
     }
     
     private func showMainTabFlow() {
@@ -57,7 +58,7 @@ extension AppCoordinator {
         childCoordinators.append(tabCoordinator)
         tabCoordinator.start()
         
-        window?.setRootViewController(tabCoordinator.tabBarController)
+        window?.setRootViewController(tabCoordinator.tabBarController, with: .fade)
     }
     
     private func removeAuthCoordinators() {
