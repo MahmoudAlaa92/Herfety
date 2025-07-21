@@ -9,10 +9,12 @@ import UIKit
 
 protocol SettingTransitionDelegate: AnyObject {
     func backToProfileVC()
+    func goToAuthVC()
 }
 
 class SettingCoordinator: Coordinator {
-    var parentCoordinator: ProfileChildDelegate?
+    weak var parentCoordinator: ProfileChildDelegate?
+    weak var firstParentCoordinator: TabBarTransitionDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alerPresneter: AlertPresenter
@@ -26,7 +28,7 @@ class SettingCoordinator: Coordinator {
         let viewModel = SettingViewModel()
         let settingVC = SettingViewController(settingViewModel: viewModel)
         
-        settingVC.coordinatorTwo = self
+        settingVC.coordinator = self
         navigationController.transition(to: settingVC, with: .push)
     }
     
@@ -41,4 +43,8 @@ extension SettingCoordinator: SettingTransitionDelegate {
         parentCoordinator?.backToProfile(self)
         navigationController.pop(with: .push)
     }
+    func goToAuthVC() {
+        firstParentCoordinator?.goToAuthVC()
+    }
+    
 }

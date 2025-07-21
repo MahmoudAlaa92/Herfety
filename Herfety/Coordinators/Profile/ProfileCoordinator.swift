@@ -90,6 +90,7 @@ extension ProfileCoordinator: PorfileTransionDelegate {
         let coordinator = SettingCoordinator(navigationController: navigationController,
                                             alertPresenter: alertPresenter)
         coordinator.parentCoordinator = self
+        coordinator.firstParentCoordinator = parentCoordinator
         childCoordinators.append(coordinator)
         coordinator.start()
     }

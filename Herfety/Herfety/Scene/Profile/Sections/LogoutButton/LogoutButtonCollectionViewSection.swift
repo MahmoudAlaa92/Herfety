@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class LogoutButtonCollectionViewSection: CollectionViewDataSource {
+    
+    let onLogoutPressed = PassthroughSubject<Void, Never>()
     
     func registerCells(in collectionView: UICollectionView) {
         /// Cell
@@ -21,6 +24,9 @@ class LogoutButtonCollectionViewSection: CollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.configureButton(title: "Logout", image: Images.logout)
+        cell.onLogoutPressed = { [weak self] in
+            self?.onLogoutPressed.send()
+        }
         return cell
     }
 }

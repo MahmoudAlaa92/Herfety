@@ -9,7 +9,7 @@ import Combine
 import UIKit
 
 class SignupViewController: UIViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var firstNameTextField: HRTextField!
@@ -18,7 +18,7 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var emailTextField: HRTextField!
     @IBOutlet weak var passwordTextField: HRTextField!
     @IBOutlet weak var confirmPasswordTextField: HRTextField!
-
+    
     @IBOutlet weak var phoneNumber: HRTextField!
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -29,6 +29,7 @@ class SignupViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private var navBarBehavior: HerfetyNavigationController?
     weak var coordinator: SignUpTransitionDelegate?
+    weak var alertPresenter: AlertPresenter?
     // MARK: - Init
     init(viewModel: SignupViewModelType = SignupViewModel()) {
         self.viewModel = viewModel
@@ -37,21 +38,22 @@ class SignupViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - Life Cycle Methods
-    //
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backButtonTitle = ""
         configureViews()
         setUpNavigationBar()
         bindViewModel()
         setupTextFields()
         dismissKeyboardWhenTapped()
     }
-    // MARK: - UI Setup
-
+}
+// MARK: - UI Setup
+//
+extension SignupViewController {
     /// NavBar
     private func setUpNavigationBar() {
+        navigationItem.backButtonTitle = ""
         navBarBehavior = HerfetyNavigationController(
             navigationItem: navigationItem,
             navigationController: navigationController
@@ -104,23 +106,6 @@ class SignupViewController: UIViewController {
             for: .editingChanged
         )
     }
-
-    /// Configures the initial appearance of UI elements
-    private func configureViews() {
-        view.backgroundColor = Colors.hBackgroundColor
-
-        // Images UI
-        logoImage.image = Images.logo
-
-        // Buttons UI
-        loginButton.title = "Sign Up"
-
-        configureUsernameTextField()
-        configureEmailTextField()
-        configurePasswordTextField()
-        configurePhoneTextField()
-        configureLabelsUI()
-    }
     private func dismissKeyboardWhenTapped() {
         let tapGesture = UITapGestureRecognizer(
             target: self,
@@ -132,18 +117,37 @@ class SignupViewController: UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-
+}
+// MARK: - Configuration
+//
+extension SignupViewController {
+    /// Configures the initial appearance of UI elements
+    private func configureViews() {
+        view.backgroundColor = Colors.hBackgroundColor
+        
+        // Images UI
+        logoImage.image = Images.logo
+        
+        // Buttons UI
+        loginButton.title = "Sign Up"
+        
+        configureUsernameTextField()
+        configureEmailTextField()
+        configurePasswordTextField()
+        configurePhoneTextField()
+        configureLabelsUI()
+    }
     /// Configures username text field with title and placeholder
     private func configureUsernameTextField() {
         firstNameTextField.title = "First name"
         firstNameTextField.placeholder = "Enter your First name"
-
+        
         lastNameTextField.title = "Last name"
         lastNameTextField.placeholder = "Enter your last name"
-
+        
         usernameTextField.title = "User Name"
         usernameTextField.placeholder = "Enter your name here"
-
+        
         firstNameTextField.textfield.delegate = self
         lastNameTextField.textfield.delegate = self
         usernameTextField.textfield.delegate = self
@@ -152,19 +156,19 @@ class SignupViewController: UIViewController {
         confirmPasswordTextField.textfield.delegate = self
         phoneNumber.textfield.delegate = self
     }
-
+    
     /// Configures email text field with title and placeholder
     private func configureEmailTextField() {
         emailTextField.title = "Email"
         emailTextField.placeholder = "Enter your email here"
     }
-
+    
     /// Configures password text field with title and placeholder
     private func configurePasswordTextField() {
         // Password TextField UI
         passwordTextField.title = "Password"
         passwordTextField.placeholder = "*******"
-
+        
         // Confirm Password TextField UI
         confirmPasswordTextField.title = "Confirm Password"
         confirmPasswordTextField.placeholder = "*******"
@@ -175,12 +179,12 @@ class SignupViewController: UIViewController {
         phoneNumber.title = "Phone Number"
         phoneNumber.placeholder = "+(20) 112 201 201"
     }
-
+    
     /// Configures appearance of labels
     private func configureLabelsUI() {
         titleLabel.text = "Sign Up"
         titleLabel.textColor = Colors.primaryBlue
-
+        
         subtitleLabel.text = "Create an new account"
         subtitleLabel.textColor = Colors.hSocialButton
     }
@@ -191,33 +195,33 @@ extension SignupViewController {
     @IBAction func loginTapped(_ sender: Any) {
         viewModel.registerUser()
     }
-
+    
     @objc private func firstNameChanged() {
         viewModel.updateFirstName(firstNameTextField.textfield.text ?? "")
     }
-
+    
     @objc private func lastNameChanged() {
         viewModel.updateLastName(lastNameTextField.textfield.text ?? "")
     }
-
+    
     @objc private func usernameChanged() {
         viewModel.updateUsername(usernameTextField.textfield.text ?? "")
     }
-
+    
     @objc private func emailChanged() {
         viewModel.updateEmail(emailTextField.textfield.text ?? "")
     }
-
+    
     @objc private func passwordChanged() {
         viewModel.updatePassword(passwordTextField.textfield.text ?? "")
     }
-
+    
     @objc private func confirmPasswordChanged() {
         viewModel.updateConfirmPassword(
             confirmPasswordTextField.textfield.text ?? ""
         )
     }
-
+    
     @objc private func phoneChanged() {
         viewModel.updatePhone(phoneNumber.textfield.text ?? "")
     }
@@ -230,46 +234,18 @@ extension SignupViewController {
             self?.loginButton.isEnabled = isEnabled
             self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
         }
-
+        
         viewModel.registrationSuccess
             .sink { [weak self] _ in
                 self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
-
+        
         viewModel.registrationError
-            .sink { [weak self] errorMessage in
-                let alertItem = AlertModel(
-                    message: errorMessage,
-                    buttonTitle: "Ok",
-                    image: .warning,
-                    status: .error
-                )
-                self?.presentCustomAlert(with: alertItem)
+            .sink { [weak self] alert in
+                self?.alertPresenter?.showAlert(alert)
             }
             .store(in: &cancellables)
-    }
-}
-// MARK: - Alert Presentation
-//
-extension SignupViewController {
-    func presentCustomAlert(with alertItem: AlertModel) {
-        let alertVC = AlertViewController(
-            nibName: "AlertViewController",
-            bundle: nil
-        )
-        alertVC.modalPresentationStyle = .overFullScreen
-        alertVC.modalTransitionStyle = .crossDissolve
-        alertVC.loadViewIfNeeded()
-        /// Ensure outlets are connected
-
-        alertVC.show(alertItem: alertItem)
-
-        /// Optional: dismiss on button press
-        alertVC.actionHandler = { [weak alertVC] in
-            alertVC?.dismiss(animated: true)
-        }
-        self.present(alertVC, animated: true)
     }
 }
 // MARK: - Textfield
@@ -277,7 +253,7 @@ extension SignupViewController {
 extension SignupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextField: UITextField?
-
+        
         switch textField {
         case firstNameTextField.textfield:
             nextField = lastNameTextField.textfield
@@ -296,7 +272,7 @@ extension SignupViewController: UITextFieldDelegate {
         default:
             nextField = nil
         }
-
+        
         if let next = nextField {
             scrollView.scrollRectToVisible(next.frame, animated: true)
             next.becomeFirstResponder()

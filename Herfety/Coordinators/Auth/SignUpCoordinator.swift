@@ -18,9 +18,11 @@ class SignUpCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     var onSignUpSuccess: (() -> Void)?
+    let alertPresenter: AlertPresenter
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.alertPresenter = AlertCoordinator(presentingViewController: navigationController)
     }
     
     deinit {
@@ -29,6 +31,7 @@ class SignUpCoordinator: Coordinator {
     
     func start() {
         let signVC = SignupViewController()
+        signVC.alertPresenter = alertPresenter
         signVC.coordinator = self
         navigationController.transition(to: signVC, with: .push)
     }

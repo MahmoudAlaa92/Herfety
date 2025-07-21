@@ -8,6 +8,9 @@
 import Foundation
 
 class SettingViewModel {
+    
+    var onLogout: (() -> Void)?
+    
     var firstList: [SettingItem] = [
         SettingItem(name: "Name"),
         SettingItem(name: "Age"),

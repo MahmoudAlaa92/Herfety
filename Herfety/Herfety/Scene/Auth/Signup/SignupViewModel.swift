@@ -25,14 +25,17 @@ class SignupViewModel: SignupViewModelType {
     // Outputs
     private let isRegisterButtonEnabled = CurrentValueSubject<Bool, Never>(false)
     let registrationSuccess = PassthroughSubject<Registration, Never>()
-    let registrationError = PassthroughSubject<String, Never>()
+    let registrationError = PassthroughSubject<AlertModel, Never>()
     
     // MARK: - Init
     init(registerService: RegisterRemoteProtocol = RegisterRemote(network: AlamofireNetwork())) {
         self.registerService = registerService
         setupBindings()
     }
-    
+}
+// MARK: - Private Handler
+//
+extension SignupViewModel {
     private func setupBindings() {
         let formValidation = Publishers.CombineLatest(
             Publishers.CombineLatest4(
@@ -47,18 +50,18 @@ class SignupViewModel: SignupViewModelType {
                 phoneSubject
             )
         ).map { namesAndEmail, passwordsAndPhone in
-                let (firstName, lastName, username, email) = namesAndEmail
-                let (password, confirmPassword, phone) = passwordsAndPhone
-                
-                return !firstName.isEmpty &&
-                !lastName.isEmpty &&
-                !username.isEmpty &&
-                !email.isEmpty    &&
-                !password.isEmpty &&
-                !confirmPassword.isEmpty &&
-                !phone.isEmpty
-            }
-            formValidation
+            let (firstName, lastName, username, email) = namesAndEmail
+            let (password, confirmPassword, phone) = passwordsAndPhone
+            
+            return !firstName.isEmpty &&
+            !lastName.isEmpty &&
+            !username.isEmpty &&
+            !email.isEmpty    &&
+            !password.isEmpty &&
+            !confirmPassword.isEmpty &&
+            !phone.isEmpty
+        }
+        formValidation
             .subscribe(isRegisterButtonEnabled)
             .store(in: &cancellables)
         
@@ -130,10 +133,17 @@ class SignupViewModel: SignupViewModelType {
         } else {
             errorMessage = error.localizedDescription
         }
-        registrationError.send(errorMessage)
+        let alertItem = AlertModel(
+            message: errorMessage,
+            buttonTitle: "Ok",
+            image: .warning,
+            status: .error
+        )
+        registrationError.send(alertItem)
     }
 }
 // MARK: - SignupViewModelInput
+//
 extension SignupViewModel {
     func updateFirstName(_ text: String) {
         firstNameSubject.send(text)
@@ -166,13 +176,18 @@ extension SignupViewModel {
     func registerUser() {
         // Validate passwords match before proceeding
         guard passwordSubject.value == confirmPasswordSubject.value else {
-            registrationError.send("Passwords do not match")
+            let alertItem = AlertModel(
+                message: "Passwords do not match",
+                buttonTitle: "Ok",
+                image: .warning,
+                status: .error
+            )
+            registrationError.send(alertItem)
             return
         }
         registerTappedSubject.send()
     }
 }
-
 // MARK: - SignupViewModelOutput
 extension SignupViewModel {
     func configureOnButtonEnabled(onEnabled: @escaping (Bool) -> Void) {

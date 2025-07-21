@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class SettingViewController: UIViewController {
 
@@ -17,8 +18,10 @@ class SettingViewController: UIViewController {
     private(set) var layoutSections: [LayoutSectionProvider] = []
     private var navigationBarBehavior: HerfetyNavigationController?
     ///
-    weak var coordinator: PorfileTransionDelegate?
-    weak var coordinatorTwo: SettingTransitionDelegate?
+    weak var ProfileCoordinator: PorfileTransionDelegate?
+    weak var coordinator: SettingTransitionDelegate?
+    ///
+    var subcriptions = Set<AnyCancellable>()
     // MARK: - Init
     init(settingViewModel: SettingViewModel) {
         self.settingViewModel = settingViewModel
@@ -36,6 +39,7 @@ class SettingViewController: UIViewController {
         configureLayoutSections()
         setUpCollectionView()
         setUpNavigationBar()
+        bindViewModel()
     }
 }
 // MARK: - Configuration
@@ -50,10 +54,12 @@ extension SettingViewController {
         /// 1) First list
         let firstList = SettingCollectionViewSection(items: settingViewModel.firstList)
         /// 2) Second list
-        let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList, coordinator: coordinator)
+        let secondList = ProfileListCollectionViewSection(items: settingViewModel.secondList, coordinator: ProfileCoordinator)
         /// 3) Logout button
         let logoutButton = LogoutButtonCollectionViewSection()
-        
+        logoutButton.onLogoutPressed.sink { [weak self] in
+            self?.settingViewModel.onLogout?()
+        }.store(in: &subcriptions)
         sections = [firstList, secondList, logoutButton]
         sections.forEach({ $0.registerCells(in: collectionView) })
     }
@@ -73,7 +79,6 @@ extension SettingViewController {
         
         collectionView.setCollectionViewLayout(layoutFactory, animated: true)
     }
-    
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
         
@@ -90,7 +95,7 @@ extension SettingViewController {
             onPlus: { },
             showRighBtn: false,
             showBackButton: true) { [weak self] in
-                self?.coordinatorTwo?.backToProfileVC()
+                self?.coordinator?.backToProfileVC()
             }
     }
 }
@@ -114,6 +119,15 @@ extension SettingViewController: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
         return provider.cellForItems(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+    }
+}
+// MARK: - Binding
+//
+extension SettingViewController {
+    func bindViewModel() {
+        settingViewModel.onLogout = { [weak self] in
+            self?.coordinator?.goToAuthVC()
+        }
     }
 }
 // MARK: - Delegate

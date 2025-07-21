@@ -12,7 +12,7 @@ class LogoutButttonCollectionViewCell: UICollectionViewCell {
     static let identifier = "LogoutButttonCollectionViewCell"
     // MARK: - Outlets
     @IBOutlet weak var logoutButton: HerfetyButton!
-    
+    var onLogoutPressed: (() -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -30,6 +30,6 @@ extension LogoutButttonCollectionViewCell {
 //
 extension LogoutButttonCollectionViewCell {
     @IBAction func lougoutBtnPressed(_ sender: Any) {
-        // Pressed the logout button
+        onLogoutPressed?()
     }
 }
