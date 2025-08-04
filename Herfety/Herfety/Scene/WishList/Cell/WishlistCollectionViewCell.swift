@@ -80,6 +80,7 @@ extension WishlistCollectionViewCell {
            !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order })  {
             itemToAdd.qty = 1
             CustomeTabBarViewModel.shared.cartItems.append(itemToAdd)
+            CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(false)
         }
     }
 }

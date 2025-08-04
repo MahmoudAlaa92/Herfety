@@ -107,9 +107,6 @@ extension InfoViewController {
             onPlus: { [weak self] in
                 guard let self = self else { return }
                 /// plus button is tapped
-//                self.viewModel.didTapPlusButton(
-//                    navigationController: navigationController
-//                )
                 self.coordinator?.goToAddAddressVC()
             },
             showBackButton: true) { [weak self] in

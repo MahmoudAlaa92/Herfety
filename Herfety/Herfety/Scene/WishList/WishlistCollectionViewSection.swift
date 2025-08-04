@@ -71,7 +71,7 @@ extension WishlistCollectionViewSection: ContextMenuProvider {
                 let wishlist = items.Wishlist[indexPath.row]
                 let userId = items.userId
                 CustomeTabBarViewModel.shared.deleteWishlistItem(userId: userId, productId: (wishlist.productID ?? 1), indexPath: indexPath)
-                
+                CustomeTabBarViewModel.shared.isWishlistItemDeleted.send(true)
             }
             return UIMenu(title: "", children: [delete])
         }

@@ -714,6 +714,14 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		151EF2202E2F96CE00AB8470 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				151631272D5D55DB00BA088E /* UIButton+Style.swift */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
 		1532F3442D5E7DA7003223A1 /* Info */ = {
 			isa = PBXGroup;
 			children = (
@@ -887,7 +895,6 @@
 		157E04702D554200000170FC /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
-				151631272D5D55DB00BA088E /* UIButton+Style.swift */,
 				157E04712D554213000170FC /* Colors */,
 				157E04742D55424A000170FC /* Images */,
 				151631242D5D553200BA088E /* Generated */,
@@ -1326,6 +1333,7 @@
 		15A4F5DD2DB28931000EACEA /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				151EF2202E2F96CE00AB8470 /* UIButton */,
 				1517BE4B2E2E2ED500801013 /* UIWindow */,
 				15085B432E280B4E007F8B3F /* UINavigation */,
 				15A4F5DE2DB28956000EACEA /* UIImage */,

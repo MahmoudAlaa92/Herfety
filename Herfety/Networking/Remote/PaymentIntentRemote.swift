@@ -11,7 +11,7 @@ protocol PaymentIntentRemoteProtocol {
     func createPaymentIntent(PaymentIntent: PaymentIntent, completion: @escaping (Result<CheckoutIntentResponse, Error>) -> Void)
 }
 
-class PaymentIntentRemote: Remote, PaymentIntentRemoteProtocol {
+class PaymentIntentRemote: Remote, PaymentIntentRemoteProtocol, @unchecked Sendable {
     func createPaymentIntent(PaymentIntent: PaymentIntent, completion: @escaping (Result<CheckoutIntentResponse, Error>) -> Void) {
         
         let parameters: [String: Any] = [

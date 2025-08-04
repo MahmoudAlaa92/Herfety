@@ -11,7 +11,7 @@ protocol ResetPasswordRemoteProtocol {
     func reset(parameter: ResetPassword ,completion: @escaping (Result<ResponseReset, Error>) -> Void)
 }
 
-class ResetPasswordRemote: Remote, ResetPasswordRemoteProtocol {
+class ResetPasswordRemote: Remote, ResetPasswordRemoteProtocol, @unchecked Sendable {
     func reset(parameter: ResetPassword ,completion: @escaping (Result<ResponseReset, Error>) -> Void){
         let parameter: [String: Any] = [
             "UserName" : parameter.UserName,

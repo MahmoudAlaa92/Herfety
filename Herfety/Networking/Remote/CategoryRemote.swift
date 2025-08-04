@@ -11,7 +11,7 @@ protocol CategoryRemoteProtocol {
     func loadAllCategories(completion: @escaping (Result<[CategoryElement], Error>) -> Void)
 }
 
-class CategoryRemote: Remote, CategoryRemoteProtocol {
+class CategoryRemote: Remote, CategoryRemoteProtocol, @unchecked Sendable {
     func loadAllCategories(completion: @escaping (Result<[CategoryElement], Error>) -> Void) {
         
         let request = HerfetyRequest(

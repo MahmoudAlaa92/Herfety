@@ -15,7 +15,7 @@ protocol ReviewRemoteProtocol {
     func deleteReview(id: Int, completion: @escaping (Result<DeleteReviewResponse, Error>) -> Void)
 }
 
-class ReviewRemote: Remote, ReviewRemoteProtocol {
+class ReviewRemote: Remote, ReviewRemoteProtocol, @unchecked Sendable {
     
     func createReview(request: CreateReviewRequest, completion: @escaping (Result<Reviewrr, Error>) -> Void) {
         let parameters: [String: Any] = [

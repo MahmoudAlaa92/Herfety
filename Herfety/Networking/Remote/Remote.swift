@@ -11,7 +11,7 @@ import Foundation
 
 /// Represents a collection of Remote Endpoints
 ///
-public class Remote {
+public class Remote: @unchecked Sendable {
 
     /// Networking Wrapper: Dependency Injection Mechanism, useful for Unit Testing purposes.
     ///
@@ -26,7 +26,35 @@ public class Remote {
     public init(network: Network) {
         self.network = network
     }
-
+    
+    // MARK: - Modern Async/Await Methods
+        
+        /// Enqueues the specified Network Request asynchronously using async/await
+        ///
+        /// - Parameters:
+        ///     - request: Request that should be performed.
+        ///     - decoder: Decoder entity that will be used to attempt to decode the Backend's Response.
+        ///
+        /// - Returns: Decoded response of type D
+        /// - Throws: RemoteError or decoding errors
+        ///
+        func enqueue<D: Decodable>(_ request: URLRequestConvertible,
+                                   decoder: JSONDecoder = JSONDecoder()) async throws -> D {
+            let data = try await network.responseData(for: request)
+            
+            if let remoteError = RemoteErrorValidator.error(from: data) {
+                throw remoteError
+            }
+            
+            do {
+                let decoded = try decoder.decode(D.self, from: data)
+                return decoded
+            } catch {
+                throw error
+            }
+        }
+    
+    // MARK: - Legacy Callback Methods
     /// Enqueues the specified Network Request.
     ///
     /// - Parameters:

@@ -11,7 +11,7 @@ protocol GetProductsOfCatergoryRemoteProtocol {
     func loadAllProducts(name: String ,completion: @escaping (Result<[Products], Error>) -> Void)
 }
 
-class GetProductsOfCategoryRemote: Remote, GetProductsOfCatergoryRemoteProtocol {
+class GetProductsOfCategoryRemote: Remote, GetProductsOfCatergoryRemoteProtocol, @unchecked Sendable {
     func loadAllProducts(name: String ,completion: @escaping (Result<[Products], Error>) -> Void) {
         let parameters = ["Name": name]
         

@@ -33,7 +33,7 @@ protocol OrderRemoteProtocol {
     func addOrder(order: Orderr, completion: @escaping (Result<RecieveOrders, Error>) -> Void)
 }
 
-class GetAllOrdersRemote: Remote, OrderRemoteProtocol {
+class GetAllOrdersRemote: Remote, OrderRemoteProtocol, @unchecked Sendable {
     
     /// .GET all orders
     func loadAllOrders(completion: @escaping (Result<[Orderr], Error>) -> Void) {

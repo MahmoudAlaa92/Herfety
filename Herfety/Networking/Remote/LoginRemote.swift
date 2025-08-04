@@ -11,7 +11,7 @@ protocol LoginRemoteProtocol {
     func login(email: String, password: String, completion: @escaping (Result<Registration, Error>) -> Void)
 }
 
-class LoginRemote: Remote, LoginRemoteProtocol {
+class LoginRemote: Remote, LoginRemoteProtocol, @unchecked Sendable {
     func login(email: String, password: String, completion: @escaping (Result<Registration, Error>) -> Void) {
         
         let parameters: [String: Sendable] = [

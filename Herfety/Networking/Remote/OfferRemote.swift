@@ -12,7 +12,7 @@ protocol OfferRemoteProtocol {
     func loadSpecificOffer(disount:Int ,completion: @escaping (Result<[Products], Error>) -> Void)
 }
 
-class OfferRemote: Remote, OfferRemoteProtocol {
+class OfferRemote: Remote, OfferRemoteProtocol, @unchecked Sendable {
      func loadAllOffer(completion: @escaping (Result<[Products], Error>) -> Void) {
          
         let request = HerfetyRequest(

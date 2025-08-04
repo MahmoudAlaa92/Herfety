@@ -11,7 +11,7 @@ protocol RegisterRemoteProtocol {
     func registerUser(user: RegisterUser, completion: @escaping (Result<Registration, Error>) -> Void)
 }
 
-class RegisterRemote: Remote, RegisterRemoteProtocol {
+class RegisterRemote: Remote, RegisterRemoteProtocol, @unchecked Sendable {
     func registerUser(user: RegisterUser, completion: @escaping (Result<Registration, Error>) -> Void) {
         let parameters: [String: Sendable] = [
             "FName": user.FName,

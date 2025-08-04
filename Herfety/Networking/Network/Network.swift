@@ -8,8 +8,12 @@ import Alamofire
 import Combine
 import Foundation
 
-public protocol Network {
+public protocol Network: Sendable {
 
+    /// Modern async/await method
+    /// 
+    func responseData(for request: URLRequestConvertible) async throws -> Data
+    
     /// Executes the specified Network Request. Upon completion, the payload will be sent back to the caller as a Data instance.
     ///
     func responseData(for request: URLRequestConvertible, completion: @escaping (Result<Data, Error>) -> Void)

@@ -11,7 +11,7 @@ protocol ProductsRemoteProtocol {
     func loadAllProducts(completion: @escaping (Result<[Products], Error>) -> Void)
 }
 
-class ProductsRemote: Remote, ProductsRemoteProtocol {
+class ProductsRemote: Remote, ProductsRemoteProtocol, @unchecked Sendable {
     func loadAllProducts(completion: @escaping (Result<[Products], Error>) -> Void) {
         let request = HerfetyRequest(
             method: .get,

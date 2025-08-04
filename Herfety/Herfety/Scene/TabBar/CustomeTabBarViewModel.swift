@@ -8,12 +8,7 @@
 import UIKit
 import Combine
 
-enum TabBarItems: Int {
-    case home = 0
-    case wishlist
-    case order
-    case profile
-}
+
 // MARK: - change this class to Actor (Safe threading)
 //
 class CustomeTabBarViewModel: ObservableObject {
@@ -28,7 +23,6 @@ class CustomeTabBarViewModel: ObservableObject {
      var isOrdersItemDeleted = CurrentValueSubject<Bool, Never>(false)
     ///
     @Published var userProfileImage: UIImage = Images.iconPersonalDetails
-    @Published var selectedTab: TabBarItems = .home
     @Published var isLogin: Bool = false
     @Published var orders: [WishlistItem] = []
     @Published var cartItems: [Wishlist] = []
@@ -42,7 +36,6 @@ class CustomeTabBarViewModel: ObservableObject {
     var subscriptions = Set<AnyCancellable>()
     ///
     func logout() {
-        selectedTab = .home
         isLogin = false
         login = false
         orders.removeAll()
@@ -61,14 +54,14 @@ extension CustomeTabBarViewModel {
     // MARK: Wishlist
     func fetchWishlistItems(id: Int = 22) {
         let productItems: ProductsOfWishlistRemoteProtocol = ProductsOfWishlistRemote(network: AlamofireNetwork())
-        productItems.loadAllProducts(userId: id) { [weak self] result in
-            switch result {
-            case.success(let products):
-                DispatchQueue.main.async {
-                    self?.Wishlist = products
+        Task {
+            do {
+                let products = try await productItems.loadAllProducts(userId: id)
+                await MainActor.run {
+                    self.Wishlist = products
                 }
-            case .failure(let error):
-                print("error: \(error)")
+            } catch {
+                print("❌ Failed to fetch wishlist: \(error)")
             }
         }
     }
@@ -78,15 +71,16 @@ extension CustomeTabBarViewModel {
 extension CustomeTabBarViewModel {
     // MARK: Wishlist
     func deleteWishlistItem(userId: Int, productId: Int, indexPath: IndexPath) {
-        let productItem = ProductsOfWishlistRemote(network: AlamofireNetwork())
-        productItem.removeProduct(userId: userId, productId: productId) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case.success(_):
-                    self?.Wishlist.remove(at: indexPath.row)
-                case .failure(let error):
-                    print("error \(error)")
+        let productItem: ProductsOfWishlistRemoteProtocol = ProductsOfWishlistRemote(network: AlamofireNetwork())
+        
+        Task {
+            do {
+                _ = try await productItem.removeProduct(userId: userId, productId: productId)
+                _ = await MainActor.run {
+                    self.Wishlist.remove(at: indexPath.row)
                 }
+            } catch {
+                print("error \(error)")
             }
         }
     }

@@ -42,7 +42,7 @@ extension UIImage {
         }
         
         guard let url = URL(string: urlString) else { return nil }
-
+        
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             guard let image = UIImage(data: data) else { return nil }
@@ -54,4 +54,5 @@ extension UIImage {
             print("Image loading failed:", error)
             return nil
         }
-    }}
+    }
+}
