@@ -11,6 +11,7 @@ protocol ProductsOfWishlistRemoteProtocol {
     
     /// Async/await versions
     func loadAllProducts(userId: Int) async throws -> [Wishlist]
+    func addNewProduct(userId: Int, productId: Int) async throws -> Wishlist
     func removeProduct(userId: Int, productId: Int) async throws -> WishlistMessage
     /// Legacy callback versions for backward compatibility
     func loadAllProducts(userId: Int, completion: @escaping (Result<[Wishlist], Error>) -> Void)
@@ -30,6 +31,21 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol, @unche
         
         return try await enqueue(request)
     }
+    /// .post
+    func addNewProduct(userId: Int, productId: Int) async throws -> Wishlist {
+        let parameters: [String: Sendable] = [
+            "productId": productId,
+            "userId": userId
+        ]
+        
+        let request = HerfetyRequest(
+            method: .post,
+            path: "api/WishLists",
+            parameters: parameters,
+            destination: .body)
+        
+        return try await enqueue(request)
+    }
     /// delete
     func removeProduct(userId: Int, productId: Int) async throws -> WishlistMessage {
         let parameters: [String: Sendable] = [
@@ -44,7 +60,6 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol, @unche
         
         return try await enqueue(request)
     }
-    
 }
 // MARK: - Legacy Callback Methods for Backward Compatibility
 //

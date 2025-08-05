@@ -11,7 +11,7 @@ class TitleProductDetails: UICollectionReusableView {
     
     // MARK: - Properties
     static let identifier: String = "TitleProductDetails"
-    var product: Wishlist!
+    private var product: Wishlist?
     
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
@@ -52,14 +52,20 @@ extension TitleProductDetails {
 //
 extension TitleProductDetails {
     @IBAction func addToWhishlist(_ sender: Any) {
-        if !CustomeTabBarViewModel.shared.Wishlist.contains(where: { $0 == self.product }) {
-            let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
+        
+        guard let product = product else { return }
+        
+        Task {
+            let appDataStore = AppDataStore.shared
+            let isInWishlist = await appDataStore.isItemInWishlist(productId: product.productID ?? 1)
             
-            let userId = CustomeTabBarViewModel.shared.userId
-            productItems.addNewProduct(userId: userId, productId: (product.productID ?? 1)) { result in
-                CustomeTabBarViewModel.shared.fetchWishlistItems(id: userId)
+            if !isInWishlist {
+                await appDataStore.addToWishlist(
+                    userId: appDataStore.userId,
+                    productId: product.productID ?? 1
+                )
             }
+            appDataStore.isWishlistItemDeleted.send(false)
         }
-        CustomeTabBarViewModel.shared.isWishlistItemDeleted.send(false)
     }
 }

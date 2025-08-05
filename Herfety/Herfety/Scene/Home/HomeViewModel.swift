@@ -40,12 +40,14 @@ class HomeViewModel {
     private var subscriptions = Set<AnyCancellable>()
     
     init() {
-        observeWishlist()
-        observeOrders()
+        Task {
+           await observeWishlist()
+           await observeOrders()
+        }
     }
-    
+    @MainActor
     private func observeWishlist() {
-        CustomeTabBarViewModel
+        AppDataStore
             .shared
             .isWishlistItemDeleted
             .dropFirst()
@@ -62,8 +64,11 @@ class HomeViewModel {
             .store(in: &subscriptions)
     }
     
+    @MainActor
     private func observeOrders() {
-        CustomeTabBarViewModel.shared.isOrdersItemDeleted
+        AppDataStore
+            .shared
+            .isOrdersItemDeleted
             .dropFirst()
             .sink { [weak self] current in
                 guard let self = self else { return }
@@ -92,7 +97,6 @@ class HomeViewModel {
         }
     }
 }
-
 // MARK: - Fetching
 //
 extension HomeViewModel {

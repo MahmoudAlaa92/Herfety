@@ -39,7 +39,7 @@ class WishlistCollectionViewSection: CollectionViewDataSource {
         cell.priceCell.text = "$" +  String(format: "%.2f", Double(item.price ?? 0.0))
         
         cell.configureOrder(with: item)
-
+        
         return cell
     }
 }
@@ -66,15 +66,38 @@ extension WishlistCollectionViewSection: HeaderAndFooterProvider {
 extension WishlistCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
-                let items = CustomeTabBarViewModel.shared
-                let wishlist = items.Wishlist[indexPath.row]
-                let userId = items.userId
-                CustomeTabBarViewModel.shared.deleteWishlistItem(userId: userId, productId: (wishlist.productID ?? 1), indexPath: indexPath)
-                CustomeTabBarViewModel.shared.isWishlistItemDeleted.send(true)
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+                guard let self = self else { return }
+                Task { @MainActor in
+                    await self.handleWishlistDeletion(at: indexPath)
+                }
             }
             return UIMenu(title: "", children: [delete])
         }
+    }
+    @MainActor
+    private func handleWishlistDeletion(at indexPath: IndexPath) async {
+        let viewModel = AppDataStore.shared
+        
+        /// Safe access to wishlist items
+        let wishlistItems = await viewModel.safeWishlistAccess()
+        
+        /// Validate index bounds
+        guard indexPath.row < wishlistItems.count else {
+            print("❌ Invalid index path for wishlist deletion")
+            return
+        }
+        
+        let wishlistItem = wishlistItems[indexPath.row]
+        let userId = viewModel.userId
+        let productId = wishlistItem.productID ?? 1
+        
+        /// Perform deletion with proper error handling
+        await viewModel.deleteWishlistItem(
+            userId: userId,
+            productId: productId,
+            indexPath: indexPath
+        )
     }
 }
 // MARK: - Layout
@@ -89,7 +112,7 @@ struct WishlistSectionLayoutProvider: LayoutSectionProvider {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-    
+        
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 0
         section.boundarySupplementaryItems = [.init(layoutSize: .init(widthDimension: .fractionalWidth(1),

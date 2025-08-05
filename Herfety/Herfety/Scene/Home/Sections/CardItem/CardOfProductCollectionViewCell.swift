@@ -11,7 +11,7 @@ class CardOfProductCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     //
     static let cellIdentifier: String = "CardOfProductCollectionViewCell"
-    var productOfWishlist: Wishlist!
+    var productOfWishlist: Wishlist?
     // MARK: - Outlets
     //
     @IBOutlet weak var topBackground: UIView!
@@ -106,22 +106,37 @@ extension CardOfProductCollectionViewCell {
 extension CardOfProductCollectionViewCell {
     
     private func updateWhishlistItems() {
-        if !CustomeTabBarViewModel.shared.Wishlist.contains(where: { $0 == self.productOfWishlist }) {
-            let productItems: ProductsOfWishlistRemote = ProductsOfWishlistRemote(network: AlamofireNetwork())
+        
+        guard let product = productOfWishlist else { return }
+        
+        Task {
+            let appDataStore = AppDataStore.shared
+            let isInWishlist = await appDataStore.isItemInWishlist(productId: product.productID ?? 1)
             
-            productItems.addNewProduct(userId: CustomeTabBarViewModel.shared.userId, productId: (productOfWishlist.productID ?? 1)) { result in
-                CustomeTabBarViewModel.shared.fetchWishlistItems(id: CustomeTabBarViewModel.shared.userId)
+            if !isInWishlist {
+                await appDataStore.addToWishlist(
+                    userId: appDataStore.userId,
+                    productId: product.productID ?? 1
+                )
             }
+            appDataStore.isWishlistItemDeleted.send(false)
         }
-        CustomeTabBarViewModel.shared.isWishlistItemDeleted.send(false)
     }
     
     private func updataCartItems() {
-        if var itemToAdd = productOfWishlist ,
-           !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.productOfWishlist })  {
-            itemToAdd.qty = 1
-            CustomeTabBarViewModel.shared.cartItems.append(itemToAdd)
-            CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(false)
+        guard let product = productOfWishlist else { return }
+        
+        Task {
+            let appDataStore = AppDataStore.shared
+            let isInCart = await appDataStore.isItemInCart(productId: product.productID ?? 1)
+            
+            if !isInCart ,var itemToAdd = productOfWishlist {
+                var cartItem = await appDataStore.safeCartItemsAccess()
+                itemToAdd.qty = 1
+                cartItem.append(itemToAdd)
+                appDataStore.updateCartItems(cartItem)
+            }
+            appDataStore.isOrdersItemDeleted.send(false)
         }
     }
 }

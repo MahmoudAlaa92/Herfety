@@ -18,7 +18,9 @@ class CartViewModel: ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     // MARK: - Init
     init() {
-        observeOrderUpdates()
+        Task {
+            await observeOrderUpdates()
+        }
         observeOrderItems()
     }
     func didTapPayment() {
@@ -42,8 +44,9 @@ class CartViewModel: ObservableObject {
 // MARK: - Private Handlers
 //
 extension CartViewModel {
+    @MainActor
     private func observeOrderUpdates() {
-        CustomeTabBarViewModel
+        AppDataStore
             .shared
             .$cartItems
             .receive(on: DispatchQueue.main)
@@ -85,5 +88,4 @@ extension CartViewModel {
         CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(true)
         CustomeTabBarViewModel.shared.cartItems = updatedItems
     }
-
 }
