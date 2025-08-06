@@ -40,10 +40,6 @@ class ProductDetailsViewController: UIViewController {
         configureLayoutSections()
         bindViewModel()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        viewModel.loadReviews()
-    }
 }
 // MARK: - Configuration
 //
@@ -235,15 +231,14 @@ extension ProductDetailsViewController {
     }
     /// Reviews Updated
     private func bindUpadateReviews() {
-        viewModel.onReviewsUpdated = { [weak self] in
-
-            guard let self = self else { return }
-
-            self.reviewDetailsSection?.reviewItems = self.viewModel.reviews
-
-            DispatchQueue.main.async {
+        viewModel.$reviews
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newReviews in
+                guard let self = self else { return }
+                self.reviewDetailsSection?.reviewItems = newReviews
                 self.collectionView.reloadData()
             }
-        }
+            .store(in: &subscriptions)
+
     }
 }

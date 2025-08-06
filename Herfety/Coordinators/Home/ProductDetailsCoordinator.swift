@@ -35,7 +35,10 @@ class PoroductDetailsCoordinator: Coordinator {
     func start() {
         let viewModel = ProductDetailsViewModel(productId: productDetails.productID ?? 93)
         viewModel.productItem = productDetails
-        viewModel.fetchProductItems()
+        
+        Task {
+           await viewModel.fetchProductItems()
+        }
 
         let productsDetailsVC = ProductDetailsViewController(viewModel: viewModel)
         productsDetailsVC.coordinator = self
