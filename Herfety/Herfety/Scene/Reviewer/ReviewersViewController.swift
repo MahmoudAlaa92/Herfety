@@ -54,26 +54,24 @@ extension ReviewersViewController {
         section.onDelete = { [weak self] index in
             guard let self = self else { return }
 
-            self.viewModel.deleteReview(at: index) { success in
-                if success {
-                    DispatchQueue.main.async {
-                        self.reloadData()
-                    }
-                } else {
-                    print("Failed to delete review")
-                }
+            Task {
+                let success = await self.viewModel.deletReview(at: index)
+                if success { self.reloadData() }
             }
+            
         }
+        
         section.onUpdate = { [weak self] index, newText in
             guard let self = self else { return }
 
-            self.viewModel.updateReview(at: index, with: newText) { success in
-                DispatchQueue.main.async {
+            Task {
+                let success = await self.viewModel.updateReview(at: index, with: newText)
+                if success {
                     self.reloadData()
                 }
             }
+            
         }
-
         sections = [section]
         collectionView.reloadData()
     }

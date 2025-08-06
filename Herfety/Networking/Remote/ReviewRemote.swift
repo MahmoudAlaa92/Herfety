@@ -8,9 +8,14 @@
 import Foundation
 
 protocol ReviewRemoteProtocol {
+    /// Async/await versions
+    func getReviewsAsync(productId: Int) async throws -> [Reviewrr]
+    func createReview(request: CreateReviewRequest) async throws -> Reviewrr
+    func updateReview(id: Int, request: UpdateReviewRequest) async throws -> Reviewrr
+    func deleteReview(id: Int) async throws -> DeleteReviewResponse
+    /// Legacy callback versions for backward compatibility
     func createReview(request: CreateReviewRequest, completion: @escaping (Result<Reviewrr, Error>) -> Void)
     func getReviews(productId: Int, completion: @escaping (Result<[Reviewrr], Error>) -> Void)
-    func getReviewsAsync(productId: Int) async throws -> [Reviewrr]
     func updateReview(id: Int, request: UpdateReviewRequest, completion: @escaping (Result<Reviewrr, Error>) -> Void)
     func deleteReview(id: Int, completion: @escaping (Result<DeleteReviewResponse, Error>) -> Void)
 }
@@ -35,6 +40,7 @@ class ReviewRemote: Remote, ReviewRemoteProtocol, @unchecked Sendable {
         
         enqueue(request, completion: completion)
     }
+    
     func getReviews(productId: Int, completion: @escaping (Result<[Reviewrr], Error>) -> Void) {
             let request = HerfetyRequest(
                 method: .get,
@@ -74,7 +80,6 @@ class ReviewRemote: Remote, ReviewRemoteProtocol, @unchecked Sendable {
         enqueue(request, completion: completion)
     }
 }
-
 // MARK: - Modern Concurency
 //
 extension ReviewRemote {
@@ -89,5 +94,54 @@ extension ReviewRemote {
                 }
             }
         }
+    }
+    
+    func createReview(request: CreateReviewRequest) async throws -> Reviewrr {
+        let parameters: [String: Any] = [
+            "productId": request.productId,
+            "userId": request.userId,
+            "review": request.review,
+            "rating": request.rating,
+            "status": request.status,
+            "createdAt": request.createdAt
+        ]
+        
+        let request = HerfetyRequest(
+            method: .post,
+            path: "api/ProductReviews",
+            parameters: parameters,
+            destination: .body)
+        
+        return try await enqueue(request)
+    }
+    
+    func updateReview(id: Int, request: UpdateReviewRequest) async throws -> Reviewrr {
+        
+        let parameters: [String: Any] = [
+            "productId": request.productId,
+            "userId": request.userId,
+            "review": request.review,
+            "rating": request.rating,
+            "status": request.status,
+            "createdAt": request.createdAt
+        ]
+        
+        let request = HerfetyRequest(
+            method: .put,
+            path: "api/ProductReviews?id=\(id)",
+            parameters: parameters,
+            destination: .body)
+        
+        return try await enqueue(request)
+    }
+    
+    func deleteReview(id: Int) async throws -> DeleteReviewResponse {
+        let request = HerfetyRequest(
+            method: .delete,
+            path: "api/ProductReviews?id=\(id)",
+            parameters: nil
+        )
+        
+        return try await enqueue(request)
     }
 }

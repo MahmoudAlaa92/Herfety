@@ -79,13 +79,14 @@ extension CartViewModel {
             .assign(to: &$paymentInfo)
     }
     
+    @MainActor
     func deleteItem(at index: Int) {
         guard orderItems.indices.contains(index) else { return }
         var updatedItems = orderItems
         updatedItems.remove(at: index)
         orderItems = updatedItems
         
-        CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(true)
-        CustomeTabBarViewModel.shared.cartItems = updatedItems
+        AppDataStore.shared.isOrdersItemDeleted.send(true)
+        AppDataStore.shared.updateCartItems(updatedItems)
     }
 }
