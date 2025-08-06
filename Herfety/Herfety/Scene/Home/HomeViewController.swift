@@ -155,8 +155,7 @@ extension HomeViewController {
         bindProductItems()
         bindTopBrandsItems()
         bindDailyEssentialsItems()
-        bindWishlist()
-        bindOrders()
+        bindAlert()
     }
     // MARK: - Slider Items
     private func bindSliderItems() {
@@ -172,13 +171,16 @@ extension HomeViewController {
     }
     // MARK: - Category Items
     private func bindCategoryItems() {
-        viewModel.fetchCategoryItems()
-        viewModel.$categoryItems
+        Task {
+            await viewModel.fetchCategoryItems()
+            await viewModel.fetchProductItems()
+        }
+        viewModel
+            .$categoryItems
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] newItems in
-                DispatchQueue.main.async {
                     self?.categoryItem?.categoryItems = newItems
                     self?.collectionView.reloadData()
-                }
             }
             .store(in: &subscriptions)
         ///
@@ -188,7 +190,6 @@ extension HomeViewController {
     }
     // MARK: - Product Items
     private func bindProductItems() {
-        viewModel.fetchProductItems()
         viewModel.$productItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newItems in
@@ -226,17 +227,8 @@ extension HomeViewController {
         }).store(in: &subscriptions)
     }
     // MARK: - Wishlist
-    private func bindWishlist() {
-        viewModel.$wishlistAlert
-            .compactMap { $0 }
-            .sink { [weak self] alert in
-                self?.alertPresenter?.showAlert(alert)
-            }
-            .store(in: &subscriptions)
-    }
-    // MARK: - Orders
-    private func bindOrders() {
-        viewModel.$orderAlert
+    private func bindAlert() {
+        viewModel.$showAlert
             .compactMap { $0 }
             .sink { [weak self] alert in
                 self?.alertPresenter?.showAlert(alert)

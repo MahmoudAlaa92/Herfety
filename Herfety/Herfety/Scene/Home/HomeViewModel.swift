@@ -33,9 +33,7 @@ class HomeViewModel {
         .init(image: Images.craft, name: "Handmade Materials: crepe", offer: "UP to 70% OFF"),
         .init(image: Images.fashion, name: "Kids’ Crafts & Toys ", offer: "UP to 80% OFF"),
     ]
-    
-    @Published var wishlistAlert: AlertModel?
-    @Published var orderAlert: AlertModel?
+    @Published var showAlert: AlertModel?
     ///
     private var subscriptions = Set<AnyCancellable>()
     
@@ -54,7 +52,7 @@ class HomeViewModel {
             .sink { [weak self] current in
                 guard let self = self else { return }
                 
-                self.wishlistAlert = AlertModel(
+                self.showAlert = AlertModel(
                     message: current ? "Deleted From Wishlist" : "Added To Wishlist",
                     buttonTitle: "Ok",
                     image: .success,
@@ -73,7 +71,7 @@ class HomeViewModel {
             .sink { [weak self] current in
                 guard let self = self else { return }
                 
-                self.orderAlert = AlertModel(
+                self.showAlert = AlertModel(
                     message: current ? "Deleted From Order" : "Added To Order",
                     buttonTitle: "Ok",
                     image: .success,
@@ -101,32 +99,26 @@ class HomeViewModel {
 //
 extension HomeViewModel {
     // MARK:  Categories
-    func fetchCategoryItems() {
+    func fetchCategoryItems() async {
         let catergoryRemote: CategoryRemoteProtocol = CategoryRemote(network: AlamofireNetwork())
-        catergoryRemote.loadAllCategories { [weak self] result in
-            switch result {
-            case .success(let categories):
-                DispatchQueue.main.async {
-                    self?.categoryItems = categories
-                }
-            case .failure(let error):
-                assertionFailure("Error when fetching categories: \(error)")
-            }
+
+        do {
+            let result = try await catergoryRemote.loadAllCategories()
+            self.categoryItems = result
+        } catch {
+            print("Error when fetching categories: \(error)")
         }
+        
     }
-    // TODO: change the Dispatch queue here for UI
     // MARK: Products
-    func fetchProductItems() {
+    func fetchProductItems() async {
         let ProductsRemote: ProductsRemoteProtocol = ProductsRemote(network: AlamofireNetwork())
-        ProductsRemote.loadAllProducts { [weak self] result in
-            switch result {
-            case .success(let Products):
-                DispatchQueue.main.async {
-                    self?.productItems = Products
-                }
-            case .failure(let error):
-                assertionFailure("Error when fetching categories: \(error)")
-            }
+       
+        do {
+            let products = try await ProductsRemote.loadAllProducts()
+            self.productItems = products
+        } catch {
+            print("Error when fetching best deal on: \(error)")
         }
     }
 }

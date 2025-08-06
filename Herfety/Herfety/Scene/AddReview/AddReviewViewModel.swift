@@ -7,7 +7,6 @@
 import Foundation
 import Combine
 
-
 class AddReviewViewModel: AddReviewViewModelType {
     
     // MARK: - Subject

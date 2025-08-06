@@ -135,7 +135,7 @@ private extension CartViewController {
                     self.viewModel.updateOrderCount(at: index, to: newCount)
                 }
                 .store(in: &self.subscriptions)
-        }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
+        }.store(in: &subscriptions) /// CustomeTabBarViewModel.shared.subscriptions
         
 
         layoutProviders.append(OrderSectionLayoutProvider())

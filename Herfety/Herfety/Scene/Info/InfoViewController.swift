@@ -44,7 +44,7 @@ extension InfoViewController {
     }
     /// Configure Section
     private func configureSections() {
-        CustomeTabBarViewModel.shared.$infos
+        AppDataStore.shared.$infos
             .receive(on: RunLoop.main)
             .sink { [weak self] infoItems in
                 guard let self = self else { return }

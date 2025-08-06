@@ -81,8 +81,15 @@ extension AddAddressViewModel {
         
         let addressValue = InfoModel(name: name, address: address, phone: phone)
         
-        if !CustomeTabBarViewModel.shared.infos.contains(where: { $0 == addressValue }) {
-            CustomeTabBarViewModel.shared.infos.append(addressValue)
+        Task {
+            let appDataStore =  await AppDataStore.shared
+            let isInInfos = await appDataStore.isItemInInfos(addressInfo: addressValue)
+            
+            if !isInInfos {
+                var newInfos = await AppDataStore.shared.infos
+                newInfos.append(addressValue)
+                await appDataStore.updateInfos(newInfos)
+            }
         }
         success.send()
     }

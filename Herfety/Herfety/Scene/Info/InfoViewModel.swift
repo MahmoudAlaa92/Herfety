@@ -11,11 +11,13 @@ class InfoViewModel {
     // MARK: - Properties
     var infoItems: [InfoModel] = []
     var navigationToPayment: (() -> Void)?
-
     @Published var infoState: AlertModel?
+    var subscription = Set<AnyCancellable>()
 
     init() {
-        observeInfoItems()
+        Task {
+            await observeInfoItems()
+        }
     }
     func numberOfItems() -> Int {
         return infoItems.count
@@ -43,9 +45,9 @@ class InfoViewModel {
 // MARK: - Privagte Handlers
 //
 extension InfoViewModel {
-    private func observeInfoItems() {
-        CustomeTabBarViewModel.shared.$infos.sink { [weak self] infoItems in
+    private func observeInfoItems() async {
+        await AppDataStore.shared.$infos.sink { [weak self] infoItems in
             self?.infoItems = infoItems
-        }.store(in: &CustomeTabBarViewModel.shared.subscriptions)
+        }.store(in: &subscription)
     }
 }

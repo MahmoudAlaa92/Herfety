@@ -43,8 +43,14 @@ class AppDataStore: ObservableObject {
     @Published var countProductDetails: Int = 1
     @Published var totalPriceOfOrders: Int = 0
     @Published var orderAddress: String = "Egypt, Aswan"
-    
     // MARK: - Thread-Safe Computed Properties for External Access
+    
+    nonisolated var isUserIdValue: Int {
+        get async {
+            await userId
+        }
+    }
+    
     nonisolated var isLoginValue: Bool {
         get async {
             await isLogin
@@ -178,6 +184,10 @@ extension AppDataStore {
         orders = newOrders
     }
     
+    func updateInfos(_ newInfos: [InfoModel]) {
+        infos = newInfos
+    }
+    
     func incrementProductCount() {
         countProductDetails = min(countProductDetails + 1, 99)
     }
@@ -189,6 +199,7 @@ extension AppDataStore {
     func updateProfileImage(_ image: UIImage) {
         userProfileImage = image
     }
+    
     
     private func calculateTotalPrice() {
         totalPriceOfOrders = cartItems.reduce(0) { total, item in
@@ -215,6 +226,11 @@ extension AppDataStore {
         await infos
     }
     
+    
+    nonisolated func safeTotalPriceAccess() async -> Int {
+        await totalPriceOfOrders
+    }
+    
     nonisolated func isItemInWishlist(productId: Int) async -> Bool {
         let wishlist = await Wishlist
         return wishlist.contains { $0.productID == productId }
@@ -223,6 +239,11 @@ extension AppDataStore {
     nonisolated func isItemInCart(productId: Int) async -> Bool {
         let cart = await cartItems
         return cart.contains { $0.productID == productId }
+    }
+    
+    nonisolated func isItemInInfos(addressInfo: InfoModel) async -> Bool {
+        let infos = await infos
+        return infos.contains{ $0 ==  addressInfo }
     }
 }
 // MARK: - change this class to Actor (Safe threading)

@@ -10,7 +10,10 @@ import Combine
 class CartViewModel: ObservableObject {
     // MARK: - Properties
     @Published var orderItems: [Wishlist] = []
-    @Published private(set) var paymentInfo: PaymentView.Model = PaymentView.Model(subTotal: 0, shipping: 0, total: 0, numberOfItems: 0)
+    @Published private(set) var paymentInfo: PaymentView.Model = PaymentView.Model(subTotal: 0,
+                                                                                   shipping: 0,
+                                                                                   total: 0,
+                                                                                   numberOfItems: 0)
     @Published var orderAlert: AlertModel?
     
     var navigationToShipping: (() -> Void)?
@@ -65,9 +68,6 @@ extension CartViewModel {
                 let total = subTotal + shipping
                 let numberOfItems = orderItems.reduce(0) { $0 + ($1.qty ?? 0) }
                 
-                // TODO: change this logic
-                let roundedTotal = total == floor(total) ? total : ceil(total)
-                         CustomeTabBarViewModel.shared.totalPriceOfOrders = Int(roundedTotal)
                 return PaymentView.Model(
                     subTotal: subTotal,
                     shipping: shipping,

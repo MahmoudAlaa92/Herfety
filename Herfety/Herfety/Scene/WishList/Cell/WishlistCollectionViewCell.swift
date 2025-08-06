@@ -29,13 +29,11 @@ class WishlistCollectionViewCell: UICollectionViewCell {
         // Initialization code
         configure()
         configureContainerView()
-        
     }
 }
 // MARK: - Configure
 //
 extension WishlistCollectionViewCell {
-    
     
     /// Configure the order Details
     ///
@@ -72,15 +70,23 @@ extension WishlistCollectionViewCell {
 extension WishlistCollectionViewCell {
     
     @IBAction func removeFromWhishlist(_ sender: UIButton) {
-        // Remove From Whishlist
+        /// Remove From Whishlist
     }
     
     @IBAction func addToCart(_ sender: UIButton) {
-        if var itemToAdd = order,
-           !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order })  {
-            itemToAdd.qty = 1
-            CustomeTabBarViewModel.shared.cartItems.append(itemToAdd)
-            CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(false)
+        guard let product = order else { return }
+        
+        Task {
+            let appDataStore = AppDataStore.shared
+            let isInCart = await appDataStore.isItemInCart(productId: product.productID ?? 1)
+            
+            if !isInCart ,var itemToAdd = order {
+                var cartItem = await appDataStore.safeCartItemsAccess()
+                itemToAdd.qty = 1
+                cartItem.append(itemToAdd)
+                appDataStore.updateCartItems(cartItem)
+            }
+            appDataStore.isOrdersItemDeleted.send(false)
         }
     }
 }

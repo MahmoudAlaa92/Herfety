@@ -36,8 +36,10 @@ class CheckoutViewModel {
      }
     // MARK: - Public Methods
     func createEmbeddedPaymentElement() async throws -> EmbeddedPaymentElement {
+        let totalPrice = await AppDataStore.shared.totalPriceOfOrders
+
         let intentConfig = PaymentSheet.IntentConfiguration(
-            mode: .payment(amount: Int(ceil(Double(CustomeTabBarViewModel.shared.totalPriceOfOrders) * 100.0)),
+            mode: .payment(amount: Int(ceil(Double(totalPrice) * 100.0)),
                            currency: "USD")
         ) { [weak self] _, _, intentCreationCallback in
             self?.handleConfirm(intentCreationCallback)
@@ -84,7 +86,9 @@ class CheckoutViewModel {
                 image: .success,
                 status: .success
             )
-            self.createOrder()
+            Task {
+                await self.createOrder()
+            }
             
         case .failed(let error):
             // Handle the custom error for missing payment method
@@ -115,77 +119,89 @@ class CheckoutViewModel {
          self.alertItem = alertItem
     }
     
-    func createOrder() {
-        let products = CustomeTabBarViewModel.shared.cartItems.map { item in
-            ProductIntent(
-                vendorID: item.vendorId ?? 12,
-                productID: item.productID ?? 93,
-                quantity: item.qty ?? 3
+    func createOrder() async {
+        Task { @MainActor in
+            let cartItems = await AppDataStore.shared.safeCartItemsAccess()
+            let userId =  AppDataStore.shared.userId
+            let infos = await AppDataStore.shared.safeInfoAccess()
+            let total = await AppDataStore.shared.safeTotalPriceAccess()
+            
+            let products = cartItems.map { item in
+                ProductIntent(
+                    vendorID: item.vendorId ?? 12,
+                    productID: item.productID ?? 93,
+                    quantity: item.qty ?? 3
+                )
+            }
+            
+            let order = Orderr(
+                companyDeliveryId: 1,
+                userId: userId,
+                currencyName: 0,
+                paymentMethod: 0,
+                orderAddress: infos[0].address ?? "Egypt Aswan", /// Error here
+                subTotal: Double(total),
+                orderStatus: 1,
+                productsOrder: products,
+                createdAt: Date().ISO8601Format(),
+                updatedAt: Date().ISO8601Format()
             )
+            
+            ordersRemote.addOrder(order: order) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let response):
+                        print("✅ Order placed successfully: \(response)")
+                    case .failure(let error):
+                        self?.alertItem = AlertModel(
+                            message: "Failed to place order: \(error.localizedDescription)",
+                            buttonTitle: "Ok",
+                            image: .error,
+                            status: .error
+                        )
+                    }
+                }
+            }
         }
         
-        let order = Orderr(
-            companyDeliveryId: 1,
-            userId: CustomeTabBarViewModel.shared.userId,
-            currencyName: 0,
-            paymentMethod: 0,
-            orderAddress: CustomeTabBarViewModel.shared.infos[0].address ?? "Egypt Aswan",
-            subTotal: Double(CustomeTabBarViewModel.shared.totalPriceOfOrders),
-            orderStatus: 1,
-            productsOrder: products,
-            createdAt: Date().ISO8601Format(),
-            updatedAt: Date().ISO8601Format()
-        )
-        
-        ordersRemote.addOrder(order: order) { [weak self] result in
-            DispatchQueue.main.async {
+    }
+    // MARK: - Private Methods
+    private func handleConfirm(_ intentCreationCallback: @escaping (Result<String, Error>) -> Void) {
+        Task { @MainActor in
+            let cartItems = await AppDataStore.shared.safeCartItemsAccess()
+            let amount = Int(ceil(Double(await AppDataStore.shared.safeTotalPriceAccess()) * 100.0))
+
+            let products = cartItems.map { item in
+                ProductIntent(
+                    vendorID: item.vendorId ?? 12,
+                    productID: item.productID ?? 93,
+                    quantity: item.qty ?? 3
+                )
+            }
+            
+            paymentIntentRemote.createPaymentIntent(
+                PaymentIntent: .init(
+                    amount: amount,
+                    companyDelivery: 1,
+                    products: products
+                )
+            ) { result in
                 switch result {
                 case .success(let response):
-                    print("✅ Order placed successfully: \(response)")
+                    if let clientSecret = response.clientSecret {
+                        intentCreationCallback(.success(clientSecret))
+                    } else {
+                        let error = NSError(
+                            domain: "PaymentError",
+                            code: 0,
+                            userInfo: [NSLocalizedDescriptionKey: "Client secret missing from response"]
+                        )
+                        intentCreationCallback(.failure(error))
+                    }
                 case .failure(let error):
-                    self?.alertItem = AlertModel(
-                        message: "Failed to place order: \(error.localizedDescription)",
-                        buttonTitle: "Ok",
-                        image: .error,
-                        status: .error
-                    )
+                    intentCreationCallback(.failure(error))
                 }
             }
         }
     }
-    // MARK: - Private Methods
-       private func handleConfirm(_ intentCreationCallback: @escaping (Result<String, Error>) -> Void) {
-           let amount = Int(ceil(Double(CustomeTabBarViewModel.shared.totalPriceOfOrders) * 100.0))
-           let products = CustomeTabBarViewModel.shared.cartItems.map { item in
-               ProductIntent(
-                   vendorID: item.vendorId ?? 12,
-                   productID: item.productID ?? 93,
-                   quantity: item.qty ?? 3
-               )
-           }
-           
-           paymentIntentRemote.createPaymentIntent(
-               PaymentIntent: .init(
-                   amount: amount,
-                   companyDelivery: 1,
-                   products: products
-               )
-           ) { result in
-               switch result {
-               case .success(let response):
-                   if let clientSecret = response.clientSecret {
-                       intentCreationCallback(.success(clientSecret))
-                   } else {
-                       let error = NSError(
-                           domain: "PaymentError",
-                           code: 0,
-                           userInfo: [NSLocalizedDescriptionKey: "Client secret missing from response"]
-                       )
-                       intentCreationCallback(.failure(error))
-                   }
-               case .failure(let error):
-                   intentCreationCallback(.failure(error))
-               }
-           }
-       }
 }
