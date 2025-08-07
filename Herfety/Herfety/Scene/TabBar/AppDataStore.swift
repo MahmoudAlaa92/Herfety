@@ -100,7 +100,6 @@ class AppDataStore: ObservableObject {
 //
 actor DataActor {
     private let productService: ProductsOfWishlistRemoteProtocol
-    
     init() {
         self.productService = ProductsOfWishlistRemote(network: AlamofireNetwork())
     }
