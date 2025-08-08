@@ -42,8 +42,8 @@ actor DataStore {
     
     // MARK: - Thread-safe UserDefaults access
     private var _login: Bool = false
-    private var _userInfo: RegisterUser?
-    private let userId: Int = 22
+    private var userInfo: RegisterUser?
+    private var userId: Int = 22
     
     // MARK: - Private state (thread-safe within actor)
     private var userProfileImage: UIImage = Images.iconPersonalDetails
@@ -73,7 +73,7 @@ actor DataStore {
         _login = UserDefaults.standard.bool(forKey: "login")
         if let userData = UserDefaults.standard.data(forKey: "userInfo"),
            let user = try? JSONDecoder().decode(RegisterUser.self, from: userData) {
-            _userInfo = user
+            userInfo = user
         }
         isLogin = _login
     }
@@ -85,7 +85,7 @@ actor DataStore {
                 await UserDefaults.standard.set(self._login, forKey: "login")
             }
             
-            if let userInfo = self._userInfo {
+            if let userInfo = self.userInfo {
                 group.addTask {
                     if let userData = try? JSONEncoder().encode(userInfo) {
                         UserDefaults.standard.set(userData, forKey: "userInfo")
@@ -105,7 +105,7 @@ actor DataStore {
     }
     
     func getUserInfo() -> RegisterUser? {
-        return _userInfo
+        return userInfo
     }
     
     func getUserProfileImage() -> UIImage {
@@ -139,8 +139,15 @@ actor DataStore {
     func getOrderAddress() -> String {
         return orderAddress
     }
-    
     // MARK: - Update Methods with Synchronous Notifications
+    func updateUserId(userId: Int) {
+        self.userId = userId
+    }
+    
+    func updateUserInfo(userInfo: RegisterUser) {
+        self.userInfo = userInfo
+    }
+    
     func updateWishlist(_ newItems: [Wishlist]) async {
         guard !newItems.isEmpty else { return }
         wishlist = newItems
@@ -249,7 +256,7 @@ actor DataStore {
     }
     
     func loadUserProfileImage() async {
-        guard let imageUrl = _userInfo?.image else {
+        guard let imageUrl = userInfo?.image else {
             userProfileImage = Images.iconPersonalDetails
             return
         }
@@ -312,25 +319,25 @@ extension AppDataStorePublisher {
         $loginStatusUpdated.eraseToAnyPublisher()
     }
 }
-
 // MARK: - Data Actor (Thread-safe)
-//actor DataActor {
-//    private let productService: ProductsOfWishlistRemoteProtocol
-//    
-//    init() {
-//        self.productService = ProductsOfWishlistRemote(network: AlamofireNetwork())
-//    }
-//    
-//    func fetchWishlistProducts(userId: Int) async throws -> [Wishlist] {
-//        return try await productService.loadAllProducts(userId: userId)
-//    }
-//    
-//    func removeWishlistProduct(userId: Int, productId: Int) async throws {
-//        _ = try await productService.removeProduct(userId: userId, productId: productId)
-//    }
-//    
-//    func addWishlistProduct(userId: Int, productId: Int) async throws {
-//        _ = try await productService.addNewProduct(userId: userId, productId: productId)
-//    }
-//}
+//
+actor DataActor {
+    private let productService: ProductsOfWishlistRemoteProtocol
+    
+    init() {
+        self.productService = ProductsOfWishlistRemote(network: AlamofireNetwork())
+    }
+    
+    func fetchWishlistProducts(userId: Int) async throws -> [Wishlist] {
+        return try await productService.loadAllProducts(userId: userId)
+    }
+    
+    func removeWishlistProduct(userId: Int, productId: Int) async throws {
+        _ = try await productService.removeProduct(userId: userId, productId: productId)
+    }
+    
+    func addWishlistProduct(userId: Int, productId: Int) async throws {
+        _ = try await productService.addNewProduct(userId: userId, productId: productId)
+    }
+}
 

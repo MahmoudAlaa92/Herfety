@@ -98,25 +98,25 @@ class AppDataStore: ObservableObject {
 }
 // MARK: - Data Actor for Thread-Safe Operations
 //
-actor DataActor {
-    private let productService: ProductsOfWishlistRemoteProtocol
-    init() {
-        self.productService = ProductsOfWishlistRemote(network: AlamofireNetwork())
-    }
-    
-    // MARK: - Wishlist Operations
-    func fetchWishlistProducts(userId: Int) async throws -> [Wishlist] {
-        return try await productService.loadAllProducts(userId: userId)
-    }
-    
-    func removeWishlistProduct(userId: Int, productId: Int) async throws {
-        _ = try await productService.removeProduct(userId: userId, productId: productId)
-    }
-    
-    func addWishlistProduct(userId: Int, productId: Int) async throws {
-        _ = try await productService.addNewProduct(userId: userId, productId: productId)
-    }
-}
+//actor DataActor {
+//    private let productService: ProductsOfWishlistRemoteProtocol
+//    init() {
+//        self.productService = ProductsOfWishlistRemote(network: AlamofireNetwork())
+//    }
+//    
+//    // MARK: - Wishlist Operations
+//    func fetchWishlistProducts(userId: Int) async throws -> [Wishlist] {
+//        return try await productService.loadAllProducts(userId: userId)
+//    }
+//    
+//    func removeWishlistProduct(userId: Int, productId: Int) async throws {
+//        _ = try await productService.removeProduct(userId: userId, productId: productId)
+//    }
+//    
+//    func addWishlistProduct(userId: Int, productId: Int) async throws {
+//        _ = try await productService.addNewProduct(userId: userId, productId: productId)
+//    }
+//}
 // MARK: - Operations
 //
 extension AppDataStore {

@@ -157,12 +157,14 @@ extension LoginViewController {
     private func bindViewModel() {
 
         viewModel.loginSuccess
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
 
         viewModel.loginError
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] errorMessage in
                 let alert = UIAlertController(
                     title: "Login Failed",
@@ -199,7 +201,9 @@ extension LoginViewController {
 //
 extension LoginViewController {
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        viewModel.loginTapped()
+        Task {
+            await viewModel.loginTapped()
+        }
     }
 
     @IBAction func forgetThePassword(_ sender: Any) {
@@ -207,11 +211,15 @@ extension LoginViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func facebookTapped(_ sender: Any) {
-        viewModel.loginWithFacebook(from: self)
+        Task {
+            await viewModel.loginWithFacebook(from: self)
+        }
     }
 
     @IBAction func googleTapped(_ sender: Any) {
-        viewModel.loginWithGoogle(from: self)
+        Task { 
+            await viewModel.loginWithGoogle(from: self)
+        }
     }
 
     @IBAction func appleTapped(_ sender: Any) {
@@ -242,7 +250,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate,
         if let details = authorization.credential
             as? ASAuthorizationAppleIDCredential
         {
-            viewModel.loginWithApple(credential: details)
+            Task {
+                await viewModel.loginWithApple(credential: details)
+            }
         }
     }
 

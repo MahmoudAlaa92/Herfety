@@ -22,16 +22,16 @@ protocol LoginViewModelInput {
     func updatePassword(_ text: String)
     
     /// Called when login button is tapped
-    func loginTapped()
+    func loginTapped() async
     
     /// Initiates login via Facebook
-    func loginWithFacebook(from viewController: UIViewController)
+    func loginWithFacebook(from viewController: UIViewController) async
     
     /// Initiates login via Google
-    func loginWithGoogle(from viewController: UIViewController)
+    func loginWithGoogle(from viewController: UIViewController) async
     
     /// Initiates login via Apple
-    func loginWithApple(credential: ASAuthorizationAppleIDCredential)
+    func loginWithApple(credential: ASAuthorizationAppleIDCredential) async
 }
 
 // MARK: - ViewModel Output
@@ -45,4 +45,7 @@ protocol LoginViewModelOutput {
     
     /// Emits login error messages
     var loginError: PassthroughSubject<String, Never> { get }
+
+    /// Emits loading 
+    var isLoading: PassthroughSubject<Bool, Never> { get }
 }
