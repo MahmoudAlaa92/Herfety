@@ -19,7 +19,7 @@ protocol SignupViewModelInput {
     func updatePassword(_ text: String)
     func updateConfirmPassword(_ text: String)
     func updatePhone(_ text: String)
-    func registerUser()
+    func registerTapped() async 
 }
 // MARK: - ViewModel Output
 //

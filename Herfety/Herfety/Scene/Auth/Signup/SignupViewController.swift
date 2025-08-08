@@ -193,7 +193,9 @@ extension SignupViewController {
 //
 extension SignupViewController {
     @IBAction func loginTapped(_ sender: Any) {
-        viewModel.registerUser()
+        Task {
+            await viewModel.registerTapped()
+        }
     }
     
     @objc private func firstNameChanged() {
@@ -236,12 +238,14 @@ extension SignupViewController {
         }
         
         viewModel.registrationSuccess
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
         
         viewModel.registrationError
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] alert in
                 self?.alertPresenter?.showAlert(alert)
             }
