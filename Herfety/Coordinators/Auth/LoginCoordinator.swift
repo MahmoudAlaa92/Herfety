@@ -61,6 +61,9 @@ extension LoginCoordinator: LoginTransitionDelegate {
     func goToForgetPasswordVC() {
         let coordinator = ForgetPasswordCoordinator(navigationController: navigationController)
         coordinator.parentCoordinator = self
+        coordinator.onStartShoping = { [weak self] in
+            self?.onLoginSuccess?()
+        }
         childCoordinators.append(coordinator)
         coordinator.start()
     }

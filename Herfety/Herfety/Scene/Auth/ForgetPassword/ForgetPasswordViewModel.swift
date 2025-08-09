@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class ForgetPasswordViewModel {
     // MARK: - Properties
@@ -15,12 +16,16 @@ class ForgetPasswordViewModel {
     private var confirmPassword: String = ""
     private let resetService: ResetPasswordRemoteProtocol
     /// Outputs
-    var onResetTapped: (() -> Void)?
-    var onError: ((String) -> Void)?
+    let onSuccess = PassthroughSubject<Void, Never>()
+    let onError = PassthroughSubject<AlertModel, Never>()
     private var onResetButtonEnabled: ((Bool) -> Void)?
 
-    /// Init
-    init(resetService: ResetPasswordRemoteProtocol = ResetPasswordRemote(network: AlamofireNetwork())){
+    // MARK: - Init
+    init(
+        resetService: ResetPasswordRemoteProtocol = ResetPasswordRemote(
+            network: AlamofireNetwork()
+        )
+    ) {
         self.resetService = resetService
     }
 }
@@ -42,25 +47,26 @@ extension ForgetPasswordViewModel {
         confirmPassword = text
         updateEnabledStateButton()
     }
-    func resetTapped() {
-        resetService.reset(parameter: ResetPassword(
-            UserName: userName,
-            CurrentPassword: currentPassword,
-            NewPassword: newPassword,
-            ConfirmPassword: confirmPassword)) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let response):
-                        self?.handleResetSuccess(response: response)
-                    case .failure(let error):
-                        self?.handleLoginError(error)
-                    }
-                }
-            }
+    func resetTapped() async {
+        do {
+            let response = try await resetService.reset(
+                parameter: ResetPassword(
+                    UserName: userName,
+                    CurrentPassword: currentPassword,
+                    NewPassword: newPassword,
+                    ConfirmPassword: confirmPassword
+                )
+            )
+            self.handleResetSuccess(response: response)
+        } catch {
+            handleLoginError(error)
+        }
     }
+    
     private func handleResetSuccess(response: ResponseReset) {
-        onResetTapped?()
+        onSuccess.send()
     }
+    
     private func handleLoginError(_ error: Error) {
         let errorMessage: String
         if let afError = error.asAFError, afError.isResponseValidationError {
@@ -68,7 +74,13 @@ extension ForgetPasswordViewModel {
         } else {
             errorMessage = error.localizedDescription
         }
-        onError?(errorMessage)
+        let alert = AlertModel(
+            message: errorMessage,
+            buttonTitle: "Ok",
+            image: .warning,
+            status: .warning
+        )
+        onError.send(alert)
     }
 }
 // MARK: - ResetViewModelOutput
@@ -81,10 +93,9 @@ extension ForgetPasswordViewModel {
 // MARK: - Private Handlers
 extension ForgetPasswordViewModel {
     func updateEnabledStateButton() {
-        let isValid = !userName.isEmpty &&
-                      !currentPassword.isEmpty &&
-                      !newPassword.isEmpty &&
-                      !confirmPassword.isEmpty 
+        let isValid =
+            !userName.isEmpty && !currentPassword.isEmpty
+            && !newPassword.isEmpty && !confirmPassword.isEmpty
         onResetButtonEnabled?(isValid)
     }
 }

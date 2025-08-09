@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ForgetPasswordViewController: UIViewController {
 
@@ -23,7 +24,9 @@ class ForgetPasswordViewController: UIViewController {
     // MARK: - Properties
     private let viewModel = ForgetPasswordViewModel()
     private var navBarBehavior: HerfetyNavigationController?
+    var cancelabel = Set<AnyCancellable>()
     weak var coordinator: ForgetPasswordTransitonDelegate?
+    weak var alertPresenter: AlertPresenter?
 
     // MARK: - Life Cycle Methods
     //
@@ -45,7 +48,7 @@ class ForgetPasswordViewController: UIViewController {
             target: self,
             action: #selector(dismissKeyboard)
         )
-        tapGesture.cancelsTouchesInView = false  // Allows other taps (e.g. buttons) to still work
+        tapGesture.cancelsTouchesInView = false  /// Allows other taps (e.g. buttons) to still work
         view.addGestureRecognizer(tapGesture)
     }
     @objc func dismissKeyboard() {
@@ -134,21 +137,19 @@ class ForgetPasswordViewController: UIViewController {
 //
 extension ForgetPasswordViewController {
     private func bindViewModel() {
-        viewModel.onResetTapped = { [weak self] in
-            let vc = SuccessViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self?.present(vc, animated: true)
-        }
-
-        viewModel.onError = { [weak self] errorMessage in
-            let alert = UIAlertController(
-                title: "Login Failed",
-                message: errorMessage,
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self?.present(alert, animated: true)
-        }
+        viewModel
+            .onSuccess
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+            self?.coordinator?.goToSuccessVC()
+        }.store(in: &cancelabel)
+        
+        viewModel
+            .onError
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] alert in
+                self?.alertPresenter?.showAlert(alert)
+            }.store(in: &cancelabel)
 
         viewModel.configureOnButtonEnabled { [weak self] isEnabled in
             self?.resetBtn.isEnabled = isEnabled
@@ -156,24 +157,32 @@ extension ForgetPasswordViewController {
         }
     }
 }
-// MARK: - Alert Presentation
+// MARK: - Actions
 //
 extension ForgetPasswordViewController {
-    func presentCustomAlert(with alertItem: AlertModel) {
-        let alertVC = AlertViewController(
-            nibName: "AlertViewController",
-            bundle: nil
-        )
-        alertVC.modalPresentationStyle = .overFullScreen
-        alertVC.modalTransitionStyle = .crossDissolve
-        alertVC.loadViewIfNeeded()
-        alertVC.show(alertItem: alertItem)
-
-        /// Optional: dismiss on button press
-        alertVC.actionHandler = { [weak alertVC] in
-            alertVC?.dismiss(animated: true)
+    @IBAction func resetPassword(_ sender: Any) {
+        Task {
+            await viewModel.resetTapped()
         }
-        self.present(alertVC, animated: true)
+    }
+}
+// MARK: - TextFieldDelegate
+//
+extension ForgetPasswordViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case usernameTextField.textfield:
+            currentPasswordTextField.textfield.becomeFirstResponder()
+        case currentPasswordTextField.textfield:
+            newPasswordTextField.textfield.becomeFirstResponder()
+        case newPasswordTextField.textfield:
+            confirmPasswordTextField.textfield.becomeFirstResponder()
+        case confirmPasswordTextField.textfield:
+            confirmPasswordTextField.textfield.resignFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
 // MARK: - Private Handlers
@@ -191,30 +200,5 @@ extension ForgetPasswordViewController {
         } else if sender == confirmPasswordTextField.textfield {
             viewModel.upadteConfirmPassword(text)
         }
-    }
-}
-// MARK: - Actions
-//
-extension ForgetPasswordViewController {
-    @IBAction func resetPassword(_ sender: Any) {
-        viewModel.resetTapped()
-    }
-}
-
-extension ForgetPasswordViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case usernameTextField.textfield:
-            currentPasswordTextField.textfield.becomeFirstResponder()
-        case currentPasswordTextField.textfield:
-            newPasswordTextField.textfield.becomeFirstResponder()
-        case newPasswordTextField.textfield:
-            confirmPasswordTextField.textfield.becomeFirstResponder()
-        case confirmPasswordTextField.textfield:
-            confirmPasswordTextField.textfield.resignFirstResponder()
-        default:
-            textField.resignFirstResponder()
-        }
-        return true
     }
 }

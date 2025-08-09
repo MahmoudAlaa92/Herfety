@@ -9,6 +9,7 @@ import UIKit
 
 protocol ForgetPasswordTransitonDelegate: AnyObject {
     func backToLoginVC()
+    func goToSuccessVC()
 }
 
 class ForgetPasswordCoordinator: Coordinator {
@@ -16,15 +17,19 @@ class ForgetPasswordCoordinator: Coordinator {
     weak var parentCoordinator: LoginChildDelegate?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    
+    let alertCoordinator: AlertPresenter
+    var onStartShoping: (() -> Void)? // Add callback
+
     func start() {
         let vc = ForgetPasswordViewController()
         vc.coordinator = self
+        vc.alertPresenter = alertCoordinator
         navigationController.transition(to: vc, with: .push)
     }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.alertCoordinator = AlertCoordinator(presentingViewController: navigationController)
     }
     
     deinit {
@@ -38,4 +43,14 @@ extension ForgetPasswordCoordinator: ForgetPasswordTransitonDelegate {
         parentCoordinator?.pop(self)
         navigationController.pop(with: .push)
     }
+    
+    func goToSuccessVC() {
+        let coordinator = SuccessCoordinator(navigationController: navigationController)
+        coordinator.onStartShoping = { [weak self] in
+            self?.onStartShoping?()
+        }
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+
 }

@@ -8,6 +8,9 @@
 import Foundation
 
 protocol ResetPasswordRemoteProtocol {
+    /// Async/await versions
+    func reset(parameter: ResetPassword) async throws -> ResponseReset
+    /// Legacy callback versions for backward compatibility
     func reset(parameter: ResetPassword ,completion: @escaping (Result<ResponseReset, Error>) -> Void)
 }
 
@@ -26,5 +29,24 @@ class ResetPasswordRemote: Remote, ResetPasswordRemoteProtocol, @unchecked Senda
             destination: .body)
         
         enqueue(request, completion: completion)
+    }
+}
+// MARK: - Modern Async/Await Methods
+//
+extension ResetPasswordRemote {
+    func reset(parameter: ResetPassword) async throws -> ResponseReset {
+        let parameter: [String: Any] = [
+            "UserName" : parameter.UserName,
+            "CurrentPassword" : parameter.CurrentPassword,
+            "NewPassword" : parameter.NewPassword,
+            "ConfirmPassword" : parameter.ConfirmPassword,
+        ]
+        let request = HerfetyRequest(
+            method: .put,
+            path: "api/Users/ChangeUserPassword",
+            parameters: parameter,
+            destination: .body)
+        
+        return try await enqueue(request)
     }
 }
