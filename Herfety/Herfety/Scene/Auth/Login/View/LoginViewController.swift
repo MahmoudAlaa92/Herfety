@@ -180,9 +180,7 @@ extension LoginViewController {
             self?.loginButton.isEnabled = isEnabled
             self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
         }
-
     }
-
 }
 // MARK: - Private Handlers
 //
@@ -207,8 +205,7 @@ extension LoginViewController {
     }
 
     @IBAction func forgetThePassword(_ sender: Any) {
-        let vc = ForgetPasswordViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.coordinator?.goToForgetPasswordVC()
     }
     @IBAction func facebookTapped(_ sender: Any) {
         Task {

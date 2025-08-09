@@ -10,6 +10,11 @@ import UIKit
 protocol LoginTransitionDelegate: AnyObject {
     func backToSplash()
     func goToSuccessVC()
+    func goToForgetPasswordVC()
+}
+
+protocol LoginChildDelegate: AnyObject {
+    func pop(_ coordinator: Coordinator)
 }
 
 class LoginCoordinator: Coordinator {
@@ -38,6 +43,7 @@ class LoginCoordinator: Coordinator {
 // MARK: - Transition Delegate
 //
 extension LoginCoordinator: LoginTransitionDelegate {
+    
     func goToSuccessVC() {
         let coordinator = SuccessCoordinator(navigationController: navigationController)
         coordinator.onStartShoping = { [weak self] in
@@ -46,8 +52,25 @@ extension LoginCoordinator: LoginTransitionDelegate {
         childCoordinators.append(coordinator)
         coordinator.start()
     }
+    
     func backToSplash() {
         parentCoordinator?.pop(self)
         navigationController.pop(with: .push)
+    }
+    
+    func goToForgetPasswordVC() {
+        let coordinator = ForgetPasswordCoordinator(navigationController: navigationController)
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
+    }
+}
+// MARK: - Child Delegate
+//
+extension LoginCoordinator: LoginChildDelegate {
+    func pop(_ coordinator: any Coordinator) {
+        if let index = childCoordinators.firstIndex(where: { $0 === coordinator}) {
+            childCoordinators.remove(at: index)
+        }
     }
 }

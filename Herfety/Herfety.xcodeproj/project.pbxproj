@@ -212,6 +212,7 @@
 		15AA58F62E185C450050D01D /* ProductDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA58F52E185C450050D01D /* ProductDetailsCoordinator.swift */; };
 		15ABC2312E2D43DD00DCB8E5 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABC2302E2D43DD00DCB8E5 /* SettingCoordinator.swift */; };
 		15ABC2332E2D611600DCB8E5 /* AlertStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABC2322E2D611600DCB8E5 /* AlertStatus.swift */; };
+		15C177C62E47A4770086F236 /* ForgetPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C177C52E47A4770086F236 /* ForgetPasswordCoordinator.swift */; };
 		15CD44AE2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CD44AD2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib */; };
 		15CD44AF2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD44AC2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift */; };
 		15CD44B32D52716D00E58C6F /* CategoriesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CD44B22D52716D00E58C6F /* CategoriesCollectionViewCell.xib */; };
@@ -458,6 +459,7 @@
 		15AA58F52E185C450050D01D /* ProductDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsCoordinator.swift; sourceTree = "<group>"; };
 		15ABC2302E2D43DD00DCB8E5 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		15ABC2322E2D611600DCB8E5 /* AlertStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStatus.swift; sourceTree = "<group>"; };
+		15C177C52E47A4770086F236 /* ForgetPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordCoordinator.swift; sourceTree = "<group>"; };
 		15CD44AC2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		15CD44AD2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		15CD44B12D52716D00E58C6F /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 				1592D5F92E13F9FF001792F7 /* LoginCoordinator.swift */,
 				1592D6052E142E57001792F7 /* SignUpCoordinator.swift */,
 				15AA58F12E1822A80050D01D /* SuccessCoordinator.swift */,
+				15C177C52E47A4770086F236 /* ForgetPasswordCoordinator.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1799,6 +1802,7 @@
 				1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */,
 				159B578C2DCBEB7200CDD958 /* LoginViewModelType.swift in Sources */,
 				1541679E2D9D37B0007E4CAA /* SettingModel.swift in Sources */,
+				15C177C62E47A4770086F236 /* ForgetPasswordCoordinator.swift in Sources */,
 				15840BD72D5D80F7006F8B67 /* PrimaryButton.swift in Sources */,
 				1589FC202D51808600240754 /* HomeViewController.swift in Sources */,
 				156C2CBF2E02253D00C68546 /* PaymentIntent.swift in Sources */,
