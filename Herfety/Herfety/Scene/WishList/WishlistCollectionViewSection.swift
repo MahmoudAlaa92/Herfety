@@ -43,7 +43,7 @@ class WishlistCollectionViewSection: CollectionViewDataSource {
         return cell
     }
 }
-// MARK: - Header And Foter for category
+// MARK: - Header And Footer for category
 //
 extension WishlistCollectionViewSection: HeaderAndFooterProvider {
     func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -77,27 +77,27 @@ extension WishlistCollectionViewSection: ContextMenuProvider {
     }
     @MainActor
     private func handleWishlistDeletion(at indexPath: IndexPath) async {
-        let viewModel = AppDataStore.shared
         
-        /// Safe access to wishlist items
-        let wishlistItems = await viewModel.safeWishlistAccess()
+        let store = DataStore.shared
         
         /// Validate index bounds
-        guard indexPath.row < wishlistItems.count else {
+        guard indexPath.row < whishlistItems.count else {
             print("❌ Invalid index path for wishlist deletion")
             return
         }
         
-        let wishlistItem = wishlistItems[indexPath.row]
-        let userId = viewModel.userId
-        let productId = wishlistItem.productID ?? 1
+        /// Safe access to wishlist items
+        let wishlistItem = whishlistItems[indexPath.row]
+        guard let productId = wishlistItem.productID else {
+            print("❌ Wishlist item missing product ID")
+            return
+        }
+        let userId = await store.getUserId()
         
         /// Perform deletion with proper error handling
-        await viewModel.deleteWishlistItem(
-            userId: userId,
-            productId: productId,
-            indexPath: indexPath
-        )
+        await store.deleteWishlistItem(userId: userId,
+                                       productId: productId,
+                                       indexPath: indexPath)
     }
 }
 // MARK: - Layout

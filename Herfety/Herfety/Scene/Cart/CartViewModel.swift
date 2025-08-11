@@ -18,12 +18,12 @@ class CartViewModel: ObservableObject {
     
     var navigationToShipping: (() -> Void)?
     ///
-    private var subscriptions = Set<AnyCancellable>()
+    private var cancellabels = Set<AnyCancellable>()
     // MARK: - Init
     init() {
-        Task {
-            await observeOrderUpdates()
-        }
+        
+             observeOrderUpdates()
+        
         observeOrderItems()
     }
     func didTapPayment() {
@@ -47,13 +47,18 @@ class CartViewModel: ObservableObject {
 // MARK: - Private Handlers
 //
 extension CartViewModel {
-    @MainActor
+    
     private func observeOrderUpdates() {
-        AppDataStore
+        AppDataStorePublisher
             .shared
-            .$cartItems
+            .cartUpdatePublisher
             .receive(on: DispatchQueue.main)
-            .assign(to: &$orderItems)
+            .sink { [weak self] value in
+                Task {
+                    let cartItems = await DataStore.shared.getCartItems()
+                    self?.orderItems = cartItems
+                }
+            }.store(in: &cancellabels)
     }
 
     private func observeOrderItems() {

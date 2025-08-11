@@ -113,9 +113,9 @@ private extension CartViewController {
     }
     
     private func configureProvider() {
-        AppDataStore
-            .shared
-            .$cartItems.sink { [weak self] value in
+        viewModel
+            .$orderItems
+            .sink { [weak self] value in
             let orderProvider = CartCollectionViewSection(orderItems: value)
             guard let self = self else { return }
             self.sections = [orderProvider]
@@ -136,7 +136,6 @@ private extension CartViewController {
                 }
                 .store(in: &self.subscriptions)
         }.store(in: &subscriptions) /// CustomeTabBarViewModel.shared.subscriptions
-        
 
         layoutProviders.append(OrderSectionLayoutProvider())
     }
@@ -165,7 +164,8 @@ extension CartViewController {
     }
     private func bindOrderItems() {
         /// Bind payment info
-        viewModel.$paymentInfo
+        viewModel
+            .$paymentInfo
             .receive(on: RunLoop.main)
             .sink { [weak self] paymentModel in
                 self?.paymentView.configure(with: paymentModel)
@@ -173,7 +173,8 @@ extension CartViewController {
             .store(in: &subscriptions)
         
         /// Procced to Payment
-        viewModel.$orderAlert
+        viewModel
+            .$orderAlert
             .compactMap({ $0 })
             .sink { [weak self] alert in
                 self?.alertPresenter?.showAlert(alert)

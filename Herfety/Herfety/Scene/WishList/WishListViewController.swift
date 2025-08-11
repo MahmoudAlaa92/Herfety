@@ -6,26 +6,26 @@
 //
 
 import UIKit
+import Combine
 
 class WishListViewController: UIViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
     private var navigationBarBehavior: HerfetyNavigationController?
-    private var sections = [CollectionViewDataSource]()
-    private var layoutProviders = [LayoutSectionProvider]()
-    var isShowBackButton = false
+    private var viewModel = WishListViewModel()
+    var cancellables = Set<AnyCancellable>()
     ///
+    var isShowBackButton = false
     weak var coordinator: WishlistTransitionDelegate?
-    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
-        configureProvider()
-        cofigureCompositianalLayout()
+        bindViewModel()
+        configureCompositionalLayout()
         setUpCollectionView()
         view.backgroundColor = Colors.hBackgroundColor
     }
@@ -35,46 +35,33 @@ class WishListViewController: UIViewController {
 extension WishListViewController {
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
-
+        
         navigationItem.backButtonTitle = ""
-
+        
         navigationBarBehavior = HerfetyNavigationController(
             navigationItem: navigationItem,
             navigationController: navigationController
         )
-
+        
         navigationBarBehavior?.configure(
             title: "",
             titleColor: .primaryBlue,
             onPlus: { },
             showRighBtn: false,
             showBackButton: isShowBackButton) { [weak self] in
-                 self?.coordinator?.backToProfileVC()
+                self?.coordinator?.backToProfileVC()
             }
-    }
-    /// Configure Provider
-    private func configureProvider() {
-        AppDataStore
-            .shared
-            .$Wishlist
-            .sink { [weak self] value in
-            let wishListProvider = WishlistCollectionViewSection(whishlistItems: value)
-            self?.sections = [wishListProvider]
-            self?.collectionView.reloadData()
-        }.store(in: &AppDataStore.shared.subscriptions)
-        layoutProviders.append(WishlistSectionLayoutProvider())
     }
     
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        sections.forEach { $0.registerCells(in: collectionView) }
+        viewModel.sections.forEach { $0.registerCells(in: collectionView) }
     }
     
     /// Configure Layout
-    private func cofigureCompositianalLayout() {
-
-        let layoutFactory = SectionsLayout(providers: layoutProviders)
+    private func configureCompositionalLayout() {
+        let layoutFactory = SectionsLayout(providers: viewModel.getLayoutProviders())
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
     }
 }
@@ -85,7 +72,7 @@ extension WishListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         contextMenuConfigurationForItemAt indexPath: IndexPath,
                         point: CGPoint) -> UIContextMenuConfiguration? {
-        if let providers = sections[indexPath.section] as? ContextMenuProvider {
+        if let providers = viewModel.section(at: indexPath.section) as? ContextMenuProvider {
             return providers.contextMenuConfiguration(for: collectionView, at: indexPath, point: point)
         }
         return nil
@@ -97,15 +84,16 @@ extension WishListViewController: UICollectionViewDelegate {
 extension WishListViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
+        return viewModel.numberOfSections()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        sections[section].numberOfItems
+        return viewModel.numberOfItems(in: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
+        return viewModel.section(at: indexPath.section)
+            .cellForItems(collectionView, cellForItemAt: indexPath)
     }
 }
 
@@ -113,9 +101,22 @@ extension WishListViewController: UICollectionViewDataSource {
 //
 extension WishListViewController {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if let provider = sections[indexPath.section] as? HeaderAndFooterProvider {
+        if let provider = viewModel.section(at: indexPath.section) as? HeaderAndFooterProvider {
             return provider.cellForItems(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         }
         return UICollectionReusableView()
+    }
+}
+// MARK: - Binding
+//
+extension WishListViewController {
+    private func bindViewModel() {
+        viewModel
+            .$sections
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &cancellables)
     }
 }

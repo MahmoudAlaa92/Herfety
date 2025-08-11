@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 // MARK: - Publisher Manager (MainActor isolated)
-@MainActor
+
 class AppDataStorePublisher: ObservableObject {
     static let shared = AppDataStorePublisher()
     
@@ -20,16 +20,16 @@ class AppDataStorePublisher: ObservableObject {
     
     private init() {}
     
-    func notifyWishlistUpdate() {
-        wishlistUpdated.toggle()
+    func notifyWishlistUpdate(value: Bool) {
+        wishlistUpdated = value
     }
     
     func notifyOrdersUpdate() {
         ordersUpdated.toggle()
     }
     
-    func notifyCartUpdate() {
-        cartUpdated.toggle()
+    func notifyCartUpdate(value: Bool) {
+        cartUpdated = value
     }
     
     func notifyLoginStatusUpdate() {
@@ -62,7 +62,7 @@ actor DataStore {
     init() {
         Task {
             await loadUserDefaultsSync()
-            await fetchWishlistItems(id: userId)
+            await fetchWishlistItems(id: userId, value: false)
             await loadUserProfileImage()
         }
     }
@@ -148,22 +148,22 @@ actor DataStore {
         self.userInfo = userInfo
     }
     
-    func updateWishlist(_ newItems: [Wishlist]) async {
+    func updateWishlist(_ newItems: [Wishlist] ,value: Bool) async {
         guard !newItems.isEmpty else { return }
         wishlist = newItems
         
         // Synchronous notification to ensure data consistency
         await MainActor.run {
-            AppDataStorePublisher.shared.notifyWishlistUpdate()
+            AppDataStorePublisher.shared.notifyWishlistUpdate(value: value)
         }
     }
     
-    func updateCartItems(_ newItems: [Wishlist]) async {
+    func updateCartItems(_ newItems: [Wishlist] ,value: Bool) async {
         cartItems = newItems
         calculateTotalPrice()
         
         await MainActor.run {
-            AppDataStorePublisher.shared.notifyCartUpdate()
+            AppDataStorePublisher.shared.notifyCartUpdate(value: value)
         }
     }
     
@@ -221,10 +221,10 @@ actor DataStore {
     }
     
     // MARK: - Operations
-    func fetchWishlistItems(id: Int = 22) async {
+    func fetchWishlistItems(id: Int = 22 ,value: Bool) async {
         do {
             let products = try await dataActor.fetchWishlistProducts(userId: id)
-            await updateWishlist(products)
+            await updateWishlist(products, value: value)
         } catch {
             print("❌ Failed to fetch wishlist: \(error)")
         }
@@ -238,7 +238,7 @@ actor DataStore {
                 wishlist.remove(at: indexPath.row)
                 
                 await MainActor.run {
-                    AppDataStorePublisher.shared.notifyWishlistUpdate()
+                    AppDataStorePublisher.shared.notifyWishlistUpdate(value: false)
                 }
             }
         } catch {
@@ -249,7 +249,7 @@ actor DataStore {
     func addToWishlist(userId: Int, productId: Int) async {
         do {
             try await dataActor.addWishlistProduct(userId: userId, productId: productId)
-            await fetchWishlistItems(id: userId)
+            await fetchWishlistItems(id: userId, value: true)
         } catch {
             print("❌ Error adding to wishlist: \(error)")
         }
@@ -286,9 +286,9 @@ actor DataStore {
         
         await MainActor.run {
             let publisher = AppDataStorePublisher.shared
-            publisher.notifyWishlistUpdate()
+            publisher.notifyWishlistUpdate(value: true)
             publisher.notifyOrdersUpdate()
-            publisher.notifyCartUpdate()
+            publisher.notifyCartUpdate(value: true)
             publisher.notifyLoginStatusUpdate()
         }
     }

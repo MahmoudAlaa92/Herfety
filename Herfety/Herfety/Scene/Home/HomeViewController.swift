@@ -179,8 +179,8 @@ extension HomeViewController {
             .$categoryItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newItems in
-                    self?.categoryItem?.categoryItems = newItems
-                    self?.collectionView.reloadData()
+                self?.categoryItem?.categoryItems = newItems
+                self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
         ///
@@ -228,8 +228,10 @@ extension HomeViewController {
     }
     // MARK: - Wishlist
     private func bindAlert() {
-        viewModel.$showAlert
+        viewModel
+            .$showAlert
             .compactMap { $0 }
+            .dropFirst()
             .sink { [weak self] alert in
                 self?.alertPresenter?.showAlert(alert)
             }

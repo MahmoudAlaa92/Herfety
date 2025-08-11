@@ -110,33 +110,40 @@ extension CardOfProductCollectionViewCell {
         guard let product = productOfWishlist else { return }
         
         Task {
-            let appDataStore = AppDataStore.shared
-            let isInWishlist = await appDataStore.isItemInWishlist(productId: product.productID ?? 1)
-            
+            let dataStore = DataStore.shared
+            let isInWishlist = await dataStore.isItemInWishlist(productId: product.productID ?? 92)
             if !isInWishlist {
-                await appDataStore.addToWishlist(
-                    userId: appDataStore.userId,
-                    productId: product.productID ?? 1
-                )
+                let userId = await dataStore.getUserId()
+                await dataStore
+                    .addToWishlist(userId: userId,
+                                   productId: product.productID ?? 92)
+            } else {
+                await MainActor.run {
+                    AppDataStorePublisher
+                        .shared
+                        .notifyWishlistUpdate(value: true)
+                }
             }
-            appDataStore.isWishlistItemDeleted.send(false)
         }
     }
     
     private func updataCartItems() {
-        guard let product = productOfWishlist else { return }
-        
+        guard var product = productOfWishlist else { return }
+
         Task {
-            let appDataStore = AppDataStore.shared
-            let isInCart = await appDataStore.isItemInCart(productId: product.productID ?? 1)
+            let dataStore = DataStore.shared
+            let isInCart = await dataStore.isItemInCart(productId: product.productID ?? 92)
             
-            if !isInCart ,var itemToAdd = productOfWishlist {
-                var cartItem = await appDataStore.safeCartItemsAccess()
-                itemToAdd.qty = 1
-                cartItem.append(itemToAdd)
-                appDataStore.updateCartItems(cartItem)
+            if !isInCart {
+                var cartItem = await dataStore.getCartItems()
+                product.qty = 1
+                cartItem.append(product)
+                await dataStore.updateCartItems(cartItem, value: true)
+            } else {
+                await MainActor.run {
+                    AppDataStorePublisher.shared.notifyCartUpdate(value: true)
+                }
             }
-            appDataStore.isOrdersItemDeleted.send(false)
         }
     }
 }
