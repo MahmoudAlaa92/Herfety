@@ -6,18 +6,18 @@ import Combine
 //  Created by Mahmoud Alaa on 13/02/2025.
 //
 import UIKit
+import Combine
 
+@MainActor
 class InfoViewModel {
     // MARK: - Properties
-    var infoItems: [InfoModel] = []
+    @Published var infoItems: [InfoModel] = []
     var navigationToPayment: (() -> Void)?
     @Published var infoState: AlertModel?
     var subscription = Set<AnyCancellable>()
 
     init() {
-        Task {
-            await observeInfoItems()
-        }
+        observeInfoItems()
     }
     func numberOfItems() -> Int {
         return infoItems.count
@@ -45,9 +45,25 @@ class InfoViewModel {
 // MARK: - Privagte Handlers
 //
 extension InfoViewModel {
-    private func observeInfoItems() async {
-        await AppDataStore.shared.$infos.sink { [weak self] infoItems in
-            self?.infoItems = infoItems
-        }.store(in: &subscription)
+    private func observeInfoItems() {
+        AppDataStorePublisher
+            .shared
+            .infoUpdatePublisher
+            .sink { [weak self] _ in
+                Task {
+                    let infoItems = await DataStore.shared.getInfos()
+                    self?.infoItems = infoItems
+                }
+            }.store(in: &subscription)
     }
+    
+    func deleteItem(at index: Int) {
+        Task {
+            var items = await DataStore.shared.getInfos()
+            guard index < items.count else { return }
+            items.remove(at: index)
+            await DataStore.shared.updateInfos(items)
+        }
+    }
+
 }

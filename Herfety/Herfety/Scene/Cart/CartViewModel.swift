@@ -7,6 +7,7 @@
 import UIKit
 import Combine
 
+@MainActor
 class CartViewModel: ObservableObject {
     // MARK: - Properties
     @Published var orderItems: [Wishlist] = []
@@ -21,9 +22,7 @@ class CartViewModel: ObservableObject {
     private var cancellabels = Set<AnyCancellable>()
     // MARK: - Init
     init() {
-        
-             observeOrderUpdates()
-        
+        observeOrderUpdates()
         observeOrderItems()
     }
     func didTapPayment() {
@@ -39,9 +38,9 @@ class CartViewModel: ObservableObject {
     }
     func updateOrderCount(at index: Int, to newCount: Int) {
         guard orderItems.indices.contains(index) else { return }
-            orderItems[index].qty = newCount
-            // TODO: when increase the alert showed, solve this logic here
-         // CustomeTabBarViewModel.shared.orders = orderItems
+        orderItems[index].qty = newCount
+        // TODO: when increase the alert showed, solve this logic here
+        // CustomeTabBarViewModel.shared.orders = orderItems
     }
 }
 // MARK: - Private Handlers
@@ -52,15 +51,14 @@ extension CartViewModel {
         AppDataStorePublisher
             .shared
             .cartUpdatePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] value in
+            .sink { [weak self] _ in
                 Task {
                     let cartItems = await DataStore.shared.getCartItems()
                     self?.orderItems = cartItems
                 }
             }.store(in: &cancellabels)
     }
-
+    
     private func observeOrderItems() {
         $orderItems
             .map { orderItems -> PaymentView.Model in
@@ -84,14 +82,14 @@ extension CartViewModel {
             .assign(to: &$paymentInfo)
     }
     
-    @MainActor
     func deleteItem(at index: Int) {
         guard orderItems.indices.contains(index) else { return }
         var updatedItems = orderItems
         updatedItems.remove(at: index)
         orderItems = updatedItems
         
-        AppDataStore.shared.isOrdersItemDeleted.send(true)
-        AppDataStore.shared.updateCartItems(updatedItems)
+        Task {
+            await DataStore.shared.updateCartItems(updatedItems, showAlert: false)
+        }
     }
 }

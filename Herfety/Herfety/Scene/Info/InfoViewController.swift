@@ -30,7 +30,6 @@ class InfoViewController: UIViewController {
         configureUI()
         setUpNavigationBar()
         bindViewModel()
-        configureNotificationCenter()
     }
 }
 // MARK: - Configuration
@@ -44,27 +43,26 @@ extension InfoViewController {
     }
     /// Configure Section
     private func configureSections() {
-        AppDataStore.shared.$infos
-            .receive(on: RunLoop.main)
+        viewModel
+            .$infoItems
             .sink { [weak self] infoItems in
                 guard let self = self else { return }
 
                 let infoSection = InfoCollectionViewSection(
                     infoItems: infoItems
                 )
+                
                 self.sections = [infoSection]
                 self.layoutProviders = [InfoSectionLayoutProvider()]
 
-                infoSection.registerCells(in: self.collectionView)  // ✅ FIX HERE
-                self.updateCollectionViewLayout()  // 👈 Fixes the layout error
+                infoSection.registerCells(in: self.collectionView)
+                self.updateCollectionViewLayout()
                 self.collectionView.reloadData()
 
-                infoSection.deleteItemSubject
-                    .sink { index in
-                        var items = CustomeTabBarViewModel.shared.infos
-                        guard index < items.count else { return }
-                        items.remove(at: index)
-                        CustomeTabBarViewModel.shared.infos = items
+                infoSection
+                    .deleteItemSubject
+                    .sink { [weak self] index in
+                        self?.viewModel.deleteItem(at: index)
                     }
                     .store(in: &subscriptions)
             }
@@ -112,22 +110,6 @@ extension InfoViewController {
             showBackButton: true) { [weak self] in
                 self?.coordinator?.backToCartVC()
             }
-    }
-    /// Notification Center
-    private func configureNotificationCenter() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(reloadCollectionView),
-            name: Notification.Name("infoItemsUpdated"),
-            object: nil
-        )
-    }
-    /// Reloud collectionView
-    @objc private func reloadCollectionView() {
-        configureSections()
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.reloadData()
-        }
     }
 }
 // MARK: - UICollectionViewDataSource

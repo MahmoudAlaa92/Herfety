@@ -84,10 +84,10 @@ extension WishlistCollectionViewCell {
                 var cartItem = await dataStore.getCartItems()
                 product.qty = 1
                 cartItem.append(product)
-                await dataStore.updateCartItems(cartItem, value: true)
+                await dataStore.updateCartItems(cartItem, showAlert: true)
             } else {
                 await MainActor.run {
-                    AppDataStorePublisher.shared.notifyCartUpdate(value: true)
+                    AppDataStorePublisher.shared.notifyCartUpdate(showAlert: true)
                 }
             }
         }

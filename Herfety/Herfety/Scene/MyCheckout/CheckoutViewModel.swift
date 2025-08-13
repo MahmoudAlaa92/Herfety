@@ -11,21 +11,21 @@ import Combine
 
 class CheckoutViewModel {
     // MARK: - Published Properties
-     @Published var isCheckoutEnabled: Bool = false
-     @Published var isLoading: Bool = false
-     @Published var alertItem: AlertModel?
-     
-     // MARK: - Properties
-     private var embeddedPaymentElement: EmbeddedPaymentElement?
-     private let paymentIntentRemote: PaymentIntentRemoteProtocol
-     private let ordersRemote: OrderRemoteProtocol
-     private var subscriptions = Set<AnyCancellable>()
-     
-     // MARK: - Init
-     init(paymentIntentRemote: PaymentIntentRemoteProtocol = PaymentIntentRemote(network: AlamofireNetwork()),
-          ordersRemote: OrderRemoteProtocol = GetAllOrdersRemote(network: AlamofireNetwork())) {
-         self.paymentIntentRemote = paymentIntentRemote
-         self.ordersRemote = ordersRemote
+    @Published var isCheckoutEnabled: Bool = false
+    @Published var isLoading: Bool = false
+    @Published var alertItem: AlertModel?
+    
+    // MARK: - Properties
+    private var embeddedPaymentElement: EmbeddedPaymentElement?
+    private let paymentIntentRemote: PaymentIntentRemoteProtocol
+    private let ordersRemote: OrderRemoteProtocol
+    private var subscriptions = Set<AnyCancellable>()
+    
+    // MARK: - Init
+    init(paymentIntentRemote: PaymentIntentRemoteProtocol = PaymentIntentRemote(network: AlamofireNetwork()),
+         ordersRemote: OrderRemoteProtocol = GetAllOrdersRemote(network: AlamofireNetwork())) {
+        self.paymentIntentRemote = paymentIntentRemote
+        self.ordersRemote = ordersRemote
 #if DEBUG
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
             Task { @MainActor in
@@ -33,11 +33,11 @@ class CheckoutViewModel {
             }
         }
 #endif
-     }
+    }
     // MARK: - Public Methods
     func createEmbeddedPaymentElement() async throws -> EmbeddedPaymentElement {
-        let totalPrice = await AppDataStore.shared.totalPriceOfOrders
-
+        let totalPrice = await DataStore.shared.getTotalPriceOfOrders()
+        
         let intentConfig = PaymentSheet.IntentConfiguration(
             mode: .payment(amount: Int(ceil(Double(totalPrice) * 100.0)),
                            currency: "USD")
@@ -55,27 +55,27 @@ class CheckoutViewModel {
         return result
     }
     
-       func confirmPayment() async -> PaymentSheetResult {
-           guard let embeddedPaymentElement else { return .canceled }
-           
-           guard await embeddedPaymentElement.paymentOption != nil else {
-                   alertItem = AlertModel(
-                       message: "Please select a payment method",
-                       buttonTitle: "Ok",
-                       image: .warning,
-                       status: .warning
-                   )
-               return .failed(error: NSError(domain: "Checkout", code: 1, userInfo: [NSLocalizedDescriptionKey: "No payment method selected"]))
-               }
-           isLoading = true
-           
-           let result = await embeddedPaymentElement.confirm()
-           isLoading = false
-           
-           return result
-       }
+    func confirmPayment() async -> PaymentSheetResult {
+        guard let embeddedPaymentElement else { return .canceled }
+        
+        guard await embeddedPaymentElement.paymentOption != nil else {
+            alertItem = AlertModel(
+                message: "Please select a payment method",
+                buttonTitle: "Ok",
+                image: .warning,
+                status: .warning
+            )
+            return .failed(error: NSError(domain: "Checkout", code: 1, userInfo: [NSLocalizedDescriptionKey: "No payment method selected"]))
+        }
+        isLoading = true
+        
+        let result = await embeddedPaymentElement.confirm()
+        isLoading = false
+        
+        return result
+    }
     
-     func handlePaymentResult(_ result: PaymentSheetResult) {
+    func handlePaymentResult(_ result: PaymentSheetResult) {
         var alertItem: AlertModel
         
         switch result {
@@ -91,7 +91,7 @@ class CheckoutViewModel {
             }
             
         case .failed(let error):
-            // Handle the custom error for missing payment method
+            /// Handle the custom error for missing payment method
             if (error as NSError).code == 1 {
                 alertItem = AlertModel(
                     message: "Please select a payment method",
@@ -116,15 +116,15 @@ class CheckoutViewModel {
                 status: .warning
             )
         }
-         self.alertItem = alertItem
+        self.alertItem = alertItem
     }
     
     func createOrder() async {
-        Task { @MainActor in
-            let cartItems = await AppDataStore.shared.safeCartItemsAccess()
-            let userId =  AppDataStore.shared.userId
-            let infos = await AppDataStore.shared.safeInfoAccess()
-            let total = await AppDataStore.shared.safeTotalPriceAccess()
+        do {
+            let cartItems = await DataStore.shared.getCartItems()
+            let userId =  await DataStore.shared.getUserId()
+            let infos = await DataStore.shared.getInfos()
+            let total = await DataStore.shared.getTotalPriceOfOrders()
             
             let products = cartItems.map { item in
                 ProductIntent(
@@ -147,30 +147,24 @@ class CheckoutViewModel {
                 updatedAt: Date().ISO8601Format()
             )
             
-            ordersRemote.addOrder(order: order) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let response):
-                        print("✅ Order placed successfully: \(response)")
-                    case .failure(let error):
-                        self?.alertItem = AlertModel(
-                            message: "Failed to place order: \(error.localizedDescription)",
-                            buttonTitle: "Ok",
-                            image: .error,
-                            status: .error
-                        )
-                    }
-                }
-            }
+            _ = try await ordersRemote.addOrder(order: order)
+        } catch {
+            self.alertItem = AlertModel(
+                message: "Failed to place order: \(error.localizedDescription)",
+                buttonTitle: "Ok",
+                image: .error,
+                status: .error
+            )
+            
         }
         
     }
     // MARK: - Private Methods
     private func handleConfirm(_ intentCreationCallback: @escaping (Result<String, Error>) -> Void) {
         Task { @MainActor in
-            let cartItems = await AppDataStore.shared.safeCartItemsAccess()
-            let amount = Int(ceil(Double(await AppDataStore.shared.safeTotalPriceAccess()) * 100.0))
-
+            let cartItems = await DataStore.shared.getCartItems()
+            let amount = Int(ceil(Double(await DataStore.shared.getTotalPriceOfOrders()) * 100.0))
+            
             let products = cartItems.map { item in
                 ProductIntent(
                     vendorID: item.vendorId ?? 12,

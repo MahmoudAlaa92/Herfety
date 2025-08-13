@@ -16,20 +16,25 @@ class AppDataStorePublisher: ObservableObject {
     @Published var wishlistUpdated: Bool = false
     @Published var ordersUpdated: Bool = false
     @Published var cartUpdated: Bool = false
+    @Published var infoUpdated: Bool = false
     @Published var loginStatusUpdated: Bool = false
     
     private init() {}
     
-    func notifyWishlistUpdate(value: Bool) {
-        wishlistUpdated = value
+    func notifyWishlistUpdate(showAlert: Bool) {
+        wishlistUpdated = showAlert
     }
     
     func notifyOrdersUpdate() {
         ordersUpdated.toggle()
     }
     
-    func notifyCartUpdate(value: Bool) {
-        cartUpdated = value
+    func notifyCartUpdate(showAlert: Bool) {
+        cartUpdated = showAlert
+    }
+   
+    func notifyInfoUpdate() {
+        infoUpdated.toggle()
     }
     
     func notifyLoginStatusUpdate() {
@@ -62,7 +67,7 @@ actor DataStore {
     init() {
         Task {
             await loadUserDefaultsSync()
-            await fetchWishlistItems(id: userId, value: false)
+            await fetchWishlistItems(id: userId, showAlert: false)
             await loadUserProfileImage()
         }
     }
@@ -148,22 +153,22 @@ actor DataStore {
         self.userInfo = userInfo
     }
     
-    func updateWishlist(_ newItems: [Wishlist] ,value: Bool) async {
+    func updateWishlist(_ newItems: [Wishlist] ,showAlert: Bool) async {
         guard !newItems.isEmpty else { return }
         wishlist = newItems
         
         // Synchronous notification to ensure data consistency
         await MainActor.run {
-            AppDataStorePublisher.shared.notifyWishlistUpdate(value: value)
+            AppDataStorePublisher.shared.notifyWishlistUpdate(showAlert: showAlert)
         }
     }
     
-    func updateCartItems(_ newItems: [Wishlist] ,value: Bool) async {
+    func updateCartItems(_ newItems: [Wishlist] ,showAlert: Bool) async {
         cartItems = newItems
         calculateTotalPrice()
         
         await MainActor.run {
-            AppDataStorePublisher.shared.notifyCartUpdate(value: value)
+            AppDataStorePublisher.shared.notifyCartUpdate(showAlert: showAlert)
         }
     }
     
@@ -177,6 +182,10 @@ actor DataStore {
     
     func updateInfos(_ newInfos: [InfoModel]) async {
         infos = newInfos
+        
+        await MainActor.run {
+            AppDataStorePublisher.shared.notifyInfoUpdate()
+        }
     }
     
     func updateUserProfileImage(_ image: UIImage) async {
@@ -221,10 +230,10 @@ actor DataStore {
     }
     
     // MARK: - Operations
-    func fetchWishlistItems(id: Int = 22 ,value: Bool) async {
+    func fetchWishlistItems(id: Int = 22 ,showAlert: Bool) async {
         do {
             let products = try await dataActor.fetchWishlistProducts(userId: id)
-            await updateWishlist(products, value: value)
+            await updateWishlist(products, showAlert: showAlert)
         } catch {
             print("❌ Failed to fetch wishlist: \(error)")
         }
@@ -238,7 +247,7 @@ actor DataStore {
                 wishlist.remove(at: indexPath.row)
                 
                 await MainActor.run {
-                    AppDataStorePublisher.shared.notifyWishlistUpdate(value: false)
+                    AppDataStorePublisher.shared.notifyWishlistUpdate(showAlert: false)
                 }
             }
         } catch {
@@ -249,7 +258,7 @@ actor DataStore {
     func addToWishlist(userId: Int, productId: Int) async {
         do {
             try await dataActor.addWishlistProduct(userId: userId, productId: productId)
-            await fetchWishlistItems(id: userId, value: true)
+            await fetchWishlistItems(id: userId, showAlert: true)
         } catch {
             print("❌ Error adding to wishlist: \(error)")
         }
@@ -286,9 +295,9 @@ actor DataStore {
         
         await MainActor.run {
             let publisher = AppDataStorePublisher.shared
-            publisher.notifyWishlistUpdate(value: true)
+            publisher.notifyWishlistUpdate(showAlert: true)
             publisher.notifyOrdersUpdate()
-            publisher.notifyCartUpdate(value: true)
+            publisher.notifyCartUpdate(showAlert: true)
             publisher.notifyLoginStatusUpdate()
         }
     }
@@ -313,6 +322,10 @@ extension AppDataStorePublisher {
     
     var cartUpdatePublisher: AnyPublisher<Bool, Never> {
         $cartUpdated.eraseToAnyPublisher()
+    }
+    
+    var infoUpdatePublisher: AnyPublisher<Bool, Never> {
+        $infoUpdated.eraseToAnyPublisher()
     }
     
     var loginStatusPublisher: AnyPublisher<Bool, Never> {

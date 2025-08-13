@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class AddAddressViewModel:AddAddressViewModelType {
+class AddAddressViewModel: AddAddressViewModelType {
     
     // MARK: - Subjects
     private let nameSubject = CurrentValueSubject<String, Never>("")
@@ -82,11 +82,11 @@ extension AddAddressViewModel {
         let addressValue = InfoModel(name: name, address: address, phone: phone)
         
         Task {
-            let appDataStore =  await AppDataStore.shared
+            let appDataStore = DataStore.shared
             let isInInfos = await appDataStore.isItemInInfos(addressInfo: addressValue)
             
             if !isInInfos {
-                var newInfos = await AppDataStore.shared.infos
+                var newInfos = await DataStore.shared.getInfos()
                 newInfos.append(addressValue)
                 await appDataStore.updateInfos(newInfos)
             }
