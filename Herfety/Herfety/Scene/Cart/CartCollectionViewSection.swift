@@ -10,7 +10,7 @@ import Combine
 
 class CartCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
-    let orderItems: [Wishlist]
+    var orderItems: [Wishlist]
     let countUpdateSubject = PassthroughSubject<(Int, Int), Never>()
     let deleteItemSubject = PassthroughSubject<Int, Never>()
 

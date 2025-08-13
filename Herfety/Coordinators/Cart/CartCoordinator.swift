@@ -34,11 +34,11 @@ class CartCoordinator: Coordinator {
     }
     
     func start() {
-        
-        let cartVC = CartViewController()
+        let viewModel = CartViewModel()
+        viewModel.isShowBackButton = isShowBackButton
+        let cartVC = CartViewController(viewModel: viewModel)
         cartVC.coordinator = self
         cartVC.alertPresenter = alertPresenter
-        cartVC.isShowBackButton = isShowBackButton
         navigationController.transition(to: cartVC, with: .push)
     }
 }

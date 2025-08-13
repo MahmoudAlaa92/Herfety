@@ -787,6 +787,14 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		153C9E472E4CEA4D006D1616 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				15CD44C62D52A72F00E58C6F /* SectionsLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		153F6A992D59527200317F49 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1418,7 +1426,6 @@
 				15CD44C42D52A3BC00E58C6F /* HomeViewModel.swift */,
 				1589FC1D2D51808600240754 /* HomeViewController.swift */,
 				1589FC1E2D51808600240754 /* HomeViewController.xib */,
-				15CD44C62D52A72F00E58C6F /* SectionsLayout.swift */,
 				15CD44BF2D529A4000E58C6F /* Sections */,
 			);
 			path = Home;
@@ -1538,6 +1545,7 @@
 		15F420652DB1275300FCDF71 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				153C9E472E4CEA4D006D1616 /* Layout */,
 				15F420662DB1278B00FCDF71 /* CollectionViewSectionProtocols.swift */,
 			);
 			path = Common;
