@@ -87,13 +87,8 @@ extension HomeViewController {
         navigationItem.backButtonTitle = ""
         navigationBarBehavior = HomeNavBar(navigationItem: navigationItem)
         
-        let userName = CustomeTabBarViewModel.shared.userInfo?.UserName ?? ""
-        let userImageURL = CustomeTabBarViewModel.shared.userInfo?.image
-        
-        let loadedImage = await UIImage.load(from: userImageURL ?? "")
-        
-        let finalImage = loadedImage ?? Images.iconPersonalDetails
-        CustomeTabBarViewModel.shared.userProfileImage = finalImage
+        let userName = await DataStore.shared.getUserInfo()?.UserName ?? ""
+        let userImage = await DataStore.shared.getUserProfileImage()
         navigationBarBehavior?.configure(
             onNotification: { [weak self] in
                 self?.coordinator?.gotToSafari(url: "https://9ec0-34-74-104-29.ngrok-free.app/")
@@ -102,7 +97,7 @@ extension HomeViewController {
                 self?.coordinator?.goToSearchVC(discount: 80)
             },
             userName: userName,
-            userImage: finalImage
+            userImage: userImage
         )
     }
     
@@ -165,7 +160,9 @@ extension HomeViewController {
                 self?.collectionView.reloadData()
             }.store(in: &subscriptions)
         ///
-        sliderItem?.selectedItem.sink { [weak self] sliderItems in
+        sliderItem?
+            .selectedItem
+            .sink { [weak self] sliderItems in
             self?.coordinator?.goToSliderItem(discount: (sliderItems.1+1)*10)
         }.store(in: &subscriptions)
     }
@@ -184,13 +181,16 @@ extension HomeViewController {
             }
             .store(in: &subscriptions)
         ///
-        categoryItem?.categorySelection.sink { [weak self] item in
+        categoryItem?
+            .categorySelection
+            .sink { [weak self] item in
             self?.coordinator?.goToCategoryItem(category: item.name ?? "")
         }.store(in: &subscriptions)
     }
     // MARK: - Product Items
     private func bindProductItems() {
-        viewModel.$productItems
+        viewModel
+            .$productItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newItems in
                 self?.cardItem?.productItems = newItems
@@ -198,31 +198,39 @@ extension HomeViewController {
             }
             .store(in: &subscriptions)
         ///
-        cardItem?.selectedItem.sink(receiveValue: { [weak self] value in
+        cardItem?
+            .selectedItem
+            .sink(receiveValue: { [weak self] value in
             self?.coordinator?.gotToBestDealItem(productDetails: value)
         }).store(in: &subscriptions)
     }
     // MARK: - Top Brands
     private func bindTopBrandsItems() {
-        viewModel.$topBrandsItems
+        viewModel
+            .$topBrandsItems
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
         ///
-        topBrandItem?.selectedBrand.sink(receiveValue: { [weak self] items in
+        topBrandItem?
+            .selectedBrand
+            .sink(receiveValue: { [weak self] items in
             self?.coordinator?.gotToTopBrandItem(discount: (items.1+5)*10)
         }).store(in: &subscriptions)
     }
     // MARK: - Daily Essentials
     private func bindDailyEssentialsItems() {
-        viewModel.$dailyEssentailItems
+        viewModel
+            .$dailyEssentailItems
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
             }
             .store(in: &subscriptions)
         ///
-        dailyEssentialItem?.selectedItem.sink(receiveValue: { [weak self] items in
+        dailyEssentialItem?
+            .selectedItem
+            .sink(receiveValue: { [weak self] items in
             self?.coordinator?.gotToDailyEssentialItem(discount: (items.1+5)*10)
         }).store(in: &subscriptions)
     }

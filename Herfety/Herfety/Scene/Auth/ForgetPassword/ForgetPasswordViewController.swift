@@ -15,19 +15,25 @@ class ForgetPasswordViewController: UIViewController {
     @IBOutlet weak var currentPasswordTextField: HRTextField!
     @IBOutlet weak var newPasswordTextField: HRTextField!
     @IBOutlet weak var confirmPasswordTextField: HRTextField!
-
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-
     @IBOutlet weak var resetBtn: HerfetyButton!
     // MARK: - Properties
-    private let viewModel = ForgetPasswordViewModel()
+    private let viewModel: ForgetPasswordViewModel
     private var navBarBehavior: HerfetyNavigationController?
     var cancelabel = Set<AnyCancellable>()
     weak var coordinator: ForgetPasswordTransitonDelegate?
     weak var alertPresenter: AlertPresenter?
-
+    // MARK: - Init
+    init(viewModel: ForgetPasswordViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - Life Cycle Methods
     //
     override func viewDidLoad() {
@@ -192,13 +198,13 @@ extension ForgetPasswordViewController {
         guard let text = sender.text else { return }
 
         if sender == usernameTextField.textfield {
-            viewModel.upadateUserName(text)
+            viewModel.userNameSubject.send(text)
         } else if sender == currentPasswordTextField.textfield {
-            viewModel.upadteCurrentPassword(text)
+            viewModel.currentPasswordSubject.send(text)
         } else if sender == newPasswordTextField.textfield {
-            viewModel.upadteNewPassword(text)
+            viewModel.newPasswordSubject.send(text)
         } else if sender == confirmPasswordTextField.textfield {
-            viewModel.upadteConfirmPassword(text)
+            viewModel.confirmPasswordSubject.send(text)
         }
     }
 }

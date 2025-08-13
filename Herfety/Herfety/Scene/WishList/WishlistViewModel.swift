@@ -21,8 +21,10 @@ final class WishListViewModel {
         bindWishlistUpdates()
         layoutProviders.append(WishlistSectionLayoutProvider())
     }
-    
-    // MARK: - Bind to Data Store Publisher
+}
+// MARK: - Bind to Data Store Publisher
+//
+extension WishListViewModel {
     private func bindWishlistUpdates() {
         AppDataStorePublisher
             .shared
@@ -36,8 +38,10 @@ final class WishListViewModel {
             }
             .store(in: &cancellables)
     }
-    
-    // MARK: - Public Methods
+}
+// MARK: - Public Methods
+//
+extension WishListViewModel {
     func numberOfSections() -> Int {
         return sections.count
     }
@@ -54,3 +58,4 @@ final class WishListViewModel {
         return layoutProviders
     }
 }
+

@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol SuccessTransitionDelegate: AnyObject {
-    
-}
+protocol SuccessTransitionDelegate: AnyObject {}
 
 class SuccessCoordinator: Coordinator {
     
@@ -22,10 +20,11 @@ class SuccessCoordinator: Coordinator {
     }
     
     func start() {
-        let SuccessVC = SuccessViewController()
-        SuccessVC.onStartShoping = { [weak self] in
+        let viewModel = SuccessViewModel()
+        viewModel.onStartShopping = { [weak self] in
             self?.onStartShoping?()
         }
+        let SuccessVC = SuccessViewController(viewModel: viewModel)
         SuccessVC.coordinator = self
         SuccessVC.modalPresentationStyle = .fullScreen
         navigationController.present(SuccessVC, with: .fade)

@@ -1,11 +1,12 @@
-import AuthenticationServices
-import Combine
 //
 //  LoginViewController.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 20/04/2024.
 //
+
+import AuthenticationServices
+import Combine
 import UIKit
 
 class LoginViewController: UIViewController {
@@ -16,7 +17,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-
     @IBOutlet weak var forgetPassword: UIButton!
     @IBOutlet weak var loginButton: PrimaryButton!
     @IBOutlet weak var facebookButton: FacebookButton!
@@ -26,7 +26,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var orLabel: UILabel!
     // MARK: - Properties
     var viewModel: LoginViewModelType
-    private var navBarBehavior: HerfetyNavigationController?
+    private lazy var navBarBehavior = HerfetyNavigationController(
+        navigationItem: navigationItem,
+        navigationController: navigationController)
     private var cancellables = Set<AnyCancellable>()
     weak var coordinator: LoginTransitionDelegate?
 
@@ -45,7 +47,6 @@ class LoginViewController: UIViewController {
         setUpNavigationBar()
         bindViewModel()
     }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         /// Keep nav bar visible
@@ -55,7 +56,6 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
 }
 // MARK: - Configuration
 //
@@ -65,10 +65,10 @@ extension LoginViewController {
         view.backgroundColor = Colors.hPrimaryBackground
         lineView.backgroundColor = Colors.hTextFieldUnderLine
 
-        // Images UI
+        /// Images UI
         logoImage.image = Images.logo
 
-        // Buttons UI
+        /// Buttons UI
         loginButton.title = "Login"
         facebookButton.title = "Continue with Facebook"
         googleButton.title = "Continue with Google"
@@ -85,7 +85,7 @@ extension LoginViewController {
             target: self,
             action: #selector(dismissKeyboard)
         )
-        tapGesture.cancelsTouchesInView = false  // Allows other taps (e.g. buttons) to still work
+        tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
     }
     @objc func dismissKeyboard() {
@@ -93,11 +93,7 @@ extension LoginViewController {
     }
     /// NavBar
     private func setUpNavigationBar() {
-        navBarBehavior = HerfetyNavigationController(
-            navigationItem: navigationItem,
-            navigationController: navigationController
-        )
-        navBarBehavior?.configure(
+        navBarBehavior.configure(
             title: "",
             titleColor: Colors.primaryBlue,
             onPlus: {
@@ -156,14 +152,16 @@ extension LoginViewController {
 
     private func bindViewModel() {
 
-        viewModel.loginSuccess
+        viewModel
+            .loginSuccess
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
 
-        viewModel.loginError
+        viewModel
+            .loginError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] errorMessage in
                 let alert = UIAlertController(
@@ -176,7 +174,8 @@ extension LoginViewController {
             }
             .store(in: &cancellables)
 
-        viewModel.configureOnButtonEnabled { [weak self] isEnabled in
+        viewModel
+            .configureOnButtonEnabled { [weak self] isEnabled in
             self?.loginButton.isEnabled = isEnabled
             self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
         }
@@ -231,6 +230,21 @@ extension LoginViewController {
         controller.performRequests()
     }
 }
+// MARK: - TextFieldDelegate
+//
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField.textfield {
+            passwordTextField.textfield.becomeFirstResponder()  // Move to password field
+        } else if textField == passwordTextField.textfield {
+            textField.resignFirstResponder()  // Dismiss keyboard
+        }
+        return true
+    }
+
+}
+// MARK: - AppleDelegate
+//
 extension LoginViewController: ASAuthorizationControllerDelegate,
     ASAuthorizationControllerPresentationContextProviding
 {
@@ -259,16 +273,4 @@ extension LoginViewController: ASAuthorizationControllerDelegate,
     ) {
         print(error.localizedDescription)
     }
-}
-
-extension LoginViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == emailTextField.textfield {
-            passwordTextField.textfield.becomeFirstResponder()  // Move to password field
-        } else if textField == passwordTextField.textfield {
-            textField.resignFirstResponder()  // Dismiss keyboard
-        }
-        return true
-    }
-
 }

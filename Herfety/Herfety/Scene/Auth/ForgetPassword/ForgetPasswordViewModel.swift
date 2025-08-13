@@ -8,18 +8,23 @@
 import Foundation
 import Combine
 
-class ForgetPasswordViewModel {
+class ForgetPasswordViewModel: ForgetPasswordViewModelType {
     // MARK: - Properties
-    private var userName: String = ""
-    private var currentPassword: String = ""
-    private var newPassword: String = ""
-    private var confirmPassword: String = ""
     private let resetService: ResetPasswordRemoteProtocol
-    /// Outputs
+    private var cancellables = Set<AnyCancellable>()
+    
+    // Inputs as Combine subjects
+    let userNameSubject = CurrentValueSubject<String, Never>("")
+    let currentPasswordSubject = CurrentValueSubject<String, Never>("")
+    let newPasswordSubject = CurrentValueSubject<String, Never>("")
+    let confirmPasswordSubject = CurrentValueSubject<String, Never>("")
+    
+    // Output streams
+    private let isButtonEnabled = CurrentValueSubject<Bool, Never>(false)
     let onSuccess = PassthroughSubject<Void, Never>()
     let onError = PassthroughSubject<AlertModel, Never>()
-    private var onResetButtonEnabled: ((Bool) -> Void)?
-
+    let isLoading = PassthroughSubject<Bool, Never>()
+    
     // MARK: - Init
     init(
         resetService: ResetPasswordRemoteProtocol = ResetPasswordRemote(
@@ -27,50 +32,33 @@ class ForgetPasswordViewModel {
         )
     ) {
         self.resetService = resetService
+        setupBindings()
     }
-}
-// MARK: - ResetViewModelInput
-extension ForgetPasswordViewModel {
-    func upadateUserName(_ text: String) {
-        userName = text
-        updateEnabledStateButton()
-    }
-    func upadteCurrentPassword(_ text: String) {
-        currentPassword = text
-        updateEnabledStateButton()
-    }
-    func upadteNewPassword(_ text: String) {
-        newPassword = text
-        updateEnabledStateButton()
-    }
-    func upadteConfirmPassword(_ text: String) {
-        confirmPassword = text
-        updateEnabledStateButton()
-    }
-    func resetTapped() async {
-        do {
-            let response = try await resetService.reset(
-                parameter: ResetPassword(
-                    UserName: userName,
-                    CurrentPassword: currentPassword,
-                    NewPassword: newPassword,
-                    ConfirmPassword: confirmPassword
-                )
-            )
-            self.handleResetSuccess(response: response)
-        } catch {
-            handleLoginError(error)
+    private func setupBindings() {
+        Publishers.CombineLatest4(
+            userNameSubject,
+            currentPasswordSubject,
+            newPasswordSubject,
+            confirmPasswordSubject
+        )
+        .map {
+            !$0.0.isEmpty &&
+            !$0.1.isEmpty &&
+            !$0.2.isEmpty &&
+            !$0.3.isEmpty
         }
+        .subscribe(isButtonEnabled)
+        .store(in: &cancellables)
     }
     
     private func handleResetSuccess(response: ResponseReset) {
         onSuccess.send()
     }
     
-    private func handleLoginError(_ error: Error) {
+    private func handleResetError(_ error: Error) {
         let errorMessage: String
         if let afError = error.asAFError, afError.isResponseValidationError {
-            errorMessage = "There exist Inavalid Input"
+            errorMessage = "There exists invalid input"
         } else {
             errorMessage = error.localizedDescription
         }
@@ -83,19 +71,67 @@ extension ForgetPasswordViewModel {
         onError.send(alert)
     }
 }
-// MARK: - ResetViewModelOutput
+// MARK: - ForgetPasswordViewModelInput
+//
 extension ForgetPasswordViewModel {
-    func configureOnButtonEnabled(onEnabled: @escaping (Bool) -> Void) {
-        onResetButtonEnabled = onEnabled
-        updateEnabledStateButton()
+    func updateUserName(_ text: String) {
+        userNameSubject.send(text)
+    }
+    
+    func updateCurrentPassword(_ text: String) {
+        currentPasswordSubject.send(text)
+    }
+    
+    func updateNewPassword(_ text: String) {
+        newPasswordSubject.send(text)
+    }
+    
+    func updateConfirmPassword(_ text: String) {
+        confirmPasswordSubject.send(text)
+    }
+    
+    func resetTapped() async {
+        guard !userNameSubject.value.isEmpty,
+              !currentPasswordSubject.value.isEmpty,
+              !newPasswordSubject.value.isEmpty,
+              !confirmPasswordSubject.value.isEmpty
+        else {
+            let alert = AlertModel(
+                message: "Please fill in all fields",
+                buttonTitle: "Ok",
+                image: .warning,
+                status: .warning
+            )
+            onError.send(alert)
+            return
+        }
+        
+        isLoading.send(true)
+        defer { isLoading.send(false) }
+        
+        do {
+            let response = try await resetService.reset(
+                parameter: ResetPassword(
+                    UserName: userNameSubject.value,
+                    CurrentPassword: currentPasswordSubject.value,
+                    NewPassword: newPasswordSubject.value,
+                    ConfirmPassword: confirmPasswordSubject.value
+                )
+            )
+            handleResetSuccess(response: response)
+        } catch {
+            handleResetError(error)
+        }
     }
 }
-// MARK: - Private Handlers
+
+// MARK: - ForgetPasswordViewModelOutput
+//
 extension ForgetPasswordViewModel {
-    func updateEnabledStateButton() {
-        let isValid =
-            !userName.isEmpty && !currentPassword.isEmpty
-            && !newPassword.isEmpty && !confirmPassword.isEmpty
-        onResetButtonEnabled?(isValid)
+    func configureOnButtonEnabled(onEnabled: @escaping (Bool) -> Void) {
+        isButtonEnabled
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: onEnabled)
+            .store(in: &cancellables)
     }
 }

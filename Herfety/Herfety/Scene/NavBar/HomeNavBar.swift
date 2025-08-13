@@ -21,7 +21,10 @@ class HomeNavBar {
 //
 extension HomeNavBar {
     
-    func configure(onNotification: @escaping () -> Void, onSearch: @escaping () -> Void, userName: String, userImage: UIImage) {
+    func configure(onNotification: @escaping () -> Void,
+                   onSearch: @escaping () -> Void,
+                   userName: String,
+                   userImage: UIImage) {
         self.noticationBtn = onNotification
         self.searchBtn = onSearch
         
@@ -41,7 +44,7 @@ extension HomeNavBar {
         nameLabel.textColor = .black
         nameLabel.font = .body
         
-
+        
         profileView.addSubview(imageView)
         profileView.addSubview(nameLabel)
         

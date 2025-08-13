@@ -14,12 +14,22 @@ class WishListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
-    private var navigationBarBehavior: HerfetyNavigationController?
-    private var viewModel = WishListViewModel()
-    var cancellables = Set<AnyCancellable>()
+    private lazy var navigationBarBehavior = HerfetyNavigationController(
+        navigationItem: navigationItem,
+        navigationController: navigationController)
+    private(set) var viewModel: WishListViewModel
+    private var cancellables = Set<AnyCancellable>()
     ///
     var isShowBackButton = false
     weak var coordinator: WishlistTransitionDelegate?
+    // MARK: - Init
+    init(viewModel: WishListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +45,8 @@ class WishListViewController: UIViewController {
 extension WishListViewController {
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
-        
         navigationItem.backButtonTitle = ""
-        
-        navigationBarBehavior = HerfetyNavigationController(
-            navigationItem: navigationItem,
-            navigationController: navigationController
-        )
-        
-        navigationBarBehavior?.configure(
+        navigationBarBehavior.configure(
             title: "",
             titleColor: .primaryBlue,
             onPlus: { },

@@ -29,7 +29,8 @@ class WishlistCoordinator: Coordinator {
     }
     
     func start() {
-        let wishlistVC = WishListViewController()
+        let viewModel = WishListViewModel()
+        let wishlistVC = WishListViewController(viewModel: viewModel)
         wishlistVC.isShowBackButton = isShowBackButton
         wishlistVC.coordinator = self
         navigationController.transition(to: wishlistVC, with: .push)

@@ -5,6 +5,7 @@
 //  Created by Mahmoud Alaa on 20/04/2025.
 //
 import UIKit
+import Combine
 import Lottie
 
 class SplashViewController: UIViewController {
@@ -14,11 +15,14 @@ class SplashViewController: UIViewController {
     @IBOutlet weak var signUpButton: PrimaryButton!
     @IBOutlet weak var HerfetyView: LottieAnimationView!
     // MARK: - Properties
-    private var navigationBarBehavior: HerfetyNavigationController?
-    private let viewModel: SplashViewModel
+    private lazy var navigationBarBehavior = HerfetyNavigationController(
+        navigationItem: navigationItem,
+        navigationController: navigationController)
+    private let viewModel: SplashViewModelType
     weak var coordinator: SplashTransitionDelegate?
+    private var cancellabels = Set<AnyCancellable>()
     // MARK: - Init
-    init(viewModel:SplashViewModel) {
+    init(viewModel: SplashViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,17 +35,7 @@ class SplashViewController: UIViewController {
         setup()
         setUpNavigationBar()
         makeAnimation()
-    }
-    /// lottie Animation
-    private func makeAnimation() {
-        HerfetyView.animation = .named("HerfetyAnimation")
-        HerfetyView.loopMode = .loop
-        HerfetyView.play()
-    }
-    // MARK: - Setup Buttons
-    private func setup() {
-        loginButton.title = "Login"
-        signUpButton.title = "SignUp"
+        bindViewModel()
     }
 }
 // MARK: - Configuration
@@ -50,11 +44,7 @@ extension SplashViewController {
     /// NavBar
     private func setUpNavigationBar() {
         navigationItem.backButtonTitle = ""
-        navigationBarBehavior = HerfetyNavigationController(
-            navigationItem: navigationItem,
-            navigationController: navigationController
-        )
-        navigationBarBehavior?.configure(
+        navigationBarBehavior.configure(
             title: "",
             titleColor: Colors.primaryBlue,
             onPlus: {
@@ -63,16 +53,48 @@ extension SplashViewController {
             showRighBtn: false,
             showBackButton: false)
     }
+    /// Setup Buttons
+    private func setup() {
+        loginButton.title = "Login"
+        signUpButton.title = "SignUp"
+    }
 }
 // MARK: - Actions
 //
 extension SplashViewController {
     
     @IBAction func loginPressed(_ sender: Any) {
-        coordinator?.goLoginVC()
+        viewModel.loginTapped()
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
-        coordinator?.goSignUpVC()
+        viewModel.signUpTapped()
+    }
+}
+// MARK: - Binding
+//
+extension SplashViewController {
+    private func bindViewModel() {
+        viewModel
+            .onLogin
+            .sink { [weak self] _ in
+                self?.coordinator?.goLoginVC()
+            }.store(in: &cancellabels)
+        
+        viewModel
+            .onSignUp
+            .sink { [weak self] _ in
+                self?.coordinator?.goSignUpVC()
+            }.store(in: &cancellabels)
+    }
+}
+// MARK: - Private Handler
+//
+extension SplashViewController {
+    /// lottie Animation
+    private func makeAnimation() {
+        HerfetyView.animation = .named("HerfetyAnimation")
+        HerfetyView.loopMode = .loop
+        HerfetyView.play()
     }
 }

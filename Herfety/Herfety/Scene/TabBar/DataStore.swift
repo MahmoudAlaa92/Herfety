@@ -18,6 +18,7 @@ class AppDataStorePublisher: ObservableObject {
     @Published var cartUpdated: Bool = false
     @Published var infoUpdated: Bool = false
     @Published var loginStatusUpdated: Bool = false
+    @Published var userProfileImage: Bool = false
     
     private init() {}
     
@@ -39,6 +40,10 @@ class AppDataStorePublisher: ObservableObject {
     
     func notifyLoginStatusUpdate() {
         loginStatusUpdated.toggle()
+    }
+    
+    func notifyProfileImageUpdate() {
+        userProfileImage.toggle()
     }
 }
 
@@ -68,7 +73,6 @@ actor DataStore {
         Task {
             await loadUserDefaultsSync()
             await fetchWishlistItems(id: userId, showAlert: false)
-            await loadUserProfileImage()
         }
     }
     
@@ -330,6 +334,10 @@ extension AppDataStorePublisher {
     
     var loginStatusPublisher: AnyPublisher<Bool, Never> {
         $loginStatusUpdated.eraseToAnyPublisher()
+    }
+    
+    var profileImageStatusPublisher: AnyPublisher<Bool, Never> {
+        $userProfileImage.eraseToAnyPublisher()
     }
 }
 // MARK: - Data Actor (Thread-safe)

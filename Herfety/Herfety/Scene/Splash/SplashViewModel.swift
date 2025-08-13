@@ -5,20 +5,20 @@
 //  Created by Mahmoud Alaa on 07/05/2025.
 //
 
-import Foundation
+import Combine
 
-class SplashViewModel {
+final class SplashViewModel: SplashViewModelType {
     
-    // MARK: - Properties
-    var onLoginTapped: (() -> Void)?
-    var onSignUpTapped: (() -> Void)?
+    // MARK: - Output
+    let onLogin = PassthroughSubject<Void, Never>()
+    let onSignUp = PassthroughSubject<Void, Never>()
     
-    
+    // MARK: - Input
     func loginTapped() {
-        onLoginTapped?()
+        onLogin.send()
     }
     
     func signUpTapped() {
-        onSignUpTapped?()
+        onSignUp.send()
     }
 }

@@ -63,6 +63,10 @@
 		153B7FD52D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B7FD42D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift */; };
 		153B7FD82D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B7FD62D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift */; };
 		153B7FD92D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153B7FD72D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib */; };
+		153C9E402E4CB337006D1616 /* SplashViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C9E3F2E4CB337006D1616 /* SplashViewModelType.swift */; };
+		153C9E422E4CD729006D1616 /* ForgetPasswordViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C9E412E4CD729006D1616 /* ForgetPasswordViewModelType.swift */; };
+		153C9E442E4CE136006D1616 /* SuccessViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C9E432E4CE135006D1616 /* SuccessViewModelType.swift */; };
+		153C9E462E4CE15F006D1616 /* SuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C9E452E4CE15F006D1616 /* SuccessViewModel.swift */; };
 		153F6A942D58FBA800317F49 /* DailyEssentailCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F6A932D58FBA800317F49 /* DailyEssentailCollectionViewSection.swift */; };
 		153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F6A972D59157300317F49 /* HomeNavBar.swift */; };
 		153F6A9D2D59538100317F49 /* CustomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F6A9C2D59538000317F49 /* CustomeTabBarViewController.swift */; };
@@ -315,6 +319,10 @@
 		153B7FD42D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsCollectionViewSection.swift; sourceTree = "<group>"; };
 		153B7FD62D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesProductDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		153B7FD72D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesProductDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
+		153C9E3F2E4CB337006D1616 /* SplashViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModelType.swift; sourceTree = "<group>"; };
+		153C9E412E4CD729006D1616 /* ForgetPasswordViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewModelType.swift; sourceTree = "<group>"; };
+		153C9E432E4CE135006D1616 /* SuccessViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewModelType.swift; sourceTree = "<group>"; };
+		153C9E452E4CE15F006D1616 /* SuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewModel.swift; sourceTree = "<group>"; };
 		153F6A932D58FBA800317F49 /* DailyEssentailCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEssentailCollectionViewSection.swift; sourceTree = "<group>"; };
 		153F6A972D59157300317F49 /* HomeNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavBar.swift; sourceTree = "<group>"; };
 		153F6A9C2D59538000317F49 /* CustomeTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeTabBarViewController.swift; sourceTree = "<group>"; };
@@ -1162,9 +1170,10 @@
 			isa = PBXGroup;
 			children = (
 				158A7E8C2DB53EF600B89684 /* HerfetyAnimation.json */,
+				153C9E3F2E4CB337006D1616 /* SplashViewModelType.swift */,
+				159B57872DCBD2E000CDD958 /* SplashViewModel.swift */,
 				158A7E762DB52A7500B89684 /* SplashViewController.swift */,
 				158A7E772DB52A7500B89684 /* SplashViewController.xib */,
-				159B57872DCBD2E000CDD958 /* SplashViewModel.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -1484,6 +1493,8 @@
 		15D0F5882DB67D4C00967C7F /* SuccessScreen */ = {
 			isa = PBXGroup;
 			children = (
+				153C9E432E4CE135006D1616 /* SuccessViewModelType.swift */,
+				153C9E452E4CE15F006D1616 /* SuccessViewModel.swift */,
 				15D0F5862DB67D4C00967C7F /* SuccessViewController.swift */,
 				15D0F5872DB67D4C00967C7F /* SuccessViewController.xib */,
 			);
@@ -1494,8 +1505,9 @@
 			isa = PBXGroup;
 			children = (
 				15E33A2E2DD4B5130004D408 /* ForgetModel.swift */,
-				15E33A282DD4AC500004D408 /* ForgetPasswordViewController.swift */,
+				153C9E412E4CD729006D1616 /* ForgetPasswordViewModelType.swift */,
 				15E33A2C2DD4AEFC0004D408 /* ForgetPasswordViewModel.swift */,
+				15E33A282DD4AC500004D408 /* ForgetPasswordViewController.swift */,
 				15E33A292DD4AC500004D408 /* ForgetPasswordViewController.xib */,
 			);
 			path = ForgetPassword;
@@ -1786,6 +1798,7 @@
 				15F927C62D5A55BC0038CEB8 /* WishlistCollectionViewSection.swift in Sources */,
 				1532F34D2D5E876F003223A1 /* InfoShippingCollectionViewCell.swift in Sources */,
 				1599B8982DB85F5A00A48510 /* Category.swift in Sources */,
+				153C9E442E4CE136006D1616 /* SuccessViewModelType.swift in Sources */,
 				157F42892DB6DAD0000305D6 /* Network.swift in Sources */,
 				15E33A2D2DD4AEFD0004D408 /* ForgetPasswordViewModel.swift in Sources */,
 				158B39D32D7A41F800D58B07 /* ProfileListCollectionViewSection.swift in Sources */,
@@ -1860,6 +1873,7 @@
 				15CD44C72D52A73000E58C6F /* SectionsLayout.swift in Sources */,
 				153B7FD82D720CC200B364F8 /* ImagesProductDetailsCollectionViewCell.swift in Sources */,
 				158B39DC2D7A85E100D58B07 /* SettingViewController.swift in Sources */,
+				153C9E422E4CD729006D1616 /* ForgetPasswordViewModelType.swift in Sources */,
 				1599B8A02DB86D9A00A48510 /* ProductsRemote.swift in Sources */,
 				15166A6F2D57AE1B00F8F35C /* CardItemCollectionViewSection.swift in Sources */,
 				157F42812DB6D979000305D6 /* RemoteError.swift in Sources */,
@@ -1876,7 +1890,9 @@
 				15A5EC922D77E125003E49AB /* ProfileListCollectionViewCell.swift in Sources */,
 				1555876D2DC12EDE00342236 /* WishlistRemote.swift in Sources */,
 				1532F3512D5E8EB5003223A1 /* InfoViewModel.swift in Sources */,
+				153C9E402E4CB337006D1616 /* SplashViewModelType.swift in Sources */,
 				15AA58F22E1822A80050D01D /* SuccessCoordinator.swift in Sources */,
+				153C9E462E4CE15F006D1616 /* SuccessViewModel.swift in Sources */,
 				158B39E12D7A869F00D58B07 /* SettingHeader.swift in Sources */,
 				15DF25122E23587100C17B53 /* InfoCoordinator.swift in Sources */,
 				158A7EAF2DB566C900B89684 /* AppleButton.swift in Sources */,

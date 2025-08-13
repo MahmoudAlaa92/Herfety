@@ -83,7 +83,7 @@ class AppDataStore: ObservableObject {
     init() {
         Task {
             await fetchWishlistItems(id: userId)
-            await loadUserProfileImage()
+//            await loadUserProfileImage()
         }
     }
     

@@ -5,8 +5,8 @@
 //  Created by Mahmoud Alaa on 7/04/2025.
 //
 
-import Combine
 import UIKit
+import Combine
 
 class SignupViewController: UIViewController {
     
@@ -18,7 +18,6 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var emailTextField: HRTextField!
     @IBOutlet weak var passwordTextField: HRTextField!
     @IBOutlet weak var confirmPasswordTextField: HRTextField!
-    
     @IBOutlet weak var phoneNumber: HRTextField!
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -27,7 +26,9 @@ class SignupViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: SignupViewModelType
     private var cancellables = Set<AnyCancellable>()
-    private var navBarBehavior: HerfetyNavigationController?
+    private lazy var navBarBehavior = HerfetyNavigationController(
+        navigationItem: navigationItem,
+        navigationController: navigationController)
     weak var coordinator: SignUpTransitionDelegate?
     weak var alertPresenter: AlertPresenter?
     // MARK: - Init
@@ -54,11 +55,7 @@ extension SignupViewController {
     /// NavBar
     private func setUpNavigationBar() {
         navigationItem.backButtonTitle = ""
-        navBarBehavior = HerfetyNavigationController(
-            navigationItem: navigationItem,
-            navigationController: navigationController
-        )
-        navBarBehavior?.configure(
+        navBarBehavior.configure(
             title: "",
             titleColor: Colors.primaryBlue,
             onPlus: {
@@ -111,7 +108,7 @@ extension SignupViewController {
             target: self,
             action: #selector(dismissKeyboard)
         )
-        tapGesture.cancelsTouchesInView = false  // Allows other taps buttons to still work
+        tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
     }
     @objc func dismissKeyboard() {

@@ -18,10 +18,11 @@ class ForgetPasswordCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     let alertCoordinator: AlertPresenter
-    var onStartShoping: (() -> Void)? // Add callback
+    var onStartShoping: (() -> Void)? /// Add callback
 
     func start() {
-        let vc = ForgetPasswordViewController()
+        let viewModel = ForgetPasswordViewModel()
+        let vc = ForgetPasswordViewController(viewModel: viewModel)
         vc.coordinator = self
         vc.alertPresenter = alertCoordinator
         navigationController.transition(to: vc, with: .push)

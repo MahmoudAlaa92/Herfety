@@ -14,23 +14,26 @@ class SuccessViewController: UIViewController {
     @IBOutlet private(set) weak var imageView: UIImageView!
     @IBOutlet weak var startButton: PrimaryButton!
     // MARK: - Properties
+    private var viewModel: SuccessViewModelType
     weak var coordinator: SuccessTransitionDelegate?
-    var onStartShoping: (() -> Void)?
-
+    
     // MARK: - Init
-    init() {
+    init(viewModel: SuccessViewModelType) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-        required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
-    // MARK: - Setup UI
+}
+// MARK: - Setup UI
+//
+extension SuccessViewController {
     private func setupUI() {
         view.backgroundColor = Colors.hPrimaryBackground
         containerView.backgroundColor = Colors.hPrimaryBackground
@@ -42,15 +45,19 @@ class SuccessViewController: UIViewController {
         successMessage.text = "You have successfully registered in\nour app and start working in it."
         successMessage.textColor = Colors.hSocialButton
         
-        // Images UI
+        /// Images UI
         imageView.image = Images.iconSuccess
         
-        // Buttons UI
+        /// Buttons UI
         startButton.title = "Start Shopping"
     }
+}
+// MARK: - Actions
+//
+extension SuccessViewController {
     @IBAction func startShoppingButtonTapped(_ sender: UIButton) {
         dismiss(animated: true) { [weak self] in
-            self?.onStartShoping?()
+            self?.viewModel.startShoppingTapped()
         }
     }
 }

@@ -1,19 +1,20 @@
-import AuthenticationServices
-import Combine
-import FacebookLogin
-import Firebase
-import FirebaseAuth
 //
 //  LoginViewModel.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 07/05/2025.
 //
+
+import AuthenticationServices
+import Combine
+import FacebookLogin
+import Firebase
+import FirebaseAuth
 import Foundation
 import GoogleSignIn
 
 class LoginViewModel: LoginViewModelType {
-    
+
     // MARK: - Properties
     private let loginService: LoginRemoteProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -28,7 +29,7 @@ class LoginViewModel: LoginViewModelType {
     let loginError = PassthroughSubject<String, Never>()
     let isLoading = PassthroughSubject<Bool, Never>()
 
-    /// Init
+    //MARK: - Init
     init(
         loginService: LoginRemoteProtocol = LoginRemote(
             network: AlamofireNetwork()
@@ -40,12 +41,13 @@ class LoginViewModel: LoginViewModelType {
 
     private func setupBindings() {
         /// Combine email and password for button state
-        Publishers.CombineLatest(emailSubject, passwordSubject)
+        Publishers
+            .CombineLatest(emailSubject, passwordSubject)
             .map { !$0.isEmpty && !$1.isEmpty }
             .subscribe(isLoginButtonEnabled)
             .store(in: &cancellables)
     }
-    
+
     private func handelLoginSuccess(response: Registration) async {
         UserSessionManager.isLoggedIn = true
         let userInfo = RegisterUser(
@@ -61,10 +63,10 @@ class LoginViewModel: LoginViewModelType {
 
         await DataStore.shared.updateUserId(userId: response.id ?? 22)
         await DataStore.shared.updateUserInfo(userInfo: userInfo)
-        
+
         loginSuccess.send()
     }
-    
+
     private func handleLoginError(_ error: Error) {
         let errorMessage: String
         if let afError = error.asAFError, afError.isResponseValidationError {
@@ -102,31 +104,40 @@ extension LoginViewModel {
             )
             await handelLoginSuccess(response: response)
             loginSuccess.send()
-            
+
         } catch {
-             handleLoginError(error)
+            handleLoginError(error)
         }
     }
     @MainActor
     func loginWithFacebook(from viewController: UIViewController) async {
         let loginManager = LoginManager()
 
-        let loginResult: Result<String, Error> = await withCheckedContinuation { continuation in
-            loginManager.logIn(permissions: ["public_profile", "email"], from: viewController) { result, error in
+        let loginResult: Result<String, Error> = await withCheckedContinuation {
+            continuation in
+            loginManager.logIn(
+                permissions: ["public_profile", "email"],
+                from: viewController
+            ) { result, error in
                 if let error = error {
                     continuation.resume(returning: .failure(error))
                     return
                 }
 
                 guard let tokenString = AccessToken.current?.tokenString else {
-                    continuation.resume(returning: .failure(NSError(
-                        domain: "FB",
-                        code: 401,
-                        userInfo: [NSLocalizedDescriptionKey: "No access token"]
-                    )))
+                    continuation.resume(
+                        returning: .failure(
+                            NSError(
+                                domain: "FB",
+                                code: 401,
+                                userInfo: [
+                                    NSLocalizedDescriptionKey: "No access token"
+                                ]
+                            )
+                        )
+                    )
                     return
                 }
-
                 continuation.resume(returning: .success(tokenString))
             }
         }
@@ -136,7 +147,9 @@ extension LoginViewModel {
             loginError.send(error.localizedDescription)
         case .success(let token):
             do {
-                let credential = FacebookAuthProvider.credential(withAccessToken: token)
+                let credential = FacebookAuthProvider.credential(
+                    withAccessToken: token
+                )
                 let authResult = try await Auth.auth().signIn(with: credential)
                 await handleFirebaseLogin(with: authResult.user)
             } catch {
@@ -152,23 +165,25 @@ extension LoginViewModel {
             self.loginError.send("Client ID not found")
             return
         }
-        
+
         let configuration = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = configuration
-        
+
         do {
-            let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: viewController)
-            
+            let result = try await GIDSignIn.sharedInstance.signIn(
+                withPresenting: viewController
+            )
+
             guard let idToken = result.user.idToken?.tokenString else {
                 loginError.send("Failed to retrieve Google ID token.")
                 return
             }
-            
+
             let credential = GoogleAuthProvider.credential(
                 withIDToken: idToken,
                 accessToken: result.user.accessToken.tokenString
             )
-            
+
             let authResult = try await Auth.auth().signIn(with: credential)
             await handleFirebaseLogin(with: authResult.user)
         } catch {
@@ -176,28 +191,7 @@ extension LoginViewModel {
         }
     }
     @MainActor
-    func loginWithApple(credential: ASAuthorizationAppleIDCredential) async {
-        let userId = credential.user
-        let email = credential.email ?? ""
-
-        let fullName: String
-        if let nameComponents = credential.fullName {
-            let formatter = PersonNameComponentsFormatter()
-            fullName = formatter.string(from: nameComponents)
-        } else {
-            fullName = ""
-        }
-
-        // Example usage (Firebase, custom backend, etc.)
-        print("Apple Sign-In Info:")
-        print("User ID: \(userId)")
-        print("Email: \(email)")
-        print("Full Name: \(fullName)")
-
-        if userId.isEmpty {
-            loginError.send("Apple login failed.")
-        }
-    }
+    func loginWithApple(credential: ASAuthorizationAppleIDCredential) async {}
 }
 // MARK: - LoginViewModelOutput
 //
@@ -233,7 +227,7 @@ extension LoginViewModel {
             image: imageUrl ?? ""
         )
     }
-    
+
     private func handleFirebaseLogin(with user: FirebaseAuth.User) async {
         let userInfo = createUserInfo(
             displayName: user.displayName ?? "",
@@ -242,7 +236,8 @@ extension LoginViewModel {
             imageUrl: user.photoURL?.absoluteString
         )
         await DataStore.shared.updateUserInfo(userInfo: userInfo)
+        await DataStore.shared.loadUserProfileImage()
+        UserSessionManager.isLoggedIn = true
         loginSuccess.send()
     }
-
 }
