@@ -1,26 +1,24 @@
-import Combine
 //
 //  ProductDetailsViewController.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 27/02/2025.
 //
+
 import UIKit
+import Combine
 
 class ProductDetailsViewController: UIViewController {
-    // MARK: - Properties
-    //
+    // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
-    ///
+    // MARK: - Properties
     private(set) var viewModel: ProductDetailsViewModel
-    private var sections: [CollectionViewDataSource] = []
-    private var layoutSections: [LayoutSectionProvider] = []
-    private var navBarBehavior: HerfetyNavigationController?
-    private var productDetialsSection: ProductDetailsCollectionViewSection?
-    private var reviewDetailsSection: ReviewCollectionViewSection?
-    private var recommendedProductsSection: CardItemCollectionViewSection?
+    private lazy var navBarBehavior = HerfetyNavigationController(
+        navigationItem: navigationItem,
+        navigationController: navigationController
+    )
     ///
-    private var subscriptions = Set<AnyCancellable>()
+    private var cancellabels = Set<AnyCancellable>()
     weak var coordinator: PoroductsDetailsTransitionDelegate?
     weak var alertPresenter: AlertPresenter?
     // MARK: - Init
@@ -37,7 +35,6 @@ class ProductDetailsViewController: UIViewController {
         setUpNavigationBar()
         setUpCollectionView()
         configureSections()
-        configureLayoutSections()
         bindViewModel()
     }
 }
@@ -46,18 +43,14 @@ class ProductDetailsViewController: UIViewController {
 extension ProductDetailsViewController {
     /// NavBar
     private func setUpNavigationBar() {
-        navBarBehavior = HerfetyNavigationController(
-            navigationItem: navigationItem,
-            navigationController: navigationController
-        )
-        navBarBehavior?.configure(
+        navBarBehavior.configure(
             title: "",
             titleColor: Colors.primaryBlue,
             onPlus: {
                 /// don't add plus button in VC
             },
             showRighBtn: false,
-            showBackButton: true,  // Enable back button
+            showBackButton: true,  /// Enable back button
             onBack: { [weak self] in
                 self?.coordinator?.backToProductsVC()
                 self?.coordinator?.backToHomeVC()
@@ -71,42 +64,9 @@ extension ProductDetailsViewController {
     }
     /// Sections
     private func configureSections() {
-        let productDetials = ProductDetailsCollectionViewSection(
-            productItems: viewModel.productItem
-        )
-        self.productDetialsSection = productDetials
-
-        let reviews = ReviewCollectionViewSection(
-            reviewItems: viewModel.reviews,
-            rating: viewModel.productItem
-        )
-        self.reviewDetailsSection = reviews
-
-        let recommendItems = CardItemCollectionViewSection(
-            productItems: viewModel.recommendItems
-        )
-        self.recommendedProductsSection = recommendItems
-
-        recommendItems.headerConfigurator = { header in
-            header.configure(
-                title: "Recommended for you",
-                description: "",
-                shouldShowButton: false
-            )
-        }
-        sections = [productDetials, reviews, recommendItems]
-
-        sections.forEach({ $0.registerCells(in: collectionView) })
-    }
-    /// Layout
-    private func configureLayoutSections() {
-        let productImages = ProductDetailsCollectionViewProvider()
-        let review = ReviewCollectionViewSectionLayout()
-        let recommendItems = CardProductSectionLayoutProvider()
-
-        layoutSections = [productImages, review, recommendItems]
-
-        let layoutFactory = SectionsLayout(providers: layoutSections)
+        viewModel.sections.forEach({ $0.registerCells(in: collectionView) })
+        
+        let layoutFactory = SectionsLayout(providers: viewModel.layoutSections)
         collectionView.setCollectionViewLayout(
             layoutFactory.createLayout(),
             animated: true
@@ -117,33 +77,33 @@ extension ProductDetailsViewController {
 //
 extension ProductDetailsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        sections.count
+        viewModel.sections.count
     }
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        sections[section].numberOfItems
+        viewModel.sections[section].numberOfItems
     }
-
+    
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        sections[indexPath.section].cellForItems(
+        viewModel.sections[indexPath.section].cellForItems(
             collectionView,
             cellForItemAt: indexPath
         )
     }
-
+    
     // Header And Footer
     func collectionView(
         _ collectionView: UICollectionView,
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
-
-        if let provider = sections[indexPath.section]
+        
+        if let provider = viewModel.sections[indexPath.section]
             as? HeaderAndFooterProvider
         {
             return provider.cellForItems(
@@ -152,7 +112,6 @@ extension ProductDetailsViewController: UICollectionViewDataSource {
                 at: indexPath
             )
         }
-
         return UICollectionReusableView()
     }
 }
@@ -163,7 +122,7 @@ extension ProductDetailsViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        if let selectable = sections[indexPath.section]
+        if let selectable = viewModel.sections[indexPath.section]
             as? CollectionViewDelegate
         {
             selectable.collectionView(
@@ -177,24 +136,33 @@ extension ProductDetailsViewController: UICollectionViewDelegate {
 //
 extension ProductDetailsViewController {
     func bindViewModel() {
-
-        viewModel.$productItem.sink { _ in
-            self.collectionView.reloadData()
-        }.store(in: &subscriptions)
-
+        
+        viewModel
+            .$productItem
+            .sink { [weak self] _ in
+                self?.viewModel.configureSections()
+                self?.collectionView.reloadData()
+            }
+            .store(in: &cancellabels)
         /// recommended items
-        viewModel.$recommendItems
+        viewModel
+            .$recommendItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newItems in
-                self?.recommendedProductsSection?.productItems = newItems
+                self?.viewModel.recommendedProductsSection?.productItems = newItems
                 self?.collectionView.reloadData()
-            }.store(in: &subscriptions)
+            }
+            .store(in: &cancellabels)
         /// selected her
-        recommendedProductsSection?.selectedItem.sink(receiveValue: {
-            [weak self] value in
-            self?.coordinator?.goToProductDetailsVC(productDetails: value)
-        }).store(in: &subscriptions)
-
+        viewModel
+            .recommendedProductsSection?
+            .selectedItem
+            .sink(receiveValue: {
+                [weak self] value in
+                self?.coordinator?.goToProductDetailsVC(productDetails: value)
+            })
+            .store(in: &cancellabels)
+        
         bindWishlist()
         bindReviewrs()
         bindUpadateReviews()
@@ -208,7 +176,7 @@ extension ProductDetailsViewController {
             .dropFirst()
             .sink { [weak self] current in
                 guard let self = self, !current else { return }
-
+                
                 /// Trigger alert presentation
                 let alertItem = AlertModel(
                     message: "Added To Wishlist",
@@ -218,27 +186,30 @@ extension ProductDetailsViewController {
                 )
                 self.alertPresenter?.showAlert(alertItem)
             }
-            .store(in: &subscriptions)
+            .store(in: &cancellabels)
     }
     // MARK: - Reviewrs
     private func bindReviewrs() {
-        reviewDetailsSection?.reviewrsButton.sink { [weak self] reviewrs in
-            
-            guard let self = self else { return }
-            
-            self.coordinator?.goToReviewersVC(productId: viewModel.currentProductId, reviewers: reviewrs)
-        }.store(in: &subscriptions)
+        viewModel
+            .reviewDetailsSection?
+            .reviewrsButton
+            .sink { [weak self] reviewrs in
+                guard let self = self else { return }
+                self.coordinator?.goToReviewersVC(productId: viewModel.currentProductId, reviewers: reviewrs)
+            }
+            .store(in: &cancellabels)
     }
     /// Reviews Updated
     private func bindUpadateReviews() {
-        viewModel.$reviews
+        viewModel
+            .$reviews
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newReviews in
                 guard let self = self else { return }
-                self.reviewDetailsSection?.reviewItems = newReviews
+                self.viewModel.reviewDetailsSection?.reviewItems = newReviews
                 self.collectionView.reloadData()
             }
-            .store(in: &subscriptions)
-
+            .store(in: &cancellabels)
+        
     }
 }

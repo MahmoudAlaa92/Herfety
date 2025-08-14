@@ -56,16 +56,19 @@ extension TitleProductDetails {
         guard let product = product else { return }
         
         Task {
-            let appDataStore = AppDataStore.shared
-            let isInWishlist = await appDataStore.isItemInWishlist(productId: product.productID ?? 1)
-            
+            let dataStore = DataStore.shared
+            let isInWishlist = await dataStore.isItemInWishlist(productId: product.productID ?? 92)
             if !isInWishlist {
-                await appDataStore.addToWishlist(
-                    userId: appDataStore.userId,
-                    productId: product.productID ?? 1
-                )
+                let userId = await dataStore.getUserId()
+                await dataStore.addToWishlist(userId: userId,
+                                              productId: product.productID ?? 92)
+            } else {
+                await MainActor.run {
+                    AppDataStorePublisher
+                        .shared
+                        .notifyWishlistUpdate(showAlert: true)
+                }
             }
-            appDataStore.isWishlistItemDeleted.send(false)
         }
     }
 }

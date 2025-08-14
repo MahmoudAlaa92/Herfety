@@ -21,7 +21,7 @@ class OrderCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceProduct: UILabel!
     @IBOutlet weak var numberOfProduct: UILabel!
     @IBOutlet weak var minusAndPlusView: UIView!
-  
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configure()
@@ -57,16 +57,16 @@ extension OrderCollectionViewCell {
     }
     
     private func updateCountLabel(_ count: Int) {
-          numberOfProduct.text = "\(count)"
-          onChangeCountOrder?(count)
-      }
-      
-      private func loadInitialCount() async {
-          let count = await DataStore.shared.getCountProductDetails()
-          await MainActor.run {
-              updateCountLabel(count)
-          }
-      }
+        numberOfProduct.text = "\(count)"
+        onChangeCountOrder?(count)
+    }
+    
+    private func loadInitialCount() async {
+        let count = await DataStore.shared.getCountProductDetails()
+        await MainActor.run {
+            updateCountLabel(count)
+        }
+    }
 }
 // MARK: - Actions
 //

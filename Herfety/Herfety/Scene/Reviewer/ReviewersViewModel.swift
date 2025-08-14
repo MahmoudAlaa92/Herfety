@@ -7,27 +7,69 @@
 
 import UIKit
 
-class ReviewersViewModel {
+final class ReviewersViewModel {
     // MARK: - Properties
-    var reviewersItems: [Reviewrr] = [ ]
+    @Published var reviewersItems: [Reviewrr] = [ ]
     let productId: Int
     private let remote: ReviewRemoteProtocol
-
     var didTapPlusButton: (() -> Void)?
     
+    // MARK: - Collection view sections
+    private(set) var sections: [CollectionViewDataSource] = []
+    private(set) var sectionsLayout: [LayoutSectionProvider] = []
+    
     // MARK: - Init
-    init(productId: Int, reviews: [Reviewrr] = [] , remote: ReviewRemoteProtocol = ReviewRemote(network: AlamofireNetwork())) {
+    init(productId: Int,
+         reviews: [Reviewrr] = [],
+         remote: ReviewRemoteProtocol = ReviewRemote(network: AlamofireNetwork())) {
         self.productId = productId
         self.reviewersItems = reviews
         self.remote = remote
+        
+        configureSections()
+        configureLayoutSections()
     }
+    
+    private func configureSections() {
+        let section = ReviewerCollectionViewSection(
+            reviewers: reviewersItems
+        )
+        section.onDelete = { [weak self] index in
+            guard let self = self else { return }
+            
+            Task {
+                let success = await self.deletReview(at: index)
+                if success { await self.refreshSections() }
+            }
+        }
+        
+        section.onUpdate = { [weak self] index, newText in
+            guard let self = self else { return }
+            
+            Task {
+                let success = await self.updateReview(at: index, with: newText)
+                if success { await self.refreshSections() }
+            }
+        }
+        sections = [section]
+    }
+    @MainActor
+    func refreshSections() async {
+        configureSections()
+    }
+    private func configureLayoutSections() {
+        sectionsLayout = [ReviewerCollectionViewLayoutSection()]
+    }
+}
+// MARK: - Networking
+//
+extension ReviewersViewModel {
     /// Fetch
     func fetchReviews() async {
         let remote: ReviewRemoteProtocol = ReviewRemote(network: AlamofireNetwork())
         do {
             let reviews = try await remote.getReviewsAsync(productId: productId)
             self.reviewersItems = reviews
-            
         } catch {
             print("Error fetching reviews: \(error)")
         }
@@ -67,7 +109,7 @@ class ReviewersViewModel {
             status: review.status,
             createdAt: review.createdAt
         )
-      
+        
         do {
             var updatedReview = try await remote.updateReview(id: reviewId, request: request)
             if let user = updatedReview.user {

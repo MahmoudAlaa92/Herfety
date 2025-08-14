@@ -39,13 +39,23 @@ extension ButtonCollectionReusableView {
 //
 extension ButtonCollectionReusableView {
     @IBAction func addToCart(_ sender: Any) {
-        
-        if var orderItem = order,
-           !CustomeTabBarViewModel.shared.cartItems.contains(where: { $0 == self.order }) {
-            orderItem.qty = CustomeTabBarViewModel.shared.countProductDetails
-            CustomeTabBarViewModel.shared.cartItems.append(orderItem)
-            CustomeTabBarViewModel.shared.isOrdersItemDeleted.send(false)
+        Task {
+            let dataStore = DataStore.shared
+            let isInCart = await dataStore.isItemInCart(productId: order.productID ?? 92)
+            
+            if !isInCart {
+                var cartItem = await dataStore.getCartItems()
+                let countProduct = await dataStore.getCountProductDetails()
+                order.qty = countProduct
+                cartItem.append(order)
+                await dataStore.updateCartItems(cartItem, showAlert: true)
+            } else {
+                await MainActor.run {
+                    AppDataStorePublisher.shared.notifyCartUpdate(showAlert: true)
+                }
+            }
         }
+
     }
 }
 // MARK: - ViewModel

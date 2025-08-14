@@ -66,13 +66,39 @@ extension ReviewerCollectionViewSection: ContextMenuProvider {
                            self.onUpdate?(indexPath.row, updatedText)
                        }
                    })
-
-                   if let topVC = UIApplication.shared.windows.first?.rootViewController {
-                       topVC.present(alert, animated: true, completion: nil)
-                   }
+                
+                if let windowScene = UIApplication.shared.connectedScenes
+                    .compactMap({ $0 as? UIWindowScene })
+                    .first(where: { $0.activationState == .foregroundActive }),
+                   let topVC = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+                    topVC.present(alert, animated: true)
+                }
             }
             return UIMenu(title: "", children: [delete, update])
         }
+    }
+}
+// MARK: - Header And Footer
+//
+extension ReviewerCollectionViewSection: HeaderAndFooterProvider {
+    
+    func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == HeaderView.headerIdentifier,
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: HeaderView.headerIdentifier,
+                withReuseIdentifier: HeaderView.headerIdentifier,
+                for: indexPath
+            ) as? HeaderView
+        {
+            header.configure(
+                title: "Reviews Client",
+                description: "",
+                titleFont: .title3,
+                shouldShowButton: false
+            )
+            return header
+        }
+        return UICollectionReusableView()
     }
 }
 // MARK: - Layout

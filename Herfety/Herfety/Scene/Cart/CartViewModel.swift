@@ -53,6 +53,7 @@ extension CartViewModel {
         var items = orderSection.orderItems
         guard items.indices.contains(index) else { return }
         items.remove(at: index)
+        updatePaymentInfo(cartItems: items)
         sections = [CartCollectionViewSection(orderItems: items)]
         Task {
             await DataStore.shared.updateCartItems(items, showAlert: false)
@@ -70,6 +71,7 @@ private extension CartViewModel {
             .sink { [weak self] _ in
                 Task {
                     let cartItems = await DataStore.shared.getCartItems()
+                    self?.updatePaymentInfo(cartItems: cartItems)
                     let provider = CartCollectionViewSection(orderItems: cartItems)
                     guard let self = self else { return }
                     /// Listen to delete & count updates

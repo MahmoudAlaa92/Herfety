@@ -9,14 +9,7 @@ import UIKit
 class DescriptionProductDetails: UICollectionReusableView {
     // MARK: - Properties
     static let identifier: String = "DescriptionProductDetails"
-    ///
-    var productCount: Int {
-        get { return Int(numberProduct.text ?? "1") ?? 1 }
-        set {
-            numberProduct.text = "\(newValue)"
-            CustomeTabBarViewModel.shared.countProductDetails = newValue
-        }
-    }
+    
     // MARK: - Outlets
     @IBOutlet weak var descriptionTitle: UILabel!
     @IBOutlet weak var numberProduct: UILabel!
@@ -27,6 +20,9 @@ class DescriptionProductDetails: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         configureUI()
+        Task {
+            await loadInitialCount()
+        }
     }
 }
 // MARK: - Configuration
@@ -42,23 +38,41 @@ extension DescriptionProductDetails {
         
         descriptionLabel.font = .body
         descriptionLabel.textColor = Colors.hSocialButton
-        
-        productCount = 1
     }
-
+    
     func configure(descriptionLabel: String){
         self.descriptionLabel.text = descriptionLabel
     }
+    
+    private func loadInitialCount() async {
+        let count = await DataStore.shared.getCountProductDetails()
+        await MainActor.run {
+            updateCountLabel(count)
+        }
+    }
+    
+    private func updateCountLabel(_ count: Int) {
+        numberProduct.text = "\(count)"
+    }
+    
 }
 // MARK: - Actions
 //
 extension DescriptionProductDetails {
     @IBAction func minusPressed(_ sender: Any) {
-        if productCount > 1 {
-            productCount -= 1
+        Task {
+            let newCount = await DataStore.shared.decrementProductCount()
+            await MainActor.run {
+                updateCountLabel(newCount)
+            }
         }
     }
     @IBAction func plusPressed(_ sender: Any) {
-        productCount += 1
+        Task {
+            let newCount = await DataStore.shared.incrementProductCount()
+            await MainActor.run {
+                updateCountLabel(newCount)
+            }
+        }
     }
 }
