@@ -135,17 +135,15 @@ extension CartViewController {
     private func setUpCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        viewModel.sections.forEach { $0.registerCells(in: collectionView) }
     }
     /// Configure Layout
     private func configureCompositionalLayout() {
         let layoutFactory = SectionsLayout(
-            providers: viewModel.layoutProviders
-        )
+            providers: viewModel.layoutProviders)
         self.collectionView.setCollectionViewLayout(
             layoutFactory.createLayout(),
-            animated: true
-        )
+            animated: true)
+        viewModel.sections.forEach { $0.registerCells(in: collectionView) }
     }
     /// Configure UI
     private func configureUI() {
@@ -170,7 +168,10 @@ extension CartViewController {
             .$sections
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.collectionView.reloadData()
+                guard let self = self else { return }
+                /// Must Register cells whenever sections change
+                viewModel.sections.forEach { $0.registerCells(in: self.collectionView) }
+                self.collectionView.reloadData()
             }
             .store(in: &cancellables)
         /// Navigate to Shipping VC

@@ -216,6 +216,7 @@
 		15AA58F62E185C450050D01D /* ProductDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA58F52E185C450050D01D /* ProductDetailsCoordinator.swift */; };
 		15ABC2312E2D43DD00DCB8E5 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABC2302E2D43DD00DCB8E5 /* SettingCoordinator.swift */; };
 		15ABC2332E2D611600DCB8E5 /* AlertStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABC2322E2D611600DCB8E5 /* AlertStatus.swift */; };
+		15AF292E2E4F6B8E00EA5570 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AF292D2E4F6B8E00EA5570 /* ProfileViewModel.swift */; };
 		15C177C62E47A4770086F236 /* ForgetPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C177C52E47A4770086F236 /* ForgetPasswordCoordinator.swift */; };
 		15C583472E4A5D030035F88F /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C583462E4A5D030035F88F /* WishlistViewModel.swift */; };
 		15CD44AE2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CD44AD2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib */; };
@@ -467,6 +468,7 @@
 		15AA58F52E185C450050D01D /* ProductDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsCoordinator.swift; sourceTree = "<group>"; };
 		15ABC2302E2D43DD00DCB8E5 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		15ABC2322E2D611600DCB8E5 /* AlertStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStatus.swift; sourceTree = "<group>"; };
+		15AF292D2E4F6B8E00EA5570 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		15C177C52E47A4770086F236 /* ForgetPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordCoordinator.swift; sourceTree = "<group>"; };
 		15C583462E4A5D030035F88F /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
 		15CD44AC2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderImagesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -832,6 +834,7 @@
 		153F6AA42D59561600317F49 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				15AF292D2E4F6B8E00EA5570 /* ProfileViewModel.swift */,
 				153F6AA92D59563F00317F49 /* ProfileViewController.swift */,
 				153F6AAA2D59563F00317F49 /* ProfileViewController.xib */,
 				15A5EC872D77DCF3003E49AB /* Sections */,
@@ -1053,10 +1056,10 @@
 		157F91152D62E7CC005381FB /* Alert */ = {
 			isa = PBXGroup;
 			children = (
-				157F91162D62E804005381FB /* AlertViewController.swift */,
-				157F91172D62E804005381FB /* AlertViewController.xib */,
 				152E8EB72D6662AF005766FB /* AlertModel.swift */,
 				15ABC2322E2D611600DCB8E5 /* AlertStatus.swift */,
+				157F91162D62E804005381FB /* AlertViewController.swift */,
+				157F91172D62E804005381FB /* AlertViewController.xib */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1064,6 +1067,7 @@
 		15840BD22D5D7C26006F8B67 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1592D5F22E13E0BD001792F7 /* Coordinators */,
 				151DF4262D5BAB3000A3AD98 /* CustomViews */,
 			);
 			path = Utilities;
@@ -1088,10 +1092,8 @@
 			isa = PBXGroup;
 			children = (
 				1570F72E2DFF61EC00AE9F6D /* Secrets.plist */,
-				1592D5F22E13E0BD001792F7 /* Coordinators */,
 				1589FC132D51785700240754 /* Herfety */,
 				1589FC1B2D51801900240754 /* Resources */,
-				15840BD22D5D7C26006F8B67 /* Utilities */,
 				157F427E2DB6D78F000305D6 /* Networking */,
 				1589FC212D51818E00240754 /* Frameworks */,
 				1589FBF32D51781D00240754 /* Products */,
@@ -1111,6 +1113,7 @@
 			children = (
 				151D5E712DF47FEC0019F1D9 /* Herfety.entitlements */,
 				15F420652DB1275300FCDF71 /* Common */,
+				15840BD22D5D7C26006F8B67 /* Utilities */,
 				1589FC1C2D51802300240754 /* Scene */,
 				1589FC0A2D51785700240754 /* AppDelegate.swift */,
 				1589FC112D51785700240754 /* SceneDelegate.swift */,
@@ -1761,6 +1764,7 @@
 				15D2E1B22E19BC9300B9C579 /* ReviewersCoordinator.swift in Sources */,
 				153944E62DCF7BB1008465BB /* MultipartFormDataRequest.swift in Sources */,
 				151DF42E2D5BD03B00A3AD98 /* CartViewModel.swift in Sources */,
+				15AF292E2E4F6B8E00EA5570 /* ProfileViewModel.swift in Sources */,
 				151631262D5D556D00BA088E /* Fonts+Style.swift in Sources */,
 				1570F74C2DFF7F0100AE9F6D /* MyCheckoutViewController.swift in Sources */,
 				15840BD52D5D7CAA006F8B67 /* HerfetyButton.swift in Sources */,

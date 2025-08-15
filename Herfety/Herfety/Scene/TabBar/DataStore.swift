@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 // MARK: - Publisher Manager (MainActor isolated)
-
 class AppDataStorePublisher: ObservableObject {
     static let shared = AppDataStorePublisher()
     
@@ -33,7 +32,7 @@ class AppDataStorePublisher: ObservableObject {
     func notifyCartUpdate(showAlert: Bool) {
         cartUpdated = showAlert
     }
-   
+    
     func notifyInfoUpdate() {
         infoUpdated.toggle()
     }
@@ -46,7 +45,8 @@ class AppDataStorePublisher: ObservableObject {
         userProfileImage.toggle()
     }
 }
-
+// MARK: - Data Store
+//
 actor DataStore {
     static let shared = DataStore()
     
@@ -105,6 +105,7 @@ actor DataStore {
     }
     
     // MARK: - Safe External Access Methods
+    //
     func getUserId() -> Int {
         return userId
     }
@@ -305,7 +306,6 @@ actor DataStore {
             publisher.notifyLoginStatusUpdate()
         }
     }
-    
     // MARK: - Private Helper Methods
     private func calculateTotalPrice() {
         totalPriceOfOrders = cartItems.reduce(0) { total, item in
@@ -313,8 +313,8 @@ actor DataStore {
         }
     }
 }
-
 // MARK: - Publisher Extensions
+//
 extension AppDataStorePublisher {
     var wishlistUpdatePublisher: AnyPublisher<Bool, Never> {
         $wishlistUpdated.eraseToAnyPublisher()

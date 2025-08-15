@@ -8,7 +8,9 @@
 import Foundation
 
 protocol RegisterRemoteProtocol {
+    /// Async/await versions
     func registerUser(user: RegisterUser) async throws -> Registration
+    /// Legacy callback versions for backward compatibility
     func registerUser(user: RegisterUser, completion: @escaping (Result<Registration, Error>) -> Void)
 }
 

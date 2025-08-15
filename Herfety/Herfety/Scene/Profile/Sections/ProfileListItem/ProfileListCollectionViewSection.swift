@@ -9,10 +9,11 @@ import UIKit
 import SafariServices
 
 class ProfileListCollectionViewSection: CollectionViewDataSource {
-    
+    // MARK: - Properties
     private let items: [ProfileListItem]
     weak var coordinator: PorfileTransionDelegate?
     
+    // MARK: - Init
     init(items: [ProfileListItem], coordinator: PorfileTransionDelegate?) {
         self.items = items
         self.coordinator = coordinator
@@ -68,7 +69,7 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             case "Logout":
                 self.coordinator?.goToAuthVC()
                 break
-
+                
             default:
                 break
             }
@@ -88,26 +89,26 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
         }
     }
 }
-    // MARK: - Layout
-    //
-    struct ProfileListLayoutSection: LayoutSectionProvider {
+// MARK: - Layout
+//
+struct ProfileListLayoutSection: LayoutSectionProvider {
+    
+    func layoutSection() -> NSCollectionLayoutSection {
+        /// Item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .absolute(50))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        /// Group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(50))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
+                                                     subitems: [item])
+        /// Section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 50, trailing: 15)
         
-        func layoutSection() -> NSCollectionLayoutSection {
-            /// Item
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                  heightDimension: .absolute(50))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            /// Group
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: .estimated(50)) // or .absolute if fixed
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                         subitems: [item])
-            /// Section
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 50, trailing: 15)
-            
-            section.decorationItems = [.background(elementKind: SectionDecorationView.identifier) ]
-            
-            return section
-        }
+        section.decorationItems = [.background(elementKind: SectionDecorationView.identifier) ]
+        
+        return section
     }
+}

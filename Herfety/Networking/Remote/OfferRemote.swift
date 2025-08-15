@@ -8,8 +8,12 @@
 import Foundation
 
 protocol OfferRemoteProtocol {
+    /// Async/await versions
+    func loadAllOffer() async throws -> [Products]
+    func loadSpecificOffer(disount: Int) async throws -> [Products]
+    /// Legacy callback versions for backward compatibility
     func loadAllOffer(completion: @escaping (Result<[Products], Error>) -> Void)
-    func loadSpecificOffer(disount:Int ,completion: @escaping (Result<[Products], Error>) -> Void)
+    func loadSpecificOffer(disount: Int ,completion: @escaping (Result<[Products], Error>) -> Void)
 }
 
 class OfferRemote: Remote, OfferRemoteProtocol, @unchecked Sendable {
@@ -31,5 +35,27 @@ class OfferRemote: Remote, OfferRemoteProtocol, @unchecked Sendable {
             parameters: parameters)
         
         enqueue(request, completion: completion)
+    }
+}
+// MARK: - Modern Concurrency
+//
+extension OfferRemote {
+    func loadAllOffer() async throws -> [Products] {
+        let request = HerfetyRequest(
+            method: .get,
+            path: "api/Home/GetOffer")
+         
+        return try await enqueue(request)
+    }
+    
+    func loadSpecificOffer(disount: Int) async throws -> [Products] {
+        let parameters = ["offer": disount]
+        
+        let request = HerfetyRequest(
+            method: .get,
+            path: "api/Home/GetOffer" ,
+            parameters: parameters)
+        
+        return try await enqueue(request)
     }
 }

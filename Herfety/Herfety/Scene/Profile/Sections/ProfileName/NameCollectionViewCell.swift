@@ -8,10 +8,10 @@
 import UIKit
 
 class NameCollectionViewCell: UICollectionViewCell {
-
+    
+    // MARK: - Properties
     static let identifier = "NameCollectionViewCell"
     // MARK: - Outlets
-    //
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var imageProfile: UIImageView!
     @IBOutlet weak var nameProfile: UILabel!
@@ -21,7 +21,6 @@ class NameCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         configureIU()
     }
-
 }
 // MARK: - Configurations
 //

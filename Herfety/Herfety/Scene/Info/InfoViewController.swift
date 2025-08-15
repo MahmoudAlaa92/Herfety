@@ -1,31 +1,39 @@
-import Combine
 //
 //  InfoViewController.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 13/02/2025.
 //
+
 import UIKit
+import Combine
 
 class InfoViewController: UIViewController {
-    // MARK: - Properties
-    private var viewModel = InfoViewModel()
-    private var sections: [CollectionViewDataSource] = []
-    private var layoutProviders: [LayoutSectionProvider] = []
-    private var navigationBarBehavior: HerfetyNavigationController?
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var paymentButton: PrimaryButton!
     // MARK: - Properties
+    private var viewModel: InfoViewModel
+    private lazy var navigationBarBehavior = HerfetyNavigationController(
+        navigationItem: navigationItem,
+        navigationController: navigationController
+    )
     weak var coordinator: InfoTransitionDelegate?
     weak var alertPresenter: AlertPresenter?
     ///
     var subscriptions = Set<AnyCancellable>()
+    // MARK: - Init
+    init(viewModel: InfoViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - Lifcycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSections()
-        configureCompositianalLayout()
         setUpCollectionView()
         configureUI()
         setUpNavigationBar()
@@ -35,71 +43,10 @@ class InfoViewController: UIViewController {
 // MARK: - Configuration
 //
 extension InfoViewController {
-
-    private func setUpCollectionView() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        sections.forEach { $0.registerCells(in: collectionView) }
-    }
-    /// Configure Section
-    private func configureSections() {
-        viewModel
-            .$infoItems
-            .sink { [weak self] infoItems in
-                guard let self = self else { return }
-
-                let infoSection = InfoCollectionViewSection(
-                    infoItems: infoItems
-                )
-                
-                self.sections = [infoSection]
-                self.layoutProviders = [InfoSectionLayoutProvider()]
-
-                infoSection.registerCells(in: self.collectionView)
-                self.updateCollectionViewLayout()
-                self.collectionView.reloadData()
-
-                infoSection
-                    .deleteItemSubject
-                    .sink { [weak self] index in
-                        self?.viewModel.deleteItem(at: index)
-                    }
-                    .store(in: &subscriptions)
-            }
-            .store(in: &subscriptions)
-    }
-
-    /// Configure Layout
-    private func configureCompositianalLayout() {
-        let layoutFactory = SectionsLayout(providers: layoutProviders)
-        self.collectionView.setCollectionViewLayout(
-            layoutFactory.createLayout(),
-            animated: true
-        )
-    }
-    private func updateCollectionViewLayout() {
-        let layoutFactory = SectionsLayout(providers: layoutProviders)
-        collectionView.setCollectionViewLayout(
-            layoutFactory.createLayout(),
-            animated: false
-        )
-    }
-
-    /// Configure UI
-    private func configureUI() {
-        paymentButton.title = "Proceed to payment"
-    }
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
-
         navigationItem.backButtonTitle = ""
-
-        navigationBarBehavior = HerfetyNavigationController(
-            navigationItem: navigationItem,
-            navigationController: navigationController
-        )
-
-        navigationBarBehavior?.configure(
+        navigationBarBehavior.configure(
             title: "Info",
             titleColor: .primaryBlue,
             onPlus: { [weak self] in
@@ -111,25 +58,42 @@ extension InfoViewController {
                 self?.coordinator?.backToCartVC()
             }
     }
+    private func setUpCollectionView() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        viewModel.sections.forEach { $0.registerCells(in: collectionView) }
+    }
+    /// Configure Section
+    private func configureSections() {
+        let layoutFactory = SectionsLayout(providers: viewModel.layoutProviders)
+        collectionView.setCollectionViewLayout(
+            layoutFactory.createLayout(),
+            animated: false
+        )
+    }
+    /// Configure UI
+    private func configureUI() {
+        paymentButton.title = "Proceed to payment"
+    }
 }
 // MARK: - UICollectionViewDataSource
 //
 extension InfoViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        sections.count
+        viewModel.sections.count
     }
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        sections[section].numberOfItems
+        viewModel.sections[section].numberOfItems
     }
-
+    
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        sections[indexPath.section].cellForItems(
+        viewModel.sections[indexPath.section].cellForItems(
             collectionView,
             cellForItemAt: indexPath
         )
@@ -143,7 +107,7 @@ extension InfoViewController: UICollectionViewDelegate {
         contextMenuConfigurationForItemAt indexPath: IndexPath,
         point: CGPoint
     ) -> UIContextMenuConfiguration? {
-        if let providers = sections[indexPath.section] as? ContextMenuProvider {
+        if let providers = viewModel.sections[indexPath.section] as? ContextMenuProvider {
             return providers.contextMenuConfiguration(
                 for: collectionView,
                 at: indexPath,
@@ -156,14 +120,19 @@ extension InfoViewController: UICollectionViewDelegate {
 // MARK: - Binding
 //
 extension InfoViewController {
-    /// Navigate to Credit Card
     private func bindViewModel() {
-        viewModel.navigationToPayment = { [weak self] in
-            self?.coordinator?.goToCheckoutVC()
-        }
-
-        /// Not navigatte
-        viewModel.$infoState
+        viewModel
+            .$sections
+            .sink { [weak self] _  in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &subscriptions)
+        viewModel
+            .navigationToPayment = { [weak self] in
+                self?.coordinator?.goToCheckoutVC()
+            }
+        viewModel
+            .$infoState
             .compactMap({ $0 })
             .sink { [weak self] alert in
                 self?.alertPresenter?.showAlert(alert)
@@ -173,7 +142,7 @@ extension InfoViewController {
 // MARK: - Actions
 //
 extension InfoViewController {
-
+    
     @IBAction func paymentPressed(_ sender: Any) {
         viewModel.didTapPaymentButton()
     }

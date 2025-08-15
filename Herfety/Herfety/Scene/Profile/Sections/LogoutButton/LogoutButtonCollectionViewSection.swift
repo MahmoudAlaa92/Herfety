@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class LogoutButtonCollectionViewSection: CollectionViewDataSource {
-    
+    // MARK: - Properteis
     let onLogoutPressed = PassthroughSubject<Void, Never>()
     
     func registerCells(in collectionView: UICollectionView) {

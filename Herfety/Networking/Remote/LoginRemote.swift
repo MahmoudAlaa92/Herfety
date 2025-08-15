@@ -8,7 +8,9 @@
 import Foundation
 
 protocol LoginRemoteProtocol {
+    /// Async/await versions
     func login(email: String, password: String) async throws -> Registration
+    /// Legacy callback versions for backward compatibility
     func login(email: String, password: String, completion: @escaping (Result<Registration, Error>) -> Void)
 }
 

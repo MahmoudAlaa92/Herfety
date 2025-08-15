@@ -17,13 +17,11 @@ class AddAddressViewModel: AddAddressViewModelType {
     private let addTappedSubject = PassthroughSubject<Void, Never>()
     ///
     private var cancellables = Set<AnyCancellable>()
-    
     // MARK: - Outputs
     let isAddButtonEnabled: AnyPublisher<Bool, Never>
     let success = PassthroughSubject<Void, Never>()
     let showAlert = PassthroughSubject<AlertModel, Never>()
     
-    weak var coordinator: AddAddressChildDelegate?
     // MARK: - Init
     init() {
         isAddButtonEnabled = Publishers.CombineLatest3(
@@ -31,7 +29,10 @@ class AddAddressViewModel: AddAddressViewModelType {
             addressSubject,
             phoneSubject
         )
-        .map { !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty }
+        .map { !$0.0.isEmpty &&
+               !$0.1.isEmpty &&
+               !$0.2.isEmpty
+        }
         .eraseToAnyPublisher()
         
         addTappedSubject

@@ -8,7 +8,6 @@
 import Foundation
 
 protocol ProductsOfWishlistRemoteProtocol {
-    
     /// Async/await versions
     func loadAllProducts(userId: Int) async throws -> [Wishlist]
     func addNewProduct(userId: Int, productId: Int) async throws -> Wishlist

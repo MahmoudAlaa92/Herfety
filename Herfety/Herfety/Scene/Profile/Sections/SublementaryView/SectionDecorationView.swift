@@ -8,18 +8,17 @@
 import UIKit
 
 class SectionDecorationView: UICollectionReusableView {
+    // MARK: - Properties
     static let identifier = "SectionDecorationView"
     let view = UIView()
-    
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 // MARK: - Configuration
 //

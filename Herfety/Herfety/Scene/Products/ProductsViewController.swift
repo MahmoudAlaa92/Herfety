@@ -9,20 +9,18 @@ import Combine
 import UIKit
 
 class ProductsViewController: UIViewController {
-
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchTextField: SearchTextField!
     // MARK: - Properties
     private(set) var viewModel: ProductsViewModel
-    private var sections = [CollectionViewDataSource]()
-    private var layoutSections = [LayoutSectionProvider]()
-    private var navBarBehavior: HerfetyNavigationController?
-    private var productsItems: ProductsCollectionViewSection?
-    ///
-    var subscriptions = Set<AnyCancellable>()
+    private lazy var navBarBehavior = HerfetyNavigationController(
+        navigationItem: navigationItem,
+        navigationController: navigationController
+    )
+    private var cancellabels = Set<AnyCancellable>()
     weak var coordinator: ProductsTransitionDelegate?
-    // MARK: Init
+    // MARK: - Init
     init(viewModel: ProductsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +33,6 @@ class ProductsViewController: UIViewController {
         super.viewDidLoad()
         setUpNavigationBar()
         configureSections()
-        configureLayout()
         setUpCollectionView()
         bindViewModel()
         searchTextField.addTarget(
@@ -50,11 +47,7 @@ class ProductsViewController: UIViewController {
 extension ProductsViewController {
     /// NavBar
     private func setUpNavigationBar() {
-        navBarBehavior = HerfetyNavigationController(
-            navigationItem: navigationItem,
-            navigationController: navigationController
-        )
-        navBarBehavior?.configure(
+        navBarBehavior.configure(
             title: "",
             titleColor: Colors.primaryBlue,
             onPlus: {
@@ -69,19 +62,7 @@ extension ProductsViewController {
     }
     /// Section
     private func configureSections() {
-        let products = ProductsCollectionViewSection(
-            Products: viewModel.productItems
-        )
-        self.productsItems = products
-        sections = [products]
-        products.selectedItem.sink { [weak self] products in
-            self?.coordinator?.goToProductDetails(productDetails: products)
-        }.store(in: &subscriptions)
-        layoutSections.append(ProductsCollectionViewSectionLayout())
-    }
-    /// Layout
-    private func configureLayout() {
-        let factory = SectionsLayout(providers: layoutSections)
+        let factory = SectionsLayout(providers: viewModel.layoutSections)
         collectionView.setCollectionViewLayout(
             factory.createLayout(),
             animated: true
@@ -91,26 +72,26 @@ extension ProductsViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        sections.forEach({ $0.registerCells(in: collectionView) })
+        viewModel.sections.forEach({ $0.registerCells(in: collectionView) })
     }
 }
 // MARK: - UICollectionViewDataSource
 //
 extension ProductsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        sections.count
+        viewModel.sections.count
     }
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        sections[section].numberOfItems
+        viewModel.sections[section].numberOfItems
     }
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        sections[indexPath.section].cellForItems(
+        viewModel.sections[indexPath.section].cellForItems(
             collectionView,
             cellForItemAt: indexPath
         )
@@ -123,7 +104,7 @@ extension ProductsViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        if let selectable = sections[indexPath.section]
+        if let selectable = viewModel.sections[indexPath.section]
             as? CollectionViewDelegate
         {
             selectable.collectionView(
@@ -131,18 +112,6 @@ extension ProductsViewController: UICollectionViewDelegate {
                 didSelectItemAt: indexPath
             )
         }
-    }
-}
-// MARK: - BindingViewModel
-//
-extension ProductsViewController {
-    private func bindViewModel() {
-        viewModel.$productItems
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newItems in
-                self?.productsItems?.Products = newItems
-                self?.collectionView.reloadData()
-            }.store(in: &subscriptions)
     }
 }
 // MARK: - Actions
@@ -157,5 +126,26 @@ extension ProductsViewController {
             return
         }
         viewModel.searchProducts(with: searchText)
+    }
+}
+// MARK: - Binding
+//
+extension ProductsViewController {
+    private func bindViewModel() {
+        viewModel
+            .$sections
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                viewModel.sections.forEach({ $0.registerCells(in: self.collectionView) })
+                self.collectionView.reloadData()
+            }
+            .store(in: &cancellabels)
+        ///
+        viewModel
+            .onProdcutsDetials
+            .sink { [weak self] product in
+                self?.coordinator?.goToProductDetails(productDetails: product)
+            }
+            .store(in: &cancellabels)
     }
 }

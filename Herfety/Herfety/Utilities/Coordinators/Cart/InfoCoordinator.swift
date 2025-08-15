@@ -29,7 +29,8 @@ class InfoCoordinator: Coordinator {
     }
     
     func start() {
-        let shippingVC = InfoViewController()
+        let viewModel = InfoViewModel()
+        let shippingVC = InfoViewController(viewModel: viewModel)
         shippingVC.coordinator = self
         shippingVC.alertPresenter = alertPresenter
         navigationController.transition(to: shippingVC, with: .push)

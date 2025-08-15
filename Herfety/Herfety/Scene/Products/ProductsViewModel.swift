@@ -7,55 +7,83 @@
 import UIKit
 import Combine
 
-class ProductsViewModel {
+@MainActor
+final class ProductsViewModel {
     // MARK: - Properties
+    /// Inputs
     @Published var productItems: [Products] = []
+    var onProdcutsDetials = PassthroughSubject<Wishlist, Never>()
+    /// Outputs
+    @Published private(set) var sections: [CollectionViewDataSource] = []
+    @Published private(set) var layoutSections: [LayoutSectionProvider] = []
+    ///
+    private var cancellabels = Set<AnyCancellable>()
+    ///
     private let categoryRemote: GetProductsOfCatergoryRemoteProtocol
-    
+    private let offerRemote: OfferRemoteProtocol
+    // MARK: - Init
     init(
-        categoryRemote: GetProductsOfCatergoryRemoteProtocol = GetProductsOfCategoryRemote(network: AlamofireNetwork())
+        categoryRemote: GetProductsOfCatergoryRemoteProtocol = GetProductsOfCategoryRemote(network: AlamofireNetwork()),
+        offerRemote: OfferRemoteProtocol = OfferRemote(network: AlamofireNetwork())
     ) {
         self.categoryRemote = categoryRemote
-    }
-}
-// MARK: - Handlers
+        self.offerRemote = offerRemote
+        configureSections()
+        configureLayoutSections()
+    }}
+// MARK: - Private Handler
 //
 extension ProductsViewModel {
-    // MARK: Products of SliderItems & DailyEssential (10% to 80%)
+    private func configureSections() {
+        let products = ProductsCollectionViewSection(Products: self.productItems)
+        products
+            .selectedItem
+            .sink { [weak self] products in
+                self?.onProdcutsDetials.send(products)
+            }
+            .store(in: &cancellabels)
+        
+        sections = [products]
+    }
+    private func configureLayoutSections() {
+        layoutSections = [ProductsCollectionViewSectionLayout()]
+    }
+}
+// MARK: - Handle Networking
+//
+extension ProductsViewModel {
+    /// Products of SliderItems & DailyEssential (10% to 80%)
     func fetchProductItems(discount: Int) {
-        let productItems: OfferRemoteProtocol = OfferRemote(network: AlamofireNetwork())
-        productItems.loadSpecificOffer(disount: discount) { [weak self] result in
-            switch result {
-            case .success(let offers):
-                    self?.productItems = offers
-            case .failure(let error):
-                assertionFailure("Error when reteive productIetms in ProductsViewModel \(error)")
+        Task {
+            do {
+                let offers = try await offerRemote.loadSpecificOffer(disount: discount)
+                self.productItems = offers
+                configureSections()
+            } catch {
+                assertionFailure("Error retrieving productItems: \(error)")
             }
         }
     }
-    // MARK: Products of Categories
+    /// Products of Categories
     func fetchProductItems(nameOfCategory: String) {
-        let productItems: GetProductsOfCategoryRemote = GetProductsOfCategoryRemote(network: AlamofireNetwork())
-        productItems.loadAllProducts(name: nameOfCategory) { result in
-            switch result {
-            case.success(let products):
-                DispatchQueue.main.async {
-                    self.productItems = products
-                }
-            case .failure(let error):
-                print(error)
+        Task {
+            do {
+                let products = try await categoryRemote.loadAllProducts(name: nameOfCategory)
+                self.productItems = products
+                configureSections()
+            } catch {
+                print("Error fetching category products:", error)
             }
         }
     }
-    // MARK: Serch about Products of Categories
+    /// Serch about Products of Categories
     func searchProducts(with keyword: String) {
-        categoryRemote.loadAllProducts(name: keyword) { [weak self] result in
-            switch result {
-            case .success(let filteredProducts):
-                DispatchQueue.main.async {
-                    self?.productItems = filteredProducts
-                }
-            case .failure(let error):
+        Task {
+            do {
+                let filteredProducts = try await categoryRemote.loadAllProducts(name: keyword)
+                self.productItems = filteredProducts
+                configureSections()
+            } catch {
                 print("Search Error:", error)
             }
         }

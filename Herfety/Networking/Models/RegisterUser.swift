@@ -15,5 +15,4 @@ struct RegisterUser: Codable {
     let Email: String
     let Phone: String
     let image: String
-
 }

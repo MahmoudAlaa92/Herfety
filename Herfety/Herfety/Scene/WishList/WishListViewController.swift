@@ -58,16 +58,15 @@ extension WishListViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        viewModel.sections.forEach { $0.registerCells(in: collectionView) }
     }
     
     /// Configure Layout
     private func configureCompositionalLayout() {
         let layoutFactory = SectionsLayout(providers: viewModel.getLayoutProviders())
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
+        viewModel.sections.forEach { $0.registerCells(in: collectionView) }
     }
 }
-
 // MARK: - UICollectionViewDelegate
 //
 extension WishListViewController: UICollectionViewDelegate {
@@ -80,7 +79,6 @@ extension WishListViewController: UICollectionViewDelegate {
         return nil
     }
 }
-
 // MARK: - UICollectionViewDataSource
 //
 extension WishListViewController: UICollectionViewDataSource {
@@ -98,7 +96,6 @@ extension WishListViewController: UICollectionViewDataSource {
             .cellForItems(collectionView, cellForItemAt: indexPath)
     }
 }
-
 // MARK: - Header And Footer
 //
 extension WishListViewController {
@@ -117,7 +114,10 @@ extension WishListViewController {
             .$sections
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.collectionView.reloadData()
+                guard let self = self else { return }
+                /// Must Register cells whenever sections change
+                viewModel.sections.forEach { $0.registerCells(in: self.collectionView) }
+                self.collectionView.reloadData()
             }
             .store(in: &cancellables)
     }

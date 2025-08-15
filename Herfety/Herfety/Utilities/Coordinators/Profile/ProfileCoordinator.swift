@@ -39,11 +39,13 @@ class ProfileCoordinator: Coordinator, ParentCartDelegate, ParentCheckoutDelegat
     }
     
     func start() {
-        let profileVC = ProfileViewController(
-            nameViewModel: NameViewModel(),
-            profileListViewModel: ProfileListViewModel()
-        )
-        profileVC.coordinator = self
+        let nameViewModel = NameViewModel()
+        let profileListViewModel = ProfileListViewModel()
+        let viewModel = ProfileViewModel(nameViewModel: nameViewModel,
+                                         profileListViewModel: profileListViewModel,
+                                         coordinator: self)
+        
+        let profileVC = ProfileViewController(viewModel: viewModel)
         navigationController.transition(to: profileVC, with: .push)
     }
 }
@@ -52,7 +54,8 @@ class ProfileCoordinator: Coordinator, ParentCartDelegate, ParentCheckoutDelegat
 extension ProfileCoordinator: PorfileTransionDelegate {
     
     func gotToCartVC() {
-        let coordinator = CartCoordinator(navigationController: navigationController, alertPresenter: alertPresenter)
+        let coordinator = CartCoordinator(navigationController: navigationController,
+                                          alertPresenter: alertPresenter)
         coordinator.isShowBackButton = true
         
         childCoordinators.append(coordinator)

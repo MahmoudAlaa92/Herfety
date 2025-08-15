@@ -1,10 +1,10 @@
-import Combine
 //
 //  InfoViewModel.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 13/02/2025.
 //
+
 import UIKit
 import Combine
 
@@ -12,23 +12,20 @@ import Combine
 class InfoViewModel {
     // MARK: - Properties
     @Published var infoItems: [InfoModel] = []
-    var navigationToPayment: (() -> Void)?
     @Published var infoState: AlertModel?
-    var subscription = Set<AnyCancellable>()
-
+    
+    var navigationToPayment: (() -> Void)?
+    private var cancellabels = Set<AnyCancellable>()
+    // MARK: - Collection view sections
+    @Published private(set) var sections: [CollectionViewDataSource] = []
+    private(set) var layoutProviders: [LayoutSectionProvider] = []
+    // MARK: - Init
     init() {
+        configureLayoutProviders()
+        configureSections()
         observeInfoItems()
     }
-    func numberOfItems() -> Int {
-        return infoItems.count
-    }
-    func didTapPlusButton(navigationController: UINavigationController?) {
-        // navigate to address screen
-        let addressVC = AddAddressViewController(
-            viewModel: AddAddressViewModel()
-        )
-        navigationController?.pushViewController(addressVC, animated: true)
-    }
+    
     func didTapPaymentButton() {
         if infoItems.isEmpty {
             self.infoState = AlertModel(
@@ -45,6 +42,30 @@ class InfoViewModel {
 // MARK: - Privagte Handlers
 //
 extension InfoViewModel {
+    private func configureSections() {
+        $infoItems
+            .sink { [weak self] infoItems in
+                guard let self = self else { return }
+                
+                let infoSection = InfoCollectionViewSection(
+                    infoItems: infoItems
+                )
+                
+                self.sections = [infoSection]
+                
+                infoSection
+                    .deleteItemSubject
+                    .sink { [weak self] index in
+                        self?.deleteItem(at: index)
+                    }
+                    .store(in: &cancellabels)
+            }
+            .store(in: &cancellabels)
+    }
+    
+    private func configureLayoutProviders() {
+        self.layoutProviders = [InfoSectionLayoutProvider()]
+    }
     private func observeInfoItems() {
         AppDataStorePublisher
             .shared
@@ -54,10 +75,10 @@ extension InfoViewModel {
                     let infoItems = await DataStore.shared.getInfos()
                     self?.infoItems = infoItems
                 }
-            }.store(in: &subscription)
+            }.store(in: &cancellabels)
     }
     
-    func deleteItem(at index: Int) {
+    private func deleteItem(at index: Int) {
         Task {
             var items = await DataStore.shared.getInfos()
             guard index < items.count else { return }
@@ -65,5 +86,4 @@ extension InfoViewModel {
             await DataStore.shared.updateInfos(items)
         }
     }
-
 }

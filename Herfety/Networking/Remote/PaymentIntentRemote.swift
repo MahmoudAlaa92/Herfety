@@ -8,6 +8,8 @@
 import Foundation
 
 protocol PaymentIntentRemoteProtocol {
+    /// Async/await versions
+    /// Legacy callback versions for backward compatibility
     func createPaymentIntent(PaymentIntent: PaymentIntent, completion: @escaping (Result<CheckoutIntentResponse, Error>) -> Void)
 }
 
