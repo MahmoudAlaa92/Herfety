@@ -29,7 +29,7 @@ class HomeViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    // MARK: - Initialization
+    // MARK: - Init
     init(
         dataSource: HomeDataSourceProtocol,
         alertService: AlertServiceProtocol,
@@ -44,8 +44,10 @@ class HomeViewModel: ObservableObject {
         setupAlertObserver()
         configureSectionsAndLayouts()
     }
-    
-    // MARK: - Public Methods
+}
+// MARK: - Public Methods
+//
+extension HomeViewModel {
     func numberOfSections() -> Int {
         return HomeSection.allCases.count
     }
@@ -66,8 +68,10 @@ class HomeViewModel: ObservableObject {
             group.addTask { await self.fetchProducts() }
         }
     }
-    
-    // MARK: - Private Methods
+}
+// MARK: - Private Methods
+//
+extension HomeViewModel {
     private func setupAlertObserver() {
         alertService.alertPublisher
             .receive(on: DispatchQueue.main)
@@ -108,3 +112,4 @@ class HomeViewModel: ObservableObject {
         }
     }
 }
+
