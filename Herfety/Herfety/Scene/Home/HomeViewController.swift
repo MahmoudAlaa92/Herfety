@@ -10,78 +10,37 @@ import Combine
 class HomeViewController: UIViewController {
     
     // MARK: - Outlets
-    private var subscriptions = Set<AnyCancellable>()
-    // MARK: - Properties
-    private var navigationBarBehavior: HomeNavBar?
-    private var viewModel = HomeViewModel()
-    private var sections: [CollectionViewDataSource] = []
-    private var layoutSections:[LayoutSectionProvider] = []
-    
-    private var sliderItem: SliderCollectionViewSection?
-    private var categoryItem: CategoryCollectionViewSection?
-    private var cardItem: CardItemCollectionViewSection?
-    private var topBrandItem: TopBrandsCollectionViewSection?
-    private var dailyEssentialItem: DailyEssentailCollectionViewSection?
-    ///
-    weak var coordinator: HomeCoordinator?
-    weak var alertPresenter: AlertPresenter?
-    //
     @IBOutlet weak var collectionView: UICollectionView!
+    // MARK: - Properties
+    private var viewModel: HomeViewModel
+    private var navigationBarBehavior: HomeNavBar?
+    ///
+    weak var coordinator: HomeTranisitionDelegate?
+    weak var alertPresenter: AlertPresenter?
+    private var cancellabels = Set<AnyCancellable>()
+    // MARK: - Init
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - Lifecycle
     //
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSections()
         setUpCollectionView()
-        cofigureCompositianalLayout()
         bindViewModel()
         Task {
             await configureNavBar()
         }
     }
-    
-    private func setUpCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        /// Registere cells
-        sections.forEach { $0.registerCells(in: collectionView) }
-    }
 }
 // MARK: - Configuration
 //
 extension HomeViewController {
-    
-    /// Configure Sections
-    private func configureSections() {
-        let sliderProvider = SliderCollectionViewSection(sliderItems: viewModel.sliderItems)
-        self.sliderItem = sliderProvider
-        
-        let categoryProvider = CategoryCollectionViewSection(categoryItems: viewModel.categoryItems)
-        self.categoryItem = categoryProvider
-        
-        let cardProvider = CardItemCollectionViewSection(productItems: viewModel.productItems)
-        self.cardItem = cardProvider
-        cardProvider.headerConfigurator = { header in
-            header.configure(title: "the best deal on", description: "Jewelry & Accessories", shouldShowButton: true)
-        }
-        
-        let topBrands = TopBrandsCollectionViewSection(topBrandsItems: viewModel.topBrandsItems)
-        self.topBrandItem = topBrands
-        
-        let dailyEssentials = DailyEssentailCollectionViewSection(dailyEssentail: viewModel.dailyEssentailItems)
-        self.dailyEssentialItem = dailyEssentials
-        
-        sections = [sliderProvider, categoryProvider, cardProvider, topBrands, dailyEssentials]
-        
-        layoutSections = [
-            SliderSectionLayoutProvider(),
-            CategoriesSectionLayoutSection(),
-            CardProductSectionLayoutProvider(),
-            TopBrandsSectionLayoutProvider(),
-            DailyEssentailSectionLayoutProvider()
-        ]
-    }
     /// NavBar
     func configureNavBar() async {
         navigationItem.backButtonTitle = ""
@@ -100,19 +59,24 @@ extension HomeViewController {
             userImage: userImage
         )
     }
-    
-    /// CompositianalLayout
-    private func cofigureCompositianalLayout() {
+    private func setUpCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
-        let layoutFactory = SectionsLayout(providers: layoutSections)
+        /// Registere cells
+    }
+    /// Configure Sections
+    private func configureSections() {
+        let layoutFactory = SectionsLayout(providers: viewModel.layoutSections)
         self.collectionView.setCollectionViewLayout(layoutFactory.createLayout(), animated: true)
+        viewModel.sections.forEach { $0.registerCells(in: collectionView) }
     }
 }
 // MARK: - UICollectionViewDelegate
 //
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let selectable = sections[indexPath.section] as? CollectionViewDelegate {
+        if let selectable = viewModel.sections[indexPath.section] as? CollectionViewDelegate {
             selectable.collectionView(collectionView, didSelectItemAt: indexPath)
         }
     }
@@ -122,35 +86,46 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
+        return viewModel.sections.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section].numberOfItems
+        return viewModel.sections[section].numberOfItems
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
+        return viewModel.sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
     // MARK: - Header And Footer
     //
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if let provider = sections[indexPath.section] as? HeaderAndFooterProvider {
+        if let provider = viewModel.sections[indexPath.section] as? HeaderAndFooterProvider {
             return provider.cellForItems(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         }
         /// provider does not support headers/footers.
         return UICollectionReusableView()
     }
 }
-// MARK: - Binding ViewModel
+// MARK: - Binding
 //
 extension HomeViewController {
     private func bindViewModel() {
+        bindSections()
         bindSliderItems()
         bindCategoryItems()
-        bindProductItems()
         bindTopBrandsItems()
         bindDailyEssentialsItems()
         bindAlert()
+    }
+    // MARK: - Sections
+    private func bindSections() {
+        viewModel
+            .$sections
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.viewModel.sections.forEach { $0.registerCells(in: self.collectionView) }
+                self.collectionView.reloadData()
+            }
+            .store(in: &cancellabels)
     }
     // MARK: - Slider Items
     private func bindSliderItems() {
@@ -158,13 +133,7 @@ extension HomeViewController {
             .$sliderItems
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
-            }.store(in: &subscriptions)
-        ///
-        sliderItem?
-            .selectedItem
-            .sink { [weak self] sliderItems in
-            self?.coordinator?.goToSliderItem(discount: (sliderItems.1+1)*10)
-        }.store(in: &subscriptions)
+            }.store(in: &cancellabels)
     }
     // MARK: - Category Items
     private func bindCategoryItems() {
@@ -172,37 +141,6 @@ extension HomeViewController {
             await viewModel.fetchCategoryItems()
             await viewModel.fetchProductItems()
         }
-        viewModel
-            .$categoryItems
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newItems in
-                self?.categoryItem?.categoryItems = newItems
-                self?.collectionView.reloadData()
-            }
-            .store(in: &subscriptions)
-        ///
-        categoryItem?
-            .categorySelection
-            .sink { [weak self] item in
-            self?.coordinator?.goToCategoryItem(category: item.name ?? "")
-        }.store(in: &subscriptions)
-    }
-    // MARK: - Product Items
-    private func bindProductItems() {
-        viewModel
-            .$productItems
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newItems in
-                self?.cardItem?.productItems = newItems
-                self?.collectionView.reloadData()
-            }
-            .store(in: &subscriptions)
-        ///
-        cardItem?
-            .selectedItem
-            .sink(receiveValue: { [weak self] value in
-            self?.coordinator?.gotToBestDealItem(productDetails: value)
-        }).store(in: &subscriptions)
     }
     // MARK: - Top Brands
     private func bindTopBrandsItems() {
@@ -211,13 +149,7 @@ extension HomeViewController {
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
             }
-            .store(in: &subscriptions)
-        ///
-        topBrandItem?
-            .selectedBrand
-            .sink(receiveValue: { [weak self] items in
-            self?.coordinator?.gotToTopBrandItem(discount: (items.1+5)*10)
-        }).store(in: &subscriptions)
+            .store(in: &cancellabels)
     }
     // MARK: - Daily Essentials
     private func bindDailyEssentialsItems() {
@@ -226,13 +158,7 @@ extension HomeViewController {
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
             }
-            .store(in: &subscriptions)
-        ///
-        dailyEssentialItem?
-            .selectedItem
-            .sink(receiveValue: { [weak self] items in
-            self?.coordinator?.gotToDailyEssentialItem(discount: (items.1+5)*10)
-        }).store(in: &subscriptions)
+            .store(in: &cancellabels)
     }
     // MARK: - Wishlist
     private func bindAlert() {
@@ -243,6 +169,6 @@ extension HomeViewController {
             .sink { [weak self] alert in
                 self?.alertPresenter?.showAlert(alert)
             }
-            .store(in: &subscriptions)
+            .store(in: &cancellabels)
     }
 }

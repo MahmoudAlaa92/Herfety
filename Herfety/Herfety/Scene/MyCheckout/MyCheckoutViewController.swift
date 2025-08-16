@@ -9,21 +9,20 @@ class MyCheckoutViewController: UIViewController {
     private let contentStackView = UIStackView()
     private var checkoutButton: HerfetyButton!
     private var subscriptions = Set<AnyCancellable>()
-    private var navigationBarBehavior: HerfetyNavigationController?
-    ///
+    private lazy var navigationBarBehavior = HerfetyNavigationController(
+        navigationItem: navigationItem,
+        navigationController: navigationController
+    )
     weak var coordinator: CheckoutTransionDelegate?
     weak var alertPresenter: AlertPresenter?
-
     // MARK: - Init
     init(viewModel: CheckoutViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +31,33 @@ class MyCheckoutViewController: UIViewController {
         loadPaymentElement()
         setUpNavigationBar()
     }
+}
+// MARK: - Stripe Embedded Delegate
+//
+extension MyCheckoutViewController: EmbeddedPaymentElementDelegate {
+    func embeddedPaymentElementDidUpdateHeight(
+        embeddedPaymentElement: EmbeddedPaymentElement
+    ) {
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+    }
+    
+    func embeddedPaymentElementDidUpdatePaymentOption(
+        embeddedPaymentElement: EmbeddedPaymentElement
+    ) {
+        viewModel.isCheckoutEnabled =
+        embeddedPaymentElement.paymentOption != nil
+    }
+}
+// MARK: - Configuration
+//
+extension MyCheckoutViewController {
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
-
-        navigationBarBehavior = HerfetyNavigationController(
-            navigationItem: navigationItem,
-            navigationController: navigationController
-        )
-
-        navigationBarBehavior?.configure(
+        navigationBarBehavior.configure(
             title: "Payment Method",
             titleColor: .primaryBlue,
-            onPlus: { 
+            onPlus: {
                 /// plus button not appear in this VC
             },
             showRighBtn: false,
@@ -52,11 +66,11 @@ class MyCheckoutViewController: UIViewController {
             self?.coordinator?.backToInfoVC()
         }
     }
-    // MARK: - UI Setup
+    /// UI Setup
     private func setupUI() {
         view.backgroundColor = .systemBackground
         title = "Payment"
-
+        
         // Configure checkout button
         checkoutButton = HerfetyButton()
         checkoutButton.title = "Checkout"
@@ -66,16 +80,16 @@ class MyCheckoutViewController: UIViewController {
             action: #selector(didTapConfirmButton),
             for: .touchUpInside
         )
-
+        
         // Setup scroll view and stack
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.axis = .vertical
         contentStackView.spacing = 16
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentStackView)
-
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor
@@ -83,7 +97,7 @@ class MyCheckoutViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
+            
             contentStackView.topAnchor.constraint(
                 equalTo: scrollView.contentLayoutGuide.topAnchor,
                 constant: 20
@@ -102,36 +116,16 @@ class MyCheckoutViewController: UIViewController {
             ),
         ])
     }
-    // MARK: - Bindings
-    private func setupBindings() {
-        viewModel.$isCheckoutEnabled
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.isEnabled, on: checkoutButton)
-            .store(in: &subscriptions)
-
-        viewModel.$isLoading
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] isLoading in
-                self?.view.isUserInteractionEnabled = !isLoading
-                self?.checkoutButton.isEnabled = !isLoading
-            }
-            .store(in: &subscriptions)
-
-        viewModel.$alertItem
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] alertItem in
-                guard let alertItem = alertItem else { return }
-                self?.alertPresenter?.showAlert(alertItem)
-            }
-            .store(in: &subscriptions)
-    }
-
-    // MARK: - Payment Element
+}
+// MARK: - Private Handler
+//
+extension MyCheckoutViewController {
+    /// Payment Element
     private func loadPaymentElement() {
         Task { @MainActor in
             do {
                 let embeddedPaymentElement =
-                    try await viewModel.createEmbeddedPaymentElement()
+                try await viewModel.createEmbeddedPaymentElement()
                 self.addEmbeddedElementToStack(embeddedPaymentElement)
             } catch {
                 let alertItem = AlertModel(
@@ -145,15 +139,14 @@ class MyCheckoutViewController: UIViewController {
             }
         }
     }
-
     private func addEmbeddedElementToStack(_ element: EmbeddedPaymentElement) {
         element.delegate = self
         element.presentingViewController = self
-
+        
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(element.view)
-
+        
         element.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             element.view.topAnchor.constraint(equalTo: container.topAnchor),
@@ -170,33 +163,48 @@ class MyCheckoutViewController: UIViewController {
                 greaterThanOrEqualToConstant: 300
             ),
         ])
-
+        
         contentStackView.addArrangedSubview(container)
         contentStackView.addArrangedSubview(checkoutButton)
     }
 
-    // MARK: - Actions
+}
+// MARK: - Actions
+//
+extension MyCheckoutViewController {
     @objc private func didTapConfirmButton() {
         Task { @MainActor in
             let result = await viewModel.confirmPayment()
             self.viewModel.handlePaymentResult(result)
         }
     }
-
 }
-// MARK: - Stripe Embedded Delegate
-extension MyCheckoutViewController: EmbeddedPaymentElementDelegate {
-    func embeddedPaymentElementDidUpdateHeight(
-        embeddedPaymentElement: EmbeddedPaymentElement
-    ) {
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
-    }
-
-    func embeddedPaymentElementDidUpdatePaymentOption(
-        embeddedPaymentElement: EmbeddedPaymentElement
-    ) {
-        viewModel.isCheckoutEnabled =
-            embeddedPaymentElement.paymentOption != nil
+// MARK: - Binding
+//
+extension MyCheckoutViewController {
+    private func setupBindings() {
+        viewModel
+            .$isCheckoutEnabled
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.isEnabled, on: checkoutButton)
+            .store(in: &subscriptions)
+        
+        viewModel
+            .$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                self?.view.isUserInteractionEnabled = !isLoading
+                self?.checkoutButton.isEnabled = !isLoading
+            }
+            .store(in: &subscriptions)
+        
+        viewModel
+            .$alertItem
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] alertItem in
+                guard let alertItem = alertItem else { return }
+                self?.alertPresenter?.showAlert(alertItem)
+            }
+            .store(in: &subscriptions)
     }
 }

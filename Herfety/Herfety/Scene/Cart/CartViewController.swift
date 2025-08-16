@@ -143,6 +143,7 @@ extension CartViewController {
         self.collectionView.setCollectionViewLayout(
             layoutFactory.createLayout(),
             animated: true)
+        ///
         viewModel.sections.forEach { $0.registerCells(in: collectionView) }
     }
     /// Configure UI
