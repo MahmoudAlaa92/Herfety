@@ -30,10 +30,11 @@ class HomeViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSections()
         setUpCollectionView()
+        configureSections()
         bindViewModel()
         Task {
+            await viewModel.fetchData()
             await configureNavBar()
         }
     }
@@ -62,8 +63,6 @@ extension HomeViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        /// Registere cells
     }
     /// Configure Sections
     private func configureSections() {
@@ -110,57 +109,29 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController {
     private func bindViewModel() {
         bindSections()
-        bindSliderItems()
-        bindCategoryItems()
-        bindTopBrandsItems()
-        bindDailyEssentialsItems()
         bindAlert()
     }
-    // MARK: - Sections
+    /// Sections
     private func bindSections() {
         viewModel
-            .$sections
+            .$categoryItems
             .sink { [weak self] _ in
-                guard let self = self else { return }
-                self.viewModel.sections.forEach { $0.registerCells(in: self.collectionView) }
-                self.collectionView.reloadData()
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }
+            .store(in: &cancellabels)
+        
+        viewModel
+            .$productItems
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
             }
             .store(in: &cancellabels)
     }
-    // MARK: - Slider Items
-    private func bindSliderItems() {
-        viewModel
-            .$sliderItems
-            .sink { [weak self] _ in
-                self?.collectionView.reloadData()
-            }.store(in: &cancellabels)
-    }
-    // MARK: - Category Items
-    private func bindCategoryItems() {
-        Task {
-            await viewModel.fetchCategoryItems()
-            await viewModel.fetchProductItems()
-        }
-    }
-    // MARK: - Top Brands
-    private func bindTopBrandsItems() {
-        viewModel
-            .$topBrandsItems
-            .sink { [weak self] _ in
-                self?.collectionView.reloadData()
-            }
-            .store(in: &cancellabels)
-    }
-    // MARK: - Daily Essentials
-    private func bindDailyEssentialsItems() {
-        viewModel
-            .$dailyEssentailItems
-            .sink { [weak self] _ in
-                self?.collectionView.reloadData()
-            }
-            .store(in: &cancellabels)
-    }
-    // MARK: - Wishlist
+    /// Alert
     private func bindAlert() {
         viewModel
             .$showAlert

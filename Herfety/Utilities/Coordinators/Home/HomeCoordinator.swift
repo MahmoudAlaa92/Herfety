@@ -38,7 +38,7 @@ class HomeCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-        let viewModel = HomeViewModel(coordinator: self)
+        let viewModel = HomeViewModelFactory.create(coordinator: self)
         let homeVC = HomeViewController(viewModel: viewModel)
         homeVC.coordinator = self
         homeVC.alertPresenter = alertPresenter
