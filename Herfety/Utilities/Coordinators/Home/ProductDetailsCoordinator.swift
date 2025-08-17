@@ -20,7 +20,7 @@ protocol PoroductsDetailsChildDelegate: AnyObject {
 
 class PoroductDetailsCoordinator: Coordinator {
     weak var productsParentCoordinator: ProductsChildDelegate?
-    weak var homeParentCoordinator: HomeChildDelegate?
+    weak var homeParentCoordinator: HomeChildProtocol?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var productDetails: Wishlist

@@ -18,7 +18,7 @@ protocol ProductsChildDelegate: AnyObject {
 
 class ProductsCoordinator: NSObject, Coordinator {
 
-    weak var parentCoordinator: HomeChildDelegate?
+    weak var parentCoordinator: HomeChildProtocol?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     var discount: Int = 0
@@ -29,10 +29,13 @@ class ProductsCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-        let viewModel = ProductsViewModel()
-        if discount != 0 { viewModel.fetchProductItems(discount: discount) }
-        if !categoryName.isEmpty{ viewModel.fetchProductItems(nameOfCategory: categoryName) }
+        let viewModel = ProdcutsViewModelFactory().create(coordinator: self)
         
+        Task {
+            await viewModel.fetchProducts(discount: discount)
+            await viewModel.fetchProductsWhileSearch(name: categoryName)
+        }
+
         let ProductsVC = ProductsViewController(viewModel: viewModel)
         ProductsVC.coordinator = self
         navigationController.transition(to: ProductsVC, with: .push)

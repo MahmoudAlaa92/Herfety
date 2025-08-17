@@ -7,7 +7,6 @@
 import UIKit
 import Combine
 
-@MainActor
 class HomeViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var categoryItems: [CategoryElement] = []
@@ -25,7 +24,7 @@ class HomeViewModel: ObservableObject {
     private let dataSource: HomeDataSourceProtocol
     private let alertService: AlertServiceProtocol
     private let sectionConfigurator: HomeSectionConfiguratorProtocol
-    private weak var coordinator: HomeTranisitionDelegate?
+    private weak var coordinator: HomeTranisitionProtocol?
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -34,7 +33,7 @@ class HomeViewModel: ObservableObject {
         dataSource: HomeDataSourceProtocol,
         alertService: AlertServiceProtocol,
         sectionConfigurator: HomeSectionConfiguratorProtocol,
-        coordinator: HomeTranisitionDelegate
+        coordinator: HomeTranisitionProtocol
     ) {
         self.dataSource = dataSource
         self.alertService = alertService

@@ -28,7 +28,7 @@ protocol HomeSectionConfiguratorProtocol {
         productItems: [Products],
         topBrandsItems: [TopBrandsItem],
         dailyEssentialItems: [DailyEssentialyItem],
-        coordinator: HomeTranisitionDelegate
+        coordinator: HomeTranisitionProtocol
     ) -> [CollectionViewDataSource]
     
     func configureLayoutSections() -> [LayoutSectionProvider]
@@ -52,7 +52,6 @@ protocol ContextMenuProvider {
 protocol HeaderAndFooterProvider {
     func cellForItems(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
 }
-
 // MARK: - Layout
 //
 protocol LayoutSectionProvider {

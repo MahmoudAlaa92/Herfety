@@ -17,7 +17,7 @@ class HomeSectionConfigurator: HomeSectionConfiguratorProtocol {
         productItems: [Products],
         topBrandsItems: [TopBrandsItem],
         dailyEssentialItems: [DailyEssentialyItem],
-        coordinator: HomeTranisitionDelegate
+        coordinator: HomeTranisitionProtocol
     ) -> [CollectionViewDataSource] {
         
         let sliderProvider = createSliderSection(items: sliderItems, coordinator: coordinator)
@@ -42,7 +42,7 @@ class HomeSectionConfigurator: HomeSectionConfiguratorProtocol {
 // MARK: - Private Section Creators
 //
 extension HomeSectionConfigurator {
-    private func createSliderSection(items: [SliderItem], coordinator: HomeTranisitionDelegate) -> SliderCollectionViewSection {
+    private func createSliderSection(items: [SliderItem], coordinator: HomeTranisitionProtocol) -> SliderCollectionViewSection {
         let provider = SliderCollectionViewSection(sliderItems: items)
         provider.selectedItem
             .sink { sliderItems in
@@ -52,7 +52,7 @@ extension HomeSectionConfigurator {
         return provider
     }
     
-    private func createCategorySection(items: [CategoryElement], coordinator: HomeTranisitionDelegate) -> CategoryCollectionViewSection {
+    private func createCategorySection(items: [CategoryElement], coordinator: HomeTranisitionProtocol) -> CategoryCollectionViewSection {
         let provider = CategoryCollectionViewSection(categoryItems: items)
         provider.categorySelection
             .sink { item in
@@ -62,7 +62,7 @@ extension HomeSectionConfigurator {
         return provider
     }
     
-    private func createCardSection(items: [Products], coordinator: HomeTranisitionDelegate) -> CardItemCollectionViewSection {
+    private func createCardSection(items: [Products], coordinator: HomeTranisitionProtocol) -> CardItemCollectionViewSection {
         let provider = CardItemCollectionViewSection(productItems: items)
         provider.headerConfigurator = { header in
             header.configure(title: "the best deal on", description: "Jewelry & Accessories", shouldShowButton: true)
@@ -75,7 +75,7 @@ extension HomeSectionConfigurator {
         return provider
     }
     
-    private func createTopBrandsSection(items: [TopBrandsItem], coordinator: HomeTranisitionDelegate) -> TopBrandsCollectionViewSection {
+    private func createTopBrandsSection(items: [TopBrandsItem], coordinator: HomeTranisitionProtocol) -> TopBrandsCollectionViewSection {
         let provider = TopBrandsCollectionViewSection(topBrandsItems: items)
         provider.selectedBrand
             .sink { brand in
@@ -85,7 +85,7 @@ extension HomeSectionConfigurator {
         return provider
     }
     
-    private func createDailyEssentialsSection(items: [DailyEssentialyItem], coordinator: HomeTranisitionDelegate) -> DailyEssentailCollectionViewSection {
+    private func createDailyEssentialsSection(items: [DailyEssentialyItem], coordinator: HomeTranisitionProtocol) -> DailyEssentailCollectionViewSection {
         let provider = DailyEssentailCollectionViewSection(dailyEssentail: items)
         provider.selectedItem
             .sink { essential in

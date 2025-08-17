@@ -6,9 +6,9 @@
 //
 
 import Foundation
-@MainActor
+
 struct HomeViewModelFactory {
-    static func create(coordinator: HomeTranisitionDelegate) -> HomeViewModel {
+    static func create(coordinator: HomeTranisitionProtocol) -> HomeViewModel {
         let categoryRemote = CategoryRemote(network: AlamofireNetwork())
         let productsRemote = ProductsRemote(network: AlamofireNetwork())
         let dataSource = HomeDataSource(categoryRemote: categoryRemote,

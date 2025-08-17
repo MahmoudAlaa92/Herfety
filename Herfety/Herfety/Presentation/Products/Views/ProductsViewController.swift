@@ -12,14 +12,16 @@ class ProductsViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchTextField: SearchTextField!
+    
     // MARK: - Properties
     private(set) var viewModel: ProductsViewModel
     private lazy var navBarBehavior = HerfetyNavigationController(
         navigationItem: navigationItem,
-        navigationController: navigationController
-    )
-    private var cancellabels = Set<AnyCancellable>()
+        navigationController: navigationController)
     weak var coordinator: ProductsTransitionDelegate?
+    ///
+    private var cancellabels = Set<AnyCancellable>()
+    
     // MARK: - Init
     init(viewModel: ProductsViewModel) {
         self.viewModel = viewModel
@@ -28,6 +30,7 @@ class ProductsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +41,7 @@ class ProductsViewController: UIViewController {
         searchTextField.addTarget(
             self,
             action: #selector(searchTextChanged(_:)),
-            for: .editingChanged
-        )
+            for: .editingChanged)
     }
 }
 // MARK: - Configuraion
@@ -60,6 +62,11 @@ extension ProductsViewController {
             }
         )
     }
+    /// Collection
+    private func setUpCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
     /// Section
     private func configureSections() {
         let factory = SectionsLayout(providers: viewModel.layoutSections)
@@ -67,11 +74,6 @@ extension ProductsViewController {
             factory.createLayout(),
             animated: true
         )
-    }
-    /// Collection
-    private func setUpCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
         viewModel.sections.forEach({ $0.registerCells(in: collectionView) })
     }
 }
@@ -125,7 +127,9 @@ extension ProductsViewController {
         else {
             return
         }
-        viewModel.searchProducts(with: searchText)
+        Task {
+            await viewModel.fetchProductsWhileSearch(name: searchText)
+        }
     }
 }
 // MARK: - Binding
@@ -133,18 +137,11 @@ extension ProductsViewController {
 extension ProductsViewController {
     private func bindViewModel() {
         viewModel
-            .$sections
+            .$productItems
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                viewModel.sections.forEach({ $0.registerCells(in: self.collectionView) })
                 self.collectionView.reloadData()
-            }
-            .store(in: &cancellabels)
-        ///
-        viewModel
-            .onProdcutsDetials
-            .sink { [weak self] product in
-                self?.coordinator?.goToProductDetails(productDetails: product)
             }
             .store(in: &cancellabels)
     }

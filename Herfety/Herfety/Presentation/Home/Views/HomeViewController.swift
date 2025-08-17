@@ -11,13 +11,14 @@ class HomeViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    
     // MARK: - Properties
     private var viewModel: HomeViewModel
     private var navigationBarBehavior: HomeNavBar?
-    ///
-    weak var coordinator: HomeTranisitionDelegate?
+    weak var coordinator: HomeTranisitionProtocol?
     weak var alertPresenter: AlertPresenter?
     private var cancellabels = Set<AnyCancellable>()
+    
     // MARK: - Init
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -26,8 +27,8 @@ class HomeViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Lifecycle
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
@@ -60,10 +61,12 @@ extension HomeViewController {
             userImage: userImage
         )
     }
+    
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+    
     /// Configure Sections
     private func configureSections() {
         let layoutFactory = SectionsLayout(providers: viewModel.layoutSections)
@@ -115,19 +118,17 @@ extension HomeViewController {
     private func bindSections() {
         viewModel
             .$categoryItems
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
+                self?.collectionView.reloadData()
             }
             .store(in: &cancellabels)
-        
+        ///
         viewModel
             .$productItems
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
+                self?.collectionView.reloadData()
             }
             .store(in: &cancellabels)
     }

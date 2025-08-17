@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-protocol HomeTranisitionDelegate: AnyObject {
+protocol HomeTranisitionProtocol: AnyObject {
     func goToSearchVC(discount: Int)
     func gotToSafari(url: String)
     func goToSliderItem(discount: Int)
@@ -18,7 +18,7 @@ protocol HomeTranisitionDelegate: AnyObject {
     func gotToDailyEssentialItem(discount: Int)
 }
 
-protocol HomeChildDelegate: AnyObject {
+protocol HomeChildProtocol: AnyObject {
     func backToHome(_ coordinator: Coordinator)
 }
 
@@ -47,7 +47,7 @@ class HomeCoordinator: NSObject, Coordinator {
 }
 // MARK: - Home Transition Delegate
 //
-extension HomeCoordinator: HomeTranisitionDelegate {
+extension HomeCoordinator: HomeTranisitionProtocol {
     
     func gotToSafari(url: String) {
         if let urlString = URL(string: url) {
@@ -91,7 +91,7 @@ extension HomeCoordinator: HomeTranisitionDelegate {
 }
 // MARK: - ChildDelegate
 //
-extension HomeCoordinator: HomeChildDelegate {
+extension HomeCoordinator: HomeChildProtocol {
     
     func backToHome(_ coordinator: Coordinator) {
         if let index = childCoordinators.firstIndex(where: { $0 === coordinator } ){
