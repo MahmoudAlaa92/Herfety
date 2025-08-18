@@ -4,4 +4,7 @@
    <FileRef
       location = "group:Herfety/Herfety.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Herfety.xctestplan">
+   </FileRef>
 </Workspace>

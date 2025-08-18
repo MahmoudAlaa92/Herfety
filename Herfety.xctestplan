@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "96FE0041-CE3B-4D79-9F95-3291439760FA",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Herfety.xcodeproj",
+      "identifier" : "1589FBF12D51781D00240754",
+      "name" : "Herfety"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Herfety.xcodeproj",
+        "identifier" : "1513B2E22E51274900FE069F",
+        "name" : "HerfetyTests"
+      }
+    }
+  ],
+  "version" : 1
+}
