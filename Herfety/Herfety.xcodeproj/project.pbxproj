@@ -53,6 +53,8 @@
 		151DF42E2D5BD03B00A3AD98 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF42D2D5BD03B00A3AD98 /* CartViewModel.swift */; };
 		151DF4302D5BD39200A3AD98 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF42F2D5BD39200A3AD98 /* CartModel.swift */; };
 		151DF4322D5BDBDF00A3AD98 /* CartCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF4312D5BDBDF00A3AD98 /* CartCollectionViewSection.swift */; };
+		152BCDC62E5740B500809ACB /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152BCDC52E5740B500809ACB /* WishlistViewModel.swift */; };
+		152BCDC82E57414000809ACB /* WishlistProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152BCDC72E57414000809ACB /* WishlistProtocols.swift */; };
 		152E26EF2E53789E0095ABF3 /* TestDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152E26EE2E53789E0095ABF3 /* TestDataFactory.swift */; };
 		152E26F52E5379880095ABF3 /* HomeDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152E26F42E5379880095ABF3 /* HomeDataSourceTests.swift */; };
 		152E26F92E537A520095ABF3 /* HomeAlertServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152E26F82E537A520095ABF3 /* HomeAlertServiceTests.swift */; };
@@ -236,7 +238,6 @@
 		15ABC2332E2D611600DCB8E5 /* AlertStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ABC2322E2D611600DCB8E5 /* AlertStatus.swift */; };
 		15AF292E2E4F6B8E00EA5570 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AF292D2E4F6B8E00EA5570 /* ProfileViewModel.swift */; };
 		15C177C62E47A4770086F236 /* ForgetPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C177C52E47A4770086F236 /* ForgetPasswordCoordinator.swift */; };
-		15C583472E4A5D030035F88F /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C583462E4A5D030035F88F /* WishlistViewModel.swift */; };
 		15CD44AE2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CD44AD2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib */; };
 		15CD44AF2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD44AC2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift */; };
 		15CD44B32D52716D00E58C6F /* CategoriesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CD44B22D52716D00E58C6F /* CategoriesCollectionViewCell.xib */; };
@@ -342,6 +343,8 @@
 		151DF42D2D5BD03B00A3AD98 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		151DF42F2D5BD39200A3AD98 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		151DF4312D5BDBDF00A3AD98 /* CartCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionViewSection.swift; sourceTree = "<group>"; };
+		152BCDC52E5740B500809ACB /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
+		152BCDC72E57414000809ACB /* WishlistProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistProtocols.swift; sourceTree = "<group>"; };
 		152E26EE2E53789E0095ABF3 /* TestDataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataFactory.swift; sourceTree = "<group>"; };
 		152E26F42E5379880095ABF3 /* HomeDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSourceTests.swift; sourceTree = "<group>"; };
 		152E26F82E537A520095ABF3 /* HomeAlertServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAlertServiceTests.swift; sourceTree = "<group>"; };
@@ -521,7 +524,6 @@
 		15ABC2322E2D611600DCB8E5 /* AlertStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStatus.swift; sourceTree = "<group>"; };
 		15AF292D2E4F6B8E00EA5570 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		15C177C52E47A4770086F236 /* ForgetPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordCoordinator.swift; sourceTree = "<group>"; };
-		15C583462E4A5D030035F88F /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
 		15CD44AC2D52696B00E58C6F /* SliderImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		15CD44AD2D52696B00E58C6F /* SliderImagesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		15CD44B12D52716D00E58C6F /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -716,6 +718,7 @@
 			children = (
 				1513B2B42E50FA6300FE069F /* HomeProtocols.swift */,
 				15CD8B0C2E51FB8F00DC5227 /* ProductsProtocols.swift */,
+				152BCDC72E57414000809ACB /* WishlistProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1008,6 +1011,40 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		152E27122E53A33D0095ABF3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				153F6A9F2D5955E800317F49 /* WishListViewController.swift */,
+				153F6AA02D5955E800317F49 /* WishListViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		152E27132E53A3460095ABF3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				15F927C72D5A56660038CEB8 /* WishlistModel.swift */,
+				152BCDC52E5740B500809ACB /* WishlistViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		152E27142E53A3510095ABF3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		152E27152E53A3580095ABF3 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				15F927C52D5A55BC0038CEB8 /* WishlistCollectionViewSection.swift */,
+				153F6AAE2D597DB600317F49 /* Cell */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
 		1532F3442D5E7DA7003223A1 /* Info */ = {
 			isa = PBXGroup;
 			children = (
@@ -1079,12 +1116,10 @@
 		153F6A9E2D5955AB00317F49 /* WishList */ = {
 			isa = PBXGroup;
 			children = (
-				15F927C72D5A56660038CEB8 /* WishlistModel.swift */,
-				15C583462E4A5D030035F88F /* WishlistViewModel.swift */,
-				15F927C52D5A55BC0038CEB8 /* WishlistCollectionViewSection.swift */,
-				153F6A9F2D5955E800317F49 /* WishListViewController.swift */,
-				153F6AA02D5955E800317F49 /* WishListViewController.xib */,
-				153F6AAE2D597DB600317F49 /* Cell */,
+				152E27122E53A33D0095ABF3 /* Views */,
+				152E27132E53A3460095ABF3 /* ViewModels */,
+				152E27142E53A3510095ABF3 /* Services */,
+				152E27152E53A3580095ABF3 /* Sections */,
 			);
 			path = WishList;
 			sourceTree = "<group>";
@@ -2129,7 +2164,6 @@
 				158A7EA92DB557A700B89684 /* FacebookButton.swift in Sources */,
 				15760D852D692DFC0033BC0D /* AddAddressViewModel.swift in Sources */,
 				15CD8B0D2E51FB8F00DC5227 /* ProductsProtocols.swift in Sources */,
-				15C583472E4A5D030035F88F /* WishlistViewModel.swift in Sources */,
 				15DF251A2E24026100C17B53 /* AddAddressViewModelType.swift in Sources */,
 				1541679C2D9D373B007E4CAA /* SettingViewModel.swift in Sources */,
 				15A4F5E82DB2981E000EACEA /* Notification.swift in Sources */,
@@ -2167,6 +2201,7 @@
 				1599B8982DB85F5A00A48510 /* Category.swift in Sources */,
 				153C9E442E4CE136006D1616 /* SuccessViewModelType.swift in Sources */,
 				157F42892DB6DAD0000305D6 /* Network.swift in Sources */,
+				152BCDC62E5740B500809ACB /* WishlistViewModel.swift in Sources */,
 				1513B2B52E50FA6300FE069F /* HomeProtocols.swift in Sources */,
 				15E33A2D2DD4AEFD0004D408 /* ForgetPasswordViewModel.swift in Sources */,
 				158B39D32D7A41F800D58B07 /* ProfileListCollectionViewSection.swift in Sources */,
@@ -2180,6 +2215,7 @@
 				159B578C2DCBEB7200CDD958 /* LoginViewModelType.swift in Sources */,
 				1541679E2D9D37B0007E4CAA /* SettingModel.swift in Sources */,
 				15C177C62E47A4770086F236 /* ForgetPasswordCoordinator.swift in Sources */,
+				152BCDC82E57414000809ACB /* WishlistProtocols.swift in Sources */,
 				15840BD72D5D80F7006F8B67 /* PrimaryButton.swift in Sources */,
 				1589FC202D51808600240754 /* HomeViewController.swift in Sources */,
 				156C2CBF2E02253D00C68546 /* PaymentIntent.swift in Sources */,
