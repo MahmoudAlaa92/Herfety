@@ -30,9 +30,8 @@ class ReviewersCoordinator: Coordinator {
     }
     
     func start() {
-        let viewModel = ReviewersViewModel(productId: productId)
-        viewModel.reviewersItems = reviewers
-        
+        let viewModel = ReviewersViewModelFactory.create(coordinator: self, productId: productId, reviews: reviewers)
+
         let reviewrsVC = ReviewersViewController(viewModel: viewModel)
         reviewrsVC.coordinator = self
         navigationController.transition(to: reviewrsVC, with: .push)

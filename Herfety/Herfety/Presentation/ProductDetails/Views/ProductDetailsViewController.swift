@@ -144,7 +144,6 @@ extension ProductDetailsViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
-//                viewModel.sections.forEach({ $0.registerCells(in: self.collectionView) })
                 self.collectionView.reloadData()
             }
             .store(in: &cancellabels)

@@ -9,9 +9,10 @@ import UIKit
 import Combine
 
 class ReviewersViewController: UIViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    
     // MARK: - Properties
     var viewModel: ReviewersViewModel
     private lazy var navBarBehavior = HerfetyNavigationController(
@@ -19,7 +20,8 @@ class ReviewersViewController: UIViewController {
         navigationController: navigationController
     )
     weak var coordinator: ReviewersTransitionDelegate?
-    private var cancellabels = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Init
     init(viewModel: ReviewersViewModel) {
         self.viewModel = viewModel
@@ -28,6 +30,7 @@ class ReviewersViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +92,7 @@ extension ReviewersViewController: UICollectionViewDataSource {
     ) -> Int {
         viewModel.sections[section].numberOfItems
     }
-
+    
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
@@ -135,15 +138,22 @@ extension ReviewersViewController: UICollectionViewDelegate {
 //
 extension ReviewersViewController {
     func bindViewModel() {
-        viewModel
-            .$reviewersItems
+        /// Bind reviewersItems changes
+        viewModel.$reviewersItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 Task { @MainActor in
                     await self?.viewModel.refreshSections()
-                    self?.collectionView.reloadData()
                 }
             }
-            .store(in: &cancellabels)
+            .store(in: &cancellables)
+        
+        /// Bind sections changes
+        viewModel.$sections
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &cancellables)
     }
 }
