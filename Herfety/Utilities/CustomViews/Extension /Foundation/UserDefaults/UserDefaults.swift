@@ -7,15 +7,6 @@
 
 import Foundation
 
-
-// UserSessionManager.swift
-class UserSessionManager {
-    static var isLoggedIn: Bool {
-        get { UserDefaults.standard.bool(forKey: "isLoggedIn") }
-        set { UserDefaults.standard.set(newValue, forKey: "isLoggedIn") }
-    }
-}
-
 class UserDefaultsKeys {
     static let shared = UserDefaultsKeys()
     private init() { }

@@ -49,7 +49,6 @@ class LoginViewModel: LoginViewModelType {
     }
 
     private func handelLoginSuccess(response: Registration) async {
-        UserSessionManager.isLoggedIn = true
         let userInfo = RegisterUser(
             FName: "",
             LName: "",
@@ -60,9 +59,16 @@ class LoginViewModel: LoginViewModelType {
             Phone: "",
             image: ""
         )
-
+        
+        /// Save to UserDefaults using property wrapper
+        let userDefaultsManager = UserDefaultsManager.shared
+        userDefaultsManager.isLoggedIn = true
+        userDefaultsManager.userId = response.id ?? 22
+        userDefaultsManager.userInfo = userInfo
+        
         await DataStore.shared.updateUserId(userId: response.id ?? 22)
         await DataStore.shared.updateUserInfo(userInfo: userInfo)
+        await DataStore.shared.updateLoginStatus(true)
 
         loginSuccess.send()
     }
@@ -235,9 +241,16 @@ extension LoginViewModel {
             phone: user.phoneNumber,
             imageUrl: user.photoURL?.absoluteString
         )
+        
+        /// Save to UserDefaults using property wrapper
+        let userDefaultsManager = UserDefaultsManager.shared
+        userDefaultsManager.isLoggedIn = true
+        userDefaultsManager.userInfo = userInfo
+        
         await DataStore.shared.updateUserInfo(userInfo: userInfo)
+        await DataStore.shared.updateLoginStatus(true)
         await DataStore.shared.loadUserProfileImage()
-        UserSessionManager.isLoggedIn = true
+        
         loginSuccess.send()
     }
 }

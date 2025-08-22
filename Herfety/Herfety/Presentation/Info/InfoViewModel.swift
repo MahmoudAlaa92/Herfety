@@ -8,7 +8,6 @@
 import UIKit
 import Combine
 
-@MainActor
 class InfoViewModel {
     // MARK: - Properties
     @Published var infoItems: [InfoModel] = []
@@ -16,9 +15,11 @@ class InfoViewModel {
     
     var navigationToPayment: (() -> Void)?
     private var cancellabels = Set<AnyCancellable>()
+    
     // MARK: - Collection view sections
     @Published private(set) var sections: [CollectionViewDataSource] = []
     private(set) var layoutProviders: [LayoutSectionProvider] = []
+    
     // MARK: - Init
     init() {
         configureLayoutProviders()
@@ -39,7 +40,7 @@ class InfoViewModel {
         }
     }
 }
-// MARK: - Privagte Handlers
+// MARK: - Private Methods
 //
 extension InfoViewModel {
     private func configureSections() {
@@ -66,6 +67,7 @@ extension InfoViewModel {
     private func configureLayoutProviders() {
         self.layoutProviders = [InfoSectionLayoutProvider()]
     }
+    
     private func observeInfoItems() {
         AppDataStorePublisher
             .shared

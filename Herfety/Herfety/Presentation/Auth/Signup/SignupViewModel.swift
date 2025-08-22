@@ -143,8 +143,16 @@ extension SignupViewModel {
             image: ""
         )
         
+        /// Save to UserDefaults using property wrapper
+        let userDefaultsManager = UserDefaultsManager.shared
+        userDefaultsManager.isLoggedIn = true
+        userDefaultsManager.userId = response.id ?? 22
+        userDefaultsManager.userInfo = userInfo
+        
         await DataStore.shared.updateUserInfo(userInfo: userInfo)
         await DataStore.shared.updateUserId(userId: response.id ?? 22)
+        await DataStore.shared.updateLoginStatus(true)
+
         registrationSuccess.send(response)
     }
     

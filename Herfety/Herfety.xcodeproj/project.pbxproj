@@ -20,6 +20,7 @@
 		150236312E58BAB900A605B7 /* ProfileSectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150236302E58BAB900A605B7 /* ProfileSectionConfigurator.swift */; };
 		150236332E58BAFD00A605B7 /* ProfileViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150236322E58BAFD00A605B7 /* ProfileViewModelFactory.swift */; };
 		150236352E58BB3C00A605B7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150236342E58BB3C00A605B7 /* ProfileViewModel.swift */; };
+		150236392E58FF8100A605B7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150236382E58FF8100A605B7 /* UserDefaultsManager.swift */; };
 		15085B452E280B96007F8B3F /* Ext+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15085B442E280B96007F8B3F /* Ext+Navigation.swift */; };
 		150ABBDC2DC2E0D700C1A7AD /* Wishlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150ABBDB2DC2E0D700C1A7AD /* Wishlist.swift */; };
 		1511F3CB2D5554D100D986CF /* DMSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1511F3C62D5554D100D986CF /* DMSans-Bold.ttf */; };
@@ -330,6 +331,7 @@
 		150236302E58BAB900A605B7 /* ProfileSectionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionConfigurator.swift; sourceTree = "<group>"; };
 		150236322E58BAFD00A605B7 /* ProfileViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelFactory.swift; sourceTree = "<group>"; };
 		150236342E58BB3C00A605B7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		150236382E58FF8100A605B7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		15085B442E280B96007F8B3F /* Ext+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Navigation.swift"; sourceTree = "<group>"; };
 		150ABBDB2DC2E0D700C1A7AD /* Wishlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wishlist.swift; sourceTree = "<group>"; };
 		1511F3C52D5554D100D986CF /* DMSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DMSans.ttf; sourceTree = "<group>"; };
@@ -1606,16 +1608,16 @@
 				153F6A992D59527200317F49 /* TabBar */,
 				15CD44AA2D5268F800E58C6F /* Home */,
 				15E5B66A2D709CCD00C0383D /* ProductDetails */,
-				15FB21C72D7530FD0002B576 /* Reviewer */,
-				1513DD3F2DF37B3D001EB3B3 /* AddReview */,
+				156CD83C2D6A461E00D6DA77 /* Products */,
 				153F6A9E2D5955AB00317F49 /* WishList */,
+				15FB21C72D7530FD0002B576 /* Reviewer */,
+				153F6AA42D59561600317F49 /* Profile */,
+				1513DD3F2DF37B3D001EB3B3 /* AddReview */,
 				153F6AA32D59560800317F49 /* Cart */,
 				1532F3442D5E7DA7003223A1 /* Info */,
 				157F91052D62B780005381FB /* AddAdress */,
-				153F6AA42D59561600317F49 /* Profile */,
 				1570F74A2DFF7F0100AE9F6D /* MyCheckout */,
 				15955C142D67701E00673BE7 /* CreditCard */,
-				156CD83C2D6A461E00D6DA77 /* Products */,
 				158B39D82D7A848500D58B07 /* Settings */,
 			);
 			path = Presentation;
@@ -1826,6 +1828,7 @@
 		15A4F5DF2DB28CF5000EACEA /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
+				150236382E58FF8100A605B7 /* UserDefaultsManager.swift */,
 				15A4F5E02DB28D18000EACEA /* UserDefaults.swift */,
 				15A4F5E22DB28DDB000EACEA /* UserDefaultsKeys.swift */,
 			);
@@ -2390,6 +2393,7 @@
 				1567200E2DCE70E400D8AFCA /* RegisterRemote.swift in Sources */,
 				154840D42E44CF0F00F2011D /* DataStore.swift in Sources */,
 				157F42982DB6E1E7000305D6 /* Remote.swift in Sources */,
+				150236392E58FF8100A605B7 /* UserDefaultsManager.swift in Sources */,
 				156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */,
 				1517FFC22DC822A200F1D7BD /* Order.swift in Sources */,
 				15AA58F42E183BB50050D01D /* ProductsCoordinator.swift in Sources */,

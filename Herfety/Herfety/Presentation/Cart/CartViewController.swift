@@ -191,6 +191,7 @@ extension CartViewController {
         /// Procced to Payment
         viewModel
             .$orderAlert
+            .receive(on: DispatchQueue.main)
             .compactMap({ $0 })
             .sink { [weak self] alert in
                 self?.alertPresenter?.showAlert(alert)

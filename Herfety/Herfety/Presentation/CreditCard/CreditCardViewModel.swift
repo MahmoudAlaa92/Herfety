@@ -36,7 +36,7 @@ class CreditCardViewModel {
         let numericalValue = value.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         return String(numericalValue.prefix(byPrefix))
     }
-    
+    /*
     func didTapAddCard() {
         self.startCheckout(
             amount: CustomeTabBarViewModel
@@ -45,7 +45,7 @@ class CreditCardViewModel {
                 
         }
     }
-    
+    */
     func didTapCancel() {
         onDismiss?()
     }

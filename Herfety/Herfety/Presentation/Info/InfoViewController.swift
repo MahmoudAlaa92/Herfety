@@ -123,6 +123,7 @@ extension InfoViewController {
     private func bindViewModel() {
         viewModel
             .$sections
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _  in
                 self?.collectionView.reloadData()
             }

@@ -7,7 +7,6 @@
 import UIKit
 import Combine
 
-@MainActor
 final class CartViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published private(set) var sections: [CollectionViewDataSource] = []
@@ -19,11 +18,12 @@ final class CartViewModel: ObservableObject {
         numberOfItems: 0
     )
     @Published var orderAlert: AlertModel?
-    
+
+    // MARK: - Properties
     var navigationToShipping: (() -> Void)?
     var isShowBackButton: Bool = false
-    
     private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Init
     init() {
         bindCartUpdates()
@@ -60,7 +60,7 @@ extension CartViewModel {
         }
     }
 }
-// MARK: - Private Handlers
+// MARK: - Private Methods
 //
 private extension CartViewModel {
     func bindCartUpdates() {

@@ -29,7 +29,9 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        if UserSessionManager.isLoggedIn {
+        let isLoggedIn = UserDefaultsManager.shared.isLoggedIn ?? false
+
+        if isLoggedIn {
             showMainTabFlow()
         } else {
             showAuthFlow()
@@ -81,9 +83,13 @@ extension AppCoordinator {
 //
 extension AppCoordinator: AppTransitionDelegate {
     func didRequestLogout() {
-        UserSessionManager.isLoggedIn = false
-        navigationController.viewControllers = []
-        removeTabBarCoordinators()
-        showAuthFlow()
+        Task {
+            await DataStore.shared.logout()
+            await MainActor.run {
+                navigationController.viewControllers = []
+                removeTabBarCoordinators()
+                showAuthFlow()
+            }
+        }
     }
 }

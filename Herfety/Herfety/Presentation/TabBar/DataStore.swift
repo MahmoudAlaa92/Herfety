@@ -51,13 +51,12 @@ actor DataStore {
     static let shared = DataStore()
     
     // MARK: - Thread-safe UserDefaults access
-    private var _login: Bool = false
     private var userInfo: RegisterUser?
     private var userId: Int = 22
+    private var isLogin: Bool = false
     
     // MARK: - Private state (thread-safe within actor)
     private var userProfileImage: UIImage = Images.iconPersonalDetails
-    private var isLogin: Bool = false
     private var orders: [WishlistItem] = []
     private var cartItems: [Wishlist] = []
     private var wishlist: [Wishlist] = []
@@ -69,43 +68,24 @@ actor DataStore {
     // MARK: - Data actor for API operations
     private let dataActor = DataActor()
     
+    // MARK: - Init
     init() {
         Task {
-            await loadUserDefaultsSync()
+            await loadFromUserDefaults()
             await fetchWishlistItems(id: userId, showAlert: false)
         }
     }
     
-    // MARK: - Thread-safe UserDefaults access
-    private func loadUserDefaultsSync() {
-        // Synchronous UserDefaults access in init
-        _login = UserDefaults.standard.bool(forKey: "login")
-        if let userData = UserDefaults.standard.data(forKey: "userInfo"),
-           let user = try? JSONDecoder().decode(RegisterUser.self, from: userData) {
-            userInfo = user
-        }
-        isLogin = _login
-    }
-    
-    private func saveUserDefaults() async {
-        // Perform UserDefaults writes on a background queue to avoid blocking
-        await withTaskGroup(of: Void.self) { group in
-            group.addTask {
-                await UserDefaults.standard.set(self._login, forKey: "login")
-            }
-            
-            if let userInfo = self.userInfo {
-                group.addTask {
-                    if let userData = try? JSONEncoder().encode(userInfo) {
-                        UserDefaults.standard.set(userData, forKey: "userInfo")
-                    }
-                }
-            }
-        }
+    // MARK: - UserDefaults Integration
+    private func loadFromUserDefaults() {
+        let userDefaultsManager = UserDefaultsManager.shared
+        
+        isLogin = userDefaultsManager.isLoggedIn ?? false
+        userId = userDefaultsManager.userId ?? 22
+        userInfo = userDefaultsManager.userInfo
     }
     
     // MARK: - Safe External Access Methods
-    //
     func getUserId() -> Int {
         return userId
     }
@@ -149,6 +129,7 @@ actor DataStore {
     func getOrderAddress() -> String {
         return orderAddress
     }
+    
     // MARK: - Update Methods with Synchronous Notifications
     func updateUserId(userId: Int) {
         self.userId = userId
@@ -199,9 +180,8 @@ actor DataStore {
     
     func updateLoginStatus(_ status: Bool) async {
         isLogin = status
-        _login = status
-        await saveUserDefaults()
-        
+        UserDefaultsManager.shared.isLoggedIn = status
+
         await MainActor.run {
             AppDataStorePublisher.shared.notifyLoginStatusUpdate()
         }
@@ -294,17 +274,9 @@ actor DataStore {
         cartItems.removeAll()
         wishlist.removeAll()
         isLogin = false
-        _login = false
-        
-        await saveUserDefaults()
-        
-        await MainActor.run {
-            let publisher = AppDataStorePublisher.shared
-            publisher.notifyWishlistUpdate(showAlert: true)
-            publisher.notifyOrdersUpdate()
-            publisher.notifyCartUpdate(showAlert: true)
-            publisher.notifyLoginStatusUpdate()
-        }
+        userId = 22
+        userInfo = nil
+        UserDefaultsManager.shared.clearUserData()
     }
     // MARK: - Private Helper Methods
     private func calculateTotalPrice() {
