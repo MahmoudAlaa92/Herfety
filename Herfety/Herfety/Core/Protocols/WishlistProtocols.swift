@@ -22,27 +22,3 @@ protocol WishlistSectionConfiguratorProtocol {
     func configureSections(wishlistItems: [Wishlist]) -> [CollectionViewDataSource]
     func configureLayoutSections() -> [LayoutSectionProvider]
 }
-
-// MARK: - Default Implementations
-//
-class DefaultWishlistDataSource: WishlistDataSourceProtocol {
-    func getWishlist() async -> [Wishlist] {
-        return await DataStore.shared.getWishlist()
-    }
-}
-
-class DefaultWishlistPublisher: WishlistPublisherProtocol {
-    var wishlistUpdatePublisher: AnyPublisher<Bool, Never> {
-        AppDataStorePublisher.shared.wishlistUpdatePublisher
-    }
-}
-
-class DefaultWishlistSectionConfigurator: WishlistSectionConfiguratorProtocol {
-    func configureSections(wishlistItems: [Wishlist]) -> [CollectionViewDataSource] {
-        return [WishlistCollectionViewSection(whishlistItems: wishlistItems)]
-    }
-    
-    func configureLayoutSections() -> [LayoutSectionProvider] {
-        return [WishlistSectionLayoutProvider()]
-    }
-}

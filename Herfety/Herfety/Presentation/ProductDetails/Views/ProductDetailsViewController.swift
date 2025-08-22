@@ -11,6 +11,7 @@ import Combine
 class ProductDetailsViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    
     // MARK: - Properties
     private(set) var viewModel: ProductDetailsViewModel
     private lazy var navBarBehavior = HerfetyNavigationController(
@@ -21,6 +22,7 @@ class ProductDetailsViewController: UIViewController {
     private var cancellabels = Set<AnyCancellable>()
     weak var coordinator: PoroductsDetailsTransitionDelegate?
     weak var alertPresenter: AlertPresenter?
+    
     // MARK: - Init
     init(viewModel: ProductDetailsViewModel) {
         self.viewModel = viewModel
@@ -29,6 +31,7 @@ class ProductDetailsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,80 +139,14 @@ extension ProductDetailsViewController: UICollectionViewDelegate {
 //
 extension ProductDetailsViewController {
     func bindViewModel() {
-        
         viewModel
-            .$productItem
+            .$sections
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.viewModel.configureSections()
-                self?.collectionView.reloadData()
-            }
-            .store(in: &cancellabels)
-        /// recommended items
-        viewModel
-            .$recommendItems
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newItems in
-                self?.viewModel.recommendedProductsSection?.productItems = newItems
-                self?.collectionView.reloadData()
-            }
-            .store(in: &cancellabels)
-        /// selected her
-        viewModel
-            .recommendedProductsSection?
-            .selectedItem
-            .sink(receiveValue: {
-                [weak self] value in
-                self?.coordinator?.goToProductDetailsVC(productDetails: value)
-            })
-            .store(in: &cancellabels)
-        
-        bindWishlist()
-        bindReviewrs()
-        bindUpadateReviews()
-    }
-    // MARK: - Wishlist
-    private func bindWishlist() {
-        
-        AppDataStore
-            .shared
-            .isWishlistItemDeleted
-            .dropFirst()
-            .sink { [weak self] current in
-                guard let self = self, !current else { return }
-                
-                /// Trigger alert presentation
-                let alertItem = AlertModel(
-                    message: "Added To Wishlist",
-                    buttonTitle: "Ok",
-                    image: .success,
-                    status: .success
-                )
-                self.alertPresenter?.showAlert(alertItem)
-            }
-            .store(in: &cancellabels)
-    }
-    // MARK: - Reviewrs
-    private func bindReviewrs() {
-        viewModel
-            .reviewDetailsSection?
-            .reviewrsButton
-            .sink { [weak self] reviewrs in
                 guard let self = self else { return }
-                self.coordinator?.goToReviewersVC(productId: viewModel.currentProductId, reviewers: reviewrs)
-            }
-            .store(in: &cancellabels)
-    }
-    /// Reviews Updated
-    private func bindUpadateReviews() {
-        viewModel
-            .$reviews
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newReviews in
-                guard let self = self else { return }
-                self.viewModel.reviewDetailsSection?.reviewItems = newReviews
+//                viewModel.sections.forEach({ $0.registerCells(in: self.collectionView) })
                 self.collectionView.reloadData()
             }
             .store(in: &cancellabels)
-        
     }
 }

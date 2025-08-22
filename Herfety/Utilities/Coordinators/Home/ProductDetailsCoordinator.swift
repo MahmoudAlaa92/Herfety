@@ -33,13 +33,11 @@ class PoroductDetailsCoordinator: Coordinator {
     }
     
     func start() {
-        let viewModel = ProductDetailsViewModel(productId: productDetails.productID ?? 93)
-        viewModel.productItem = productDetails
+        let viewModel = ProductDetailsViewModelFactory.creat(coordinator: self,
+                                                             currentProductId: productDetails.productID ?? 93,
+                                                             productItem: productDetails)
+        Task { await viewModel.fetchData() }
         
-        Task {
-           await viewModel.fetchProductItems()
-        }
-
         let productsDetailsVC = ProductDetailsViewController(viewModel: viewModel)
         productsDetailsVC.coordinator = self
         productsDetailsVC.alertPresenter = alertCoordinator
