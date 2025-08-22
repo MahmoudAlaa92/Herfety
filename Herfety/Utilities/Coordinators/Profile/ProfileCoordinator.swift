@@ -39,11 +39,8 @@ class ProfileCoordinator: Coordinator, ParentCartDelegate, ParentCheckoutDelegat
     }
     
     func start() {
-        let nameViewModel = NameViewModel()
-        let profileListViewModel = ProfileListViewModel()
-        let viewModel = ProfileViewModel(nameViewModel: nameViewModel,
-                                         profileListViewModel: profileListViewModel,
-                                         coordinator: self)
+        let viewModel = ProfileViewModelFactory.create(coordinator: self)
+        Task { await viewModel.loadProfileData() }
         
         let profileVC = ProfileViewController(viewModel: viewModel)
         navigationController.transition(to: profileVC, with: .push)

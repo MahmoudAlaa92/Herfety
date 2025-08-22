@@ -12,3 +12,4 @@ struct Name {
     var email: String
     var image: UIImage
 }
+
