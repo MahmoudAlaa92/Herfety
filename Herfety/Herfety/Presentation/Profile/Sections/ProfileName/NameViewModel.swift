@@ -10,12 +10,12 @@ import UIKit
 
 class NameViewModel {
     // MARK: - Properties
-    @Published var nameItem: Name
+    @Published var nameItem: UserProfile
     ///
     private var cancellables = Set<AnyCancellable>()
     // MARK: - Init
     init() {
-        nameItem = Name(name: "",
+        nameItem = UserProfile(name: "",
                         email: "",
                         image: Images.iconPersonalDetails)
         Task {
@@ -29,7 +29,7 @@ private extension NameViewModel {
     func getInfo() async {
         let info = await DataStore.shared.getUserInfo()
         let userImage = await DataStore.shared.getUserProfileImage()
-        self.nameItem = Name(
+        self.nameItem = UserProfile(
             name: info?.UserName ?? "",
             email: info?.Email ?? "",
             image: userImage

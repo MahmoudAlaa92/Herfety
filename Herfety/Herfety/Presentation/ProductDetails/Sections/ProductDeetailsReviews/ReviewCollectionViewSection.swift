@@ -10,12 +10,12 @@ import Combine
 class ReviewCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
-    var reviewItems: [Reviewrr]
-    let product: Wishlist
-    let reviewrsButton = PassthroughSubject<[Reviewrr], Never>()
+    var reviewItems: [ReviewrItem]
+    let product: WishlistItem
+    let reviewrsButton = PassthroughSubject<[ReviewrItem], Never>()
 
     // MARK: - Init
-    init(reviewItems: [Reviewrr], rating: Wishlist) {
+    init(reviewItems: [ReviewrItem], rating: WishlistItem) {
         self.reviewItems = reviewItems
         self.product = rating
     }

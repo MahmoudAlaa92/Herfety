@@ -58,7 +58,7 @@ class MockHomeCoordinator: HomeTranisitionProtocol {
         goToSafariCalled = true
     }
 
-    func gotToBestDealItem(productDetails: Herfety.Wishlist) {
+    func gotToBestDealItem(productDetails: Herfety.WishlistItem) {
         goToBestDealItemCalled = true
     }
 }

@@ -11,7 +11,7 @@ class CardOfProductCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     //
     static let cellIdentifier: String = "CardOfProductCollectionViewCell"
-    var productOfWishlist: Wishlist?
+    var productOfWishlist: WishlistItem?
     // MARK: - Outlets
     //
     @IBOutlet weak var topBackground: UIView!
@@ -84,7 +84,7 @@ extension CardOfProductCollectionViewCell {
     /// Configure the product Details
     ///
     ///  - Parameter product: The `product` containing the data to be displayed in `Wishlist & Cart` page
-    func configureProduct(with product: Wishlist) {
+    func configureProduct(with product: WishlistItem) {
         self.productOfWishlist = product
     }
 }

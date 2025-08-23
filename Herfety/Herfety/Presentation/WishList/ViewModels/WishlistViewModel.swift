@@ -45,7 +45,7 @@ extension WishListViewModel {
     }
     
     @MainActor
-    private func updateSections(with wishlist: [Wishlist]) {
+    private func updateSections(with wishlist: [WishlistItem]) {
         sections = sectionConfigurator.configureSections(wishlistItems: wishlist)
     }
 }

@@ -10,7 +10,7 @@ class ButtonCollectionReusableView: UICollectionReusableView {
     
     // MARK: - Properties
     static let identifier = "ButtonCollectionReusableView"
-    var order: Wishlist!
+    var order: WishlistItem!
 
     // MARK: - Outlets
     @IBOutlet weak var button: PrimaryButton!
@@ -31,7 +31,7 @@ extension ButtonCollectionReusableView {
     ///
     ///  - Parameter order: The `order` containing the data to be displayed in `orders` page
     ///
-    func configureProduct(with order: Wishlist) {
+    func configureProduct(with order: WishlistItem) {
         self.order = order
     }
 }

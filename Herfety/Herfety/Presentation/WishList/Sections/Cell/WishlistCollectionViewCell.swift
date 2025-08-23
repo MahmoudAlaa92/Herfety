@@ -11,7 +11,7 @@ class WishlistCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier: String = "WishlistCollectionViewCell"
-    var order: Wishlist!
+    var order: WishlistItem!
     // MARK: - Outelets
     //
     @IBOutlet weak var containerView: UIView!
@@ -39,7 +39,7 @@ extension WishlistCollectionViewCell {
     ///
     ///  - Parameter order: The `order` containing the data to be displayed in `wishlist` page
     ///
-    func configureOrder(with order: Wishlist) {
+    func configureOrder(with order: WishlistItem) {
         self.order = order
     }
     

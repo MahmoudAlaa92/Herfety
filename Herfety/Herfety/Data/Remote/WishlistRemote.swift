@@ -9,11 +9,11 @@ import Foundation
 
 protocol ProductsOfWishlistRemoteProtocol {
     /// Async/await versions
-    func loadAllProducts(userId: Int) async throws -> [Wishlist]
-    func addNewProduct(userId: Int, productId: Int) async throws -> Wishlist
+    func loadAllProducts(userId: Int) async throws -> [WishlistItem]
+    func addNewProduct(userId: Int, productId: Int) async throws -> WishlistItem
     func removeProduct(userId: Int, productId: Int) async throws -> WishlistMessage
     /// Legacy callback versions for backward compatibility
-    func loadAllProducts(userId: Int, completion: @escaping (Result<[Wishlist], Error>) -> Void)
+    func loadAllProducts(userId: Int, completion: @escaping (Result<[WishlistItem], Error>) -> Void)
     func addNewProduct(userId: Int, productId: Int, completion: @escaping (Result<Bool, Error>) -> Void)
     func removeProduct(userId: Int, productId: Int, completion: @escaping (Result<WishlistMessage, Error>) -> Void)
 }
@@ -21,7 +21,7 @@ protocol ProductsOfWishlistRemoteProtocol {
 //
 class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol, @unchecked Sendable {
     /// get
-    func loadAllProducts(userId: Int) async throws -> [Wishlist] {
+    func loadAllProducts(userId: Int) async throws -> [WishlistItem] {
         let parameters = ["id": userId]
         let request = HerfetyRequest(
             method: .get,
@@ -31,7 +31,7 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol, @unche
         return try await enqueue(request)
     }
     /// .post
-    func addNewProduct(userId: Int, productId: Int) async throws -> Wishlist {
+    func addNewProduct(userId: Int, productId: Int) async throws -> WishlistItem {
         let parameters: [String: Sendable] = [
             "productId": productId,
             "userId": userId
@@ -64,7 +64,7 @@ class ProductsOfWishlistRemote: Remote, ProductsOfWishlistRemoteProtocol, @unche
 //
 extension ProductsOfWishlistRemote {
     /// .get
-    func loadAllProducts(userId: Int, completion: @escaping (Result<[Wishlist], Error>) -> Void) {
+    func loadAllProducts(userId: Int, completion: @escaping (Result<[WishlistItem], Error>) -> Void) {
         let parameters = ["id": userId]
         let request = HerfetyRequest(
             method: .get,

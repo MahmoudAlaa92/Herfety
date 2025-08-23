@@ -10,8 +10,8 @@ import UIKit
 protocol PoroductsDetailsTransitionDelegate: AnyObject {
     func backToHomeVC()
     func backToProductsVC()
-    func goToProductDetailsVC(productDetails: Wishlist)
-    func goToReviewersVC(productId: Int, reviewers: [Reviewrr])
+    func goToProductDetailsVC(productDetails: WishlistItem)
+    func goToReviewersVC(productId: Int, reviewers: [ReviewrItem])
 }
 
 protocol PoroductsDetailsChildDelegate: AnyObject {
@@ -23,10 +23,10 @@ class PoroductDetailsCoordinator: Coordinator {
     weak var homeParentCoordinator: HomeChildProtocol?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
-    var productDetails: Wishlist
+    var productDetails: WishlistItem
     let alertCoordinator: AlertPresenter
     
-    init(navigationController: UINavigationController, productDetails: Wishlist) {
+    init(navigationController: UINavigationController, productDetails: WishlistItem) {
         self.navigationController = navigationController
         self.productDetails = productDetails
         self.alertCoordinator = AlertCoordinator(presentingViewController: navigationController)
@@ -62,13 +62,13 @@ extension PoroductDetailsCoordinator: PoroductsDetailsTransitionDelegate {
 
     }
    // TODO: 'Change' the same coordinator
-    func goToProductDetailsVC(productDetails: Wishlist) {
+    func goToProductDetailsVC(productDetails: WishlistItem) {
         let coordinator = PoroductDetailsCoordinator(navigationController: navigationController, productDetails: productDetails)
         childCoordinators.append(coordinator)
         coordinator.start()
     }
     
-    func goToReviewersVC(productId: Int, reviewers: [Reviewrr]) {
+    func goToReviewersVC(productId: Int, reviewers: [ReviewrItem]) {
         let coordinator = ReviewersCoordinator(navigationController: navigationController, productId: productId, reviewers: reviewers)
         childCoordinators.append(coordinator)
         coordinator.parentCoordinator = self

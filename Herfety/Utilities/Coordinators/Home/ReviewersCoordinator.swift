@@ -21,9 +21,9 @@ class ReviewersCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var productId: Int
-    var reviewers: [Reviewrr]
+    var reviewers: [ReviewrItem]
     
-    init(navigationController: UINavigationController, productId: Int, reviewers: [Reviewrr]) {
+    init(navigationController: UINavigationController, productId: Int, reviewers: [ReviewrItem]) {
         self.navigationController = navigationController
         self.productId = productId
         self.reviewers = reviewers

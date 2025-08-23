@@ -7,39 +7,19 @@
 
 import Foundation
 
-struct Orderr : Decodable {
-    let companyDeliveryId: Int
-    let userId: Int
-    let currencyName: Int
-    let paymentMethod: Int
-    let orderAddress: String
-    let subTotal: Double
-    let orderStatus: Int
-    let productsOrder: [ProductIntent]
-    let createdAt: String
-    let updatedAt: String
-}
-
-struct ProductOrderr: Decodable {
-    let vendorId: Int
-    let productId: Int
-    let quantity: Int
-}
-
-
 protocol OrderRemoteProtocol {
     /// Async/await versions
-    func loadAllOrders() async throws -> [Orderr]
-    func addOrder(order: Orderr) async throws -> RecieveOrders
+    func loadAllOrders() async throws -> [OrderDeliveryItem]
+    func addOrder(order: OrderDeliveryItem) async throws -> RecieveOrders
     /// Legacy callback versions for backward compatibility
-    func loadAllOrders(completion: @escaping (Result<[Orderr], Error>) -> Void)
-    func addOrder(order: Orderr, completion: @escaping (Result<RecieveOrders, Error>) -> Void)
+    func loadAllOrders(completion: @escaping (Result<[OrderDeliveryItem], Error>) -> Void)
+    func addOrder(order: OrderDeliveryItem, completion: @escaping (Result<RecieveOrders, Error>) -> Void)
 }
 
 class GetAllOrdersRemote: Remote, OrderRemoteProtocol, @unchecked Sendable {
     
     /// .GET all orders
-    func loadAllOrders(completion: @escaping (Result<[Orderr], Error>) -> Void) {
+    func loadAllOrders(completion: @escaping (Result<[OrderDeliveryItem], Error>) -> Void) {
         let request = HerfetyRequest(
             method: .get,
             path: "api/Orders"
@@ -48,7 +28,7 @@ class GetAllOrdersRemote: Remote, OrderRemoteProtocol, @unchecked Sendable {
     }
     
     /// .POST create new order
-    func addOrder(order: Orderr, completion: @escaping (Result<RecieveOrders, Error>) -> Void) {
+    func addOrder(order: OrderDeliveryItem, completion: @escaping (Result<RecieveOrders, Error>) -> Void) {
         let productOrders: [[String: Any]] = order.productsOrder.map { product in
             return [
                 "vendorId": product.vendorID,
@@ -84,7 +64,7 @@ class GetAllOrdersRemote: Remote, OrderRemoteProtocol, @unchecked Sendable {
 //
 extension GetAllOrdersRemote {
     
-    func loadAllOrders() async throws -> [Orderr] {
+    func loadAllOrders() async throws -> [OrderDeliveryItem] {
         let request = HerfetyRequest(
             method: .get,
             path: "api/Orders"
@@ -92,7 +72,7 @@ extension GetAllOrdersRemote {
         return try await enqueue(request)
     }
 
-    func addOrder(order: Orderr) async throws -> RecieveOrders {
+    func addOrder(order: OrderDeliveryItem) async throws -> RecieveOrders {
         let productOrders: [[String: Any]] = order.productsOrder.map { product in
             return [
                 "vendorId": product.vendorID,

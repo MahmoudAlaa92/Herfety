@@ -10,7 +10,7 @@ import Combine
 final class ProductDetailsViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var recommendItems: [Products] = []
-    @Published var reviews: [Reviewrr] = []
+    @Published var reviews: [ReviewrItem] = []
     @Published private(set) var sections: [CollectionViewDataSource] = []
     @Published private(set) var layoutSections: [LayoutSectionProvider] = []
     
@@ -19,7 +19,7 @@ final class ProductDetailsViewModel: ObservableObject {
     private let sectionConfigurator: ProductdDetailsSectionConfiguratorProtocol
     private weak var coordinator: PoroductsDetailsTransitionDelegate?
     
-    private var productItem: Wishlist
+    private var productItem: WishlistItem
     private var currentProductId: Int
     private var cancellables = Set<AnyCancellable>()
     
@@ -28,7 +28,7 @@ final class ProductDetailsViewModel: ObservableObject {
          sectionConfigurator: ProductdDetailsSectionConfiguratorProtocol,
          currentProductId: Int,
          coordinator: PoroductsDetailsTransitionDelegate,
-         productItem: Wishlist ) {
+         productItem: WishlistItem ) {
         self.dataSource = dataSource
         self.sectionConfigurator = sectionConfigurator
         self.currentProductId = currentProductId

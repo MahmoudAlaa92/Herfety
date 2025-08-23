@@ -134,7 +134,7 @@ class CheckoutViewModel {
                 )
             }
             
-            let order = Orderr(
+            let order = OrderDeliveryItem(
                 companyDeliveryId: 1,
                 userId: userId,
                 currencyName: 0,

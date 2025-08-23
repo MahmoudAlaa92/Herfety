@@ -8,7 +8,7 @@
 import Combine
 
 class DefaultWishlistDataSource: WishlistDataSourceProtocol {
-    func getWishlist() async -> [Wishlist] {
+    func getWishlist() async -> [WishlistItem] {
         return await DataStore.shared.getWishlist()
     }
 }
@@ -20,7 +20,7 @@ class DefaultWishlistPublisher: WishlistPublisherProtocol {
 }
 
 class DefaultWishlistSectionConfigurator: WishlistSectionConfiguratorProtocol {
-    func configureSections(wishlistItems: [Wishlist]) -> [CollectionViewDataSource] {
+    func configureSections(wishlistItems: [WishlistItem]) -> [CollectionViewDataSource] {
         return [WishlistCollectionViewSection(whishlistItems: wishlistItems)]
     }
     

@@ -11,7 +11,7 @@ class TitleProductDetails: UICollectionReusableView {
     
     // MARK: - Properties
     static let identifier: String = "TitleProductDetails"
-    private var product: Wishlist?
+    private var product: WishlistItem?
     
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
@@ -44,7 +44,7 @@ extension TitleProductDetails {
     /// Configure the product Details
     ///
     ///  - Parameter product: The `product` containing the data to be displayed in `whishlist` page
-    func configureProduct(with product: Wishlist) {
+    func configureProduct(with product: WishlistItem) {
         self.product = product
     }
 }

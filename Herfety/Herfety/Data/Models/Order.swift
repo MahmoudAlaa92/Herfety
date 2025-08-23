@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Order: Codable {
     let userID: Int?
     let userName, currencyName, paymentMethod, createdAt: String?
@@ -30,4 +31,17 @@ struct ProductsOrder: Codable {
         case productID = "productId"
         case quantity
     }
+}
+
+struct OrderDeliveryItem : Decodable {
+    let companyDeliveryId: Int
+    let userId: Int
+    let currencyName: Int
+    let paymentMethod: Int
+    let orderAddress: String
+    let subTotal: Double
+    let orderStatus: Int
+    let productsOrder: [ProductIntent]
+    let createdAt: String
+    let updatedAt: String
 }

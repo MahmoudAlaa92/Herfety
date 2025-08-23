@@ -42,8 +42,8 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
-        configureCompositionalLayout()
         setUpCollectionView()
+        configureCompositionalLayout()
         bindViewModel()
         configureUI()
     }
@@ -159,7 +159,6 @@ extension CartViewController {
         viewModel.didTapPayment()
     }
 }
-
 // MARK: - Binding
 //
 extension CartViewController {

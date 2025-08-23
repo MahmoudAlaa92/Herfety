@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProductsTransitionDelegate: AnyObject {
-    func goToProductDetails(productDetails: Wishlist)
+    func goToProductDetails(productDetails: WishlistItem)
     func backToHomeVC()
 }
 
@@ -64,7 +64,7 @@ extension ProductsCoordinator: ProductsTransitionDelegate {
         navigationController.pop(with: .push)
     }
     
-    func goToProductDetails(productDetails: Wishlist) {
+    func goToProductDetails(productDetails: WishlistItem) {
         let coordinator = PoroductDetailsCoordinator(navigationController: navigationController, productDetails: productDetails)
         coordinator.productsParentCoordinator = self
         childCoordinators.append(coordinator)

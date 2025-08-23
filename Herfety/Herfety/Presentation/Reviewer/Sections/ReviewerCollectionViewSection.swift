@@ -9,12 +9,12 @@ import UIKit
 
 class ReviewerCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
-    let reviewers: [Reviewrr]
+    let reviewers: [ReviewrItem]
     var onDelete: ((Int) -> Void)?
     var onUpdate: ((Int, String) -> Void)?
     
     // MARK: - Init
-    init(reviewers: [Reviewrr]) {
+    init(reviewers: [ReviewrItem]) {
         self.reviewers = reviewers
     }
     func registerCells(in collectionView: UICollectionView) {

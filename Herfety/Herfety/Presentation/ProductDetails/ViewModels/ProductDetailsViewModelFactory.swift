@@ -10,7 +10,7 @@ import Foundation
 class ProductDetailsViewModelFactory {
     static func creat(coordinator: PoroductsDetailsTransitionDelegate,
                       currentProductId: Int,
-                      productItem: Wishlist) -> ProductDetailsViewModel {
+                      productItem: WishlistItem) -> ProductDetailsViewModel {
         let reviewRemote = ReviewRemote(network: AlamofireNetwork())
         let recommendedRemote = ProductsRemote(network: AlamofireNetwork())
         let dataSource = ProductDetailsDataSource(reviewsRemote: reviewRemote,

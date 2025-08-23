@@ -112,6 +112,7 @@ extension WishListViewController {
     private func bindViewModel() {
         viewModel
             .$sections
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 viewModel.sections.forEach( { $0.registerCells(in: self.collectionView) })

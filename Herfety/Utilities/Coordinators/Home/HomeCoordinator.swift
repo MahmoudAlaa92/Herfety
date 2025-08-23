@@ -13,7 +13,7 @@ protocol HomeTranisitionProtocol: AnyObject {
     func gotToSafari(url: String)
     func goToSliderItem(discount: Int)
     func goToCategoryItem(category Name: String)
-    func gotToBestDealItem(productDetails: Wishlist)
+    func gotToBestDealItem(productDetails: WishlistItem)
     func gotToTopBrandItem(discount: Int)
     func gotToDailyEssentialItem(discount: Int)
 }
@@ -74,7 +74,7 @@ extension HomeCoordinator: HomeTranisitionProtocol {
         coordinator.start()
     }
     
-    func gotToBestDealItem(productDetails: Wishlist) {
+    func gotToBestDealItem(productDetails: WishlistItem) {
         let coordinator = PoroductDetailsCoordinator(navigationController: navigationController, productDetails: productDetails)
         coordinator.homeParentCoordinator = self
         childCoordinators.append(coordinator)

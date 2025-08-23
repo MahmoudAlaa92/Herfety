@@ -9,8 +9,8 @@ import UIKit
 
 class NameOfProfileCollectionViewSection: CollectionViewDataSource {
     
-    var sectionName: Name
-    init(sectionName: Name) {
+    var sectionName: UserProfile
+    init(sectionName: UserProfile) {
         self.sectionName = sectionName
     }
     func registerCells(in collectionView: UICollectionView) {

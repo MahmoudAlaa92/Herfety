@@ -9,7 +9,7 @@ import Combine
 
 final class ReviewersViewModel: ObservableObject {
     // MARK: - Published Properties
-    @Published var reviewersItems: [Reviewrr] = []
+    @Published var reviewersItems: [ReviewrItem] = []
     @Published private(set) var sections: [CollectionViewDataSource] = []
     @Published private(set) var sectionsLayout: [LayoutSectionProvider] = []
     
@@ -27,7 +27,7 @@ final class ReviewersViewModel: ObservableObject {
          sectionConfigurator: ReviewersSectionConfiguratorProtocol,
          productId: Int,
          coordinator: ReviewersTransitionDelegate,
-         reviews: [Reviewrr] = []) {
+         reviews: [ReviewrItem] = []) {
         self.dataSource = dataSource
         self.sectionConfigurator = sectionConfigurator
         self.productId = productId

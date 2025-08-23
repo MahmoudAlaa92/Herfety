@@ -35,10 +35,10 @@ final class ProfileSectionConfigurator: ProfileSectionConfiguratorProtocol {
         ]
     }
 }
-
 // MARK: - Private Section Creators
+//
 extension ProfileSectionConfigurator {
-    private func createNameSection(nameData: Name) -> NameOfProfileCollectionViewSection {
+    private func createNameSection(nameData: UserProfile) -> NameOfProfileCollectionViewSection {
         return NameOfProfileCollectionViewSection(sectionName: nameData)
     }
     

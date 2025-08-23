@@ -57,9 +57,9 @@ actor DataStore {
     
     // MARK: - Private state (thread-safe within actor)
     private var userProfileImage: UIImage = Images.iconPersonalDetails
-    private var orders: [WishlistItem] = []
-    private var cartItems: [Wishlist] = []
-    private var wishlist: [Wishlist] = []
+    private var orders: [OrderItem] = []
+    private var cartItems: [WishlistItem] = []
+    private var wishlist: [WishlistItem] = []
     private var infos: [InfoModel] = []
     private var countProductDetails: Int = 1
     private var totalPriceOfOrders: Int = 0
@@ -102,15 +102,15 @@ actor DataStore {
         return userProfileImage
     }
     
-    func getWishlist() -> [Wishlist] {
+    func getWishlist() -> [WishlistItem] {
         return wishlist
     }
     
-    func getCartItems() -> [Wishlist] {
+    func getCartItems() -> [WishlistItem] {
         return cartItems
     }
     
-    func getOrders() -> [WishlistItem] {
+    func getOrders() -> [OrderItem] {
         return orders
     }
     
@@ -139,7 +139,7 @@ actor DataStore {
         self.userInfo = userInfo
     }
     
-    func updateWishlist(_ newItems: [Wishlist] ,showAlert: Bool) async {
+    func updateWishlist(_ newItems: [WishlistItem] ,showAlert: Bool) async {
         guard !newItems.isEmpty else { return }
         wishlist = newItems
         
@@ -149,7 +149,7 @@ actor DataStore {
         }
     }
     
-    func updateCartItems(_ newItems: [Wishlist] ,showAlert: Bool) async {
+    func updateCartItems(_ newItems: [WishlistItem] ,showAlert: Bool) async {
         cartItems = newItems
         calculateTotalPrice()
         
@@ -158,7 +158,7 @@ actor DataStore {
         }
     }
     
-    func updateOrders(_ newOrders: [WishlistItem]) async {
+    func updateOrders(_ newOrders: [OrderItem]) async {
         orders = newOrders
         
         await MainActor.run {
@@ -321,7 +321,7 @@ actor DataActor {
         self.productService = ProductsOfWishlistRemote(network: AlamofireNetwork())
     }
     
-    func fetchWishlistProducts(userId: Int) async throws -> [Wishlist] {
+    func fetchWishlistProducts(userId: Int) async throws -> [WishlistItem] {
         return try await productService.loadAllProducts(userId: userId)
     }
     

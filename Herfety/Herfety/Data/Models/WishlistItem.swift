@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Wishlist: Codable, Equatable {
+struct WishlistItem: Codable, Equatable {
     let userID, productID: Int?
     let vendorId: Int?
     let name: String?

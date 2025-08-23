@@ -8,12 +8,12 @@
 import UIKit
 
 struct ProfileData {
-    let nameData: Name
+    let nameData: UserProfile
     let firstListItems: [ProfileListItem]
     let secondListItems: [ProfileListItem]
     
     static let empty = ProfileData(
-        nameData: Name(name: "", email: "", image: Images.iconPersonalDetails),
+        nameData: UserProfile(name: "", email: "", image: Images.iconPersonalDetails),
         firstListItems: [],
         secondListItems: []
     )

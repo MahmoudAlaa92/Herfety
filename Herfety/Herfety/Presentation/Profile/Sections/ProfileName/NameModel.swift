@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Name {
+struct UserProfile {
     var name: String
     var email: String
     var image: UIImage

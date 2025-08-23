@@ -9,10 +9,10 @@ import UIKit
 class WishlistCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
-    private var whishlistItems: [Wishlist]
+    private var whishlistItems: [WishlistItem]
     
     // MARK: - Init
-    init(whishlistItems: [Wishlist]) {
+    init(whishlistItems: [WishlistItem]) {
         self.whishlistItems = whishlistItems
     }
     

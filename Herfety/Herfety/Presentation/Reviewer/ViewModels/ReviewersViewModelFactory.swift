@@ -11,7 +11,7 @@ final class ReviewersViewModelFactory {
     static func create(
         coordinator: ReviewersTransitionDelegate,
         productId: Int,
-        reviews: [Reviewrr] = []
+        reviews: [ReviewrItem] = []
     ) -> ReviewersViewModel {
         
         let reviewRemote = ReviewRemote(network: AlamofireNetwork())

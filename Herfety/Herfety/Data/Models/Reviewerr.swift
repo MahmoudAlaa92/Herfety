@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Reviewrr: Codable {
+struct ReviewrItem: Codable {
     let id: Int?
     let productId: Int?
     let userId: Int
@@ -43,7 +43,7 @@ struct UpdateReviewRequest: Codable {
 
 struct DeleteReviewResponse: Codable {
     let message: String
-    let deleteditem: Reviewrr
+    let deleteditem: ReviewrItem
 }
 
 struct User: Codable {

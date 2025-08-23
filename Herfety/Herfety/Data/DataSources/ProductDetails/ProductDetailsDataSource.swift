@@ -18,7 +18,7 @@ class ProductDetailsDataSource: ProductDetailsDataSourceProtocol {
         self.recommendedProdcutsRemote = recommendedProdcutsRemote
     }
     
-    func fetchReviews(currentProductId: Int) async throws -> [Reviewrr] {
+    func fetchReviews(currentProductId: Int) async throws -> [ReviewrItem] {
         return try await reviewsRemote.getReviewsAsync(productId: currentProductId)
     }
     

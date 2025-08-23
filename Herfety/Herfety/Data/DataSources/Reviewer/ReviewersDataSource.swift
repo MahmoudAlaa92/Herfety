@@ -18,11 +18,11 @@ final class ReviewersDataSource: ReviewersDataSourceProtocol {
         self.reviewsRemote = reviewsRemote
     }
     
-    func fetchReviews(productId: Int) async throws -> [Reviewrr] {
+    func fetchReviews(productId: Int) async throws -> [ReviewrItem] {
         return try await reviewsRemote.getReviewsAsync(productId: productId)
     }
     
-    func deleteReview(review: Reviewrr, at index: Int) async throws -> Bool {
+    func deleteReview(review: ReviewrItem, at index: Int) async throws -> Bool {
         let userId = await DataStore.shared.getUserId()
 
         guard let reviewId = review.id,
@@ -34,7 +34,7 @@ final class ReviewersDataSource: ReviewersDataSourceProtocol {
         return true
     }
     
-    func updateReview(review: Reviewrr, newText: String, productId: Int) async throws -> Reviewrr {
+    func updateReview(review: ReviewrItem, newText: String, productId: Int) async throws -> ReviewrItem {
         let userId = await DataStore.shared.getUserId()
         
         guard let reviewId = review.id,

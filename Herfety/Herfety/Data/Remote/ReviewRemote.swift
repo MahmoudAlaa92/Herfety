@@ -9,20 +9,20 @@ import Foundation
 
 protocol ReviewRemoteProtocol {
     /// Async/await versions
-    func getReviewsAsync(productId: Int) async throws -> [Reviewrr]
-    func createReview(request: CreateReviewRequest) async throws -> Reviewrr
-    func updateReview(id: Int, request: UpdateReviewRequest) async throws -> Reviewrr
+    func getReviewsAsync(productId: Int) async throws -> [ReviewrItem]
+    func createReview(request: CreateReviewRequest) async throws -> ReviewrItem
+    func updateReview(id: Int, request: UpdateReviewRequest) async throws -> ReviewrItem
     func deleteReview(id: Int) async throws -> DeleteReviewResponse
     /// Legacy callback versions for backward compatibility
-    func createReview(request: CreateReviewRequest, completion: @escaping (Result<Reviewrr, Error>) -> Void)
-    func getReviews(productId: Int, completion: @escaping (Result<[Reviewrr], Error>) -> Void)
-    func updateReview(id: Int, request: UpdateReviewRequest, completion: @escaping (Result<Reviewrr, Error>) -> Void)
+    func createReview(request: CreateReviewRequest, completion: @escaping (Result<ReviewrItem, Error>) -> Void)
+    func getReviews(productId: Int, completion: @escaping (Result<[ReviewrItem], Error>) -> Void)
+    func updateReview(id: Int, request: UpdateReviewRequest, completion: @escaping (Result<ReviewrItem, Error>) -> Void)
     func deleteReview(id: Int, completion: @escaping (Result<DeleteReviewResponse, Error>) -> Void)
 }
 
 class ReviewRemote: Remote, ReviewRemoteProtocol, @unchecked Sendable {
     
-    func createReview(request: CreateReviewRequest, completion: @escaping (Result<Reviewrr, Error>) -> Void) {
+    func createReview(request: CreateReviewRequest, completion: @escaping (Result<ReviewrItem, Error>) -> Void) {
         let parameters: [String: Any] = [
             "productId": request.productId,
             "userId": request.userId,
@@ -41,7 +41,7 @@ class ReviewRemote: Remote, ReviewRemoteProtocol, @unchecked Sendable {
         enqueue(request, completion: completion)
     }
     
-    func getReviews(productId: Int, completion: @escaping (Result<[Reviewrr], Error>) -> Void) {
+    func getReviews(productId: Int, completion: @escaping (Result<[ReviewrItem], Error>) -> Void) {
             let request = HerfetyRequest(
                 method: .get,
                 path: "api/ProductReviews/GetAllRevProduct?id=\(productId)",
@@ -51,7 +51,7 @@ class ReviewRemote: Remote, ReviewRemoteProtocol, @unchecked Sendable {
             enqueue(request, completion: completion)
         }
     
-    func updateReview(id: Int, request: UpdateReviewRequest, completion: @escaping (Result<Reviewrr, Error>) -> Void) {
+    func updateReview(id: Int, request: UpdateReviewRequest, completion: @escaping (Result<ReviewrItem, Error>) -> Void) {
         let parameters: [String: Any] = [
             "productId": request.productId,
             "userId": request.userId,
@@ -83,7 +83,7 @@ class ReviewRemote: Remote, ReviewRemoteProtocol, @unchecked Sendable {
 // MARK: - Modern Concurency
 //
 extension ReviewRemote {
-    func getReviewsAsync(productId: Int) async throws -> [Reviewrr] {
+    func getReviewsAsync(productId: Int) async throws -> [ReviewrItem] {
         try await withCheckedThrowingContinuation { continuation in
             self.getReviews(productId: productId) { result in
                 switch result {
@@ -96,7 +96,7 @@ extension ReviewRemote {
         }
     }
     
-    func createReview(request: CreateReviewRequest) async throws -> Reviewrr {
+    func createReview(request: CreateReviewRequest) async throws -> ReviewrItem {
         let parameters: [String: Any] = [
             "productId": request.productId,
             "userId": request.userId,
@@ -115,7 +115,7 @@ extension ReviewRemote {
         return try await enqueue(request)
     }
     
-    func updateReview(id: Int, request: UpdateReviewRequest) async throws -> Reviewrr {
+    func updateReview(id: Int, request: UpdateReviewRequest) async throws -> ReviewrItem {
         
         let parameters: [String: Any] = [
             "productId": request.productId,

@@ -8,14 +8,14 @@
 import Foundation
 
 protocol ReviewersDataSourceProtocol {
-    func fetchReviews(productId: Int) async throws -> [Reviewrr]
-    func deleteReview(review: Reviewrr, at index: Int) async throws -> Bool
-    func updateReview(review: Reviewrr, newText: String, productId: Int) async throws -> Reviewrr
+    func fetchReviews(productId: Int) async throws -> [ReviewrItem]
+    func deleteReview(review: ReviewrItem, at index: Int) async throws -> Bool
+    func updateReview(review: ReviewrItem, newText: String, productId: Int) async throws -> ReviewrItem
 }
 
 protocol ReviewersSectionConfiguratorProtocol {
     func configureSections(
-        reviewers: [Reviewrr],
+        reviewers: [ReviewrItem],
         onDelete: @escaping (Int) -> Void,
         onUpdate: @escaping (Int, String) -> Void
     ) -> [CollectionViewDataSource]

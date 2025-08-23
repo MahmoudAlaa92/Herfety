@@ -99,7 +99,7 @@ private extension CartViewModel {
     }
     
     /// Update payment info
-    func updatePaymentInfo(cartItems: [Wishlist]) {
+    func updatePaymentInfo(cartItems: [WishlistItem]) {
         let subTotal = cartItems.reduce(0.0) { $0 + (($1.price ?? 0.0) * Double($1.qty ?? 0)) }
         let shipping: Double = subTotal > 0 ? 10.0 : 0.0
         let total = subTotal + shipping

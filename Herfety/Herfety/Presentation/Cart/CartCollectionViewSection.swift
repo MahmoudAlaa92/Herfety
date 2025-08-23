@@ -10,12 +10,12 @@ import Combine
 
 class CartCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
-    var orderItems: [Wishlist]
+    var orderItems: [WishlistItem]
     let countUpdateSubject = PassthroughSubject<(Int, Int), Never>()
     let deleteItemSubject = PassthroughSubject<Int, Never>()
 
     // MARK: - Init
-    init(orderItems: [Wishlist]) {
+    init(orderItems: [WishlistItem]) {
         self.orderItems = orderItems
     }
     func registerCells(in collectionView: UICollectionView) {

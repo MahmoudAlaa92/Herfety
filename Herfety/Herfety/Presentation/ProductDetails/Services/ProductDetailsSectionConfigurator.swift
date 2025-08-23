@@ -14,8 +14,8 @@ class ProductDetailsSectionConfigurator: ProductdDetailsSectionConfiguratorProto
     func configureSection(
         currentProductId: Int,
         coordinator: PoroductsDetailsTransitionDelegate,
-        productItems: Wishlist,
-        reviewsItems: [Reviewrr],
+        productItems: WishlistItem,
+        reviewsItems: [ReviewrItem],
         recommendItems: [Products]
     ) -> [CollectionViewDataSource] {
         
@@ -42,15 +42,15 @@ class ProductDetailsSectionConfigurator: ProductdDetailsSectionConfiguratorProto
 // MARK: - Private Section Creators
 //
 extension ProductDetailsSectionConfigurator {
-    func creatProductSection(productItems: Wishlist) -> ProductDetailsCollectionViewSection {
+    func creatProductSection(productItems: WishlistItem) -> ProductDetailsCollectionViewSection {
         
         let provider = ProductDetailsCollectionViewSection(productItems: productItems)
         return provider
     }
     
     func creatReviewsSection(
-        reviewItems: [Reviewrr],
-        rating: Wishlist,
+        reviewItems: [ReviewrItem],
+        rating: WishlistItem,
         currentProductId: Int,
         coordinator: PoroductsDetailsTransitionDelegate
     ) -> ReviewCollectionViewSection {

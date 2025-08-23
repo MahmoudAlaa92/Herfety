@@ -97,20 +97,26 @@ extension AddReviewViewController {
 extension AddReviewViewController {
     private func bindViewModel() {
         
-        viewModel.isAddButtonEnabled
+        viewModel
+            .isAddButtonEnabled
             .sink { [weak self] isEnabled in
                 self?.addButton.isEnabled = isEnabled
                 self?.addButton.alpha = isEnabled ? 1.0 : 0.6
             }
             .store(in: &cancellables)
         
-        viewModel.showAlert
+        viewModel
+            .showAlert
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] alert in
                 self?.alertPresenter?.showAlert(alert)
             }
             .store(in: &cancellables)
         
-        viewModel.isSuccess.sink { [weak self] in
+        viewModel
+            .isSuccess
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
             self?.coordinator?.backToReviewersVC()
         }.store(in: &cancellables)
         

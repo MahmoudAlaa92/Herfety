@@ -10,7 +10,7 @@ import Foundation
 final class ReviewersSectionConfigurator: ReviewersSectionConfiguratorProtocol {
     
     func configureSections(
-        reviewers: [Reviewrr],
+        reviewers: [ReviewrItem],
         onDelete: @escaping (Int) -> Void,
         onUpdate: @escaping (Int, String) -> Void
     ) -> [CollectionViewDataSource] {
@@ -32,7 +32,7 @@ final class ReviewersSectionConfigurator: ReviewersSectionConfiguratorProtocol {
 // MARK: - Private Section Creators
 extension ReviewersSectionConfigurator {
     private func createReviewersSection(
-        reviewers: [Reviewrr],
+        reviewers: [ReviewrItem],
         onDelete: @escaping (Int) -> Void,
         onUpdate: @escaping (Int, String) -> Void
     ) -> ReviewerCollectionViewSection {

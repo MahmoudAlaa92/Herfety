@@ -9,11 +9,11 @@ import UIKit
 
 final class UserDataProvider {
     
-    func getUserNameData() async -> Name {
+    func getUserNameData() async -> UserProfile {
         let info = await DataStore.shared.getUserInfo()
         let userImage = await DataStore.shared.getUserProfileImage()
         
-        return Name(
+        return UserProfile(
             name: info?.UserName ?? "",
             email: info?.Email ?? "",
             image: userImage

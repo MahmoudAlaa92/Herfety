@@ -11,7 +11,7 @@ import Combine
 // MARK: - Wishlist Module Protocols
 //
 protocol WishlistDataSourceProtocol {
-    func getWishlist() async -> [Wishlist]
+    func getWishlist() async -> [WishlistItem]
 }
 
 protocol WishlistPublisherProtocol {
@@ -19,6 +19,6 @@ protocol WishlistPublisherProtocol {
 }
 
 protocol WishlistSectionConfiguratorProtocol {
-    func configureSections(wishlistItems: [Wishlist]) -> [CollectionViewDataSource]
+    func configureSections(wishlistItems: [WishlistItem]) -> [CollectionViewDataSource]
     func configureLayoutSections() -> [LayoutSectionProvider]
 }

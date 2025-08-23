@@ -9,9 +9,9 @@ import Combine
 
 class ProductDetailsCollectionViewSection: CollectionViewDataSource {
     
-    var productItems: Wishlist
+    var productItems: WishlistItem
     
-    init(productItems: Wishlist) {
+    init(productItems: WishlistItem) {
         self.productItems = productItems
     }
     

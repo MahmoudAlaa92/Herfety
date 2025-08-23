@@ -136,6 +136,7 @@ extension HomeViewController {
     private func bindAlert() {
         viewModel
             .$showAlert
+            .receive(on: DispatchQueue.main)
             .compactMap { $0 }
             .dropFirst()
             .sink { [weak self] alert in

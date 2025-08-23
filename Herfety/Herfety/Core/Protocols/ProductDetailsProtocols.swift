@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Home Module Protocols
 //
 protocol ProductDetailsDataSourceProtocol {
-    func fetchReviews(currentProductId: Int) async throws -> [Reviewrr]
+    func fetchReviews(currentProductId: Int) async throws -> [ReviewrItem]
     func fetchRecommended() async throws -> [Products]
 }
 
@@ -19,8 +19,8 @@ protocol ProductdDetailsSectionConfiguratorProtocol {
     func configureSection(
         currentProductId: Int,
         coordinator: PoroductsDetailsTransitionDelegate,
-        productItems: Wishlist,
-        reviewsItems: [Reviewrr],
+        productItems: WishlistItem,
+        reviewsItems: [ReviewrItem],
         recommendItems: [Products]
     ) -> [CollectionViewDataSource]
 

@@ -15,9 +15,8 @@ class AddReviewViewModel: AddReviewViewModelType {
     private let addTappedSubject = PassthroughSubject<Void, Never>()
     
     // MARK: - Properties
-    let reviersItems: [Reviewrr]
+    let reviersItems: [ReviewrItem]
     let productId: Int
-    private let userId: Int
     private let reviewRemote: ReviewRemoteProtocol
     ///
     private var cancellables = Set<AnyCancellable>()
@@ -28,16 +27,14 @@ class AddReviewViewModel: AddReviewViewModelType {
     let showAlert = PassthroughSubject<AlertModel, Never>()
     // MARK: - Init
     init(
-        reviersItems: [Reviewrr],
+        reviersItems: [ReviewrItem],
         productId: Int,
-        userId: Int = CustomeTabBarViewModel.shared.userId,
         reviewRemote: ReviewRemoteProtocol = ReviewRemote(
             network: AlamofireNetwork()
         )
     ) {
         
         self.productId = productId
-        self.userId = userId
         self.reviewRemote = reviewRemote
         self.reviersItems = reviersItems
         
@@ -58,7 +55,7 @@ class AddReviewViewModel: AddReviewViewModelType {
             }
             .store(in: &cancellables)
     }
-    @MainActor
+    
     func submitReview() async {
         
         if !validateInputs(review: commentSubject.value,
@@ -72,6 +69,8 @@ class AddReviewViewModel: AddReviewViewModelType {
             showAlert.send(alertItem)
             return
         }
+        
+        let userId = await DataStore.shared.getUserId()
         
         let request = CreateReviewRequest(
             productId: productId,
@@ -92,6 +91,7 @@ class AddReviewViewModel: AddReviewViewModelType {
                     status: .success
                 )
             )
+            
             isSuccess.send()
         } catch {
             showAlert.send(
