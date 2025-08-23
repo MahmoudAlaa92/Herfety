@@ -1,53 +1,15 @@
 //
-//  DataStore.swift
+//  DataStoreService.swift
 //  Herfety
 //
 //  Created by Mahmoud Alaa on 07/08/2025.
 //
 
 import UIKit
-import Combine
+import Foundation
 
-// MARK: - Publisher Manager (MainActor isolated)
-class AppDataStorePublisher: ObservableObject {
-    static let shared = AppDataStorePublisher()
-    
-    @Published var wishlistUpdated: Bool = false
-    @Published var ordersUpdated: Bool = false
-    @Published var cartUpdated: Bool = false
-    @Published var infoUpdated: Bool = false
-    @Published var loginStatusUpdated: Bool = false
-    @Published var userProfileImage: Bool = false
-    
-    private init() {}
-    
-    func notifyWishlistUpdate(showAlert: Bool) {
-        wishlistUpdated = showAlert
-    }
-    
-    func notifyOrdersUpdate() {
-        ordersUpdated.toggle()
-    }
-    
-    func notifyCartUpdate(showAlert: Bool) {
-        cartUpdated = showAlert
-    }
-    
-    func notifyInfoUpdate() {
-        infoUpdated.toggle()
-    }
-    
-    func notifyLoginStatusUpdate() {
-        loginStatusUpdated.toggle()
-    }
-    
-    func notifyProfileImageUpdate() {
-        userProfileImage.toggle()
-    }
-}
-// MARK: - Data Store
-//
-actor DataStore {
+// MARK: - Data Store Service
+actor DataStore: DataStoreProtocol {
     static let shared = DataStore()
     
     // MARK: - Thread-safe UserDefaults access
@@ -65,11 +27,18 @@ actor DataStore {
     private var totalPriceOfOrders: Int = 0
     private var orderAddress: String = "Egypt, Aswan"
     
-    // MARK: - Data actor for API operations
-    private let dataActor = DataActor()
+    // MARK: - Dependencies
+    private let dataActor: DataActorProtocol
+    private var userDefaultsManager: UserDefaultsManagerProtocol
     
     // MARK: - Init
-    init() {
+    init(
+        dataActor: DataActorProtocol = DataActor(),
+        userDefaultsManager: UserDefaultsManagerProtocol = UserDefaultsManager.shared
+    ) {
+        self.dataActor = dataActor
+        self.userDefaultsManager = userDefaultsManager
+        
         Task {
             await loadFromUserDefaults()
             await fetchWishlistItems(id: userId, showAlert: false)
@@ -78,8 +47,6 @@ actor DataStore {
     
     // MARK: - UserDefaults Integration
     private func loadFromUserDefaults() {
-        let userDefaultsManager = UserDefaultsManager.shared
-        
         isLogin = userDefaultsManager.isLoggedIn ?? false
         userId = userDefaultsManager.userId ?? 22
         userInfo = userDefaultsManager.userInfo
@@ -139,7 +106,7 @@ actor DataStore {
         self.userInfo = userInfo
     }
     
-    func updateWishlist(_ newItems: [WishlistItem] ,showAlert: Bool) async {
+    func updateWishlist(_ newItems: [WishlistItem], showAlert: Bool) async {
         guard !newItems.isEmpty else { return }
         wishlist = newItems
         
@@ -149,7 +116,7 @@ actor DataStore {
         }
     }
     
-    func updateCartItems(_ newItems: [WishlistItem] ,showAlert: Bool) async {
+    func updateCartItems(_ newItems: [WishlistItem], showAlert: Bool) async {
         cartItems = newItems
         calculateTotalPrice()
         
@@ -180,7 +147,7 @@ actor DataStore {
     
     func updateLoginStatus(_ status: Bool) async {
         isLogin = status
-        UserDefaultsManager.shared.isLoggedIn = status
+        userDefaultsManager.isLoggedIn = status
 
         await MainActor.run {
             AppDataStorePublisher.shared.notifyLoginStatusUpdate()
@@ -215,7 +182,7 @@ actor DataStore {
     }
     
     // MARK: - Operations
-    func fetchWishlistItems(id: Int = 22 ,showAlert: Bool) async {
+    func fetchWishlistItems(id: Int = 22, showAlert: Bool) async {
         do {
             let products = try await dataActor.fetchWishlistProducts(userId: id)
             await updateWishlist(products, showAlert: showAlert)
@@ -276,8 +243,9 @@ actor DataStore {
         isLogin = false
         userId = 22
         userInfo = nil
-        UserDefaultsManager.shared.clearUserData()
+        userDefaultsManager.clearUserData()
     }
+    
     // MARK: - Private Helper Methods
     private func calculateTotalPrice() {
         totalPriceOfOrders = cartItems.reduce(0) { total, item in
@@ -285,52 +253,3 @@ actor DataStore {
         }
     }
 }
-// MARK: - Publisher Extensions
-//
-extension AppDataStorePublisher {
-    var wishlistUpdatePublisher: AnyPublisher<Bool, Never> {
-        $wishlistUpdated.eraseToAnyPublisher()
-    }
-    
-    var ordersUpdatePublisher: AnyPublisher<Bool, Never> {
-        $ordersUpdated.eraseToAnyPublisher()
-    }
-    
-    var cartUpdatePublisher: AnyPublisher<Bool, Never> {
-        $cartUpdated.eraseToAnyPublisher()
-    }
-    
-    var infoUpdatePublisher: AnyPublisher<Bool, Never> {
-        $infoUpdated.eraseToAnyPublisher()
-    }
-    
-    var loginStatusPublisher: AnyPublisher<Bool, Never> {
-        $loginStatusUpdated.eraseToAnyPublisher()
-    }
-    
-    var profileImageStatusPublisher: AnyPublisher<Bool, Never> {
-        $userProfileImage.eraseToAnyPublisher()
-    }
-}
-// MARK: - Data Actor (Thread-safe)
-//
-actor DataActor {
-    private let productService: ProductsOfWishlistRemoteProtocol
-    
-    init() {
-        self.productService = ProductsOfWishlistRemote(network: AlamofireNetwork())
-    }
-    
-    func fetchWishlistProducts(userId: Int) async throws -> [WishlistItem] {
-        return try await productService.loadAllProducts(userId: userId)
-    }
-    
-    func removeWishlistProduct(userId: Int, productId: Int) async throws {
-        _ = try await productService.removeProduct(userId: userId, productId: productId)
-    }
-    
-    func addWishlistProduct(userId: Int, productId: Int) async throws {
-        _ = try await productService.addNewProduct(userId: userId, productId: productId)
-    }
-}
-

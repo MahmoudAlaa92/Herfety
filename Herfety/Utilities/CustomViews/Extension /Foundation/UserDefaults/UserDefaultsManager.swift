@@ -8,7 +8,7 @@
 import Foundation
 
 /// Centralized UserDefaults manager using property wrappers
-final class UserDefaultsManager {
+final class UserDefaultsManager: UserDefaultsManagerProtocol {
     static let shared = UserDefaultsManager()
     
     @UserDefault(key: \.login)
