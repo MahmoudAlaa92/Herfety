@@ -76,7 +76,7 @@ extension ProductDetailsSectionConfigurator {
         
         provider.headerConfigurator = { header in
             header.configure(
-                title: "Recommended for you",
+                title: L10n.Home.Recommended.title,
                 description: "",
                 shouldShowButton: false
             )

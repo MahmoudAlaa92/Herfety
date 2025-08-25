@@ -41,7 +41,7 @@ class InfoCollectionViewSection: CollectionViewDataSource {
 extension InfoCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+            let delete = UIAction(title: L10n.General.delete, image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
                 self.deleteItemSubject.send(indexPath.item)
             }
             return UIMenu(title: "", children: [delete])

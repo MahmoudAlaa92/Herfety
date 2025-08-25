@@ -61,8 +61,13 @@ class AddReviewViewModel: AddReviewViewModelType {
         if !validateInputs(review: commentSubject.value,
                            rating: rateSubject.value) {
             let alertItem = AlertModel(
-                message: "Invalid Input\nPlease enter:\n- Review text\n- Rating between 1-5",
-                buttonTitle: "OK",
+                message: """
+                \(L10n.Reviews.Error.invalidInput)\n\
+                \(L10n.Reviews.Error.pleaseEnter)\n\
+                - \(L10n.Reviews.Error.reviewText)\n\
+                - \(L10n.Reviews.Error.ratingRange)
+                """,
+                buttonTitle: L10n.General.ok,
                 image: .error,
                 status: .error
             )
@@ -85,8 +90,8 @@ class AddReviewViewModel: AddReviewViewModelType {
             _ = try await reviewRemote.createReview(request: request)
             showAlert.send(
                 AlertModel(
-                    message: "Your review has been added",
-                    buttonTitle: "OK",
+                    message: L10n.Reviews.Success.added,
+                    buttonTitle: L10n.General.ok,
                     image: .success,
                     status: .success
                 )
@@ -96,8 +101,8 @@ class AddReviewViewModel: AddReviewViewModelType {
         } catch {
             showAlert.send(
                 AlertModel(
-                    message: "Failed to add review. Please try again.",
-                    buttonTitle: "OK",
+                    message: L10n.Reviews.Error.failed,
+                    buttonTitle: L10n.General.ok,
                     image: .error,
                     status: .error
                 )

@@ -32,7 +32,7 @@ extension DescriptionProductDetails {
         minusAndPlusStackView.backgroundColor = Colors.buttonGray
         minusAndPlusStackView.layer.cornerRadius = 20
         
-        descriptionTitle.text = "Description"
+        descriptionTitle.text = L10n.Product.Details.description
         descriptionLabel.numberOfLines = 0
         descriptionTitle.font = .calloutBold
         

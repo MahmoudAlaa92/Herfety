@@ -58,13 +58,13 @@ class ForgetPasswordViewModel: ForgetPasswordViewModelType {
     private func handleResetError(_ error: Error) {
         let errorMessage: String
         if let afError = error.asAFError, afError.isResponseValidationError {
-            errorMessage = "There exists invalid input"
+            errorMessage = L10n.Auth.ForgotPassword.Error.invalidInput
         } else {
             errorMessage = error.localizedDescription
         }
         let alert = AlertModel(
             message: errorMessage,
-            buttonTitle: "Ok",
+            buttonTitle: L10n.General.ok,
             image: .warning,
             status: .warning
         )
@@ -97,8 +97,8 @@ extension ForgetPasswordViewModel {
               !confirmPasswordSubject.value.isEmpty
         else {
             let alert = AlertModel(
-                message: "Please fill in all fields",
-                buttonTitle: "Ok",
+                message: L10n.Auth.ForgotPassword.Error.emptyFields,
+                buttonTitle: L10n.General.ok,
                 image: .warning,
                 status: .warning
             )

@@ -50,18 +50,18 @@ class ReviewerCollectionViewSection: CollectionViewDataSource {
 extension ReviewerCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
+            let delete = UIAction(title: L10n.General.delete, image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
                 self.onDelete?(indexPath.row)
             }
-            let update = UIAction(title: "Edit", image: UIImage(systemName: "pencil"), attributes: .destructive) {  _ in
+            let update = UIAction(title: L10n.General.edit, image: UIImage(systemName: "pencil"), attributes: .destructive) {  _ in
                 let currentReview = self.reviewers[indexPath.row]
                    
-                   let alert = UIAlertController(title: "Edit Review", message: "Update your comment below.", preferredStyle: .alert)
+                let alert = UIAlertController(title: L10n.Reviews.Edit.title, message: L10n.Reviews.Edit.message, preferredStyle: .alert)
                    alert.addTextField { textField in
                        textField.text = currentReview.review
                    }
-                   alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                   alert.addAction(UIAlertAction(title: "Update", style: .default) { _ in
+                alert.addAction(UIAlertAction(title: L10n.General.cancel, style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: L10n.General.update, style: .default) { _ in
                        if let updatedText = alert.textFields?.first?.text, !updatedText.isEmpty {
                            self.onUpdate?(indexPath.row, updatedText)
                        }
@@ -91,7 +91,7 @@ extension ReviewerCollectionViewSection: HeaderAndFooterProvider {
             ) as? HeaderView
         {
             header.configure(
-                title: "Reviews Client",
+                title: L10n.Reviews.clientTitle,
                 description: "",
                 titleFont: .title3,
                 shouldShowButton: false

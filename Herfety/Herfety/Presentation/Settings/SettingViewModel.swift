@@ -12,14 +12,14 @@ class SettingViewModel {
     var onLogout: (() -> Void)?
     
     var firstList: [SettingItem] = [
-        SettingItem(name: "Name"),
-        SettingItem(name: "Age"),
-        SettingItem(name: "Email"),
+        SettingItem(name: L10n.Settings.name),
+        SettingItem(name: L10n.Settings.age),
+        SettingItem(name: L10n.Settings.email),
     ]
     
     var secondList : [ProfileListItem] = [
-        ProfileListItem(title: "Language", icon: Images.iconMyCard),
-        ProfileListItem(title: "Notification", icon: Images.iconMyCard),
-        ProfileListItem(title: "Help Center", icon: Images.iconMyCard),
+        ProfileListItem(title: L10n.Settings.language, icon: Images.iconMyCard),
+        ProfileListItem(title: L10n.Settings.notification, icon: Images.iconMyCard),
+        ProfileListItem(title: L10n.Settings.helpCenter, icon: Images.iconMyCard),
     ]
 }

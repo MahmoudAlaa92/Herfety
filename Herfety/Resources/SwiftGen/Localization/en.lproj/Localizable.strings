@@ -1,0 +1,240 @@
+/*
+  Localizable.strings (English)
+  Herfety
+
+  Created by Mahmoud Alaa on 25/08/2025.
+  
+*/
+
+// MARK: - Authentication
+"auth.login" = "Login";
+"auth.signup" = "Sign Up";
+"auth.welcome" = "Welcome!";
+"auth.welcomeBack" = "Welcome Back!";
+"auth.continue" = "Continue";
+"auth.reset" = "Reset";
+"auth.confirm" = "Confirm";
+"auth.apply" = "Apply";
+"auth.HerfetyAnimation" = "HerfetyAnimation";
+
+// Login
+"auth.login.subtitle" = "please login or sign up to continue our app";
+"auth.login.username.title" = "User Name";
+"auth.login.username.placeholder" = "Enter your user name";
+"auth.login.password.title" = "Password";
+"auth.login.password.placeholder" = "***********";
+"auth.login.forgot.password" = "Forget the password";
+"auth.login.facebook" = "Continue with Facebook";
+"auth.login.google" = "Continue with Google";
+"auth.login.apple" = "Continue with Apple";
+"auth.login.failed" = "Login Failed";
+
+// Sign Up
+"auth.signup.title" = "Sign Up";
+"auth.signup.subtitle" = "Create an new account";
+"auth.signup.firstName.title" = "First name";
+"auth.signup.firstName.placeholder" = "Enter your First name";
+"auth.signup.lastName.title" = "Last name";
+"auth.signup.lastName.placeholder" = "Enter your last name";
+"auth.signup.username.title" = "User Name";
+"auth.signup.username.placeholder" = "Enter your name here";
+"auth.signup.email.title" = "Email";
+"auth.signup.email.placeholder" = "Enter your email here";
+"auth.signup.password.title" = "Password";
+"auth.signup.password.placeholder" = "*******";
+"auth.signup.confirmPassword.title" = "Confirm Password";
+"auth.signup.confirmPassword.placeholder" = "*******";
+"auth.signup.phone.title" = "Phone Number";
+"auth.signup.phone.placeholder" = "+(20) 112 201 201";
+
+// Forgot Password
+"auth.forgotPassword.title" = "Forget the password";
+"auth.forgotPassword.subtitle" = "Change Password";
+"auth.forgotPassword.username.title" = "User Name";
+"auth.forgotPassword.username.placeholder" = "Enter your name here";
+"auth.forgotPassword.currentPassword.title" = "Current Password";
+"auth.forgotPassword.currentPassword.placeholder" = "*******";
+"auth.forgotPassword.newPassword.title" = "New Password";
+"auth.forgotPassword.newPassword.placeholder" = "*******";
+"auth.forgotPassword.confirmPassword.title" = "Confirm Password";
+"auth.forgotPassword.confirmPassword.placeholder" = "*******";
+"auth.forgotPassword.resetButton" = "Reset Password";
+"auth.forgotPassword.error.invalidInput" = "There exists invalid input";
+"auth.forgotPassword.error.emptyFields" = "Please fill in all fields";
+
+// Success
+"auth.success.title" = "Successful!";
+"auth.success.message" = "You have successfully registered in\nour app and start working in it.";
+"auth.success.startShopping" = "Start Shopping";
+
+// MARK: - General
+"general.ok" = "OK";
+"general.cancel" = "Cancel";
+"general.add" = "Add";
+"general.edit" = "Edit";
+"general.delete" = "Delete";
+"general.save" = "Save";
+"general.confirm" = "Confirm";
+"general.male" = "Male";
+"general.female" = "Female";
+"general.gender" = "Gender";
+"general.setting" = "Setting";
+"general.update" = "Update";
+
+// MARK: - Navigation
+"nav.info" = "Info";
+"nav.addReview" = "Add Review";
+"nav.addAddress" = "Add Address";
+"nav.addInformation" = "Add Information";
+"nav.payment" = "Payment";
+
+
+// MARK: - Home
+"home.slider.title1" = "Wear Art, Wear You";
+"home.slider.title2" = "Own Style, Own Story";
+"home.slider.title3" = "Dress Bold, Live True";
+"home.slider.title4" = "Be Unique, Be You";
+"home.slider.description" = "Discover Unique Handmade Treasures for Your Journey!";
+"home.bestDeal.title" = "the best deal on";
+"home.bestDeal.subtitle" = "Jewelry & Accessories";
+"home.recommended.title" = "Recommended for you";
+
+// MARK: - Categories
+"categories.title" = "Categories";
+"categories.subtitle" = "Browse by category";
+
+// Brands
+"topBrands.title" = "Top";
+"topBrands.subtitle" = "Brands";
+"home.brands.leath" = "Leath";
+"home.brands.rhine" = "Rhine";
+"home.brands.handmade" = "Handmade";
+"home.brands.organ" = "Organ";
+
+// Daily Essentials
+"dailyEssentials.title" = "Daily";
+"dailyEssentials.subtitle" = "Essential";
+"home.dailyEssentials.homeDecor" = "Home Décor";
+"home.dailyEssentials.artCollectibles" = "Art & Collectibles";
+"home.dailyEssentials.handmadeMaterials" = "Handmade Materials: crepe";
+"home.dailyEssentials.kidsCrafts" = "Kids' Crafts & Toys";
+
+
+// MARK: - Shopping Cart
+"cart.proceedToPayment" = "Procced to Payment";
+"cart.addedToOrder" = "Added To Order";
+"cart.deletedFromOrder" = "Deleted From Order";
+"cart.addedToWishlist" = "Added To Wishlist";
+"cart.deletedFromWishlist" = "Deleted From Wishlist";
+"cart.error.emptyOrder" = "Order is empty, please add some products";
+
+// MARK: - Payment & Checkout
+"payment.proceedToPayment" = "Proceed to payment";
+"payment.checkout" = "Checkout";
+"payment.cardDetails" = "Card Details";
+"payment.addNewCard" = "Add New Card";
+"payment.cardNumber" = "Card Number";
+"payment.cardHolderName" = "Card holder Name";
+"payment.expDate" = "Exp Date";
+"payment.cvv" = "CVV";
+"payment.failed" = "Failed to create payment element";
+
+// MARK: - Profile
+"profile.myOrder" = "My Order";
+"profile.myFavourites" = "My Favourites";
+"profile.shippingAddress" = "Shipping Address";
+"profile.myCard" = "My Card";
+"profile.setting" = "Setting";
+"profile.logout" = "Logout";
+"profile.faqs" = "FAQs";
+"profile.privacyPolicy" = "Privacy Policy";
+
+// MARK: - Forms
+"form.name.placeholder" = "Enter your name";
+"form.address.placeholder" = "Enter your address";
+"form.phone.placeholder" = "Enter your phone";
+"form.comment.placeholder" = "Enter your Comment";
+"form.rating.placeholder" = "Rating (1-5)";
+
+// MARK: - Offers
+"offers.upTo10" = "UP to 10% OFF";
+"offers.upTo20" = "UP to 20% OFF";
+"offers.upTo30" = "UP to 30% OFF";
+"offers.upTo40" = "UP to 40% OFF";
+"offers.upTo50" = "UP to 50% OFF";
+"offers.upTo60" = "UP to 60% OFF";
+"offers.upTo70" = "UP to 70% OFF";
+"offers.upTo80" = "UP to 80% OFF";
+
+// MARK: - Products
+"products.currency" = "$%@";
+"products.discountFormat" = "%@%%\nOFF";
+"products.saveFormat" = "Save $%@";
+
+// MARK: - Product Details
+"product.details.available" = "Available in stock";
+"product.details.notAvailable" = "Not Available";
+"product.details.indexFormat" = "%@/%@";
+"product.details.priceFormat" = "$%@";
+"product.details.description" = "Description";
+
+// MARK: - Reviews
+"reviews.title" = "Reviews";
+"reviews.clientTitle" = "Reviews Client";
+"reviews.addToCart" = "Add To Cart";
+"reviews.showAll" = "Show All Reviews";
+"reviews.edit.title" = "Edit Review";
+"reviews.edit.message" = "Update your comment below.";
+"reviews.error.invalidInput" = "Invalid Input";
+"reviews.error.pleaseEnter" = "Please enter:";
+"reviews.error.reviewText" = "Review text";
+"reviews.error.ratingRange" = "Rating between 1-5";
+"reviews.success.added" = "Your review has been added";
+"reviews.error.failed" = "Failed to add review. Please try again.";
+
+// MARK: - Info
+"info.error.empty" = "Info is empty, please add at least one piece of information.";
+"info.error.textFieldEmpty" = "One of the text fields is empty";
+
+// MARK: - Wishlist
+"wishlist.title" = "Wishlist";
+"wishlist.empty" = "Your wishlist is empty";
+"wishlist.added" = "Added to Wishlist";
+"wishlist.removed" = "Removed from Wishlist";
+
+// MARK: - Settings
+"settings.uploadImage" = "Upload Image";
+"settings.name" = "Name";
+"settings.age" = "Age";
+"settings.email" = "Email";
+"settings.language" = "Language";
+"settings.notification" = "Notification";
+"settings.helpCenter" = "Help Center";
+
+// MARK: - Payment & Checkout
+"payment.proceedToPayment" = "Proceed to payment";
+"payment.checkout" = "Checkout";
+"payment.cardDetails" = "Card Details";
+"payment.addNewCard" = "Add New Card";
+"payment.cardNumber" = "Card Number";
+"payment.cardHolderName" = "Card holder Name";
+"payment.expDate" = "Exp Date";
+"payment.cvv" = "CVV";
+"payment.failed" = "Failed to create payment element";
+"payment.failedWithError" = "Failed to create payment element: %@";
+"payment.method" = "Payment Method";
+"payment.title" = "Payment";
+"payment.select" = "Please select a payment method";
+"payment.completed" = "Payment Completed";
+"payment.failedWithError" = "Payment Failed: %@";
+"payment.canceled" = "Payment Canceled";
+"payment.orderFailed" = "Failed to place order: %@";
+
+// MARK: - Errors
+"error.invalidCredentials" = "Invalid email or password";
+"error.missingEmailPassword" = "Please enter both email and password";
+"error.noAccessToken" = "No access token";
+"error.clientIdNotFound" = "Client ID not found";
+"error.googleTokenFailed" = "Failed to retrieve Google ID token.";
+"error.passwordsMismatch" = "Passwords do not match";
+"error.registrationFailed" = "Registration failed: Please check your input";

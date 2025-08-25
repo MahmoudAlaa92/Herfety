@@ -55,7 +55,7 @@ extension MyCheckoutViewController {
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
         navigationBarBehavior.configure(
-            title: "Payment Method",
+            title: L10n.Payment.method,
             titleColor: .primaryBlue,
             onPlus: {
                 /// plus button not appear in this VC
@@ -69,11 +69,11 @@ extension MyCheckoutViewController {
     /// UI Setup
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        title = "Payment"
+        title = L10n.Payment.title
         
         // Configure checkout button
         checkoutButton = HerfetyButton()
-        checkoutButton.title = "Checkout"
+        checkoutButton.title = L10n.Payment.checkout
         checkoutButton.isEnabled = false
         checkoutButton.addTarget(
             self,
@@ -129,9 +129,8 @@ extension MyCheckoutViewController {
                 self.addEmbeddedElementToStack(embeddedPaymentElement)
             } catch {
                 let alertItem = AlertModel(
-                    message:
-                        "Failed to create payment element: \(error.localizedDescription)",
-                    buttonTitle: "Ok",
+                    message: L10n.Payment.failedWithError(error.localizedDescription),
+                    buttonTitle: L10n.General.ok,
                     image: .error,
                     status: .error
                 )

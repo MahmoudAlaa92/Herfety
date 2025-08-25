@@ -1,0 +1,237 @@
+/*
+  Localizable.strings (Arabic)
+  Herfety
+
+  Created by Mahmoud Alaa on 25/08/2025.
+  
+*/
+
+// MARK: - Authentication
+"auth.login" = "تسجيل الدخول";
+"auth.signup" = "إنشاء حساب";
+"auth.welcome" = "أهلاً وسهلاً!";
+"auth.welcomeBack" = "أهلاً بعودتك!";
+"auth.continue" = "متابعة";
+"auth.reset" = "إعادة تعيين";
+"auth.confirm" = "تأكيد";
+"auth.apply" = "تطبيق";
+
+// Login
+"auth.login.subtitle" = "يرجى تسجيل الدخول أو إنشاء حساب للمتابعة";
+"auth.login.username.title" = "اسم المستخدم";
+"auth.login.username.placeholder" = "أدخل اسم المستخدم";
+"auth.login.password.title" = "كلمة المرور";
+"auth.login.password.placeholder" = "***********";
+"auth.login.forgot.password" = "نسيت كلمة المرور";
+"auth.login.facebook" = "متابعة مع فيسبوك";
+"auth.login.google" = "متابعة مع جوجل";
+"auth.login.apple" = "متابعة مع أبل";
+"auth.login.failed" = "فشل تسجيل الدخول";
+
+// Sign Up
+"auth.signup.title" = "إنشاء حساب";
+"auth.signup.subtitle" = "إنشاء حساب جديد";
+"auth.signup.firstName.title" = "الاسم الأول";
+"auth.signup.firstName.placeholder" = "أدخل اسمك الأول";
+"auth.signup.lastName.title" = "اسم العائلة";
+"auth.signup.lastName.placeholder" = "أدخل اسم العائلة";
+"auth.signup.username.title" = "اسم المستخدم";
+"auth.signup.username.placeholder" = "أدخل اسمك هنا";
+"auth.signup.email.title" = "البريد الإلكتروني";
+"auth.signup.email.placeholder" = "أدخل بريدك الإلكتروني";
+"auth.signup.password.title" = "كلمة المرور";
+"auth.signup.password.placeholder" = "*******";
+"auth.signup.confirmPassword.title" = "تأكيد كلمة المرور";
+"auth.signup.confirmPassword.placeholder" = "*******";
+"auth.signup.phone.title" = "رقم الهاتف";
+"auth.signup.phone.placeholder" = "+(20) 112 201 201";
+
+// Forgot Password
+"auth.forgotPassword.title" = "نسيت كلمة المرور";
+"auth.forgotPassword.subtitle" = "تغيير كلمة المرور";
+"auth.forgotPassword.username.title" = "اسم المستخدم";
+"auth.forgotPassword.username.placeholder" = "أدخل اسمك هنا";
+"auth.forgotPassword.currentPassword.title" = "كلمة المرور الحالية";
+"auth.forgotPassword.currentPassword.placeholder" = "*******";
+"auth.forgotPassword.newPassword.title" = "كلمة المرور الجديدة";
+"auth.forgotPassword.newPassword.placeholder" = "*******";
+"auth.forgotPassword.confirmPassword.title" = "تأكيد كلمة المرور";
+"auth.forgotPassword.confirmPassword.placeholder" = "*******";
+"auth.forgotPassword.resetButton" = "إعادة تعيين كلمة المرور";
+"auth.forgotPassword.error.invalidInput" = "يوجد بيانات غير صحيحة";
+"auth.forgotPassword.error.emptyFields" = "يرجى ملء جميع الحقول";
+
+// Success
+"auth.success.title" = "تم بنجاح!";
+"auth.success.message" = "لقد قمت بالتسجيل بنجاح في\nتطبيقنا ويمكنك البدء بالعمل فيه.";
+"auth.success.startShopping" = "ابدأ التسوق";
+
+// MARK: - General
+"general.ok" = "موافق";
+"general.cancel" = "إلغاء";
+"general.add" = "إضافة";
+"general.edit" = "تعديل";
+"general.delete" = "حذف";
+"general.save" = "حفظ";
+"general.confirm" = "تأكيد";
+"general.male" = "ذكر";
+"general.female" = "أنثى";
+"general.gender" = "الجنس";
+"general.setting" = "الإعدادات";
+"general.update" = "تحديث";
+
+// MARK: - Navigation
+"nav.info" = "المعلومات";
+"nav.addReview" = "إضافة تقييم";
+"nav.addAddress" = "إضافة عنوان";
+"nav.addInformation" = "إضافة معلومات";
+"nav.payment" = "الدفع";
+
+// MARK: - Home
+"home.slider.title1" = "ارتدي الفن، ارتدي نفسك";
+"home.slider.title2" = "أسلوبك، قصتك";
+"home.slider.title3" = "اللباس الجريء، العيش الحقيقي";
+"home.slider.title4" = "كن مميزاً، كن أنت";
+"home.slider.description" = "اكتشف كنوز يدوية فريدة لرحلتك!";
+"home.bestDeal.title" = "أفضل صفقة على";
+"home.bestDeal.subtitle" = "المجوهرات والإكسسوارات";
+"home.recommended.title" = "موصى لك";
+
+// MARK: - Categories
+"categories.title" = "الفئات";
+"categories.subtitle" = "تصفح حسب الفئة";
+
+// Brands
+"topBrands.title" = "أفضل";
+"topBrands.subtitle" = "العلامات التجارية";
+"home.brands.leath" = "ليذر";
+"home.brands.rhine" = "راين";
+"home.brands.handmade" = "صناعة يدوية";
+"home.brands.organ" = "أورجان";
+
+// Daily Essentials
+"dailyEssentials.title" = "الضروريات";
+"dailyEssentials.subtitle" = "اليومية";
+"home.dailyEssentials.homeDecor" = "ديكور المنزل";
+"home.dailyEssentials.artCollectibles" = "الفن والمقتنيات";
+"home.dailyEssentials.handmadeMaterials" = "المواد المصنوعة يدوياً: الكريب";
+"home.dailyEssentials.kidsCrafts" = "حرف وألعاب الأطفال";
+
+// MARK: - Shopping Cart
+"cart.proceedToPayment" = "المتابعة للدفع";
+"cart.addedToOrder" = "تمت إضافته للطلب";
+"cart.deletedFromOrder" = "تم حذفه من الطلب";
+"cart.addedToWishlist" = "تمت إضافته للمفضلة";
+"cart.deletedFromWishlist" = "تم حذفه من المفضلة";
+"cart.error.emptyOrder" = "عربة التسوق فارغة، يرجى إضافة بعض المنتجات";
+
+// MARK: - Payment & Checkout
+"payment.proceedToPayment" = "المتابعة للدفع";
+"payment.checkout" = "إتمام الشراء";
+"payment.cardDetails" = "تفاصيل البطاقة";
+"payment.addNewCard" = "إضافة بطاقة جديدة";
+"payment.cardNumber" = "رقم البطاقة";
+"payment.cardHolderName" = "اسم حامل البطاقة";
+"payment.expDate" = "تاريخ الانتهاء";
+"payment.cvv" = "CVV";
+"payment.failed" = "فشل في إنشاء عنصر الدفع";
+
+// MARK: - Profile
+"profile.myOrder" = "طلباتي";
+"profile.myFavourites" = "مفضلاتي";
+"profile.shippingAddress" = "عنوان الشحن";
+"profile.myCard" = "بطاقتي";
+"profile.setting" = "الإعدادات";
+"profile.logout" = "تسجيل الخروج";
+"profile.faqs" = "الأسئلة الشائعة";
+"profile.privacyPolicy" = "سياسة الخصوصية";
+
+// MARK: - Forms
+"form.name.placeholder" = "أدخل اسمك";
+"form.address.placeholder" = "أدخل عنوانك";
+"form.phone.placeholder" = "أدخل رقم هاتفك";
+"form.comment.placeholder" = "أدخل تعليقك";
+"form.rating.placeholder" = "التقييم (1-5)";
+
+// MARK: - Offers
+"offers.upTo10" = "حتى 10% خصم";
+"offers.upTo20" = "حتى 20% خصم";
+"offers.upTo30" = "حتى 30% خصم";
+"offers.upTo40" = "حتى 40% خصم";
+"offers.upTo50" = "حتى 50% خصم";
+"offers.upTo60" = "حتى 60% خصم";
+"offers.upTo70" = "حتى 70% خصم";
+"offers.upTo80" = "حتى 80% خصم";
+
+// MARK: - Products
+"products.currency" = "%@ ج.م"; // أو "$%@" لو عايز تسيب الدولار
+"products.discountFormat" = "%@%%\nخصم";
+"products.saveFormat" = "وفرت %@ ج.م";
+
+// MARK: - Product Details
+"product.details.available" = "متوفر في المخزن";
+"product.details.notAvailable" = "غير متوفر";
+"product.details.indexFormat" = "%@\\%@"; // example: ١\١
+"product.details.priceFormat" = "%@ ج.م"; // or the correct currency
+"product.details.description" = "الوصف";
+
+// MARK: - Reviews
+"reviews.title" = "المراجعات";
+"reviews.clientTitle" = "مراجعات العملاء";
+"reviews.addToCart" = "أضف إلى السلة";
+"reviews.showAll" = "عرض كل المراجعات";
+"reviews.edit.title" = "تعديل المراجعة";
+"reviews.edit.message" = "قم بتحديث تعليقك أدناه.";
+"reviews.error.invalidInput" = "إدخال غير صالح";
+"reviews.error.pleaseEnter" = "يرجى إدخال:";
+"reviews.error.reviewText" = "نص التقييم";
+"reviews.error.ratingRange" = "تقييم بين 1-5";
+"reviews.success.added" = "تمت إضافة تقييمك بنجاح";
+"reviews.error.failed" = "فشل في إضافة التقييم. يرجى المحاولة مرة أخرى.";
+
+// MARK: - Info
+"info.error.empty" = "المعلومات فارغة، من فضلك أضف معلومة واحدة على الأقل.";
+"info.error.textFieldEmpty" = "أحد الحقول فارغ";
+
+// MARK: - Wishlist
+"wishlist.title" = "قائمة الرغبات";
+"wishlist.empty" = "قائمة الرغبات فارغة";
+"wishlist.added" = "تمت الإضافة إلى قائمة الرغبات";
+"wishlist.removed" = "تمت الإزالة من قائمة الرغبات";
+
+// MARK: - Settings
+"settings.uploadImage" = "رفع الصورة";
+"settings.name" = "الاسم";
+"settings.age" = "العمر";
+"settings.email" = "البريد الإلكتروني";
+"settings.language" = "اللغة";
+"settings.notification" = "الإشعارات";
+"settings.helpCenter" = "مركز المساعدة";
+
+// MARK: - Payment & Checkout
+"payment.proceedToPayment" = "متابعة الدفع";
+"payment.checkout" = "الدفع";
+"payment.cardDetails" = "تفاصيل البطاقة";
+"payment.addNewCard" = "إضافة بطاقة جديدة";
+"payment.cardNumber" = "رقم البطاقة";
+"payment.cardHolderName" = "اسم حامل البطاقة";
+"payment.expDate" = "تاريخ الانتهاء";
+"payment.cvv" = "CVV";
+"payment.failed" = "فشل في إنشاء عنصر الدفع";
+"payment.failedWithError" = "فشل في إنشاء عنصر الدفع: %@";
+"payment.method" = "طريقة الدفع";
+"payment.title" = "الدفع";
+"payment.select" = "يرجى اختيار وسيلة الدفع";
+"payment.completed" = "تم الدفع بنجاح";
+"payment.failedWithError" = "فشل الدفع: %@";
+"payment.canceled" = "تم إلغاء الدفع";
+"payment.orderFailed" = "فشل في إنشاء الطلب: %@";
+
+// MARK: - Errors
+"error.invalidCredentials" = "البريد الإلكتروني أو كلمة المرور غير صحيحة";
+"error.missingEmailPassword" = "يرجى إدخال البريد الإلكتروني وكلمة المرور";
+"error.noAccessToken" = "لا يوجد رمز وصول";
+"error.clientIdNotFound" = "لم يتم العثور على معرف العميل";
+"error.googleTokenFailed" = "فشل في الحصول على رمز Google ID";
+"error.passwordsMismatch" = "كلمتا المرور غير متطابقتين";
+"error.registrationFailed" = "فشل التسجيل: يرجى التحقق من البيانات المدخلة";

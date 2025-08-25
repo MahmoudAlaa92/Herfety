@@ -62,19 +62,19 @@ extension AddReviewViewController {
     }
     /// UI
     private func configureUI() {
-        addButton.title = "Add"
+        addButton.title = L10n.General.add
     }
     /// Navigation Bar
     private func setUpuNavigationBar() {
-        navigationItem.title = "Add Review"
+        navigationItem.title = L10n.Nav.addReview
     }
     /// Text Feild
     private func configureTextFields() {
-        AddReviewTextField.placeholder = "Enter your Comment"
+        AddReviewTextField.placeholder = L10n.Form.Comment.placeholder
         AddReviewTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         
         ratingTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
-        ratingTextField.placeholder = "Rating (1-5)"
+        ratingTextField.placeholder = L10n.Form.Rating.placeholder
         ratingTextField.textField.keyboardType = .numberPad
     }
 }

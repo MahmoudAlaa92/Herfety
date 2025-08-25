@@ -51,35 +51,27 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             let item = items[indexPath.item]
             
             switch item.title {
-            case "My Order":
-                self.coordinator?.gotToCartVC()
-                break
-            case "My Favourites":
-                self.coordinator?.gotToWishlistVC()
-                break
-            case "Shipping Address":
-                self.coordinator?.gotToShippingVC()
-                break
-            case "My Card":
-                self.coordinator?.gotToMyCardVC()
-                break
-            case "Setting":
-                self.coordinator?.gotToSettingVC()
-                break
-            case "Logout":
-                self.coordinator?.goToAuthVC()
-                break
-                
+            case L10n.Profile.myOrder:
+                coordinator?.gotToCartVC()
+            case L10n.Profile.myFavourites:
+                coordinator?.gotToWishlistVC()
+            case L10n.Profile.shippingAddress:
+                coordinator?.gotToShippingVC()
+            case L10n.Profile.myCard:
+                coordinator?.gotToMyCardVC()
+            case L10n.Profile.setting:
+                coordinator?.gotToSettingVC()
+            case L10n.Profile.logout:
+                coordinator?.goToAuthVC()
             default:
                 break
             }
         } else if indexPath.section == 2 {
             let item = items[indexPath.item]
             switch item.title {
-            case "FAQs":
-                self.coordinator?.gotToSafari(url: "http://www.appcoda.com/contact")
-                break
-            case "Privacy Policy":
+            case L10n.Profile.faqs:
+                coordinator?.gotToSafari(url: "http://www.appcoda.com/contact")
+            case L10n.Profile.privacyPolicy:
                 self.coordinator?.gotToSafari(url: "https://www.appcoda.com/privacy-policy/")
                 break
             default:

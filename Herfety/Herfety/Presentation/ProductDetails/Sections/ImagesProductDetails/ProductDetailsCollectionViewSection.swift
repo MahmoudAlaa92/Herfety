@@ -33,7 +33,9 @@ class ProductDetailsCollectionViewSection: CollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.imageProduct.setImage(with: productItems.thumbImage ?? " ", placeholderImage: Images.loading)
-        cell.indexProduct.text = "1/1"
+        cell.indexProduct.text = String(
+            format: L10n.Product.Details.indexFormat(1, 1),
+            "1", "1")
         return cell
     }
 }
@@ -86,7 +88,8 @@ extension ProductDetailsCollectionViewSection: HeaderAndFooterProvider {
             header.configure(
                 titleLabl: productItems.name ?? "",
                 priceLabel: "$" + String(format: "%.2f", productItems.price ?? 0),
-                avaliableLabel:  (productItems.qty != nil) && (productItems.qty ?? 0) > 0  ? "Avaliable in stok" : "Not Avaliable")
+                avaliableLabel:  (productItems.qty != nil) && (productItems.qty ?? 0) > 0 ? L10n.Product.Details.available :
+                    L10n.Product.Details.notAvailable)
             header.configureProduct(with: productItems)
             
             return header

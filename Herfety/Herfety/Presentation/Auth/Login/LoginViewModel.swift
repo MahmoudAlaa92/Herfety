@@ -76,7 +76,7 @@ class LoginViewModel: LoginViewModelType {
     private func handleLoginError(_ error: Error) {
         let errorMessage: String
         if let afError = error.asAFError, afError.isResponseValidationError {
-            errorMessage = "Invalid email or password"
+            errorMessage = L10n.Error.invalidCredentials
         } else {
             errorMessage = error.localizedDescription
         }
@@ -97,7 +97,7 @@ extension LoginViewModel {
     func loginTapped() async {
         guard !emailSubject.value.isEmpty && !passwordSubject.value.isEmpty
         else {
-            loginError.send("Please enter both email and password")
+            loginError.send(L10n.Error.missingEmailPassword)
             return
         }
 
@@ -137,7 +137,7 @@ extension LoginViewModel {
                                 domain: "FB",
                                 code: 401,
                                 userInfo: [
-                                    NSLocalizedDescriptionKey: "No access token"
+                                    NSLocalizedDescriptionKey: L10n.Error.noAccessToken
                                 ]
                             )
                         )
@@ -168,7 +168,7 @@ extension LoginViewModel {
     func loginWithGoogle(from viewController: UIViewController) async {
 
         guard let clientID = FirebaseApp.app()?.options.clientID else {
-            self.loginError.send("Client ID not found")
+            self.loginError.send(L10n.Error.clientIdNotFound)
             return
         }
 
@@ -181,7 +181,7 @@ extension LoginViewModel {
             )
 
             guard let idToken = result.user.idToken?.tokenString else {
-                loginError.send("Failed to retrieve Google ID token.")
+                loginError.send(L10n.Error.googleTokenFailed)
                 return
             }
 

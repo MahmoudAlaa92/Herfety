@@ -148,7 +148,7 @@ extension CartViewController {
     }
     /// Configure UI
     private func configureUI() {
-        proccedToPayment.title = "Procced to Payment"
+        proccedToPayment.title = L10n.Cart.proceedToPayment
     }
 }
 // MARK: - Actions

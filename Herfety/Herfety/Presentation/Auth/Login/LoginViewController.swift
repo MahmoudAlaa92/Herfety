@@ -69,10 +69,10 @@ extension LoginViewController {
         logoImage.image = Images.logo
 
         /// Buttons UI
-        loginButton.title = "Login"
-        facebookButton.title = "Continue with Facebook"
-        googleButton.title = "Continue with Google"
-        appleButton.title = "Continue with Apple"
+        loginButton.title = L10n.Auth.login
+        facebookButton.title = L10n.Auth.Login.facebook
+        googleButton.title = L10n.Auth.Login.google
+        appleButton.title = L10n.Auth.Login.apple
         configureEmailTextField()
         configurePasswordTextField()
         configureLabelsUI()
@@ -106,8 +106,8 @@ extension LoginViewController {
     }
     /// Configures email text field with title and placeholder
     private func configureEmailTextField() {
-        emailTextField.title = "User Name"
-        emailTextField.placeholder = "Enter your user name"
+        emailTextField.title = L10n.Auth.Login.Username.title
+        emailTextField.placeholder = L10n.Auth.Login.Username.placeholder
         emailTextField.textfield.delegate = self
         emailTextField.textfield.returnKeyType = .next
         emailTextField.textfield.addTarget(
@@ -119,8 +119,8 @@ extension LoginViewController {
     }
     /// Configures password text field with title and placeholder
     private func configurePasswordTextField() {
-        passwordTextField.title = "Password"
-        passwordTextField.placeholder = "***********"
+        passwordTextField.title = L10n.Auth.Login.Password.title
+        passwordTextField.placeholder = L10n.Auth.Login.Password.placeholder
         passwordTextField.textfield.isSecureTextEntry = true
         passwordTextField.textfield.delegate = self
         passwordTextField.textfield.returnKeyType = .done
@@ -132,10 +132,10 @@ extension LoginViewController {
     }
     /// Configures appearance of labels
     private func configureLabelsUI() {
-        titleLabel.text = "Wellcome!"
+        titleLabel.text = L10n.Auth.welcome
         titleLabel.textColor = Colors.primaryBlue
         titleLabel.font = .title1
-        subtitleLabel.text = "please login or sign up to continue our app"
+        subtitleLabel.text = L10n.Auth.Login.subtitle
         subtitleLabel.textColor = Colors.hSocialButton
         subtitleLabel.font = .callout
         orLabel.textColor = Colors.primaryBlue
@@ -143,7 +143,7 @@ extension LoginViewController {
     /// Configures appearance of Button
     private func configureButtonUI() {
         forgetPassword.setTitleColor(Colors.primaryBlue, for: .normal)
-        forgetPassword.setTitle("Forget the password", for: .normal)
+        forgetPassword.setTitle(L10n.Auth.ForgotPassword.title, for: .normal)
     }
 }
 // MARK: - Binding
@@ -165,11 +165,11 @@ extension LoginViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] errorMessage in
                 let alert = UIAlertController(
-                    title: "Login Failed",
+                    title: L10n.Auth.Login.failed,
                     message: errorMessage,
                     preferredStyle: .alert
                 )
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                alert.addAction(UIAlertAction(title: L10n.General.ok, style: .default))
                 self?.present(alert, animated: true)
             }
             .store(in: &cancellables)

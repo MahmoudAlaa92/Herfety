@@ -47,7 +47,7 @@ extension AddAddressViewController {
     /// Set up Navigation Bar
     private func setUpNavigationBar() {
         navigationBarBehavior.configure(
-            title: "Add Address",
+            title: L10n.Nav.addAddress,
             titleColor: .primaryBlue,
             onPlus: {
                 /// plus button not appear in this VC
@@ -60,15 +60,14 @@ extension AddAddressViewController {
     }
     /// UI
     private func configureUI() {
-        addButton.title = "Add"
-        navigationItem.title = "Add Information"
-
+        addButton.title = L10n.General.add
+        navigationItem.title = L10n.Nav.addInformation
     }
     private func configureTextFields() {
-        nameTextField.placeholder = "Enter your name"
-        addressTextField.placeholder = "Enter your address"
-        phoneTextField.placeholder = "Enter your phone"
-
+        nameTextField.placeholder = L10n.Form.Name.placeholder
+        addressTextField.placeholder = L10n.Form.Address.placeholder
+        phoneTextField.placeholder = L10n.Form.Phone.placeholder
+        
         nameTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         addressTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         phoneTextField.textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)

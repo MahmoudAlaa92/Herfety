@@ -65,7 +65,9 @@ extension HomeSectionConfigurator {
     private func createCardSection(items: [Products], coordinator: HomeTranisitionProtocol) -> CardItemCollectionViewSection {
         let provider = CardItemCollectionViewSection(productItems: items)
         provider.headerConfigurator = { header in
-            header.configure(title: "the best deal on", description: "Jewelry & Accessories", shouldShowButton: true)
+            header.configure(title: L10n.Home.BestDeal.title,
+                             description: L10n.Home.BestDeal.subtitle,
+                             shouldShowButton: true)
         }
         provider.selectedItem
             .sink { product in

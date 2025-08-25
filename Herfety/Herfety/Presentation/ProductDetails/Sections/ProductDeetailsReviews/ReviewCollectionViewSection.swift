@@ -103,7 +103,9 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
                     ofKind: ButtonCollectionReusableView.identifier,
                     withReuseIdentifier: ButtonCollectionReusableView.identifier,
                     for: indexPath) as? ButtonCollectionReusableView {
-            footer.configure(with: .init(title: "Add To Cart", target: self, action: #selector(addToCart)))
+            footer.configure(with: .init(title: L10n.Reviews.addToCart,
+                                         target: self,
+                                         action: #selector(addToCart)))
             footer.configureProduct(with: self.product)
             
             return footer

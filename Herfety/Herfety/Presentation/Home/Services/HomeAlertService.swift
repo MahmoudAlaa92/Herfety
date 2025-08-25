@@ -25,8 +25,8 @@ class HomeAlertService: AlertServiceProtocol {
     
     func showWishlistAlert(isAdded: Bool) {
         currentAlert = AlertModel(
-            message: isAdded ? "Added To Wishlist" : "Deleted From Wishlist",
-            buttonTitle: "Ok",
+            message: isAdded ? L10n.Cart.addedToWishlist : L10n.Cart.deletedFromWishlist,
+            buttonTitle: L10n.General.ok,
             image: .success,
             status: .success
         )
@@ -34,8 +34,8 @@ class HomeAlertService: AlertServiceProtocol {
     
     func showCartAlert(isAdded: Bool) {
         currentAlert = AlertModel(
-            message: isAdded ? "Added To Order" : "Deleted From Order",
-            buttonTitle: "Ok",
+            message: isAdded ? L10n.Cart.addedToOrder : L10n.Cart.deletedFromOrder,
+            buttonTitle: L10n.General.ok,
             image: .success,
             status: .success
         )

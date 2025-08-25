@@ -38,8 +38,8 @@ extension CartViewModel {
         if sections.isEmpty ||
             sections.first?.numberOfItems == 0 {
             orderAlert = AlertModel(
-                message: "Order is empty, please add some products",
-                buttonTitle: "Ok",
+                message: L10n.Cart.Error.emptyOrder,
+                 buttonTitle: L10n.General.ok,
                 image: .warning,
                 status: .warning
             )

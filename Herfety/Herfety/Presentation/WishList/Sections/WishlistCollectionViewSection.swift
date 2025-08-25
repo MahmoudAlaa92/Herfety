@@ -36,7 +36,7 @@ class WishlistCollectionViewSection: CollectionViewDataSource {
         cell.nameCell.text = item.name
         cell.imageCell.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         cell.descriptionCell.text = item.shortDescription
-        cell.priceCell.text = "$" +  String(format: "%.2f", Double(item.price ?? 0.0))
+        cell.priceCell.text = String(format: NSLocalizedString("products.currency", comment: ""), String(format: "%.2f", Double(item.price ?? 0)))
         
         cell.configureOrder(with: item)
         
@@ -54,7 +54,7 @@ extension WishlistCollectionViewSection: HeaderAndFooterProvider {
                 withReuseIdentifier: HeaderView.headerIdentifier,
                 for: indexPath) as! HeaderView
             
-            header.configure(title:  "Wishlist", description: "", titleFont:.title1, titleColor: Colors.primaryBlue, shouldShowButton: false)
+            header.configure(title: NSLocalizedString("wishlist.title", comment: "Wishlist title"), description: "", titleFont:.title1, titleColor: Colors.primaryBlue, shouldShowButton: false)
             return header
         }
         return UICollectionReusableView()
@@ -66,7 +66,7 @@ extension WishlistCollectionViewSection: HeaderAndFooterProvider {
 extension WishlistCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+            let delete = UIAction(title: L10n.General.delete, image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
                 guard let self = self else { return }
                 Task { @MainActor in
                     await self.handleWishlistDeletion(at: indexPath)

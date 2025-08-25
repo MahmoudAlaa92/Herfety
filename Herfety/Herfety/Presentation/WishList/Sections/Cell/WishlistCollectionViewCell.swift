@@ -52,7 +52,7 @@ extension WishlistCollectionViewCell {
         
         priceCell.font = .callout
         
-        addCartBtn.applyStyle(.primaryButton, title: "Add to Cart")
+        addCartBtn.applyStyle(.primaryButton, title: L10n.Reviews.addToCart)
     }
     
     /// Configures the appearance of the container view, including shadows and corner radius.

@@ -54,7 +54,10 @@ extension DailyEssentailCollectionViewSection: HeaderAndFooterProvider {
                 withReuseIdentifier: HeaderView.headerIdentifier,
                 for: indexPath) as! HeaderView
             
-            header.configure(title: "Daily ", description: "Essential", shouldShowButton: false)
+            header.configure(
+                title: L10n.DailyEssentials.title,
+                description: L10n.DailyEssentials.subtitle,
+                shouldShowButton: false)
             return header
         }
         

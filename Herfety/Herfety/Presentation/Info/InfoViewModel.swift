@@ -30,8 +30,8 @@ class InfoViewModel {
     func didTapPaymentButton() {
         if infoItems.isEmpty {
             self.infoState = AlertModel(
-                message: "Info is empty, Please add at least one piece of information.",
-                buttonTitle: "Ok",
+                message: L10n.Info.Error.empty,
+                buttonTitle: L10n.General.ok,
                 image: .warning,
                 status: .warning)
         } else {

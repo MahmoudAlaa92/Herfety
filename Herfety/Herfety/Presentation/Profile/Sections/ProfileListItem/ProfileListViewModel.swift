@@ -10,17 +10,16 @@ import UIKit
 class ProfileListViewModel {
     
     var firstList: [ProfileListItem] = [
-        ProfileListItem(title: "My Order", icon: Images.iconMyCard),
-        ProfileListItem(title: "My Favourites", icon: Images.iconMyFavourites),
-        ProfileListItem(title: "Shipping Address", icon: Images.iconShippingAddress),
-        ProfileListItem(title: "My Card", icon: Images.iconCart),
-        ProfileListItem(title: "Setting", icon: Images.iconSettings),
-        // TODO: change this
-        ProfileListItem(title: "Logout", icon: Images.iconPersonalDetails),
+        ProfileListItem(title: L10n.Profile.myOrder, icon: Images.iconMyCard),
+        ProfileListItem(title: L10n.Profile.myFavourites, icon: Images.iconMyFavourites),
+        ProfileListItem(title: L10n.Profile.shippingAddress, icon: Images.iconShippingAddress),
+        ProfileListItem(title: L10n.Profile.myCard, icon: Images.iconCart),
+        ProfileListItem(title: L10n.Profile.setting, icon: Images.iconSettings),
+        ProfileListItem(title: L10n.Profile.logout, icon: Images.iconPersonalDetails),
     ]
     
     var secondList: [ProfileListItem] = [
-        ProfileListItem(title: "FAQs", icon: Images.iconFAQs),
-        ProfileListItem(title: "Privacy Policy", icon: Images.iconPrivacyPolicy),
+        ProfileListItem(title: L10n.Profile.faqs, icon: Images.iconFAQs),
+        ProfileListItem(title: L10n.Profile.privacyPolicy, icon: Images.iconPrivacyPolicy)
     ]
 }

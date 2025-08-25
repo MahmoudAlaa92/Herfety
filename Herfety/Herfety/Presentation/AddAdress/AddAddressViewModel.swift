@@ -71,8 +71,8 @@ extension AddAddressViewModel {
         
         if name.isEmpty || address.isEmpty || phone.isEmpty {
             let alertItem = AlertModel(
-                message: "One of the text fields is empty",
-                buttonTitle: "OK",
+                message: L10n.Info.Error.textFieldEmpty,
+                buttonTitle: L10n.General.ok,
                 image: .warning,
                 status: .warning
             )

@@ -45,7 +45,7 @@ extension SettingCollectionViewSection: HeaderAndFooterProvider {
             ofKind: kind,
             withReuseIdentifier: SettingHeader.identifier,
             for: indexPath) as? SettingHeader {
-            header.titleLabel.text = "Uploud Image"
+            header.titleLabel.text = L10n.Settings.uploadImage
             header.imageSetting.image = Images.profilePhoto
             return header
         } else if kind == SettingFooter.identifier,
@@ -53,8 +53,8 @@ extension SettingCollectionViewSection: HeaderAndFooterProvider {
                     ofKind: kind,
                     withReuseIdentifier: SettingFooter.identifier,
                     for: indexPath) as? SettingFooter {
-            footer.maleBtn.setTitle("Male", for: .normal)
-            footer.femaleBtn.setTitle("Female", for: .normal)
+            footer.maleBtn.setTitle(L10n.General.male, for: .normal)
+            footer.femaleBtn.setTitle(L10n.General.female, for: .normal)
             return footer
         }
         return UICollectionReusableView()

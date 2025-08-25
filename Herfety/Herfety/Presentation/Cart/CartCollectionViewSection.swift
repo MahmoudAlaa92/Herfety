@@ -41,7 +41,7 @@ class CartCollectionViewSection: CollectionViewDataSource {
            
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         cell.numberOfProduct.text = "\(item.qty ?? 1)"
-        cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0.0))
+        cell.priceProduct.text =  L10n.Products.currency(String(format: "%.2f", Double(item.price ?? 0.0)))
         cell.onChangeCountOrder = { [weak self] newCount in
             self?.countUpdateSubject.send((indexPath.item, newCount))
         }
@@ -54,7 +54,10 @@ class CartCollectionViewSection: CollectionViewDataSource {
 extension CartCollectionViewSection: ContextMenuProvider {
     func contextMenuConfiguration(for collectionView: UICollectionView, at indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) {  _ in
+            let delete = UIAction(
+                title: L10n.General.delete,
+                image: UIImage(systemName: "trash"),
+                attributes: .destructive) {  _ in
               
                 self.deleteItemSubject.send(indexPath.item)
             }
@@ -73,7 +76,11 @@ extension CartCollectionViewSection: HeaderAndFooterProvider {
                 withReuseIdentifier: HeaderView.headerIdentifier,
                 for: indexPath) as! HeaderView
             
-            header.configure(title:  "My Order", description: "", titleFont:.title1, titleColor: Colors.primaryBlue, shouldShowButton: false)
+            header.configure(title: L10n.Profile.myOrder,
+                             description: "",
+                             titleFont:.title1,
+                             titleColor: Colors.primaryBlue,
+                             shouldShowButton: false)
             return header
         }
         

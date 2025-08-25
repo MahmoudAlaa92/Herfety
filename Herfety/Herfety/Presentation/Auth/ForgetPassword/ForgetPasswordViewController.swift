@@ -86,7 +86,7 @@ class ForgetPasswordViewController: UIViewController {
         logoImage.image = Images.logo
 
         // Buttons UI
-        resetBtn.title = "Reset Password"
+        resetBtn.title = L10n.Auth.ForgotPassword.resetButton
 
         configureUsernameTextField()
         configurePasswordTextField()
@@ -94,9 +94,8 @@ class ForgetPasswordViewController: UIViewController {
     }
     /// Configures username text field with title and placeholder
     private func configureUsernameTextField() {
-
-        usernameTextField.title = "User Name"
-        usernameTextField.placeholder = "Enter your name here"
+        usernameTextField.title = L10n.Auth.ForgotPassword.Username.title
+        usernameTextField.placeholder = L10n.Auth.ForgotPassword.Username.placeholder
         usernameTextField.textfield.addTarget(
             self,
             action: #selector(textDidChange),
@@ -106,23 +105,23 @@ class ForgetPasswordViewController: UIViewController {
     /// Configures password text field with title and placeholder
     private func configurePasswordTextField() {
         // Password TextField UI
-        currentPasswordTextField.title = "Current Password"
-        currentPasswordTextField.placeholder = "*******"
+        currentPasswordTextField.title = L10n.Auth.ForgotPassword.CurrentPassword.title
+        currentPasswordTextField.placeholder = L10n.Auth.ForgotPassword.CurrentPassword.placeholder
         currentPasswordTextField.textfield.addTarget(
             self,
             action: #selector(textDidChange),
             for: .editingChanged
         )
-        newPasswordTextField.title = "New Password"
-        newPasswordTextField.placeholder = "*******"
+        newPasswordTextField.title = L10n.Auth.ForgotPassword.NewPassword.title
+        newPasswordTextField.placeholder = L10n.Auth.ForgotPassword.NewPassword.placeholder
         newPasswordTextField.textfield.addTarget(
             self,
             action: #selector(textDidChange),
             for: .editingChanged
         )
         // Confirm Password TextField UI
-        confirmPasswordTextField.title = "Confirm Password"
-        confirmPasswordTextField.placeholder = "*******"
+        confirmPasswordTextField.title = L10n.Auth.ForgotPassword.ConfirmPassword.title
+        confirmPasswordTextField.placeholder = L10n.Auth.ForgotPassword.ConfirmPassword.placeholder
         confirmPasswordTextField.textfield.addTarget(
             self,
             action: #selector(textDidChange),
@@ -132,10 +131,10 @@ class ForgetPasswordViewController: UIViewController {
 
     /// Configures appearance of labels
     private func configureLabelsUI() {
-        titleLabel.text = "Forget the password"
+        titleLabel.text = L10n.Auth.ForgotPassword.title
         titleLabel.textColor = Colors.primaryBlue
 
-        subtitleLabel.text = "Change Password"
+        subtitleLabel.text = L10n.Auth.ForgotPassword.subtitle
         subtitleLabel.textColor = Colors.hSocialButton
     }
 }

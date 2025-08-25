@@ -68,8 +68,8 @@ extension SignupViewModel {
         /// Validate passwords match
         guard self.passwordSubject.value == self.confirmPasswordSubject.value else {
             let alertItem = AlertModel(
-                message: "Passwords do not match",
-                buttonTitle: "Ok",
+                message: L10n.Error.passwordsMismatch,
+                buttonTitle: L10n.General.ok,
                 image: .warning,
                 status: .error
             )
@@ -159,13 +159,13 @@ extension SignupViewModel {
     private func handleRegistrationError(_ error: Error) {
         let errorMessage: String
         if let afError = error.asAFError, afError.isResponseValidationError {
-            errorMessage = "Registration failed: Please check your input"
+            errorMessage = L10n.Error.registrationFailed
         } else {
             errorMessage = error.localizedDescription
         }
         let alertItem = AlertModel(
             message: errorMessage,
-            buttonTitle: "Ok",
+            buttonTitle: L10n.General.ok,
             image: .warning,
             status: .error
         )

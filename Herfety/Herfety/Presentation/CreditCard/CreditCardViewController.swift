@@ -84,23 +84,23 @@ extension CreditCardViewController {
     }
     
     private func cofigureTextFieldsPlaceHolder () {
-        addNewCardLabel.text = "Add New Card"
+        addNewCardLabel.text = L10n.Payment.addNewCard
         addNewCardLabel.font = .title3
         
-        cardDetailsLabel.text = "Card Details"
+        cardDetailsLabel.text = L10n.Payment.cardDetails
         cardDetailsLabel.font = .title3
         
-        cardNumberTextField.placeholder = "Card Number"
-        cardHolderNameTextField.placeholder = "Card holder Name"
-        cardExpDateTextField.placeholder = "Exp Date"
-        cardCvvTextField.placeholder = "CVV"
+        cardNumberTextField.placeholder = L10n.Payment.cardNumber
+        cardHolderNameTextField.placeholder = L10n.Payment.cardHolderName
+        cardExpDateTextField.placeholder = L10n.Payment.expDate
+        cardCvvTextField.placeholder = L10n.Payment.cvv
     }
     
     private func configureButtonUI() {
-        confirmBtn.title = "Confirm"
+        confirmBtn.title = L10n.General.confirm
         if #available(iOS 15.0, *) {
             cancelBtn.configuration = nil
-            cancelBtn.setTitle("Cancel", for: .normal)
+            cancelBtn.setTitle(L10n.General.cancel, for: .normal)
             cancelBtn.setTitleColor(Colors.hCardTextFieldPlaceholder, for: .normal)
             cancelBtn.titleLabel?.font = .callout
         }

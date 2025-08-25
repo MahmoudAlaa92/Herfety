@@ -55,8 +55,8 @@ extension SplashViewController {
     }
     /// Setup Buttons
     private func setup() {
-        loginButton.title = "Login"
-        signUpButton.title = "SignUp"
+        loginButton.title = L10n.Auth.login
+        signUpButton.title = L10n.Auth.signup
     }
 }
 // MARK: - Actions
@@ -93,7 +93,7 @@ extension SplashViewController {
 extension SplashViewController {
     /// lottie Animation
     private func makeAnimation() {
-        HerfetyView.animation = .named("HerfetyAnimation")
+        HerfetyView.animation = .named(L10n.Auth.herfetyAnimation)
         HerfetyView.loopMode = .loop
         HerfetyView.play()
     }

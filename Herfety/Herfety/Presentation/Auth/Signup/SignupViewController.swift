@@ -126,7 +126,7 @@ extension SignupViewController {
         logoImage.image = Images.logo
         
         // Buttons UI
-        loginButton.title = "Sign Up"
+        loginButton.title = L10n.Auth.signup
         
         configureUsernameTextField()
         configureEmailTextField()
@@ -136,14 +136,14 @@ extension SignupViewController {
     }
     /// Configures username text field with title and placeholder
     private func configureUsernameTextField() {
-        firstNameTextField.title = "First name"
-        firstNameTextField.placeholder = "Enter your First name"
+        firstNameTextField.title = L10n.Auth.Signup.FirstName.title
+        firstNameTextField.placeholder = L10n.Auth.Signup.FirstName.placeholder
         
-        lastNameTextField.title = "Last name"
-        lastNameTextField.placeholder = "Enter your last name"
+        lastNameTextField.title = L10n.Auth.Signup.LastName.title
+        lastNameTextField.placeholder = L10n.Auth.Signup.FirstName.placeholder
         
-        usernameTextField.title = "User Name"
-        usernameTextField.placeholder = "Enter your name here"
+        usernameTextField.title = L10n.Auth.Signup.Username.title
+        usernameTextField.placeholder = L10n.Auth.Signup.Username.placeholder
         
         firstNameTextField.textfield.delegate = self
         lastNameTextField.textfield.delegate = self
@@ -156,33 +156,33 @@ extension SignupViewController {
     
     /// Configures email text field with title and placeholder
     private func configureEmailTextField() {
-        emailTextField.title = "Email"
-        emailTextField.placeholder = "Enter your email here"
+        emailTextField.title = L10n.Auth.Signup.Email.title
+        emailTextField.placeholder = L10n.Auth.Signup.Email.placeholder
     }
     
     /// Configures password text field with title and placeholder
     private func configurePasswordTextField() {
         // Password TextField UI
-        passwordTextField.title = "Password"
-        passwordTextField.placeholder = "*******"
+        passwordTextField.title = L10n.Auth.Signup.Password.title
+        passwordTextField.placeholder = L10n.Auth.Signup.Password.placeholder
         
         // Confirm Password TextField UI
-        confirmPasswordTextField.title = "Confirm Password"
-        confirmPasswordTextField.placeholder = "*******"
+        confirmPasswordTextField.title = L10n.Auth.Signup.ConfirmPassword.title
+        confirmPasswordTextField.placeholder = L10n.Auth.Signup.ConfirmPassword.placeholder
     }
     /// Configures password text field with title and placeholder
     private func configurePhoneTextField() {
         // Phone TextField UI
-        phoneNumber.title = "Phone Number"
-        phoneNumber.placeholder = "+(20) 112 201 201"
+        phoneNumber.title = L10n.Auth.Signup.Phone.title
+        phoneNumber.placeholder = L10n.Auth.Signup.Phone.placeholder
     }
     
     /// Configures appearance of labels
     private func configureLabelsUI() {
-        titleLabel.text = "Sign Up"
+        titleLabel.text = L10n.Auth.Signup.title
         titleLabel.textColor = Colors.primaryBlue
         
-        subtitleLabel.text = "Create an new account"
+        subtitleLabel.text = L10n.Auth.Signup.subtitle
         subtitleLabel.textColor = Colors.hSocialButton
     }
 }

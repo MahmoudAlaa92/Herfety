@@ -39,17 +39,17 @@ extension SuccessViewController {
         containerView.backgroundColor = Colors.hPrimaryBackground
         
         /// Labels UI
-        successLabel.text = "Successful!"
+        successLabel.text = L10n.Auth.Success.title
         successLabel.textColor = Colors.primaryBlue
         
-        successMessage.text = "You have successfully registered in\nour app and start working in it."
+        successMessage.text = L10n.Auth.Success.message
         successMessage.textColor = Colors.hSocialButton
         
         /// Images UI
         imageView.image = Images.iconSuccess
         
         /// Buttons UI
-        startButton.title = "Start Shopping"
+        startButton.title = L10n.Auth.Success.startShopping
     }
 }
 // MARK: - Actions

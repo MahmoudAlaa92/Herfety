@@ -30,16 +30,16 @@ class TitleReviewsCollectionReusableView: UICollectionReusableView {
 extension TitleReviewsCollectionReusableView {
     
     func configure(numberOfReviews: Int, rating: Double) {
-        reviewsBtn.setTitle("(\(numberOfReviews) Review)", for: .normal)
+        reviewsBtn.setTitle("(\(numberOfReviews) \(L10n.Reviews.title)", for: .normal)
         cosmosView.rating = Double(rating)
     }
     
     private func configureUI() {
-        titleReview.text  = "Reviews"
+        titleReview.text  = L10n.Reviews.title
         titleReview.font = .calloutBold
         
         let attributedTitle = NSAttributedString(
-            string: "showAll",
+            string: L10n.Reviews.showAll,
             attributes: [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .foregroundColor: Colors.primaryBlue,
@@ -52,7 +52,6 @@ extension TitleReviewsCollectionReusableView {
         starView.addSubview(cosmosView)
         
         cosmosView.translatesAutoresizingMaskIntoConstraints = false
-//        cosmosView.frame = starView.bounds
         cosmosView.settings.filledImage = Images.iconRating
         cosmosView.settings.emptyImage = Images.iconRatingEmpty
         cosmosView.settings.starSize = 17

@@ -30,20 +30,20 @@ class ProductsCollectionViewSection: CollectionViewDataSource {
         // TODO: Handle DRY Principle for this part
         let item = Products[indexPath.item]
         cell.nameProduct.text = item.name
-        cell.priceProduct.text = "$" +  String(format: "%.2f", Double(item.price ?? 0))
+        cell.priceProduct.text = String(format: NSLocalizedString("products.currency", comment: ""), String(format: "%.2f", Double(item.price ?? 0)))
         
         var price = item.price ?? 0
         var offer = item.offerPrice ?? 0
         let discount = (Double(offer) / 100.0) * Double(price)
         let finalPrice = Double(price) + discount
         
-        cell.offerPrice.text = "$" + String(format: "%.2f", finalPrice)
+        cell.offerPrice.text = String(format: NSLocalizedString("products.currency", comment: ""), String(format: "%.2f", finalPrice))
 
-        cell.offerProduct.text = "\(Int(item.offerPrice ?? 0))%\nOFF"
+        cell.offerProduct.text = String(format: NSLocalizedString("products.discountFormat", comment: ""), String(Int(item.offerPrice ?? 0)))
         price = item.price ?? 0
         offer = item.offerPrice ?? 0
         let savedAmount = (Double(offer) / 100.0) * Double(price)
-        cell.savePrice.text = "Save $" + String(format: "%.2f", savedAmount)
+        cell.savePrice.text = String(format: NSLocalizedString("products.saveFormat", comment: ""), String(format: "%.2f", savedAmount))
         cell.imageProduct.setImage(with: item.thumbImage ?? "", placeholderImage: Images.loading)
         
         Task {

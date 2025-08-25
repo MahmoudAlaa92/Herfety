@@ -60,8 +60,8 @@ class CheckoutViewModel {
         
         guard await embeddedPaymentElement.paymentOption != nil else {
             alertItem = AlertModel(
-                message: "Please select a payment method",
-                buttonTitle: "Ok",
+                message: L10n.Payment.select,
+                buttonTitle: L10n.General.ok,
                 image: .warning,
                 status: .warning
             )
@@ -81,8 +81,8 @@ class CheckoutViewModel {
         switch result {
         case .completed:
             alertItem = AlertModel(
-                message: "Payment Completed",
-                buttonTitle: "Ok",
+                message: L10n.Payment.completed,
+                buttonTitle: L10n.General.ok,
                 image: .success,
                 status: .success
             )
@@ -94,15 +94,15 @@ class CheckoutViewModel {
             /// Handle the custom error for missing payment method
             if (error as NSError).code == 1 {
                 alertItem = AlertModel(
-                    message: "Please select a payment method",
-                    buttonTitle: "Ok",
+                    message: L10n.Payment.select,
+                    buttonTitle: L10n.General.ok,
                     image: .warning,
                     status: .warning
                 )
             } else {
                 alertItem = AlertModel(
-                    message: "Payment Failed: \(error.localizedDescription)",
-                    buttonTitle: "Ok",
+                    message: L10n.Payment.failedWithError(error.localizedDescription),
+                    buttonTitle: L10n.General.ok,
                     image: .error,
                     status: .error
                 )
@@ -110,8 +110,8 @@ class CheckoutViewModel {
             
         case .canceled:
             alertItem = AlertModel(
-                message: "Payment Canceled",
-                buttonTitle: "Ok",
+                message: L10n.Payment.canceled,
+                   buttonTitle: L10n.General.ok,
                 image: .warning,
                 status: .warning
             )
@@ -150,8 +150,8 @@ class CheckoutViewModel {
             _ = try await ordersRemote.addOrder(order: order)
         } catch {
             self.alertItem = AlertModel(
-                message: "Failed to place order: \(error.localizedDescription)",
-                buttonTitle: "Ok",
+                message: L10n.Payment.orderFailed(error.localizedDescription),
+                buttonTitle: L10n.General.ok,
                 image: .error,
                 status: .error
             )

@@ -64,7 +64,9 @@ extension TopBrandsCollectionViewSection: HeaderAndFooterProvider {
                 withReuseIdentifier: HeaderView.headerIdentifier,
                 for: indexPath) as! HeaderView
             
-            header.configure(title: "Top ", description: "Brands", shouldShowButton: false)
+            header.configure(title: L10n.TopBrands.title,
+                             description: "Brands",
+                             shouldShowButton: false)
             return header
         }
         

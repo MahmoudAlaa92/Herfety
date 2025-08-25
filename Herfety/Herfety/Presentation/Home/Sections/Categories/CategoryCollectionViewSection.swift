@@ -60,7 +60,7 @@ extension CategoryCollectionViewSection: HeaderAndFooterProvider {
                 withReuseIdentifier: HeaderView.headerIdentifier,
                 for: indexPath) as! HeaderView
             
-            header.configure(title:  "Categories", description: "", shouldShowButton: true)
+            header.configure(title:  L10n.Categories.title, description: "", shouldShowButton: true)
             return header
         }
         

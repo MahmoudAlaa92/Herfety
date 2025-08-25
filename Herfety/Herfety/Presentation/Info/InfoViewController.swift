@@ -47,7 +47,7 @@ extension InfoViewController {
     private func setUpNavigationBar() {
         navigationItem.backButtonTitle = ""
         navigationBarBehavior.configure(
-            title: "Info",
+            title: L10n.Nav.info,
             titleColor: .primaryBlue,
             onPlus: { [weak self] in
                 guard let self = self else { return }
