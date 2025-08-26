@@ -27,4 +27,5 @@ protocol SignupViewModelOutput {
     func configureOnButtonEnabled(onEnabled: @escaping (Bool) -> Void)
     var registrationSuccess: PassthroughSubject<Registration, Never> { get }
     var registrationError: PassthroughSubject<AlertModel, Never> { get }
+    var isLoading: PassthroughSubject<Bool, Never> { get }
 }

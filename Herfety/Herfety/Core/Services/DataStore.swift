@@ -133,6 +133,10 @@ actor DataStore: DataStoreProtocol {
         }
     }
     
+    func updateTotalPriceOfOrders(value: Int) {
+        totalPriceOfOrders = value
+    }
+    
     func updateInfos(_ newInfos: [InfoModel]) async {
         infos = newInfos
         

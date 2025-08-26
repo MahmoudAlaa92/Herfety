@@ -117,6 +117,8 @@ extension LoginViewModel {
     }
     @MainActor
     func loginWithFacebook(from viewController: UIViewController) async {
+        isLoading.send(true)
+
         let loginManager = LoginManager()
 
         let loginResult: Result<String, Error> = await withCheckedContinuation {
@@ -162,13 +164,16 @@ extension LoginViewModel {
                 loginError.send(error.localizedDescription)
             }
         }
+        isLoading.send(false)
     }
 
     @MainActor
     func loginWithGoogle(from viewController: UIViewController) async {
-
+        isLoading.send(true)
+        
         guard let clientID = FirebaseApp.app()?.options.clientID else {
             self.loginError.send(L10n.Error.clientIdNotFound)
+            isLoading.send(false)
             return
         }
 
@@ -182,6 +187,7 @@ extension LoginViewModel {
 
             guard let idToken = result.user.idToken?.tokenString else {
                 loginError.send(L10n.Error.googleTokenFailed)
+                isLoading.send(false)
                 return
             }
 
@@ -195,6 +201,7 @@ extension LoginViewModel {
         } catch {
             loginError.send(error.localizedDescription)
         }
+        isLoading.send(false)
     }
     @MainActor
     func loginWithApple(credential: ASAuthorizationAppleIDCredential) async {}

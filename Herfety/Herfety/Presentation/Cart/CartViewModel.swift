@@ -45,6 +45,9 @@ extension CartViewModel {
             )
         } else {
             navigationToShipping?()
+            Task {
+                await DataStore.shared.updateTotalPriceOfOrders(value: Int(ceil(paymentInfo.total)))
+            }
         }
     }
     

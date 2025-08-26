@@ -12,7 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="Herfety" customModuleProvider="target">
             <connections>
                 <outlet property="HerfetyView" destination="kDb-hr-3Is" id="n8y-EI-gsI"/>
-                <outlet property="loginButton" destination="n9b-fm-NYy" id="niX-z0-kAj"/>
+                <outlet property="loginButton" destination="n9b-fm-NYy" id="4lr-J8-QIf"/>
                 <outlet property="signUpButton" destination="Z3r-r3-Wo7" id="sK4-T9-Ql7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

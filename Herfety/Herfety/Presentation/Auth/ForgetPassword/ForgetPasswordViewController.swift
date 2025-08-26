@@ -22,7 +22,7 @@ class ForgetPasswordViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: ForgetPasswordViewModel
     private var navBarBehavior: HerfetyNavigationController?
-    var cancelabel = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
     weak var coordinator: ForgetPasswordTransitonDelegate?
     weak var alertPresenter: AlertPresenter?
     // MARK: - Init
@@ -143,19 +143,33 @@ class ForgetPasswordViewController: UIViewController {
 extension ForgetPasswordViewController {
     private func bindViewModel() {
         viewModel
+            .isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                if isLoading {
+                    self?.resetBtn.showLoader(userInteraction: true)
+                } else {
+                    self?.resetBtn.hideLoader()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel
             .onSuccess
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-            self?.coordinator?.goToSuccessVC()
-        }.store(in: &cancelabel)
+                self?.resetBtn.hideLoader()
+                self?.coordinator?.goToSuccessVC()
+            }.store(in: &cancellables)
         
         viewModel
             .onError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] alert in
+                self?.resetBtn.hideLoader()
                 self?.alertPresenter?.showAlert(alert)
-            }.store(in: &cancelabel)
-
+            }.store(in: &cancellables)
+        
         viewModel.configureOnButtonEnabled { [weak self] isEnabled in
             self?.resetBtn.isEnabled = isEnabled
             self?.resetBtn.alpha = isEnabled ? 1.0 : 0.5

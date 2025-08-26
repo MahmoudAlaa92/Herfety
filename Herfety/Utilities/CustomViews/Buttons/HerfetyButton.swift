@@ -1,6 +1,7 @@
 import UIKit
+import MHLoadingButton
 
-class HerfetyButton: UIButton {
+class HerfetyButton: LoadingButton {
     
     // MARK: - Properties
     var title: String? {
@@ -22,6 +23,9 @@ class HerfetyButton: UIButton {
         super.init(coder: coder)
         setUp()
     }
+    convenience init() {
+        self.init(frame: .zero)
+    }
     // MARK: - SetUp
     func setUp() {
         let height: CGFloat = 52
@@ -33,6 +37,7 @@ class HerfetyButton: UIButton {
         layer.borderColor = Colors.primaryBlue.cgColor
         heightAnchor.constraint(equalToConstant: height).isActive = true
         titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
+        indicator = BallSpinFadeIndicator(color: .white)
         
         if #available(iOS 15.0, *) {
             var config = UIButton.Configuration.filled()

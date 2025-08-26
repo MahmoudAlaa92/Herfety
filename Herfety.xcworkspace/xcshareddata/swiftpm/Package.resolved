@@ -1,5 +1,5 @@
 {
-  "originHash" : "972ede9ca894c0316c475af0cb3ec9fae200d0d830f888d6bd9792746c0d463b",
+  "originHash" : "21fbe7632815c3b8797e1aeb6e4e2d166c505e5a72f6a09f4b41ad18bb3a9e4c",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -161,6 +161,15 @@
       "state" : {
         "revision" : "a0bc79961d7be727d258d33d5a6b2f1023270ba1",
         "version" : "1.22.5"
+      }
+    },
+    {
+      "identity" : "loading-buttons-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twho/loading-buttons-ios",
+      "state" : {
+        "revision" : "551139b445a2196db748725472986cdb186fba71",
+        "version" : "0.1.3"
       }
     },
     {

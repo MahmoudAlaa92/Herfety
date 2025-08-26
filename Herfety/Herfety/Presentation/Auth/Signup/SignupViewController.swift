@@ -234,16 +234,32 @@ extension SignupViewController {
             self?.loginButton.alpha = isEnabled ? 1.0 : 0.7
         }
         
-        viewModel.registrationSuccess
+        viewModel
+            .isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                if isLoading {
+                    self?.loginButton.showLoader(userInteraction: true)
+                } else {
+                    self?.loginButton.hideLoader()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel
+            .registrationSuccess
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
+                self?.loginButton.hideLoader()
                 self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
         
-        viewModel.registrationError
+        viewModel
+            .registrationError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] alert in
+                self?.loginButton.hideLoader()
                 self?.alertPresenter?.showAlert(alert)
             }
             .store(in: &cancellables)

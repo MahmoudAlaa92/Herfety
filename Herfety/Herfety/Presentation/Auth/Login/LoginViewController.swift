@@ -156,6 +156,7 @@ extension LoginViewController {
             .loginSuccess
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
+                self?.loginButton.hideLoader()
                 self?.coordinator?.goToSuccessVC()
             }
             .store(in: &cancellables)
@@ -164,6 +165,7 @@ extension LoginViewController {
             .loginError
             .receive(on: DispatchQueue.main)
             .sink { [weak self] errorMessage in
+                self?.loginButton.hideLoader()
                 let alert = UIAlertController(
                     title: L10n.Auth.Login.failed,
                     message: errorMessage,
@@ -173,7 +175,18 @@ extension LoginViewController {
                 self?.present(alert, animated: true)
             }
             .store(in: &cancellables)
-
+        
+           viewModel
+               .isLoading
+               .receive(on: DispatchQueue.main)
+               .sink { [weak self] isLoading in
+                   if isLoading {
+                       self?.loginButton.showLoader(userInteraction: true)
+                   } else {
+                       self?.loginButton.hideLoader()
+                   }
+               }
+               .store(in: &cancellables)
         viewModel
             .configureOnButtonEnabled { [weak self] isEnabled in
             self?.loginButton.isEnabled = isEnabled
@@ -199,6 +212,7 @@ extension LoginViewController {
 extension LoginViewController {
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         Task {
+            
             await viewModel.loginTapped()
         }
     }

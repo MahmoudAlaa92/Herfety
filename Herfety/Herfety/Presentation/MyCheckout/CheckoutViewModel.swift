@@ -11,7 +11,6 @@ import Combine
 
 class CheckoutViewModel {
     // MARK: - Published Properties
-    @Published var isCheckoutEnabled: Bool = false
     @Published var isLoading: Bool = false
     @Published var alertItem: AlertModel?
     
@@ -116,6 +115,8 @@ class CheckoutViewModel {
                 status: .warning
             )
         }
+        
+        isLoading = false
         self.alertItem = alertItem
     }
     
@@ -155,9 +156,7 @@ class CheckoutViewModel {
                 image: .error,
                 status: .error
             )
-            
         }
-        
     }
     // MARK: - Private Methods
     private func handleConfirm(_ intentCreationCallback: @escaping (Result<String, Error>) -> Void) {

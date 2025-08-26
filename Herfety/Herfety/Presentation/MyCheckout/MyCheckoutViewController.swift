@@ -41,13 +41,6 @@ extension MyCheckoutViewController: EmbeddedPaymentElementDelegate {
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
-    
-    func embeddedPaymentElementDidUpdatePaymentOption(
-        embeddedPaymentElement: EmbeddedPaymentElement
-    ) {
-        viewModel.isCheckoutEnabled =
-        embeddedPaymentElement.paymentOption != nil
-    }
 }
 // MARK: - Configuration
 //
@@ -74,7 +67,6 @@ extension MyCheckoutViewController {
         // Configure checkout button
         checkoutButton = HerfetyButton()
         checkoutButton.title = L10n.Payment.checkout
-        checkoutButton.isEnabled = false
         checkoutButton.addTarget(
             self,
             action: #selector(didTapConfirmButton),
@@ -182,18 +174,16 @@ extension MyCheckoutViewController {
 //
 extension MyCheckoutViewController {
     private func setupBindings() {
-        viewModel
-            .$isCheckoutEnabled
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.isEnabled, on: checkoutButton)
-            .store(in: &subscriptions)
-        
+     
         viewModel
             .$isLoading
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isLoading in
-                self?.view.isUserInteractionEnabled = !isLoading
-                self?.checkoutButton.isEnabled = !isLoading
+                if isLoading {
+                    self?.checkoutButton.showLoader(userInteraction: true)
+                }else {
+                    self?.checkoutButton.hideLoader()
+                }
             }
             .store(in: &subscriptions)
         

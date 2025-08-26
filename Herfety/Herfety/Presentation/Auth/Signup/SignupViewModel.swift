@@ -26,6 +26,7 @@ class SignupViewModel: SignupViewModelType {
     private let isRegisterButtonEnabled = CurrentValueSubject<Bool, Never>(false)
     let registrationSuccess = PassthroughSubject<Registration, Never>()
     let registrationError = PassthroughSubject<AlertModel, Never>()
+    let isLoading = PassthroughSubject<Bool, Never>()
     
     // MARK: - Init
     init(registerService: RegisterRemoteProtocol = RegisterRemote(network: AlamofireNetwork())) {
@@ -77,6 +78,8 @@ extension SignupViewModel {
             return
         }
         
+        isLoading.send(true)
+        
         do {
             let user = buildUser()
             let response = try await registerService.registerUser(user: user)
@@ -85,6 +88,8 @@ extension SignupViewModel {
         } catch {
             handleRegistrationError(error)
         }
+        
+        isLoading.send(false)
     }
 }
 // MARK: - SignupViewModelOutput

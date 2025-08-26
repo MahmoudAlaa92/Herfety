@@ -107,6 +107,7 @@ extension ForgetPasswordViewModel {
         }
         
         isLoading.send(true)
+        
         defer { isLoading.send(false) }
         
         do {
@@ -122,6 +123,8 @@ extension ForgetPasswordViewModel {
         } catch {
             handleResetError(error)
         }
+        
+        isLoading.send(false)
     }
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1501AD102E5CA7DC004F203B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1501AD0E2E5CA7DC004F203B /* Localizable.strings */; };
 		1501AD172E5CAE32004F203B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501AD162E5CAE32004F203B /* Strings.swift */; };
+		1501AD1A2E5D0DA1004F203B /* MHLoadingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 1501AD192E5D0DA1004F203B /* MHLoadingButton */; };
 		150236182E589F9300A605B7 /* ReviewersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150236172E589F9300A605B7 /* ReviewersViewModel.swift */; };
 		1502361B2E589FFF00A605B7 /* ReviewersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1502361A2E589FFF00A605B7 /* ReviewersDataSource.swift */; };
 		1502361D2E58A02C00A605B7 /* ReviewersProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1502361C2E58A02C00A605B7 /* ReviewersProtocols.swift */; };
@@ -636,6 +637,7 @@
 				1599B8962DB85E8C00A48510 /* Kingfisher in Frameworks */,
 				157F428C2DB6DB38000305D6 /* Alamofire in Frameworks */,
 				151D5E692DF46B060019F1D9 /* GoogleSignInSwift in Frameworks */,
+				1501AD1A2E5D0DA1004F203B /* MHLoadingButton in Frameworks */,
 				1570F7242DFF213900AE9F6D /* Stripe in Frameworks */,
 				151D5E782DF487500019F1D9 /* FacebookLogin in Frameworks */,
 				15FB21C32D75209C0002B576 /* Cosmos in Frameworks */,
@@ -2151,6 +2153,7 @@
 				1570F7232DFF213900AE9F6D /* Stripe */,
 				1570F7252DFF213900AE9F6D /* StripePaymentSheet */,
 				1570F7272DFF213900AE9F6D /* StripePayments */,
+				1501AD192E5D0DA1004F203B /* MHLoadingButton */,
 			);
 			productName = Herfety;
 			productReference = 1589FBF22D51781D00240754 /* Herfety.app */;
@@ -2195,6 +2198,7 @@
 				151D5E6C2DF46EB30019F1D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				151D5E742DF487500019F1D9 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
+				1501AD182E5D0DA1004F203B /* XCRemoteSwiftPackageReference "loading-buttons-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1589FBF32D51781D00240754 /* Products */;
@@ -2814,6 +2818,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1501AD182E5D0DA1004F203B /* XCRemoteSwiftPackageReference "loading-buttons-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twho/loading-buttons-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 		151D5E652DF46B060019F1D9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -2881,6 +2893,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1501AD192E5D0DA1004F203B /* MHLoadingButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1501AD182E5D0DA1004F203B /* XCRemoteSwiftPackageReference "loading-buttons-ios" */;
+			productName = MHLoadingButton;
+		};
 		151D5E662DF46B060019F1D9 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 151D5E652DF46B060019F1D9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
