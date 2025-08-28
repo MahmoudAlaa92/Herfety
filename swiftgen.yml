@@ -1,6 +1,6 @@
 
 ## Generate Colors
-#xcassets:
+xcassets:
 #   inputs:
 #       - Herfety/Resources/SwiftGen/Colors/Colors.xcassets
 #   outputs:
@@ -10,24 +10,24 @@
 #         forceFileNameEnum: true
 #       output: Herfety/Resources/SwiftGen/Colors/Generated-Colors.swift
 # Generate Images
-#   inputs:
-#       - Herfety/Resources/SwiftGen/Images/Images.xcassets
-#   outputs:
-#       templatePath: Herfety/Resources/SwiftGen/Images/images.stencil
-#       params:
-#         forceProvidesNamespaces: true
-#         forceFileNameEnum: true
-#       output: Herfety/Resources/SwiftGen/Images/Generated-Images.swift
+   inputs:
+       - Herfety/Resources/SwiftGen/Images/Images.xcassets
+   outputs:
+       templatePath: Herfety/Resources/SwiftGen/Images/images.stencil
+       params:
+         forceProvidesNamespaces: true
+         forceFileNameEnum: true
+       output: Herfety/Resources/SwiftGen/Images/Generated-Images.swift
 
-strings:
-  inputs:
-    - Herfety/Resources/SwiftGen/Localization/en.lproj/Localizable.strings
-  outputs:
-    - templateName: structured-swift5
-      output: Herfety/Resources/SwiftGen/Generated/Strings.swift
-      params:
-        enumName: L10n
-        publicAccess: true
+#strings:
+#  inputs:
+#    - Herfety/Resources/SwiftGen/Localization/en.lproj/Localizable.strings
+#  outputs:
+#    - templateName: structured-swift5
+#      output: Herfety/Resources/SwiftGen/Generated/Strings.swift
+#      params:
+#        enumName: L10n
+#        publicAccess: true
 
 ## Generate Strings
 #strings:

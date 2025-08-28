@@ -35,7 +35,6 @@ final class WishListViewModel: ObservableObject {
         bindWishlistUpdates()
     }
 }
-
 // MARK: - Public Methods
 //
 extension WishListViewModel {
@@ -49,7 +48,6 @@ extension WishListViewModel {
         sections = sectionConfigurator.configureSections(wishlistItems: wishlist)
     }
 }
-
 // MARK: - Private Methods
 //
 extension WishListViewModel {

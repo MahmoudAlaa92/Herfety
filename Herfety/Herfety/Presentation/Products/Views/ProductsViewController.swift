@@ -7,6 +7,7 @@
 
 import Combine
 import UIKit
+import ViewAnimator
 
 class ProductsViewController: UIViewController {
     // MARK: - Outlets
@@ -102,6 +103,12 @@ extension ProductsViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 //
 extension ProductsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        cell.animate(animations: [AnimationType.from(direction: .bottom, offset: 30)], duration: 0.6)
+    }
+    
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath

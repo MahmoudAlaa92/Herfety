@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - Images
+
 public enum Images {
     public static var accentColor: UIImage {
         UIImage(named: "AccentColor")!
@@ -70,6 +72,9 @@ public enum Images {
     }
     public static var profilePhoto: UIImage {
         UIImage(named: "ProfilePhoto")!
+    }
+    public static var recatangleYellow: UIImage {
+        UIImage(named: "Recatangle Yellow")!
     }
     public static var rectangleBeige: UIImage {
         UIImage(named: "Rectangle Beige")!

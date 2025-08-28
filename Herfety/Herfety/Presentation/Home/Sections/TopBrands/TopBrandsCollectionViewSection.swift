@@ -37,10 +37,12 @@ class TopBrandsCollectionViewSection: CollectionViewDataSource {
         
         let item = topBrandsItems[indexPath.item]
         cell.nameBrands.text = item.name
+        cell.nameBrands.textColor = item.color
         cell.imageOfLogo.image = item.image
         cell.imageOfBrands.image = item.logo
-        
+        cell.backGroundView.image = item.backgroundImage
         cell.offerBrands.text = item.offer
+        cell.offerBrands.textColor = item.color
         return cell
     }
 }

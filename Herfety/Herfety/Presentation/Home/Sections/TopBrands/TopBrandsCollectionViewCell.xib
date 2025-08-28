@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,20 +25,19 @@
                         <rect key="frame" x="20" y="20" width="60" height="20"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imt-Px-HkR">
-                                <rect key="frame" x="6" y="3" width="48" height="14"/>
+                                <rect key="frame" x="0.0" y="1" width="60" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" name="Primary Beige"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="NFf-os-Oea"/>
-                            <constraint firstItem="imt-Px-HkR" firstAttribute="top" secondItem="Njn-bL-pOU" secondAttribute="top" constant="3" id="cRs-6w-JGT"/>
+                            <constraint firstItem="imt-Px-HkR" firstAttribute="top" secondItem="Njn-bL-pOU" secondAttribute="top" constant="1" id="cRs-6w-JGT"/>
                             <constraint firstAttribute="height" constant="20" id="g75-uK-dSm"/>
                             <constraint firstAttribute="bottom" secondItem="imt-Px-HkR" secondAttribute="bottom" constant="3" id="hia-FG-UKG"/>
-                            <constraint firstItem="imt-Px-HkR" firstAttribute="leading" secondItem="Njn-bL-pOU" secondAttribute="leading" constant="6" id="odx-nu-BkB"/>
-                            <constraint firstAttribute="trailing" secondItem="imt-Px-HkR" secondAttribute="trailing" constant="6" id="tWd-Er-ph6"/>
+                            <constraint firstItem="imt-Px-HkR" firstAttribute="leading" secondItem="Njn-bL-pOU" secondAttribute="leading" id="odx-nu-BkB"/>
+                            <constraint firstAttribute="trailing" secondItem="imt-Px-HkR" secondAttribute="trailing" id="tWd-Er-ph6"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MG4-lX-QmC">
@@ -101,10 +99,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Rectangle Beige" width="200" height="106.66666412353516"/>
-        <namedColor name="Primary Beige">
-            <color red="1" green="0.81960784313725488" blue="0.69019607843137254" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="Rectangle Beige" width="207" height="110.33333587646484"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

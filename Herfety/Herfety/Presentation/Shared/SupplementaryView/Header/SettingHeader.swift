@@ -19,6 +19,10 @@ class SettingHeader: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         configureUI()
+        
+        Task {
+            imageSetting.image =  await DataStore.shared.getUserProfileImage()
+        }
     }
    
 }

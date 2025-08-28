@@ -1,5 +1,5 @@
 {
-  "originHash" : "21fbe7632815c3b8797e1aeb6e4e2d166c505e5a72f6a09f4b41ad18bb3a9e4c",
+  "originHash" : "2120280222f2651c0c6d61bdfdc4df998b3984f35a0523846784c39a88dde47f",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -215,6 +215,15 @@
       "state" : {
         "revision" : "102a647b573f60f73afdce5613a51d71349fe507",
         "version" : "1.30.0"
+      }
+    },
+    {
+      "identity" : "viewanimator?tab=readme-ov-file",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marcosgriselli/ViewAnimator?tab=readme-ov-file",
+      "state" : {
+        "revision" : "55f1c46241b181c3e0b68d70edb6d87926c7d183",
+        "version" : "3.1.0"
       }
     }
   ],

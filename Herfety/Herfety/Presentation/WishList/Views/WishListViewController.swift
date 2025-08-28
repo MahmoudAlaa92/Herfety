@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 class WishListViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class WishListViewController: UIViewController {
     ///
     var isShowBackButton = false
     weak var coordinator: WishlistTransitionDelegate?
+    
     // MARK: - Init
     init(viewModel: WishListViewModel) {
         self.viewModel = viewModel
@@ -30,6 +32,7 @@ class WishListViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +73,12 @@ extension WishListViewController {
 // MARK: - UICollectionViewDelegate
 //
 extension WishListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        cell.animate(animations: [AnimationType.from(direction: .bottom, offset: 30)], duration: 0.8)
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         contextMenuConfigurationForItemAt indexPath: IndexPath,
                         point: CGPoint) -> UIContextMenuConfiguration? {
@@ -112,11 +121,14 @@ extension WishListViewController {
     private func bindViewModel() {
         viewModel
             .$sections
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 viewModel.sections.forEach( { $0.registerCells(in: self.collectionView) })
-                self.collectionView.reloadData()
+                self.collectionView.animateVisibleCellsin(section: 0,
+                                                          animation: .from(direction: .right,
+                                                          offset: 40))
             }
             .store(in: &cancellables)
     }

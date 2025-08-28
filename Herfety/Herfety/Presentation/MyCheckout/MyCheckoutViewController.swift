@@ -15,6 +15,7 @@ class MyCheckoutViewController: UIViewController {
     )
     weak var coordinator: CheckoutTransionDelegate?
     weak var alertPresenter: AlertPresenter?
+    
     // MARK: - Init
     init(viewModel: CheckoutViewModel) {
         self.viewModel = viewModel
@@ -23,6 +24,7 @@ class MyCheckoutViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()

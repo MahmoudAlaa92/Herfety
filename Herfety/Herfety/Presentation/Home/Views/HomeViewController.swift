@@ -6,6 +6,7 @@
 //
 import UIKit
 import Combine
+import ViewAnimator
 
 class HomeViewController: UIViewController {
     
@@ -82,6 +83,12 @@ extension HomeViewController: UICollectionViewDelegate {
             selectable.collectionView(collectionView, didSelectItemAt: indexPath)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        cell.animate(animations: [AnimationType.from(direction: .right, offset: 30)], duration: 0.6)
+    }
 }
 // MARK: - UICollectionViewDataSource
 //
@@ -90,12 +97,15 @@ extension HomeViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.sections.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.sections[section].numberOfItems
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return viewModel.sections[indexPath.section].cellForItems(collectionView, cellForItemAt: indexPath)
     }
+    
     // MARK: - Header And Footer
     //
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -120,7 +130,14 @@ extension HomeViewController {
             .$categoryItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.collectionView.reloadData()
+                guard let self = self else { return }
+                self.viewModel.configureSectionsAndLayouts()
+                
+                let sectionIndex = HomeSection.categories.rawValue
+                self.collectionView.reloadSections(IndexSet(integer: sectionIndex))
+                self.collectionView.animateVisibleCellsin(section: sectionIndex,
+                                                          animation: .from(direction: .right,
+                                                          offset: 40))
             }
             .store(in: &cancellabels)
         ///
@@ -128,7 +145,14 @@ extension HomeViewController {
             .$productItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.collectionView.reloadData()
+                guard let self = self else { return }
+                self.viewModel.configureSectionsAndLayouts()
+                
+                let sectionIndex = HomeSection.products.rawValue
+                self.collectionView.reloadSections(IndexSet(integer: sectionIndex))
+                self.collectionView.animateVisibleCellsin(section: sectionIndex,
+                                                          animation: .from(direction: .right,
+                                                          offset: 40))
             }
             .store(in: &cancellabels)
     }

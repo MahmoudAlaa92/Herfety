@@ -67,18 +67,8 @@ extension HomeViewModel {
             group.addTask { await self.fetchProducts() }
         }
     }
-}
-// MARK: - Private Methods
-//
-extension HomeViewModel {
-    private func setupAlertObserver() {
-        alertService.alertPublisher
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.showAlert, on: self)
-            .store(in: &cancellables)
-    }
     
-    private func configureSectionsAndLayouts() {
+    func configureSectionsAndLayouts() {
         guard let coordinator = coordinator else { return }
         
         sections = sectionConfigurator.configureSections(
@@ -92,11 +82,21 @@ extension HomeViewModel {
         
         layoutSections = sectionConfigurator.configureLayoutSections()
     }
+}
+// MARK: - Private Methods
+//
+extension HomeViewModel {
+    private func setupAlertObserver() {
+        alertService.alertPublisher
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.showAlert, on: self)
+            .store(in: &cancellables)
+    }
     
     private func fetchCategories() async {
         do {
-            categoryItems = try await dataSource.fetchCategories()
-            configureSectionsAndLayouts()
+            let categories = try await dataSource.fetchCategories()
+            await MainActor.run { self.categoryItems = categories }
         } catch {
             print("Error when fetching categories: \(error)")
         }
@@ -104,8 +104,8 @@ extension HomeViewModel {
     
     private func fetchProducts() async {
         do {
-            productItems = try await dataSource.fetchProducts()
-            configureSectionsAndLayouts()
+            let products = try await dataSource.fetchProducts()
+            await MainActor.run { self.productItems = products }
         } catch {
             print("Error when fetching products: \(error)")
         }

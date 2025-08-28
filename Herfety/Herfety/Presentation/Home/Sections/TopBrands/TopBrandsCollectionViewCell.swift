@@ -38,7 +38,8 @@ extension TopBrandsCollectionViewCell {
         backGroundView.layer.cornerRadius = 10
         backGroundView.clipsToBounds = true
         
-        nameBrands.font = .body
+        nameBrands.font = .body2
+        nameBrands.lineBreakMode = .byWordWrapping
         nameBrands.numberOfLines = 1
         
         contentOfLogo.layer.cornerRadius = 10

@@ -32,6 +32,7 @@ protocol HomeSectionConfiguratorProtocol {
     ) -> [CollectionViewDataSource]
     
     func configureLayoutSections() -> [LayoutSectionProvider]
+
 }
 // MARK: - Collection View Protocols
 //

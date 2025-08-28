@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 class InfoViewController: UIViewController {
     // MARK: - Outlets
@@ -102,6 +103,12 @@ extension InfoViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 //
 extension InfoViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        cell.animate(animations: [AnimationType.from(direction: .bottom, offset: 30)], duration: 0.8)
+    }
+    
     func collectionView(
         _ collectionView: UICollectionView,
         contextMenuConfigurationForItemAt indexPath: IndexPath,

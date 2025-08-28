@@ -6,6 +6,7 @@
 //
 import UIKit
 import Combine
+import ViewAnimator
 
 class CardItemCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
@@ -67,6 +68,7 @@ class CardItemCollectionViewSection: CollectionViewDataSource {
 // MARK: - Delegate
 //
 extension CardItemCollectionViewSection: CollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = productItems[indexPath.item]
         Task {
@@ -76,6 +78,12 @@ extension CardItemCollectionViewSection: CollectionViewDelegate {
             
             await MainActor.run { selectedItem.send(wishListItem) }
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        cell.animate(animations: [AnimationType.from(direction: .right, offset: 40)], duration: 0.5)
     }
 }
 // MARK: - Layout

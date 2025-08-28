@@ -70,6 +70,9 @@
 		151DF42E2D5BD03B00A3AD98 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF42D2D5BD03B00A3AD98 /* CartViewModel.swift */; };
 		151DF4302D5BD39200A3AD98 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF42F2D5BD39200A3AD98 /* CartModel.swift */; };
 		151DF4322D5BDBDF00A3AD98 /* CartCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF4312D5BDBDF00A3AD98 /* CartCollectionViewSection.swift */; };
+		151F9D982E5F97210018BBFA /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 151F9D972E5F97210018BBFA /* ViewAnimator */; };
+		151F9D9D2E5FB7B60018BBFA /* Ext+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151F9D9C2E5FB7B60018BBFA /* Ext+CollectionView.swift */; };
+		151F9D9F2E5FD5EC0018BBFA /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151F9D9E2E5FD5EC0018BBFA /* Generated-Images.swift */; };
 		152BCDC62E5740B500809ACB /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152BCDC52E5740B500809ACB /* WishlistViewModel.swift */; };
 		152BCDC82E57414000809ACB /* WishlistProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152BCDC72E57414000809ACB /* WishlistProtocols.swift */; };
 		152BCDE42E57885100809ACB /* DefaultWishlistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152BCDE32E57885100809ACB /* DefaultWishlistDataSource.swift */; };
@@ -110,6 +113,7 @@
 		153C9E422E4CD729006D1616 /* ForgetPasswordViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C9E412E4CD729006D1616 /* ForgetPasswordViewModelType.swift */; };
 		153C9E442E4CE136006D1616 /* SuccessViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C9E432E4CE135006D1616 /* SuccessViewModelType.swift */; };
 		153C9E462E4CE15F006D1616 /* SuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C9E452E4CE15F006D1616 /* SuccessViewModel.swift */; };
+		153DE80C2E60A5A7001DBBE9 /* Ext+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153DE80B2E60A5A7001DBBE9 /* Ext+Color.swift */; };
 		153F6A942D58FBA800317F49 /* DailyEssentailCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F6A932D58FBA800317F49 /* DailyEssentailCollectionViewSection.swift */; };
 		153F6A982D59157300317F49 /* HomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F6A972D59157300317F49 /* HomeNavBar.swift */; };
 		153F6A9D2D59538100317F49 /* CustomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F6A9C2D59538000317F49 /* CustomeTabBarViewController.swift */; };
@@ -150,7 +154,6 @@
 		156720102DCE718C00D8AFCA /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567200F2DCE718C00D8AFCA /* Registration.swift */; };
 		156720122DCE72E700D8AFCA /* RegisterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156720112DCE72E700D8AFCA /* RegisterUser.swift */; };
 		156C2CBF2E02253D00C68546 /* PaymentIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156C2CBE2E02253D00C68546 /* PaymentIntent.swift */; };
-		156C2CE12E0252C200C68546 /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156C2CE02E0252C200C68546 /* Generated-Images.swift */; };
 		156CD83F2D6A463D00D6DA77 /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156CD83E2D6A463D00D6DA77 /* ProductsViewController.xib */; };
 		156CD8402D6A463D00D6DA77 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD83D2D6A463D00D6DA77 /* ProductsViewController.swift */; };
 		156CD8442D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156CD8432D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift */; };
@@ -382,6 +385,8 @@
 		151DF42D2D5BD03B00A3AD98 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		151DF42F2D5BD39200A3AD98 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		151DF4312D5BDBDF00A3AD98 /* CartCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionViewSection.swift; sourceTree = "<group>"; };
+		151F9D9C2E5FB7B60018BBFA /* Ext+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+CollectionView.swift"; sourceTree = "<group>"; };
+		151F9D9E2E5FD5EC0018BBFA /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		152BCDC52E5740B500809ACB /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
 		152BCDC72E57414000809ACB /* WishlistProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistProtocols.swift; sourceTree = "<group>"; };
 		152BCDE32E57885100809ACB /* DefaultWishlistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWishlistDataSource.swift; sourceTree = "<group>"; };
@@ -422,6 +427,7 @@
 		153C9E412E4CD729006D1616 /* ForgetPasswordViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewModelType.swift; sourceTree = "<group>"; };
 		153C9E432E4CE135006D1616 /* SuccessViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewModelType.swift; sourceTree = "<group>"; };
 		153C9E452E4CE15F006D1616 /* SuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewModel.swift; sourceTree = "<group>"; };
+		153DE80B2E60A5A7001DBBE9 /* Ext+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Color.swift"; sourceTree = "<group>"; };
 		153F6A932D58FBA800317F49 /* DailyEssentailCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEssentailCollectionViewSection.swift; sourceTree = "<group>"; };
 		153F6A972D59157300317F49 /* HomeNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavBar.swift; sourceTree = "<group>"; };
 		153F6A9C2D59538000317F49 /* CustomeTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeTabBarViewController.swift; sourceTree = "<group>"; };
@@ -462,7 +468,6 @@
 		1567200F2DCE718C00D8AFCA /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		156720112DCE72E700D8AFCA /* RegisterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUser.swift; sourceTree = "<group>"; };
 		156C2CBE2E02253D00C68546 /* PaymentIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentIntent.swift; sourceTree = "<group>"; };
-		156C2CE02E0252C200C68546 /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		156CD83D2D6A463D00D6DA77 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		156CD83E2D6A463D00D6DA77 /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
 		156CD8432D6A4D7600D6DA77 /* ProductsCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewSection.swift; sourceTree = "<group>"; };
@@ -633,6 +638,7 @@
 			files = (
 				151D5E672DF46B060019F1D9 /* GoogleSignIn in Frameworks */,
 				1570F7262DFF213900AE9F6D /* StripePaymentSheet in Frameworks */,
+				151F9D982E5F97210018BBFA /* ViewAnimator in Frameworks */,
 				151D5E762DF487500019F1D9 /* FacebookCore in Frameworks */,
 				1599B8962DB85E8C00A48510 /* Kingfisher in Frameworks */,
 				157F428C2DB6DB38000305D6 /* Alamofire in Frameworks */,
@@ -1001,7 +1007,7 @@
 		151631242D5D553200BA088E /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				156C2CE02E0252C200C68546 /* Generated-Images.swift */,
+				151F9D9E2E5FD5EC0018BBFA /* Generated-Images.swift */,
 				151631312D5D56CF00BA088E /* Generated-Colors.swift */,
 				1513B2CE2E51156400FE069F /* GeneratedExtra+Images.swift */,
 				1501AD162E5CAE32004F203B /* Strings.swift */,
@@ -1075,6 +1081,14 @@
 				151631272D5D55DB00BA088E /* UIButton+Style.swift */,
 			);
 			path = UIButton;
+			sourceTree = "<group>";
+		};
+		151F9D9B2E5FB7820018BBFA /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				151F9D9C2E5FB7B60018BBFA /* Ext+CollectionView.swift */,
+			);
+			path = UICollectionView;
 			sourceTree = "<group>";
 		};
 		152BCDE62E578A8E00809ACB /* Wishlist */ = {
@@ -1282,6 +1296,14 @@
 				15CD44C62D52A72F00E58C6F /* SectionsLayout.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		153DE80A2E60A594001DBBE9 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				153DE80B2E60A5A7001DBBE9 /* Ext+Color.swift */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 		153F6A992D59527200317F49 /* TabBar */ = {
@@ -1830,6 +1852,8 @@
 				1517BE4B2E2E2ED500801013 /* UIWindow */,
 				15085B432E280B4E007F8B3F /* UINavigation */,
 				15A4F5DE2DB28956000EACEA /* UIImage */,
+				153DE80A2E60A594001DBBE9 /* UIColor */,
+				151F9D9B2E5FB7820018BBFA /* UICollectionView */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2154,6 +2178,7 @@
 				1570F7252DFF213900AE9F6D /* StripePaymentSheet */,
 				1570F7272DFF213900AE9F6D /* StripePayments */,
 				1501AD192E5D0DA1004F203B /* MHLoadingButton */,
+				151F9D972E5F97210018BBFA /* ViewAnimator */,
 			);
 			productName = Herfety;
 			productReference = 1589FBF22D51781D00240754 /* Herfety.app */;
@@ -2199,6 +2224,7 @@
 				151D5E742DF487500019F1D9 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
 				1501AD182E5D0DA1004F203B /* XCRemoteSwiftPackageReference "loading-buttons-ios" */,
+				151F9D962E5F97210018BBFA /* XCRemoteSwiftPackageReference "ViewAnimator" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1589FBF32D51781D00240754 /* Products */;
@@ -2311,6 +2337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				158A7EB62DB56EF400B89684 /* HRTextField.swift in Sources */,
+				151F9D9F2E5FD5EC0018BBFA /* Generated-Images.swift in Sources */,
 				15A91D522E59E26C00A97B3D /* DataActor.swift in Sources */,
 				158F8D512D7252DC00D8E768 /* DescriptionProductDetails.swift in Sources */,
 				15A3C3CB2D78863B00AE6CFA /* NameOfProfileCollectionViewSection.swift in Sources */,
@@ -2348,6 +2375,7 @@
 				1541679C2D9D373B007E4CAA /* SettingViewModel.swift in Sources */,
 				15CD8B122E5203C400DC5227 /* ProductsDataSource.swift in Sources */,
 				154B7D222DF3824B00854E61 /* AddReview.swift in Sources */,
+				151F9D9D2E5FB7B60018BBFA /* Ext+CollectionView.swift in Sources */,
 				15E33A2B2DD4AC500004D408 /* ForgetPasswordViewController.swift in Sources */,
 				157F910E2D62CA26005381FB /* AddressTextField.swift in Sources */,
 				1592D5FA2E13F9FF001792F7 /* LoginCoordinator.swift in Sources */,
@@ -2363,7 +2391,6 @@
 				1513B2C72E5102D900FE069F /* HomeSectionConfigurator.swift in Sources */,
 				15A91D4C2E59DFC500A97B3D /* AppDataStorePublisher.swift in Sources */,
 				1502362B2E58B9E400A605B7 /* ProfileDataSource.swift in Sources */,
-				156C2CE12E0252C200C68546 /* Generated-Images.swift in Sources */,
 				1532F34F2D5E8DF7003223A1 /* InfoCollectionViewSection.swift in Sources */,
 				1517FFC42DC8237B00F1D7BD /* OrdersRemote.swift in Sources */,
 				157F42902DB6DD4E000305D6 /* HerfetyRequest.swift in Sources */,
@@ -2514,6 +2541,7 @@
 				15CE60F62D73BA050032617B /* ReviewModel.swift in Sources */,
 				153B7FD52D720A7B00B364F8 /* ProductDetailsCollectionViewSection.swift in Sources */,
 				1515635C2DD4E0090001CCEE /* ReviewRemote.swift in Sources */,
+				153DE80C2E60A5A7001DBBE9 /* Ext+Color.swift in Sources */,
 				157F91142D62CF5F005381FB /* AddAddressModel.swift in Sources */,
 				151DF4302D5BD39200A3AD98 /* CartModel.swift in Sources */,
 				1517EC942D74ABF7007CCBF7 /* ButtonCollectionReusableView.swift in Sources */,
@@ -2850,6 +2878,14 @@
 				minimumVersion = 14.1.0;
 			};
 		};
+		151F9D962E5F97210018BBFA /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marcosgriselli/ViewAnimator?tab=readme-ov-file";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
 		1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stripe/stripe-ios-spm";
@@ -2932,6 +2968,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 151D5E742DF487500019F1D9 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
+		};
+		151F9D972E5F97210018BBFA /* ViewAnimator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 151F9D962E5F97210018BBFA /* XCRemoteSwiftPackageReference "ViewAnimator" */;
+			productName = ViewAnimator;
 		};
 		1570F7232DFF213900AE9F6D /* Stripe */ = {
 			isa = XCSwiftPackageProductDependency;

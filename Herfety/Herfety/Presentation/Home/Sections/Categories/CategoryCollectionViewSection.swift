@@ -13,6 +13,7 @@ class CategoryCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
     var categoryItems: [CategoryElement]
     let categorySelection = PassthroughSubject<CategoryElement, Never>()
+    
     // MARK: - Init
     init(categoryItems: [CategoryElement]) {
         self.categoryItems = categoryItems
@@ -76,7 +77,7 @@ extension CategoryCollectionViewSection: CollectionViewDelegate {
         categorySelection.send(selectedItems)
     }
 }
-  
+
 // MARK: - Layout
 //
 struct CategoriesSectionLayoutSection: LayoutSectionProvider {
