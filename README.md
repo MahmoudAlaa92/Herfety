@@ -16,7 +16,7 @@ Handmade Marketplace is a fully functional mobile app that allows users to:
 
 ---
 
-## 🏗️ Architecture - MVVM
+## 🏗️ Architecture - MVVM + Design Patterns
 
 We implemented the **Model-View-ViewModel (MVVM)** design pattern to ensure:
 
@@ -24,11 +24,11 @@ We implemented the **Model-View-ViewModel (MVVM)** design pattern to ensure:
 * Easier testability and maintainability.
 * Reactive UI updates via Combine.
 
-### Structure:
+Additional design patterns used:
 
-* **Model**: Represents the app’s data and business logic (e.g., `Product`, `User`, `Review`).
-* **View**: UIKit-based views that display data (e.g., `ProductViewController`).
-* **ViewModel**: Handles logic and communicates between View and Model.
+* **Factory** – For object creation (products, users, reviews).
+* **Coordinator** – For handling navigation flow.
+* **Singleton** – For shared managers like `SessionManager`.
 
 ---
 
@@ -39,38 +39,32 @@ We followed the SOLID principles to keep our codebase scalable and readable:
 * **S**: *Single Responsibility* - Each class (e.g., `CheckoutViewModel`) has a distinct job.
 * **O**: *Open/Closed* - The networking layer is open for new requests but closed for modification.
 * **L**: *Liskov Substitution* - Common protocols are used for polymorphism.
-* **I**: *Interface Segregation* - Protocols are small and focused (e.g., `NetworkRequestPerforming`).
+* **I**: *Interface Segregation* - Protocols are small and focused.
 * **D**: *Dependency Inversion* - Dependencies are injected (e.g., network clients).
 
 ---
 
-## 🎨 UI Design with UIKit
+## 📦 Packages & Frameworks Used
 
-Using UIKit allowed us to build:
+We leveraged powerful Swift libraries and Apple frameworks to deliver a production-ready experience:
 
-* Responsive layouts using Auto Layout.
-* Reusable custom components like `ProductCell`, `VendorCollectionView`.
-* A smooth, animated checkout flow.
-
-UIKit also provided greater control over presentation and transitions, crucial for creating an emotionally engaging user experience.
-
----
-
-## 🌐 Networking with Alamofire
-
-We used **Alamofire** to manage all HTTP networking:
-
-* Easy to send authenticated requests.
-* Upload and download product images.
-* Fetch product listings, vendor data, reviews.
-
-### Example:
-
-```swift
-Alamofire.request("/products", method: .get).responseDecodable(of: [Product].self) { response in
-   // handle response
-}
-```
+- **Alamofire** – Networking layer for REST APIs.
+- **Firebase** – Authentication, Firestore, and hosting backend services.
+- **Stripe iOS SDK** – Secure payments with Apple Pay support.
+- **Cosmos** – Star rating control for reviews.
+- **Kingfisher** – Downloading & caching images.
+- **Lottie** – Animated vector illustrations for engaging UI.
+- **Loading Buttons** – Custom styled loading buttons.
+- **SkeletonView** – Placeholder skeletons for loading states.
+- **ViewAnimator** – One-line view animations for smooth UX.
+- **SwiftyJSON** – Easy JSON parsing.
+- **SDWebImage** – Image caching & loading.
+- **Realm** – Local database for offline-first experience.
+- **SwiftGen** – Code generation for assets & strings.
+- **SwiftLint** – Linting to enforce Swift style guidelines.
+- **Combine** – Reactive programming for UI binding.
+- **Async/Await** – Modern concurrency and background task handling.
+- **Core ML** – For intelligent recommendations and classifiers (future features).
 
 ---
 
@@ -90,6 +84,17 @@ Stripe’s **EmbeddedPaymentElement** API is used for a secure and customizable 
 
 ---
 
+## 🎨 UI Design with UIKit
+
+Using UIKit allowed us to build:
+
+* Responsive layouts with Auto Layout.
+* Reusable custom components like `ProductCell`, `VendorCollectionView`.
+* A smooth, animated checkout flow.
+* Localization support for multiple languages.
+
+---
+
 ## 🔐 Authentication with Firebase
 
 We use **Firebase Authentication** to simplify sign-in:
@@ -102,24 +107,19 @@ Firebase handles token validation, user identity, and security. The sign-in stat
 
 ---
 
-## 🔥 Backend and Firebase Services
+## 🌐 Networking with Alamofire
 
-The backend includes:
+We used **Alamofire** to manage all HTTP networking:
 
-* A server (e.g., Node.js or Laravel) that handles Stripe server-side logic.
-* **Firebase Firestore** to store:
+* Easy to send authenticated requests.
+* Upload and download product images.
+* Fetch product listings, vendor data, reviews.
 
-  * User profiles
-  * Product listings
-  * Orders and payments
-  * Reviews and ratings
-
-Firebase is used for:
-
-* Real-time data sync.
-* Scalable product and review storage.
-* Secure access rules per user role.
-
+```swift
+Alamofire.request("/products", method: .get).responseDecodable(of: [Product].self) { response in
+   // handle response
+}
+```
 ---
 
 ## 🛍️ Product Browsing & Reviews
@@ -132,18 +132,6 @@ Users can:
 * View other customers’ feedback.
 
 All reviews are stored in Firestore and linked by `productId`.
-
----
-
-## 📦 Multi-Vendor Marketplace Support
-
-Each vendor can:
-
-* Upload products.
-* View orders.
-* Track earnings.
-
-Customers can see vendor profiles and filter products by vendor.
 
 ---
 
@@ -170,14 +158,13 @@ This project blends solid architecture (MVVM), modern UI with UIKit, and powerfu
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 34 41 PM" src="https://github.com/user-attachments/assets/706af593-1210-45ff-9411-080c9e575987" />
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 35 03 PM" src="https://github.com/user-attachments/assets/a3a9292c-858a-474d-87db-781156568513" />
 
-
-<img width="410" height="800" alt="Screenshot 2025-06-16 at 6 33 15 PM" src="https://github.com/user-attachments/assets/6e638551-8438-4651-a847-70eec16358f8" />
+<img width="410" height="800" alt="Screenshot 2025-08-30 at 12 41 55 AM" src="https://github.com/user-attachments/assets/918c6bee-1df4-40dd-9455-168f754ae3d7" />
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 36 57 PM" src="https://github.com/user-attachments/assets/1f6c3df7-88d0-4b6a-8b03-a8f97fd7afc5" />
+<img width="410" height="800" alt="Screenshot 2025-06-16 at 6 48 21 PM" src="https://github.com/user-attachments/assets/ad0d7759-4a92-4f7c-87a7-6aa13c6b8feb" />
 
-<img width="410" height="800" alt="Screenshot 2025-06-16 at 6 37 15 PM" src="https://github.com/user-attachments/assets/fe57e570-308f-46e5-8c0d-0b678e84ec41" />
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 39 24 PM" src="https://github.com/user-attachments/assets/be4bbee4-f084-42a2-845d-d02613fd04d4" />
+<img width="410" height="900" alt="Screenshot 2025-08-30 at 12 42 38 AM" src="https://github.com/user-attachments/assets/899c7209-2ad7-4368-baf0-533c876a8db9" />
 
-<img width="410" height="800" alt="Screenshot 2025-06-16 at 6 42 08 PM" src="https://github.com/user-attachments/assets/a9479e8d-3bc3-4748-9013-80638907af95" />
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 42 58 PM" src="https://github.com/user-attachments/assets/a7040048-4fc1-4f8a-bf24-f79594e09d4d" />
 
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 44 30 PM" src="https://github.com/user-attachments/assets/07e5acea-2c9f-4702-9d7c-ab1bce821a4f" />
@@ -188,10 +175,13 @@ This project blends solid architecture (MVVM), modern UI with UIKit, and powerfu
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 44 11 PM" src="https://github.com/user-attachments/assets/27eb83bc-c835-465b-b556-dcfde1e25df0" />
 
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 45 53 PM" src="https://github.com/user-attachments/assets/2fb888f8-35c6-4049-9950-c6f76ec7b173" />
-<img width="410" height="800" alt="Screenshot 2025-06-16 at 6 47 08 PM" src="https://github.com/user-attachments/assets/98800200-4034-47fe-97ca-ae0f2939e840" />
+<img width="410" height="800" alt="Screenshot 2025-08-30 at 12 40 26 AM" src="https://github.com/user-attachments/assets/4f0f1e3c-c937-4121-89d4-ac81f5ca2fec" />
+
+
 
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 47 34 PM" src="https://github.com/user-attachments/assets/0a32877f-7807-4c24-914e-218353c471ac" />
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 47 48 PM" src="https://github.com/user-attachments/assets/7ab1f6f9-06a4-476a-ac0b-2c7e4aa8b0fc" />
 
-<img width="410" height="800" alt="Screenshot 2025-06-16 at 6 48 21 PM" src="https://github.com/user-attachments/assets/ad0d7759-4a92-4f7c-87a7-6aa13c6b8feb" />
-<img width="410" height="800" alt="Screenshot 2025-06-16 at 6 49 18 PM" src="https://github.com/user-attachments/assets/9170da9d-992d-4b7e-9945-87a6b0977b5b" />
+<img width="410" height="800" alt="Screenshot 2025-08-30 at 12 38 30 AM" src="https://github.com/user-attachments/assets/9c8b2eb1-0478-49f1-a757-64c68ea5adee" />
+<img width="410" height="800" alt="Screenshot 2025-08-30 at 12 48 58 AM" src="https://github.com/user-attachments/assets/e3a75361-cd37-4d78-8c52-5283d36b2de2" />
+
