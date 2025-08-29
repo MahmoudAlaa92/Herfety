@@ -39,7 +39,7 @@ extension HerfetyNavigationController {
 
         if showRighBtn {
             let plusButton = UIBarButtonItem(
-                image: UIImage(systemName: "plus"),
+                image: Images.plus,
                 style: .done,
                 target: self,
                 action: #selector(onPlusBtnTapped)

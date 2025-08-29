@@ -72,7 +72,6 @@
 		151DF4322D5BDBDF00A3AD98 /* CartCollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151DF4312D5BDBDF00A3AD98 /* CartCollectionViewSection.swift */; };
 		151F9D982E5F97210018BBFA /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 151F9D972E5F97210018BBFA /* ViewAnimator */; };
 		151F9D9D2E5FB7B60018BBFA /* Ext+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151F9D9C2E5FB7B60018BBFA /* Ext+CollectionView.swift */; };
-		151F9D9F2E5FD5EC0018BBFA /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151F9D9E2E5FD5EC0018BBFA /* Generated-Images.swift */; };
 		152BCDC62E5740B500809ACB /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152BCDC52E5740B500809ACB /* WishlistViewModel.swift */; };
 		152BCDC82E57414000809ACB /* WishlistProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152BCDC72E57414000809ACB /* WishlistProtocols.swift */; };
 		152BCDE42E57885100809ACB /* DefaultWishlistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152BCDE32E57885100809ACB /* DefaultWishlistDataSource.swift */; };
@@ -234,6 +233,8 @@
 		15955C132D6759D500673BE7 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15955C122D6759D500673BE7 /* CardView.xib */; };
 		15955C1B2D67797500673BE7 /* CreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15955C192D67797500673BE7 /* CreditCardViewController.swift */; };
 		15955C1C2D67797500673BE7 /* CreditCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15955C1A2D67797500673BE7 /* CreditCardViewController.xib */; };
+		15975C912E61A1AD00281F45 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 15975C902E61A1AD00281F45 /* SkeletonView */; };
+		15975C932E61A8DF00281F45 /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15975C922E61A8DF00281F45 /* Generated-Images.swift */; };
 		1599B8962DB85E8C00A48510 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1599B8952DB85E8C00A48510 /* Kingfisher */; };
 		1599B8982DB85F5A00A48510 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B8972DB85F5A00A48510 /* Category.swift */; };
 		1599B89A2DB85FE500A48510 /* CategoryRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B8992DB85FE500A48510 /* CategoryRemote.swift */; };
@@ -386,7 +387,6 @@
 		151DF42F2D5BD39200A3AD98 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		151DF4312D5BDBDF00A3AD98 /* CartCollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionViewSection.swift; sourceTree = "<group>"; };
 		151F9D9C2E5FB7B60018BBFA /* Ext+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+CollectionView.swift"; sourceTree = "<group>"; };
-		151F9D9E2E5FD5EC0018BBFA /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		152BCDC52E5740B500809ACB /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
 		152BCDC72E57414000809ACB /* WishlistProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistProtocols.swift; sourceTree = "<group>"; };
 		152BCDE32E57885100809ACB /* DefaultWishlistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWishlistDataSource.swift; sourceTree = "<group>"; };
@@ -545,6 +545,7 @@
 		15955C122D6759D500673BE7 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		15955C192D67797500673BE7 /* CreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewController.swift; sourceTree = "<group>"; };
 		15955C1A2D67797500673BE7 /* CreditCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditCardViewController.xib; sourceTree = "<group>"; };
+		15975C922E61A8DF00281F45 /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		1599B8972DB85F5A00A48510 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		1599B8992DB85FE500A48510 /* CategoryRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRemote.swift; sourceTree = "<group>"; };
 		1599B89D2DB86D4800A48510 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
@@ -644,6 +645,7 @@
 				157F428C2DB6DB38000305D6 /* Alamofire in Frameworks */,
 				151D5E692DF46B060019F1D9 /* GoogleSignInSwift in Frameworks */,
 				1501AD1A2E5D0DA1004F203B /* MHLoadingButton in Frameworks */,
+				15975C912E61A1AD00281F45 /* SkeletonView in Frameworks */,
 				1570F7242DFF213900AE9F6D /* Stripe in Frameworks */,
 				151D5E782DF487500019F1D9 /* FacebookLogin in Frameworks */,
 				15FB21C32D75209C0002B576 /* Cosmos in Frameworks */,
@@ -1007,7 +1009,7 @@
 		151631242D5D553200BA088E /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				151F9D9E2E5FD5EC0018BBFA /* Generated-Images.swift */,
+				15975C922E61A8DF00281F45 /* Generated-Images.swift */,
 				151631312D5D56CF00BA088E /* Generated-Colors.swift */,
 				1513B2CE2E51156400FE069F /* GeneratedExtra+Images.swift */,
 				1501AD162E5CAE32004F203B /* Strings.swift */,
@@ -2179,6 +2181,7 @@
 				1570F7272DFF213900AE9F6D /* StripePayments */,
 				1501AD192E5D0DA1004F203B /* MHLoadingButton */,
 				151F9D972E5F97210018BBFA /* ViewAnimator */,
+				15975C902E61A1AD00281F45 /* SkeletonView */,
 			);
 			productName = Herfety;
 			productReference = 1589FBF22D51781D00240754 /* Herfety.app */;
@@ -2225,6 +2228,7 @@
 				1570F7222DFF213900AE9F6D /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
 				1501AD182E5D0DA1004F203B /* XCRemoteSwiftPackageReference "loading-buttons-ios" */,
 				151F9D962E5F97210018BBFA /* XCRemoteSwiftPackageReference "ViewAnimator" */,
+				15975C8F2E61A1AD00281F45 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1589FBF32D51781D00240754 /* Products */;
@@ -2337,7 +2341,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				158A7EB62DB56EF400B89684 /* HRTextField.swift in Sources */,
-				151F9D9F2E5FD5EC0018BBFA /* Generated-Images.swift in Sources */,
 				15A91D522E59E26C00A97B3D /* DataActor.swift in Sources */,
 				158F8D512D7252DC00D8E768 /* DescriptionProductDetails.swift in Sources */,
 				15A3C3CB2D78863B00AE6CFA /* NameOfProfileCollectionViewSection.swift in Sources */,
@@ -2420,6 +2423,7 @@
 				153427B22E2B7E2B007E2140 /* AddReviewViewModelType.swift in Sources */,
 				154167942D9D33E8007E4CAA /* LabelAndTextFieldCollectionViewCell.swift in Sources */,
 				159B57852DCBCA5300CDD958 /* SignupViewController.swift in Sources */,
+				15975C932E61A8DF00281F45 /* Generated-Images.swift in Sources */,
 				158A7EAD2DB5663100B89684 /* GoogleButton.swift in Sources */,
 				1548CF3F2D56DB6000F7CEEA /* CardOfProductCollectionViewCell.swift in Sources */,
 				1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */,
@@ -2910,6 +2914,14 @@
 				minimumVersion = 4.5.1;
 			};
 		};
+		15975C8F2E61A1AD00281F45 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
 		1599B8942DB85E8C00A48510 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -2998,6 +3010,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 158A7E812DB52DE500B89684 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		15975C902E61A1AD00281F45 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15975C8F2E61A1AD00281F45 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 		1599B8952DB85E8C00A48510 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

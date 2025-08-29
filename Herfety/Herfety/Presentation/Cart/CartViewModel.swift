@@ -19,14 +19,20 @@ final class CartViewModel: ObservableObject {
         numberOfItems: 0
     )
     @Published var orderAlert: AlertModel?
-
+    
     // MARK: - Properties
+    let dataStore: DataStoreProtocol
+    let appDataStore: PublisherExtensionsProtocol
     var navigationToShipping: (() -> Void)?
     var isShowBackButton: Bool = false
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Init
-    init() {
+    init(dataStore: DataStoreProtocol = DataStore.shared,
+         appDataStore: PublisherExtensionsProtocol = AppDataStorePublisher.shared) {
+        self.dataStore = dataStore
+        self.appDataStore = appDataStore
+        
         bindCartUpdates()
         layoutProviders.append(OrderSectionLayoutProvider())
     }
@@ -40,14 +46,14 @@ extension CartViewModel {
             sections.first?.numberOfItems == 0 {
             orderAlert = AlertModel(
                 message: L10n.Cart.Error.emptyOrder,
-                 buttonTitle: L10n.General.ok,
+                buttonTitle: L10n.General.ok,
                 image: .warning,
                 status: .warning
             )
         } else {
             navigationToShipping?()
             Task {
-                await DataStore.shared.updateTotalPriceOfOrders(value: Int(ceil(paymentInfo.total)))
+                await dataStore.updateTotalPriceOfOrders(value: Int(ceil(paymentInfo.total)))
             }
         }
     }
@@ -63,21 +69,35 @@ extension CartViewModel {
             await DataStore.shared.updateCartItems(items, showAlert: false)
         }
     }
+    
+    /// Update payment info
+    func updatePaymentInfo(cartItems: [WishlistItem]) {
+        let subTotal = cartItems.reduce(0.0) { $0 + (($1.price ?? 0.0) * Double($1.qty ?? 0)) }
+        let shipping: Double = subTotal > 0 ? 10.0 : 0.0
+        let total = subTotal + shipping
+        let numberOfItems = cartItems.reduce(0) { $0 + ($1.qty ?? 0) }
+        self.paymentInfo = PaymentView.Model(
+            subTotal: subTotal,
+            shipping: shipping,
+            total: total,
+            numberOfItems: numberOfItems
+        )
+    }
 }
 // MARK: - Private Methods
 //
 private extension CartViewModel {
     func bindCartUpdates() {
-        AppDataStorePublisher
-            .shared
+        appDataStore
             .cartUpdatePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
+                guard let self = self else { return }
+                
                 Task {
-                    let cartItems = await DataStore.shared.getCartItems()
-                    self?.updatePaymentInfo(cartItems: cartItems)
+                    let cartItems = await self.dataStore.getCartItems()
+                    self.updatePaymentInfo(cartItems: cartItems)
                     let provider = CartCollectionViewSection(orderItems: cartItems)
-                    guard let self = self else { return }
                     /// Listen to delete & count updates
                     provider
                         .deleteItemSubject
@@ -100,19 +120,5 @@ private extension CartViewModel {
                 }
             }
             .store(in: &cancellables)
-    }
-    
-    /// Update payment info
-    func updatePaymentInfo(cartItems: [WishlistItem]) {
-        let subTotal = cartItems.reduce(0.0) { $0 + (($1.price ?? 0.0) * Double($1.qty ?? 0)) }
-        let shipping: Double = subTotal > 0 ? 10.0 : 0.0
-        let total = subTotal + shipping
-        let numberOfItems = cartItems.reduce(0) { $0 + ($1.qty ?? 0) }
-        self.paymentInfo = PaymentView.Model(
-            subTotal: subTotal,
-            shipping: shipping,
-            total: total,
-            numberOfItems: numberOfItems
-        )
     }
 }

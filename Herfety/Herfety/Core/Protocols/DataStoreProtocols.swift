@@ -33,6 +33,7 @@ protocol DataStoreProtocol: Actor {
     func updateUserProfileImage(_ image: UIImage) async
     func updateLoginStatus(_ status: Bool) async
     func updateOrderAddress(_ address: String) async
+    func updateTotalPriceOfOrders(value: Int) async
     
     // MARK: - Operations
     func incrementProductCount() -> Int

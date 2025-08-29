@@ -24,7 +24,7 @@ class LogoutButtonCollectionViewSection: CollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LogoutButttonCollectionViewCell.identifier, for: indexPath) as? LogoutButttonCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configureButton(title: L10n.Profile.logout, image: Images.logout)
+        cell.configureButton(title: L10n.Profile.logout, image: Images.iconLocation)
         cell.onLogoutPressed = { [weak self] in
             self?.onLogoutPressed.send()
         }

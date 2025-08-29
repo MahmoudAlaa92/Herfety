@@ -35,6 +35,7 @@ class CartViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -47,6 +48,12 @@ class CartViewController: UIViewController {
         configureCompositionalLayout()
         bindViewModel()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.collectionView.reloadData()
     }
 }
 // MARK: - UICollectionViewDataSource
@@ -176,6 +183,7 @@ extension CartViewController {
 extension CartViewController {
     
     private func bindViewModel() {
+        
         viewModel
             .$sections
             .receive(on: DispatchQueue.main)

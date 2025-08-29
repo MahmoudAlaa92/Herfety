@@ -64,6 +64,9 @@ public enum Images {
     public static var offers: UIImage {
         UIImage(named: "Offers")!
     }
+    public static var plus: UIImage {
+        UIImage(named: "Plus")!
+    }
     public static var profileIcon: UIImage {
         UIImage(named: "Profile Icon")!
     }
@@ -157,17 +160,11 @@ public enum Images {
     public static var iconApple: UIImage {
         UIImage(named: "icon-apple")!
     }
-    public static var iconArrow: UIImage {
-        UIImage(named: "icon-arrow")!
-    }
     public static var iconBack: UIImage {
         UIImage(named: "icon-back")!
     }
     public static var iconCart: UIImage {
         UIImage(named: "icon-cart")!
-    }
-    public static var iconDelete: UIImage {
-        UIImage(named: "icon-delete")!
     }
     public static var iconEdit: UIImage {
         UIImage(named: "icon-edit")!
@@ -181,29 +178,14 @@ public enum Images {
     public static var iconLocation: UIImage {
         UIImage(named: "icon-location")!
     }
-    public static var iconLove: UIImage {
-        UIImage(named: "icon-love")!
-    }
-    public static var iconMenu: UIImage {
-        UIImage(named: "icon-menu")!
-    }
     public static var iconProductDelete: UIImage {
         UIImage(named: "icon-product-delete")!
-    }
-    public static var iconProfileArrow: UIImage {
-        UIImage(named: "icon-profile-arrow")!
     }
     public static var iconRatingEmpty: UIImage {
         UIImage(named: "icon-rating-empty")!
     }
     public static var iconRating: UIImage {
         UIImage(named: "icon-rating")!
-    }
-    public static var iconScan: UIImage {
-        UIImage(named: "icon-scan")!
-    }
-    public static var iconScaner: UIImage {
-        UIImage(named: "icon-scaner")!
     }
     public static var iconSuccess: UIImage {
         UIImage(named: "icon-success")!
