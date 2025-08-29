@@ -7,21 +7,26 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 class ProfileViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    
     // MARK: - Properties
     private var viewModel: ProfileViewModel
     private var cancellabels =  Set<AnyCancellable>()
+    
     // MARK: - Init
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +71,17 @@ extension ProfileViewController: UICollectionViewDataSource {
 // MARK: - Delegate
 //
 extension ProfileViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+
+        let section = viewModel.sections[indexPath.section]
+        let animation = section.animationForSection()
+        let duration = section.animationDuration()
+        
+        cell.animate(animations: [animation], duration: duration)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectable = viewModel.sections[indexPath.section] as? CollectionViewDelegate {
             selectable.collectionView(collectionView, didSelectItemAt: indexPath)

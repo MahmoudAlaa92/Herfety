@@ -6,6 +6,7 @@
 //
 import UIKit
 import Combine
+import ViewAnimator
 
 class ReviewCollectionViewSection: CollectionViewDataSource {
     
@@ -13,7 +14,7 @@ class ReviewCollectionViewSection: CollectionViewDataSource {
     var reviewItems: [ReviewrItem]
     let product: WishlistItem
     let reviewrsButton = PassthroughSubject<[ReviewrItem], Never>()
-
+    
     // MARK: - Init
     init(reviewItems: [ReviewrItem], rating: WishlistItem) {
         self.reviewItems = reviewItems
@@ -39,46 +40,11 @@ class ReviewCollectionViewSection: CollectionViewDataSource {
         }
         let item = reviewItems[indexPath.row]
         cell.commentReviewer.text = item.review
-        cell.imageReviewer.setImage(with: item.product?.thumbImage ?? "", placeholderImage: Images.profilePhoto) 
-        // TODO: 
+        cell.imageReviewer.setImage(with: item.product?.thumbImage ?? "", placeholderImage: Images.profilePhoto)
+        // TODO:
         return cell
     }
 }
-// MARK: - Layout
-//
-struct ReviewCollectionViewSectionLayout: LayoutSectionProvider {
-    
-    func layoutSection() -> NSCollectionLayoutSection {
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(60))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(widthDimension: .fractionalWidth(1),
-                              heightDimension: .absolute(60)),
-            elementKind: TitleReviewsCollectionReusableView.identifier,
-            alignment: .top)
-        sectionHeader.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 8, trailing: 0)
-        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(widthDimension: .fractionalWidth(1),
-                              heightDimension: .absolute(60)),
-            elementKind: ButtonCollectionReusableView.identifier,
-            alignment: .bottom)
-        sectionFooter.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
-        section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
-        
-        return section
-    }
-}
-
 // MARK: - Header And Footer
 //
 extension ReviewCollectionViewSection: HeaderAndFooterProvider {
@@ -115,5 +81,50 @@ extension ReviewCollectionViewSection: HeaderAndFooterProvider {
     // TODO: refactor this
     @objc private func addToCart() {
         // add to cart pressed
+    }
+}
+// MARK: - Animation
+//
+extension ReviewCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .left, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
+    }
+}
+// MARK: - Layout
+//
+struct ReviewCollectionViewSectionLayout: LayoutSectionProvider {
+    
+    func layoutSection() -> NSCollectionLayoutSection {
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .absolute(60))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(widthDimension: .fractionalWidth(1),
+                              heightDimension: .absolute(60)),
+            elementKind: TitleReviewsCollectionReusableView.identifier,
+            alignment: .top)
+        sectionHeader.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 8, trailing: 0)
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(widthDimension: .fractionalWidth(1),
+                              heightDimension: .absolute(60)),
+            elementKind: ButtonCollectionReusableView.identifier,
+            alignment: .bottom)
+        sectionFooter.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+        section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
+        
+        return section
     }
 }

@@ -7,6 +7,7 @@
 import UIKit
 import Combine
 
+@MainActor
 final class CartViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published private(set) var sections: [CollectionViewDataSource] = []

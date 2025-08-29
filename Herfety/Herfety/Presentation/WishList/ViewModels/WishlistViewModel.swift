@@ -32,7 +32,6 @@ final class WishListViewModel: ObservableObject {
         self.sectionConfigurator = sectionConfigurator
         
         setupLayoutProviders()
-        bindWishlistUpdates()
     }
 }
 // MARK: - Public Methods
@@ -53,17 +52,5 @@ extension WishListViewModel {
 extension WishListViewModel {
     private func setupLayoutProviders() {
         layoutProviders = sectionConfigurator.configureLayoutSections()
-    }
-    
-    private func bindWishlistUpdates() {
-        publisher
-            .wishlistUpdatePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                Task {
-                    await self?.loadWishlistData()
-                }
-            }
-            .store(in: &cancellables)
     }
 }

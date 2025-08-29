@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 class TopBrandsCollectionViewSection: CollectionViewDataSource {
     
@@ -52,6 +53,17 @@ extension TopBrandsCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = topBrandsItems[indexPath.item]
         selectedBrand.send((item, indexPath.row))
+    }
+}
+// MARK: - Animation
+//
+extension TopBrandsCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 30)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.7
     }
 }
 // MARK: - Header And Foter for category

@@ -87,7 +87,12 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        cell.animate(animations: [AnimationType.from(direction: .right, offset: 30)], duration: 0.6)
+
+        let section = viewModel.sections[indexPath.section]
+        let animation = section.animationForSection()
+        let duration = section.animationDuration()
+        
+        cell.animate(animations: [animation], duration: duration)
     }
 }
 // MARK: - UICollectionViewDataSource
@@ -129,30 +134,40 @@ extension HomeViewController {
         viewModel
             .$categoryItems
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] items in
                 guard let self = self else { return }
-                self.viewModel.configureSectionsAndLayouts()
+                /// Update the section's data first
+                if let categorySection = self.viewModel.sections[HomeSection.categories.rawValue] as? CategoryCollectionViewSection {
+                    categorySection.categoryItems = items
+                }
                 
                 let sectionIndex = HomeSection.categories.rawValue
-                self.collectionView.reloadSections(IndexSet(integer: sectionIndex))
-                self.collectionView.animateVisibleCellsin(section: sectionIndex,
-                                                          animation: .from(direction: .right,
-                                                          offset: 40))
+                self.collectionView.performBatchUpdates({
+                    self.collectionView.reloadSections(IndexSet(integer: sectionIndex))
+                }, completion: { _ in
+                    self.collectionView.animateVisibleCellsin(section: sectionIndex,
+                                                              animation: .from(direction: .right, offset: 40))
+                })
             }
             .store(in: &cancellabels)
         ///
         viewModel
             .$productItems
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] items in
                 guard let self = self else { return }
-                self.viewModel.configureSectionsAndLayouts()
+                /// Update the section's data first
+                if let productSection = self.viewModel.sections[HomeSection.products.rawValue] as? CardItemCollectionViewSection {
+                    productSection.productItems = items
+                }
                 
                 let sectionIndex = HomeSection.products.rawValue
-                self.collectionView.reloadSections(IndexSet(integer: sectionIndex))
-                self.collectionView.animateVisibleCellsin(section: sectionIndex,
-                                                          animation: .from(direction: .right,
-                                                          offset: 40))
+                self.collectionView.performBatchUpdates({
+                    self.collectionView.reloadSections(IndexSet(integer: sectionIndex))
+                }, completion: { _ in
+                    self.collectionView.animateVisibleCellsin(section: sectionIndex,
+                                                              animation: .from(direction: .right, offset: 40))
+                })
             }
             .store(in: &cancellabels)
     }

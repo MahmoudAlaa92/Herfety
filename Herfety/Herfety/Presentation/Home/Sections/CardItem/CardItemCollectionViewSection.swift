@@ -79,11 +79,16 @@ extension CardItemCollectionViewSection: CollectionViewDelegate {
             await MainActor.run { selectedItem.send(wishListItem) }
         }
     }
+}
+// MARK: - Animation
+//
+extension CardItemCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .right, offset: 40)
+    }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        cell.animate(animations: [AnimationType.from(direction: .right, offset: 40)], duration: 0.5)
+    func animationDuration() -> TimeInterval {
+        return 0.5
     }
 }
 // MARK: - Layout

@@ -121,6 +121,20 @@ extension SettingViewController: UICollectionViewDataSource {
         return provider.cellForItems(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
     }
 }
+// MARK: - Delegate
+//
+extension SettingViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+
+        let section = sections[indexPath.section]
+        let animation = section.animationForSection()
+        let duration = section.animationDuration()
+        
+        cell.animate(animations: [animation], duration: duration)
+    }
+}
 // MARK: - Binding
 //
 extension SettingViewController {
@@ -130,6 +144,4 @@ extension SettingViewController {
         }
     }
 }
-// MARK: - Delegate
-//
-extension SettingViewController: UICollectionViewDelegate {}
+

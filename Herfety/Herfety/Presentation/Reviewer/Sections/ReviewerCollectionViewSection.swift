@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ViewAnimator
 
 class ReviewerCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
@@ -99,6 +100,17 @@ extension ReviewerCollectionViewSection: HeaderAndFooterProvider {
             return header
         }
         return UICollectionReusableView()
+    }
+}
+// MARK: - Animation
+//
+extension ReviewerCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
     }
 }
 // MARK: - Layout

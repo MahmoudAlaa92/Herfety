@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 class ProductsCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
@@ -69,6 +70,17 @@ extension ProductsCollectionViewSection: CollectionViewDelegate {
             
             await MainActor.run { selectedItem.send(wishListItem) }
         }
+    }
+}
+// MARK: - Animation
+//
+extension ProductsCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
     }
 }
 // MARK: - Layout

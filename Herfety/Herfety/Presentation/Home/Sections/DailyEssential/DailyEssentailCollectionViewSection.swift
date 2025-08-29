@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 class DailyEssentailCollectionViewSection: CollectionViewDataSource {
     
@@ -70,6 +71,17 @@ extension DailyEssentailCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = dailyEssentail[indexPath.item]
         selectedItem.send((item, indexPath.row))
+    }
+}
+// MARK: - Animation
+//
+extension DailyEssentailCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .right, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.5
     }
 }
 // MARK: - Layout

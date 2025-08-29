@@ -8,8 +8,14 @@
 import Combine
 
 class DefaultWishlistDataSource: WishlistDataSourceProtocol {
+    let dataStore: DataStoreProtocol
+    
+    init(dataStore: DataStoreProtocol = DataStore.shared) {
+        self.dataStore = dataStore
+    }
+    
     func getWishlist() async -> [WishlistItem] {
-        return await DataStore.shared.getWishlist()
+        return await dataStore.getWishlist()
     }
 }
 

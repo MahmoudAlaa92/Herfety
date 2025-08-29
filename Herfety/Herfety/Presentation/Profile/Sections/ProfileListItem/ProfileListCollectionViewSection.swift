@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import ViewAnimator
 
 class ProfileListCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
@@ -79,6 +80,17 @@ extension ProfileListCollectionViewSection: CollectionViewDelegate {
             }
             
         }
+    }
+}
+// MARK: - Animation
+//
+extension ProfileListCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 30)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.7
     }
 }
 // MARK: - Layout

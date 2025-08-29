@@ -6,6 +6,7 @@
 //
 import UIKit
 import Combine
+import ViewAnimator
 
 class ProductDetailsCollectionViewSection: CollectionViewDataSource {
     
@@ -72,6 +73,17 @@ struct ProductDetailsCollectionViewProvider: LayoutSectionProvider {
      
         section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
         return section
+    }
+}
+// MARK: - Animation
+//
+extension ProductDetailsCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .top, offset: 50)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.8
     }
 }
 // MARK: - Header And Footer

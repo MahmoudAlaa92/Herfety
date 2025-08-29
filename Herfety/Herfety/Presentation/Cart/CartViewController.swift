@@ -98,7 +98,12 @@ extension CartViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        cell.animate(animations: [AnimationType.from(direction: .bottom, offset: 30)], duration: 0.8)
+
+        let section = viewModel.sections[indexPath.section]
+        let animation = section.animationForSection()
+        let duration = section.animationDuration()
+        
+        cell.animate(animations: [animation], duration: duration)
     }
     
     func collectionView(

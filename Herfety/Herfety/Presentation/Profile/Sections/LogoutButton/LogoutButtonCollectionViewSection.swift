@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 class LogoutButtonCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properteis
@@ -28,6 +29,17 @@ class LogoutButtonCollectionViewSection: CollectionViewDataSource {
             self?.onLogoutPressed.send()
         }
         return cell
+    }
+}
+// MARK: - Animation
+//
+extension LogoutButtonCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .right, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.5
     }
 }
 // MARK: - Layout

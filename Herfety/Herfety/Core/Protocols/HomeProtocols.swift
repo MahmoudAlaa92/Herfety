@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 // MARK: - Home Module Protocols
 //
@@ -34,9 +35,15 @@ protocol HomeSectionConfiguratorProtocol {
     func configureLayoutSections() -> [LayoutSectionProvider]
 
 }
+// MARK: - Animation Protocol
+//
+protocol SectionAnimationProvider {
+    func animationForSection() -> AnimationType
+    func animationDuration() -> TimeInterval
+}
 // MARK: - Collection View Protocols
 //
-protocol CollectionViewDataSource: AnyObject {
+protocol CollectionViewDataSource: AnyObject, SectionAnimationProvider {
     func registerCells(in collectionView: UICollectionView)
     var numberOfItems: Int { get }
     func cellForItems(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell

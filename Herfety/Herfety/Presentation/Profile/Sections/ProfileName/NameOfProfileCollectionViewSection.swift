@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ViewAnimator
 
 class NameOfProfileCollectionViewSection: CollectionViewDataSource {
     
@@ -31,7 +32,17 @@ class NameOfProfileCollectionViewSection: CollectionViewDataSource {
         return cell
     }
 }
-
+// MARK: - Animation
+//
+extension NameOfProfileCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
+    }
+}
 // MARK: - Layout
 //
 struct NameCollectionViewLayoutSection: LayoutSectionProvider {

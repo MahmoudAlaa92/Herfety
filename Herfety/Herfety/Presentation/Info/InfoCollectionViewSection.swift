@@ -6,6 +6,7 @@
 //
 import UIKit
 import Combine
+import ViewAnimator
 
 class InfoCollectionViewSection: CollectionViewDataSource {
     
@@ -48,7 +49,17 @@ extension InfoCollectionViewSection: ContextMenuProvider {
         }
     }
 }
-
+// MARK: - Animation
+//
+extension InfoCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
+    }
+}
 // MARK: - Layout
 //
 struct InfoSectionLayoutProvider: LayoutSectionProvider {

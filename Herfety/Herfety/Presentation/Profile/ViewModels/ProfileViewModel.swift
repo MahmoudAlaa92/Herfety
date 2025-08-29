@@ -33,8 +33,8 @@ final class ProfileViewModel: ObservableObject {
         configureSectionsAndLayouts()
     }
 }
-
 // MARK: - Public Methods
+//
 extension ProfileViewModel {
     func loadProfileData() async {
         do {
@@ -49,8 +49,8 @@ extension ProfileViewModel {
         await loadProfileData()
     }
 }
-
 // MARK: - Private Methods
+//
 extension ProfileViewModel {
     private func configureSectionsAndLayouts() {
         sections = sectionConfigurator.configureSections(

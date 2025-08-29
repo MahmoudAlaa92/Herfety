@@ -5,6 +5,7 @@
 //  Created by Mahmoud Alaa on 10/02/2025.
 //
 import UIKit
+import ViewAnimator
 
 class WishlistCollectionViewSection: CollectionViewDataSource {
     
@@ -98,6 +99,17 @@ extension WishlistCollectionViewSection: ContextMenuProvider {
         await store.deleteWishlistItem(userId: userId,
                                        productId: productId,
                                        indexPath: indexPath)
+    }
+}
+// MARK: - Animation
+//
+extension WishlistCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
     }
 }
 // MARK: - Layout

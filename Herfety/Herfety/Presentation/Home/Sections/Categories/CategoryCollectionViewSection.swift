@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import ViewAnimator
 
 class CategoryCollectionViewSection: CollectionViewDataSource {
     
@@ -77,7 +78,17 @@ extension CategoryCollectionViewSection: CollectionViewDelegate {
         categorySelection.send(selectedItems)
     }
 }
-
+// MARK: - Animation
+//
+extension CategoryCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
+    }
+}
 // MARK: - Layout
 //
 struct CategoriesSectionLayoutSection: LayoutSectionProvider {

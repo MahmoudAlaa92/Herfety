@@ -6,6 +6,7 @@
 //
 import UIKit
 import Combine
+import ViewAnimator
 
 class SliderCollectionViewSection: CollectionViewDataSource {
     // MARK: - Properties
@@ -37,6 +38,17 @@ class SliderCollectionViewSection: CollectionViewDataSource {
 extension SliderCollectionViewSection: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedItem.send((sliderItems[indexPath.item], indexPath.row))
+    }
+}
+// MARK: - Animation
+//
+extension SliderCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .right, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
     }
 }
 // MARK: - Layout

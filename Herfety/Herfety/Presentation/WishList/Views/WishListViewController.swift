@@ -41,6 +41,12 @@ class WishListViewController: UIViewController {
         configureCompositionalLayout()
         setUpCollectionView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Task { await viewModel.loadWishlistData() }
+    }
 }
 // MARK: - Configure
 //
@@ -76,7 +82,12 @@ extension WishListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        cell.animate(animations: [AnimationType.from(direction: .bottom, offset: 30)], duration: 0.8)
+
+        let section = viewModel.sections[indexPath.section]
+        let animation = section.animationForSection()
+        let duration = section.animationDuration()
+        
+        cell.animate(animations: [animation], duration: duration)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -126,6 +137,7 @@ extension WishListViewController {
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 viewModel.sections.forEach( { $0.registerCells(in: self.collectionView) })
+                self.collectionView.reloadData()
                 self.collectionView.animateVisibleCellsin(section: 0,
                                                           animation: .from(direction: .right,
                                                           offset: 40))

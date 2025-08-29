@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ViewAnimator
 
 class SettingCollectionViewSection: CollectionViewDataSource {
     
@@ -58,6 +59,17 @@ extension SettingCollectionViewSection: HeaderAndFooterProvider {
             return footer
         }
         return UICollectionReusableView()
+    }
+}
+// MARK: - Animation
+//
+extension SettingCollectionViewSection: SectionAnimationProvider {
+    func animationForSection() -> AnimationType {
+        return .from(direction: .bottom, offset: 40)
+    }
+    
+    func animationDuration() -> TimeInterval {
+        return 0.6
     }
 }
 // MARK: - Layout
