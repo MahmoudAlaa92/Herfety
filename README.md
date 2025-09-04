@@ -28,7 +28,7 @@ Additional design patterns used:
 
 * **Factory** – For object creation (products, users, reviews).
 * **Coordinator** – For handling navigation flow.
-* **Singleton** – For shared managers like `SessionManager`.
+* **Singleton** – For shared managers.
 
 ---
 
@@ -36,11 +36,10 @@ Additional design patterns used:
 
 We followed the SOLID principles to keep our codebase scalable and readable:
 
-* **S**: *Single Responsibility* - Each class (e.g., `CheckoutViewModel`) has a distinct job.
+* **S**: *Single Responsibility* - Each class has a distinct job.
 * **O**: *Open/Closed* - The networking layer is open for new requests but closed for modification.
 * **L**: *Liskov Substitution* - Common protocols are used for polymorphism.
 * **I**: *Interface Segregation* - Protocols are small and focused.
-* **D**: *Dependency Inversion* - Dependencies are injected (e.g., network clients).
 
 ---
 
@@ -78,9 +77,7 @@ Stripe’s **EmbeddedPaymentElement** API is used for a secure and customizable 
 
 ### Highlights:
 
-* Users can save payment methods.
 * Seamless checkout experience.
-* Stripe payments integrated using MVVM.
 
 ---
 
@@ -89,7 +86,7 @@ Stripe’s **EmbeddedPaymentElement** API is used for a secure and customizable 
 Using UIKit allowed us to build:
 
 * Responsive layouts with Auto Layout.
-* Reusable custom components like `ProductCell`, `VendorCollectionView`.
+* Reusable custom components like `CardViewCell`.
 * A smooth, animated checkout flow.
 * Localization support for multiple languages.
 
@@ -115,11 +112,6 @@ We used **Alamofire** to manage all HTTP networking:
 * Upload and download product images.
 * Fetch product listings, vendor data, reviews.
 
-```swift
-Alamofire.request("/products", method: .get).responseDecodable(of: [Product].self) { response in
-   // handle response
-}
-```
 ---
 
 ## 🛍️ Product Browsing & Reviews
@@ -137,11 +129,6 @@ All reviews are stored in Firestore and linked by `productId`.
 
 ## 📱 UX Focused Features
 
-To create an emotionally engaging experience:
-
-* We use subtle animations.
-* Feedback for user actions (spinners, alerts).
-* Empty states with illustrations.
 * For a preview of the app's design, visit the Figma Design Link:
 https://www.figma.com/design/jhw6bgjqjuRgZ2jcL0tGv8/Handmade?node-id=0-1&p=f&t=ZRGdXRbsKOym4wcX-0
 
