@@ -230,7 +230,7 @@ actor DataStore: DataStoreProtocol {
         if let loadedImage = await loadImageSafely(from: imageUrl) {
             userProfileImage = loadedImage
         } else {
-            userProfileImage = Images.iconPersonalDetails
+            userProfileImage = Images.profilePhoto
         }
     }
     

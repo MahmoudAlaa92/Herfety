@@ -154,6 +154,7 @@ extension CartViewController {
     private func setUpCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsVerticalScrollIndicator = false
     }
     /// Configure Layout
     private func configureCompositionalLayout() {

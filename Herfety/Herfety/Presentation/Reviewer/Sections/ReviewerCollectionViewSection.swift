@@ -38,7 +38,7 @@ class ReviewerCollectionViewSection: CollectionViewDataSource {
         if let imageUrl = item.user?.image, !imageUrl.isEmpty {
             cell.imageView.setImage(with: imageUrl, placeholderImage: Images.iconPersonalDetails)
         } else {
-            cell.imageView.image = Images.iconPersonalDetails
+            cell.imageView.image = Images.profilePhoto
         }
         cell.commentReviewer.text = item.review
         cell.dateReviewer.text = item.createdAt

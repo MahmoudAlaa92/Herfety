@@ -49,13 +49,11 @@ extension ButtonCollectionReusableView {
                 order.qty = countProduct
                 cartItem.append(order)
                 await dataStore.updateCartItems(cartItem, showAlert: .add)
-            } else {
-                await MainActor.run {
-                    AppDataStorePublisher.shared.notifyCartUpdate(showAlert: .add)
-                }
+            }
+            await MainActor.run {
+                AppDataStorePublisher.shared.notifyCartUpdate(showAlert: .add)
             }
         }
-
     }
 }
 // MARK: - ViewModel

@@ -11,7 +11,7 @@ class SecondaryButtonn: HerfetyButton {
         super.setUp()
         if #available(iOS 15.0, *) {
             var config = self.configuration ?? UIButton.Configuration.filled()
-            config.baseBackgroundColor = .clear
+            config.baseBackgroundColor = .white
             config.baseForegroundColor = Colors.primaryBlue
             self.configuration = config
         }

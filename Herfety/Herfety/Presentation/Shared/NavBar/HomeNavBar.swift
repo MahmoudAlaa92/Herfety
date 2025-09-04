@@ -33,7 +33,7 @@ extension HomeNavBar {
         
         /// Image
         let imageView = UIImageView(frame: CGRect(x: 0, y: 5, width: 40, height: 40))
-        imageView.image = userImage
+        imageView.image = Images.profilePhoto
         imageView.layer.cornerRadius = 15
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill

@@ -43,6 +43,7 @@ extension ProfileViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
         viewModel.sections.forEach( { $0.registerCells(in: collectionView) })
     }
     private func configureSections() {

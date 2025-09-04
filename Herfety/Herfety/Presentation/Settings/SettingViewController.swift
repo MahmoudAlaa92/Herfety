@@ -49,6 +49,7 @@ extension SettingViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
     }
     private func configureSections() {
         /// 1) First list

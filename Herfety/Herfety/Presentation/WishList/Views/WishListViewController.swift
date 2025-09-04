@@ -67,6 +67,7 @@ extension WishListViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
     }
     
     /// Configure Layout

@@ -22,7 +22,7 @@ final class UserDataProvider {
         return UserProfile(
             name: info?.UserName ?? "",
             email: info?.Email ?? "",
-            image: userImage
+            image: Images.profilePhoto // userImage
         )
     }
 }

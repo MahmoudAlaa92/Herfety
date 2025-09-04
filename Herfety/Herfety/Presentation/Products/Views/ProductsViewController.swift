@@ -67,6 +67,7 @@ extension ProductsViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
     }
     /// Section
     private func configureSections() {

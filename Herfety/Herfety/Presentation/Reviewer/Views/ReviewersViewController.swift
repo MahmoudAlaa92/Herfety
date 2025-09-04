@@ -70,6 +70,7 @@ extension ReviewersViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
     }
     private func configureSections() {
         viewModel.sections.forEach({ $0.registerCells(in: collectionView) })

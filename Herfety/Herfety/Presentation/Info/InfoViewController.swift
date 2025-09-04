@@ -62,6 +62,7 @@ extension InfoViewController {
     private func setUpCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsVerticalScrollIndicator = false
         viewModel.sections.forEach { $0.registerCells(in: collectionView) }
     }
     /// Configure Section

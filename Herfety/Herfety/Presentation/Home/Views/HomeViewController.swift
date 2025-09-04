@@ -66,6 +66,7 @@ extension HomeViewController {
     private func setUpCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
     }
     
     /// Configure Sections
