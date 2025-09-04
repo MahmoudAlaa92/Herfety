@@ -32,9 +32,19 @@ class HomeAlertService: AlertServiceProtocol {
         )
     }
     
-    func showCartAlert(isAdded: Bool) {
+    func showCartAlert(isAdded: CartUpdateAction) {
+        var message = ""
+        switch isAdded {
+        case .add:
+            message = L10n.Cart.addedToOrder
+        case .delete:
+            message = L10n.Cart.deletedFromOrder
+        case .notifyOnly:
+            return
+        }
+        
         currentAlert = AlertModel(
-            message: isAdded ? L10n.Cart.addedToOrder : L10n.Cart.deletedFromOrder,
+            message: message,
             buttonTitle: L10n.General.ok,
             image: .success,
             status: .success

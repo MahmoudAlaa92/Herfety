@@ -116,7 +116,7 @@ actor DataStore: DataStoreProtocol {
         }
     }
     
-    func updateCartItems(_ newItems: [WishlistItem], showAlert: Bool) async {
+    func updateCartItems(_ newItems: [WishlistItem], showAlert: CartUpdateAction) async {
         cartItems = newItems
         calculateTotalPrice()
         

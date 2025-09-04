@@ -46,6 +46,7 @@ class CartCollectionViewSection: CollectionViewDataSource {
         cell.onChangeCountOrder = { [weak self] newCount in
             self?.countUpdateSubject.send((indexPath.item, newCount))
         }
+        cell.indexOfItem = indexPath.item
         
         return cell
     }

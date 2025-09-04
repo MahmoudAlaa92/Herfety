@@ -12,6 +12,7 @@ class OrderCollectionViewCell: UICollectionViewCell {
     static let identifier = "OrderCollectionViewCell"
     ///
     var onChangeCountOrder: ((Int) -> Void)?
+    var indexOfItem: Int?
     
     // MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
@@ -26,9 +27,6 @@ class OrderCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         configure()
         configureUi()
-        Task {
-            await loadInitialCount()
-        }
     }
 }
 // MARK: - Configuration
@@ -60,31 +58,30 @@ extension OrderCollectionViewCell {
         numberOfProduct.text = "\(count)"
         onChangeCountOrder?(count)
     }
-    
-    private func loadInitialCount() async {
-        let count = await DataStore.shared.getCountProductDetails()
-        await MainActor.run {
-            updateCountLabel(count)
-        }
-    }
 }
 // MARK: - Actions
 //
 extension OrderCollectionViewCell {
     @IBAction func minusButtonTapped(_ sender: UIButton) {
         Task {
-            let newCount = await DataStore.shared.decrementProductCount()
-            await MainActor.run {
-                updateCountLabel(newCount)
+            var cartItems = await DataStore.shared.getCartItems()
+            if let index = indexOfItem,
+            let numberOfItems = cartItems[index].qty, numberOfItems > 1 {
+                cartItems[index].qty = numberOfItems - 1
+                await DataStore.shared.updateCartItems(cartItems, showAlert: .notifyOnly)
+                await MainActor.run { updateCountLabel(numberOfItems - 1) }
             }
         }
     }
     
     @IBAction func plusButtonTapped(_ sender: UIButton) {
         Task {
-            let newCount = await DataStore.shared.incrementProductCount()
-            await MainActor.run {
-                updateCountLabel(newCount)
+            var cartItems = await DataStore.shared.getCartItems()
+            if let index = indexOfItem,
+               let numberOfItems = cartItems[index].qty {
+                cartItems[index].qty = numberOfItems + 1
+                await DataStore.shared.updateCartItems(cartItems, showAlert: .notifyOnly)
+                await MainActor.run { updateCountLabel(numberOfItems + 1) }
             }
         }
     }

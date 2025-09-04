@@ -27,7 +27,7 @@ protocol DataStoreProtocol: Actor {
     func updateUserId(userId: Int)
     func updateUserInfo(userInfo: RegisterUser)
     func updateWishlist(_ newItems: [WishlistItem], showAlert: Bool) async
-    func updateCartItems(_ newItems: [WishlistItem], showAlert: Bool) async
+    func updateCartItems(_ newItems: [WishlistItem], showAlert: CartUpdateAction) async
     func updateOrders(_ newOrders: [OrderItem]) async
     func updateInfos(_ newInfos: [InfoModel]) async
     func updateUserProfileImage(_ image: UIImage) async

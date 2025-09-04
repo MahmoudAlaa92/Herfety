@@ -19,7 +19,7 @@ protocol HomeDataSourceProtocol {
 protocol AlertServiceProtocol {
     var alertPublisher: AnyPublisher<AlertModel?, Never> { get }
     func showWishlistAlert(isAdded: Bool)
-    func showCartAlert(isAdded: Bool)
+    func showCartAlert(isAdded: CartUpdateAction)
 }
 
 protocol HomeSectionConfiguratorProtocol {

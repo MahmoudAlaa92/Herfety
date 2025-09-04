@@ -18,7 +18,8 @@ class LoginViewModel: LoginViewModelType {
     // MARK: - Properties
     private let loginService: LoginRemoteProtocol
     private var cancellables = Set<AnyCancellable>()
-
+    private let dataStore: DataStoreProtocol
+    
     /// Input handling
     private let emailSubject = CurrentValueSubject<String, Never>("")
     private let passwordSubject = CurrentValueSubject<String, Never>("")
@@ -31,10 +32,13 @@ class LoginViewModel: LoginViewModelType {
 
     //MARK: - Init
     init(
+        dataStore: DataStoreProtocol = DataStore.shared,
         loginService: LoginRemoteProtocol = LoginRemote(
             network: AlamofireNetwork()
         )
+        
     ) {
+        self.dataStore = dataStore
         self.loginService = loginService
         setupBindings()
     }
@@ -66,9 +70,9 @@ class LoginViewModel: LoginViewModelType {
         userDefaultsManager.userId = response.id ?? 22
         userDefaultsManager.userInfo = userInfo
         
-        await DataStore.shared.updateUserId(userId: response.id ?? 22)
-        await DataStore.shared.updateUserInfo(userInfo: userInfo)
-        await DataStore.shared.updateLoginStatus(true)
+        await dataStore.updateUserId(userId: response.id ?? 22)
+        await dataStore.updateUserInfo(userInfo: userInfo)
+        await dataStore.updateLoginStatus(true)
 
         loginSuccess.send()
     }
@@ -254,9 +258,9 @@ extension LoginViewModel {
         userDefaultsManager.isLoggedIn = true
         userDefaultsManager.userInfo = userInfo
         
-        await DataStore.shared.updateUserInfo(userInfo: userInfo)
-        await DataStore.shared.updateLoginStatus(true)
-        await DataStore.shared.loadUserProfileImage()
+        await dataStore.updateUserInfo(userInfo: userInfo)
+        await dataStore.updateLoginStatus(true)
+        await dataStore.loadUserProfileImage()
         
         loginSuccess.send()
     }

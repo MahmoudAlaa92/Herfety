@@ -48,10 +48,10 @@ extension ButtonCollectionReusableView {
                 let countProduct = await dataStore.getCountProductDetails()
                 order.qty = countProduct
                 cartItem.append(order)
-                await dataStore.updateCartItems(cartItem, showAlert: true)
+                await dataStore.updateCartItems(cartItem, showAlert: .add)
             } else {
                 await MainActor.run {
-                    AppDataStorePublisher.shared.notifyCartUpdate(showAlert: true)
+                    AppDataStorePublisher.shared.notifyCartUpdate(showAlert: .add)
                 }
             }
         }

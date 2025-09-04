@@ -8,6 +8,12 @@
 import Foundation
 import Combine
 
+enum CartUpdateAction {
+    case add
+    case delete
+    case notifyOnly
+}
+
 // MARK: - Publisher Manager (MainActor isolated)
 //
 class AppDataStorePublisher: ObservableObject, AppDataStorePublisherProtocol {
@@ -15,7 +21,7 @@ class AppDataStorePublisher: ObservableObject, AppDataStorePublisherProtocol {
     
     @Published var wishlistUpdated: Bool = false
     @Published var ordersUpdated: Bool = false
-    @Published var cartUpdated: Bool = false
+    @Published var cartUpdated: CartUpdateAction = .notifyOnly
     @Published var infoUpdated: Bool = false
     @Published var loginStatusUpdated: Bool = false
     @Published var userProfileImage: Bool = false
@@ -30,7 +36,7 @@ class AppDataStorePublisher: ObservableObject, AppDataStorePublisherProtocol {
         ordersUpdated.toggle()
     }
     
-    func notifyCartUpdate(showAlert: Bool) {
+    func notifyCartUpdate(showAlert: CartUpdateAction) {
         cartUpdated = showAlert
     }
     
@@ -57,7 +63,7 @@ extension AppDataStorePublisher: PublisherExtensionsProtocol {
         $ordersUpdated.eraseToAnyPublisher()
     }
     
-    var cartUpdatePublisher: AnyPublisher<Bool, Never> {
+    var cartUpdatePublisher: AnyPublisher<CartUpdateAction, Never> {
         $cartUpdated.eraseToAnyPublisher()
     }
     

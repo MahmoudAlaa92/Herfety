@@ -66,7 +66,7 @@ extension CartViewModel {
         updatePaymentInfo(cartItems: items)
         sections = [CartCollectionViewSection(orderItems: items)]
         Task {
-            await DataStore.shared.updateCartItems(items, showAlert: false)
+            await DataStore.shared.updateCartItems(items, showAlert: .delete)
         }
     }
     
