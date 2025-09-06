@@ -6,12 +6,14 @@
 //
 import UIKit
 import ViewAnimator
+import Combine
 
 class WishlistCollectionViewSection: CollectionViewDataSource {
     
     // MARK: - Properties
     private var whishlistItems: [WishlistItem]
-    
+    let deleteItemSubject = PassthroughSubject<WishlistItem, Never>()
+
     // MARK: - Init
     init(whishlistItems: [WishlistItem]) {
         self.whishlistItems = whishlistItems
@@ -93,6 +95,9 @@ extension WishlistCollectionViewSection: ContextMenuProvider {
             print("❌ Wishlist item missing product ID")
             return
         }
+        
+        deleteItemSubject.send(wishlistItem)
+        
         let userId = await store.getUserId()
         
         /// Perform deletion with proper error handling

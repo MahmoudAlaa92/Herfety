@@ -32,13 +32,19 @@ final class WishListViewModel: ObservableObject {
         self.sectionConfigurator = sectionConfigurator
         
         setupLayoutProviders()
+        listenWishlistSectionUpdates()
     }
 }
 // MARK: - Public Methods
 //
 extension WishListViewModel {
-    func loadWishlistData() async {
-        let wishlist = await dataSource.getWishlist()
+    func loadWishlistData(item: WishlistItem?) async {
+        var wishlist = await dataSource.getWishlist()
+        
+        if let itemToRemove = item,
+           let index = wishlist.firstIndex(where: { $0.productID == itemToRemove.productID}) {
+            wishlist.remove(at: index)
+        }
         await updateSections(with: wishlist)
     }
     
@@ -52,5 +58,16 @@ extension WishListViewModel {
 extension WishListViewModel {
     private func setupLayoutProviders() {
         layoutProviders = sectionConfigurator.configureLayoutSections()
+    }
+    
+    private func listenWishlistSectionUpdates() {
+        sectionConfigurator
+            .deleteItemPublisher
+            .sink { [weak self] WishlistItem in
+                guard let self = self else { return }
+                Task { await self.loadWishlistData(item: WishlistItem)}
+                print("YES")
+            }
+            .store(in: &cancellables)
     }
 }

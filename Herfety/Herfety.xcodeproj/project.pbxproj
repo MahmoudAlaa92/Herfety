@@ -166,6 +166,7 @@
 		1570F74C2DFF7F0100AE9F6D /* MyCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570F7482DFF7F0100AE9F6D /* MyCheckoutViewController.swift */; };
 		15760D812D68A6640033BC0D /* CreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15760D802D68A6640033BC0D /* CreditCardViewModel.swift */; };
 		15760D852D692DFC0033BC0D /* AddAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */; };
+		157AA6302E6C80BC000A8A4B /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AA62F2E6C80BC000A8A4B /* Generated-Images.swift */; };
 		157E046F2D553F6E000170FC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 157E046E2D553F6E000170FC /* Colors.xcassets */; };
 		157E04732D554242000170FC /* colors.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 157E04722D554242000170FC /* colors.stencil */; };
 		157E04762D554252000170FC /* images.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 157E04752D554252000170FC /* images.stencil */; };
@@ -234,7 +235,6 @@
 		15955C1B2D67797500673BE7 /* CreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15955C192D67797500673BE7 /* CreditCardViewController.swift */; };
 		15955C1C2D67797500673BE7 /* CreditCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15955C1A2D67797500673BE7 /* CreditCardViewController.xib */; };
 		15975C912E61A1AD00281F45 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 15975C902E61A1AD00281F45 /* SkeletonView */; };
-		15975C932E61A8DF00281F45 /* Generated-Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15975C922E61A8DF00281F45 /* Generated-Images.swift */; };
 		1599B8962DB85E8C00A48510 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1599B8952DB85E8C00A48510 /* Kingfisher */; };
 		1599B8982DB85F5A00A48510 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B8972DB85F5A00A48510 /* Category.swift */; };
 		1599B89A2DB85FE500A48510 /* CategoryRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B8992DB85FE500A48510 /* CategoryRemote.swift */; };
@@ -478,6 +478,7 @@
 		1570F7492DFF7F0100AE9F6D /* MyCheckoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCheckoutViewController.xib; sourceTree = "<group>"; };
 		15760D802D68A6640033BC0D /* CreditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewModel.swift; sourceTree = "<group>"; };
 		15760D842D692DFC0033BC0D /* AddAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewModel.swift; sourceTree = "<group>"; };
+		157AA62F2E6C80BC000A8A4B /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		157E046E2D553F6E000170FC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		157E04722D554242000170FC /* colors.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = colors.stencil; sourceTree = "<group>"; };
 		157E04752D554252000170FC /* images.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = images.stencil; sourceTree = "<group>"; };
@@ -545,7 +546,6 @@
 		15955C122D6759D500673BE7 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		15955C192D67797500673BE7 /* CreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewController.swift; sourceTree = "<group>"; };
 		15955C1A2D67797500673BE7 /* CreditCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditCardViewController.xib; sourceTree = "<group>"; };
-		15975C922E61A8DF00281F45 /* Generated-Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Generated-Images.swift"; sourceTree = "<group>"; };
 		1599B8972DB85F5A00A48510 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		1599B8992DB85FE500A48510 /* CategoryRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRemote.swift; sourceTree = "<group>"; };
 		1599B89D2DB86D4800A48510 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
@@ -1009,7 +1009,7 @@
 		151631242D5D553200BA088E /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				15975C922E61A8DF00281F45 /* Generated-Images.swift */,
+				157AA62F2E6C80BC000A8A4B /* Generated-Images.swift */,
 				151631312D5D56CF00BA088E /* Generated-Colors.swift */,
 				1513B2CE2E51156400FE069F /* GeneratedExtra+Images.swift */,
 				1501AD162E5CAE32004F203B /* Strings.swift */,
@@ -2423,7 +2423,7 @@
 				153427B22E2B7E2B007E2140 /* AddReviewViewModelType.swift in Sources */,
 				154167942D9D33E8007E4CAA /* LabelAndTextFieldCollectionViewCell.swift in Sources */,
 				159B57852DCBCA5300CDD958 /* SignupViewController.swift in Sources */,
-				15975C932E61A8DF00281F45 /* Generated-Images.swift in Sources */,
+				157AA6302E6C80BC000A8A4B /* Generated-Images.swift in Sources */,
 				158A7EAD2DB5663100B89684 /* GoogleButton.swift in Sources */,
 				1548CF3F2D56DB6000F7CEEA /* CardOfProductCollectionViewCell.swift in Sources */,
 				1548CF452D56DFF300F7CEEA /* CardOfProductModel.swift in Sources */,

@@ -117,19 +117,18 @@ extension CardOfProductCollectionViewCell {
                 await dataStore
                     .addToWishlist(userId: userId,
                                    productId: product.productID ?? 92)
-            } else {
-                await MainActor.run {
-                    AppDataStorePublisher
-                        .shared
-                        .notifyWishlistUpdate(showAlert: true)
-                }
+            }
+            await MainActor.run {
+                AppDataStorePublisher
+                    .shared
+                    .notifyWishlistUpdate(showAlert: true)
             }
         }
     }
     
     private func updataCartItems() {
         guard var product = productOfWishlist else { return }
-
+        
         Task {
             let dataStore = DataStore.shared
             let isInCart = await dataStore.isItemInCart(productId: product.productID ?? 92)

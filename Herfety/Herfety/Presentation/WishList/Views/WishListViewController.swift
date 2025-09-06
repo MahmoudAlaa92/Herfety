@@ -45,7 +45,7 @@ class WishListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        Task { await viewModel.loadWishlistData() }
+        Task { await viewModel.loadWishlistData(item: nil) }
     }
 }
 // MARK: - Configure

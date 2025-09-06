@@ -19,6 +19,9 @@ protocol WishlistPublisherProtocol {
 }
 
 protocol WishlistSectionConfiguratorProtocol {
+    var deleteItemPublisher: AnyPublisher<WishlistItem, Never> { get }
+
     func configureSections(wishlistItems: [WishlistItem]) -> [CollectionViewDataSource]
+    
     func configureLayoutSections() -> [LayoutSectionProvider]
 }

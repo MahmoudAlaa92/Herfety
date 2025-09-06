@@ -7,6 +7,7 @@
 
 import Combine
 
+// MARK: - DataSource
 class DefaultWishlistDataSource: WishlistDataSourceProtocol {
     let dataStore: DataStoreProtocol
     
@@ -18,19 +19,35 @@ class DefaultWishlistDataSource: WishlistDataSourceProtocol {
         return await dataStore.getWishlist()
     }
 }
-
-class DefaultWishlistPublisher: WishlistPublisherProtocol {
-    var wishlistUpdatePublisher: AnyPublisher<Bool, Never> {
-        AppDataStorePublisher.shared.wishlistUpdatePublisher
-    }
-}
-
+// MARK: - Configuration
+//
 class DefaultWishlistSectionConfigurator: WishlistSectionConfiguratorProtocol {
+    let deleteItemSubject = PassthroughSubject<WishlistItem, Never>()
+    private var cancellables: Set<AnyCancellable> = []
+    
+    var deleteItemPublisher: AnyPublisher<WishlistItem, Never> {
+        deleteItemSubject.eraseToAnyPublisher()
+    }
+    
     func configureSections(wishlistItems: [WishlistItem]) -> [CollectionViewDataSource] {
-        return [WishlistCollectionViewSection(whishlistItems: wishlistItems)]
+        
+        let wishlistSection = [WishlistCollectionViewSection(whishlistItems: wishlistItems)]
+        
+        wishlistSection[0].deleteItemSubject.sink { [weak self] WishlistItem in
+            self?.deleteItemSubject.send(WishlistItem)
+        }.store(in: &cancellables)
+        
+        return wishlistSection
     }
     
     func configureLayoutSections() -> [LayoutSectionProvider] {
         return [WishlistSectionLayoutProvider()]
+    }
+}
+// MARK: - Publishers
+//
+class DefaultWishlistPublisher: WishlistPublisherProtocol {
+    var wishlistUpdatePublisher: AnyPublisher<Bool, Never> {
+        AppDataStorePublisher.shared.wishlistUpdatePublisher
     }
 }

@@ -91,6 +91,9 @@ public enum Images {
     public static var sliderImage1: UIImage {
         UIImage(named: "SliderImage1")!
     }
+    public static var splashScreen: UIImage {
+        UIImage(named: "Splash screen")!
+    }
     public static var tradeLogo: UIImage {
         UIImage(named: "TradeLogo")!
     }
