@@ -18,7 +18,7 @@ actor DataStore: DataStoreProtocol {
     private var isLogin: Bool = false
     
     // MARK: - Private state (thread-safe within actor)
-    private var userProfileImage: UIImage = Images.iconPersonalDetails
+    private var userProfileImage: UIImage = Images.profilePhoto
     private var orders: [OrderItem] = []
     private var cartItems: [WishlistItem] = []
     private var wishlist: [WishlistItem] = []

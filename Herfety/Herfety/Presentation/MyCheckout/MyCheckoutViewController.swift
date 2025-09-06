@@ -243,7 +243,7 @@ extension MyCheckoutViewController {
         ])
         
         // Enable skeleton animation
-        paymentSkeletonView.isSkeletonable = true
+//        paymentSkeletonView.isSkeletonable = true
         titleSkeleton.isSkeletonable = true
         inputSkeleton1.isSkeletonable = true
         inputSkeleton2.isSkeletonable = true

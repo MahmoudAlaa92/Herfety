@@ -139,10 +139,10 @@ extension CardOfProductCollectionViewCell {
                 product.qty = 1
                 cartItem.append(product)
                 await dataStore.updateCartItems(cartItem, showAlert: .add)
-            } else {
-                await MainActor.run {
-                    AppDataStorePublisher.shared.notifyCartUpdate(showAlert: .add)
-                }
+            }
+            
+            await MainActor.run {
+                AppDataStorePublisher.shared.notifyCartUpdate(showAlert: .add)
             }
         }
     }

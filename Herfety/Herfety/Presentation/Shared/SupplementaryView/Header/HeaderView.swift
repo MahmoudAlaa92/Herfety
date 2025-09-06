@@ -23,9 +23,7 @@ class HeaderView: UICollectionReusableView {
         super.awakeFromNib()
         setUp()
     }
-    
 }
-
 // MARK: - Configure
 //
 extension HeaderView {
