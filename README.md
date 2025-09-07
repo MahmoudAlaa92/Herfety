@@ -16,7 +16,7 @@ Handmade Marketplace is a fully functional mobile app that allows users to:
 
 ---
 
-## 🏗️ Architecture - MVVM + Design Patterns
+## 🏗️ Architecture - MVVM + Design Patterns + SOLID Principles
 
 We implemented the **Model-View-ViewModel (MVVM)** design pattern to ensure:
 
@@ -29,18 +29,6 @@ Additional design patterns used:
 * **Factory** – For object creation (products, users, reviews).
 * **Coordinator** – For handling navigation flow.
 * **Singleton** – For shared managers.
-
----
-
-## 🧠 SOLID Principles in Practice
-
-We followed the SOLID principles to keep our codebase scalable and readable:
-
-* **S**: *Single Responsibility* - Each class has a distinct job.
-* **O**: *Open/Closed* - The networking layer is open for new requests but closed for modification.
-* **L**: *Liskov Substitution* - Common protocols are used for polymorphism.
-* **I**: *Interface Segregation* - Protocols are small and focused.
-
 ---
 
 ## 📦 Packages & Frameworks Used
@@ -173,5 +161,6 @@ This project blends solid architecture (MVVM), modern UI with UIKit, and powerfu
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 47 48 PM" src="https://github.com/user-attachments/assets/7ab1f6f9-06a4-476a-ac0b-2c7e4aa8b0fc" />
 
 <img width="410" height="800" alt="Screenshot 2025-08-30 at 12 38 30 AM" src="https://github.com/user-attachments/assets/9c8b2eb1-0478-49f1-a757-64c68ea5adee" />
-<img width="410" height="800" alt="Screenshot 2025-08-30 at 12 48 58 AM" src="https://github.com/user-attachments/assets/e3a75361-cd37-4d78-8c52-5283d36b2de2" />
+<img width="410" height="800" alt="Screenshot 2025-09-07 at 7 35 43 PM" src="https://github.com/user-attachments/assets/9b17be9c-438d-4cf1-a487-ed8b946cd5ff" />
+
 
