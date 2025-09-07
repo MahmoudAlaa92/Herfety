@@ -142,6 +142,9 @@ This project blends solid architecture (MVVM), modern UI with UIKit, and powerfu
 
 ✨ We believe small makers deserve big tech. ✨
 
+<img width="3457" height="2528" alt="HerfetyCover" src="https://github.com/user-attachments/assets/c97a51b3-46f0-49ae-9915-e5dd3f9e624f" />
+
+
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 34 41 PM" src="https://github.com/user-attachments/assets/706af593-1210-45ff-9411-080c9e575987" />
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 35 03 PM" src="https://github.com/user-attachments/assets/a3a9292c-858a-474d-87db-781156568513" />
 
@@ -150,7 +153,7 @@ This project blends solid architecture (MVVM), modern UI with UIKit, and powerfu
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 48 21 PM" src="https://github.com/user-attachments/assets/ad0d7759-4a92-4f7c-87a7-6aa13c6b8feb" />
 
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 39 24 PM" src="https://github.com/user-attachments/assets/be4bbee4-f084-42a2-845d-d02613fd04d4" />
-<img width="410" height="900" alt="Screenshot 2025-08-30 at 12 42 38 AM" src="https://github.com/user-attachments/assets/899c7209-2ad7-4368-baf0-533c876a8db9" />
+<img width="410" height="800" alt="Screenshot 2025-09-07 at 7 20 54 PM" src="https://github.com/user-attachments/assets/08a1b485-ebd1-4dc3-9e04-7411c9e6878e" />
 
 <img width="410" height="800" alt="Screenshot 2025-06-16 at 6 42 58 PM" src="https://github.com/user-attachments/assets/a7040048-4fc1-4f8a-bf24-f79594e09d4d" />
 
