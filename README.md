@@ -1,6 +1,6 @@
 # 🧵 Handmade Marketplace App - iOS
 
-Welcome to the official documentation for the Handmade Marketplace App – an iOS e-commerce solution built with love for small artisans and handmade vendors. This app was designed to provide a seamless shopping and selling experience, integrating secure payments, modern architecture, and elegant user experience.
+An iOS e-commerce solution built with love for small artisans and handmade vendors. This app was designed to provide a seamless shopping and selling experience, integrating secure payments, modern architecture, and elegant user experience.
 
 ---
 
