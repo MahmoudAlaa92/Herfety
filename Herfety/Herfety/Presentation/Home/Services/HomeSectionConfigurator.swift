@@ -77,7 +77,8 @@ extension HomeSectionConfigurator {
         return provider
     }
     
-    private func createTopBrandsSection(items: [TopBrandsItem], coordinator: HomeTranisitionProtocol) -> TopBrandsCollectionViewSection {
+    private func createTopBrandsSection(items: [TopBrandsItem],
+                                        coordinator: HomeTranisitionProtocol) -> TopBrandsCollectionViewSection {
         let provider = TopBrandsCollectionViewSection(topBrandsItems: items)
         provider.selectedBrand
             .sink { brand in

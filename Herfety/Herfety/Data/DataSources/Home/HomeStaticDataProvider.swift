@@ -47,32 +47,33 @@ struct HomeStaticDataProvider {
                 name: "Leath",
                 image: Images.artLogo,
                 logo: Images.imageOfArt,
-                backgroundImage: Images.rectangleBeige,
                 offer: "UP to 50% OFF",
+                background: Images.rectangleBeige,
                 color: .black
+              
             ),
             .init(
                 name: "Rhine",
                 image: Images.tradeLogo,
                 logo: Images.imageOfArt2,
-                backgroundImage: Images.rectangleBlack,
                 offer: "UP to 60% OFF",
+                background: Images.rectangleBlack,
                 color: .white
             ),
             .init(
                 name: "Handmade",
                 image: Images.logo,
                 logo: Images.chain,
-                backgroundImage: Images.recatangleYellow,
                 offer: "UP to 70% OFF",
+                background: Images.recatangleYellow,
                 color: .black
             ),
             .init(
                 name: "Organ",
                 image: Images.artLogo,
                 logo: Images.sliderImage1,
-                backgroundImage: Images.rectangleBeige,
                 offer: "UP to 80% OFF",
+                background: Images.rectangleBeige,
                 color: .black
             ),
         ]

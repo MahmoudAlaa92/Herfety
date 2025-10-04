@@ -41,7 +41,7 @@ class TopBrandsCollectionViewSection: CollectionViewDataSource {
         cell.nameBrands.textColor = item.color
         cell.imageOfLogo.image = item.image
         cell.imageOfBrands.image = item.logo
-        cell.backGroundView.image = item.backgroundImage
+        cell.backGroundView.image = item.background
         cell.offerBrands.text = item.offer
         cell.offerBrands.textColor = item.color
         return cell
