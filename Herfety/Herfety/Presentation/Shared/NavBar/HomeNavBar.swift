@@ -29,7 +29,7 @@ extension HomeNavBar {
         self.searchBtn = onSearch
         
         /// Container view
-        let profileView = UIView(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        let profileView = UIView(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
         
         /// Image
         let imageView = UIImageView(frame: CGRect(x: 0, y: 5, width: 40, height: 40))
@@ -55,12 +55,13 @@ extension HomeNavBar {
                                            style: .done,
                                            target: self,
                                            action: #selector(searchWasTapped))
+        searchButton.tintColor = .white
         // TODO: Change after discuss the finale project
         let notificationButton = UIBarButtonItem(image: Images.notification.withRenderingMode(.alwaysOriginal),
                                                  style: .done,
                                                  target: self,
                                                  action: #selector(notificationWasTapped))
-        
+        notificationButton.tintColor = .white
         navigationBarButtonItems = [notificationButton, searchButton]
         navigationItem.rightBarButtonItems = navigationBarButtonItems
     }
